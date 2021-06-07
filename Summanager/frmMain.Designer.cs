@@ -29,16 +29,18 @@ namespace Summanager
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnAnalizar = new System.Windows.Forms.Button();
             this.txtConsola = new System.Windows.Forms.TextBox();
-            this.txtIp = new System.Windows.Forms.TextBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.lblTranscurrido = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnAnalizar
             // 
-            this.btnAnalizar.Location = new System.Drawing.Point(217, 6);
+            this.btnAnalizar.Location = new System.Drawing.Point(12, 12);
             this.btnAnalizar.Name = "btnAnalizar";
-            this.btnAnalizar.Size = new System.Drawing.Size(55, 31);
+            this.btnAnalizar.Size = new System.Drawing.Size(116, 37);
             this.btnAnalizar.TabIndex = 1;
             this.btnAnalizar.Text = "Analizar";
             this.btnAnalizar.UseVisualStyleBackColor = true;
@@ -48,7 +50,7 @@ namespace Summanager
             // 
             this.txtConsola.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.txtConsola.ForeColor = System.Drawing.Color.Chartreuse;
-            this.txtConsola.Location = new System.Drawing.Point(12, 298);
+            this.txtConsola.Location = new System.Drawing.Point(12, 287);
             this.txtConsola.Multiline = true;
             this.txtConsola.Name = "txtConsola";
             this.txtConsola.ReadOnly = true;
@@ -56,19 +58,27 @@ namespace Summanager
             this.txtConsola.Size = new System.Drawing.Size(776, 140);
             this.txtConsola.TabIndex = 1;
             // 
-            // txtIp
+            // timer1
             // 
-            this.txtIp.Location = new System.Drawing.Point(12, 12);
-            this.txtIp.Name = "txtIp";
-            this.txtIp.Size = new System.Drawing.Size(199, 20);
-            this.txtIp.TabIndex = 0;
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // lblTranscurrido
+            // 
+            this.lblTranscurrido.AutoSize = true;
+            this.lblTranscurrido.Location = new System.Drawing.Point(21, 430);
+            this.lblTranscurrido.Name = "lblTranscurrido";
+            this.lblTranscurrido.Size = new System.Drawing.Size(148, 13);
+            this.lblTranscurrido.TabIndex = 2;
+            this.lblTranscurrido.Text = "Tiempo transcurrido: 00:00:00";
+            this.lblTranscurrido.Visible = false;
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.txtIp);
+            this.Controls.Add(this.lblTranscurrido);
             this.Controls.Add(this.txtConsola);
             this.Controls.Add(this.btnAnalizar);
             this.Name = "frmMain";
@@ -82,6 +92,7 @@ namespace Summanager
 
         private System.Windows.Forms.Button btnAnalizar;
         private System.Windows.Forms.TextBox txtConsola;
-        private System.Windows.Forms.TextBox txtIp;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Label lblTranscurrido;
     }
 }

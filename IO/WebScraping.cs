@@ -29,6 +29,13 @@ namespace IO
         public Printer readIp(string ip)
         {
             this.url += ip;
+
+            this.web.PreRequest = delegate (HttpWebRequest webRequest)
+            {
+                webRequest.Timeout = 4000;
+                return true;
+            };
+
             this.doc = this.web.Load(this.url);
 
             var title = this.doc.DocumentNode.SelectNodes("//title").FirstOrDefault();
