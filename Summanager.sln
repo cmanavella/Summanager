@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.31321.278
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Summanager", "Summanager\Summanager.csproj", "{8DC58EE9-42B3-4609-80CD-ADC7DA6B2360}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IO", "IO\IO.csproj", "{0FC37071-E5DB-4E0D-B73A-21B2949BB07C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{64D1032D-7F82-4A14-9895-E661EBD40719}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{8DC58EE9-42B3-4609-80CD-ADC7DA6B2360}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8DC58EE9-42B3-4609-80CD-ADC7DA6B2360}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8DC58EE9-42B3-4609-80CD-ADC7DA6B2360}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FC37071-E5DB-4E0D-B73A-21B2949BB07C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FC37071-E5DB-4E0D-B73A-21B2949BB07C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FC37071-E5DB-4E0D-B73A-21B2949BB07C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FC37071-E5DB-4E0D-B73A-21B2949BB07C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64D1032D-7F82-4A14-9895-E661EBD40719}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64D1032D-7F82-4A14-9895-E661EBD40719}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64D1032D-7F82-4A14-9895-E661EBD40719}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64D1032D-7F82-4A14-9895-E661EBD40719}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
