@@ -28,7 +28,7 @@ namespace Summanager
             try
             {
                 Printer printer = webScrap.readIp(ip);
-                string result = printer.Modelo + ": Impresora analizada correctamente. Toner: " +
+                string result = "Impresora Online: " + printer.Modelo + " Toner: " +
                     printer.Toner + "% - Unidad de Imagen: " + printer.UImagen + "%";
                 if (printer.KitMant != null) result += " - Kit de Mantenimiento: " + printer.KitMant + " % ";
                 txtConsola.AppendText(result);

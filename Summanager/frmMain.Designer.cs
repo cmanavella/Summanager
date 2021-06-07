@@ -46,11 +46,14 @@ namespace Summanager
             // 
             // txtConsola
             // 
-            this.txtConsola.Location = new System.Drawing.Point(12, 43);
+            this.txtConsola.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.txtConsola.ForeColor = System.Drawing.Color.Chartreuse;
+            this.txtConsola.Location = new System.Drawing.Point(12, 298);
             this.txtConsola.Multiline = true;
             this.txtConsola.Name = "txtConsola";
             this.txtConsola.ReadOnly = true;
-            this.txtConsola.Size = new System.Drawing.Size(493, 140);
+            this.txtConsola.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtConsola.Size = new System.Drawing.Size(776, 140);
             this.txtConsola.TabIndex = 1;
             // 
             // txtIp
