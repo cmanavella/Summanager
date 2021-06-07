@@ -13,81 +13,199 @@ namespace IO
 {
     public class WebScraping
     {
-        public static Printer readIp(string ip)
+        private HtmlWeb web;
+        private HtmlDocument doc;
+        private string url;
+        private Printer printer;
+
+        public WebScraping()
         {
-            //HtmlWeb oWeb = new HtmlWeb();
-            ////HtmlDocument document = oWeb.Load("http://" + ip + "/cgi-bin/dynamic/printer/PrinterStatus.html");
-            //HtmlDocument document = oWeb.Load("http://www.cooplalaguna.com.ar");
+            this.web = new HtmlWeb();
+            this.doc = new HtmlDocument();
+            this.url = "http://";
+            this.printer = new Printer();
+        }
 
-            //HtmlNode head = document.DocumentNode.CssSelect("body").FirstOrDefault();
+        public Printer readIp(string ip)
+        {
+            this.url += ip;
+            this.doc = this.web.Load(this.url);
 
-            HtmlWeb web = new HtmlWeb();
-            string url = "http://" + ip;
-            HtmlDocument doc = web.Load(url);
+            var title = this.doc.DocumentNode.SelectNodes("//title").FirstOrDefault();
 
-            var title = doc.DocumentNode.SelectNodes("//title").FirstOrDefault();
+            this.printer.Modelo = title.InnerHtml;
 
-            Printer printer = new Printer();
-            printer.Modelo = title.InnerHtml;
-
-            url += "/cgi-bin/dynamic/printer/PrinterStatus.html";
-            doc = web.Load(url);
-
-            if (printer.Modelo == "Lexmark MS812" || printer.Modelo == "Lexmark MS610dn")
+            switch (this.printer.Modelo)
             {
-                int contTablas = 0;
-                foreach (var tabla in doc.DocumentNode.SelectNodes("//table[@class='status_table']"))
+                case "Lexmark MS812":
+                    _Lex812();
+                    break;
+                case "Lexmark MS610dn":
+                    _Lex610();
+                    break;
+                case "Lexmark MS410dn":
+                    _Lex410();
+                    break;
+            }
+            return this.printer;
+        }
+
+        private void _Lex410() {
+            this.url += "/cgi-bin/dynamic/printer/PrinterStatus.html";
+            this.doc = this.web.Load(this.url);
+
+            int contTablas = 0;
+            foreach (var tabla in doc.DocumentNode.SelectNodes("//table[@class='status_table']"))
+            {
+                contTablas++;
+                if (contTablas == 1)
                 {
-                    contTablas++;
-                    if (contTablas == 1)
+                    int contTr = 0;
+                    foreach (var nodo in tabla.ChildNodes)
                     {
-                        int contTr = 0;
-                        foreach (var nodo in tabla.ChildNodes)
+                        if (nodo.Name == "tr") contTr++;
+                        if (contTr == 3)
                         {
-                            if (nodo.Name == "tr") contTr++;
-                            if (contTr == 3)
+                            string[] valor = nodo.InnerText.Split('~');
+                            if (valor.Length > 1)
                             {
-                                string[] valor = nodo.InnerText.Split('~');
                                 valor[1] = valor[1].Remove(valor[1].Length - 1);
-
-                                printer.Toner = Int32.Parse(valor[1]);
+                                this.printer.Toner = Int32.Parse(valor[1]);
                             }
-                        }
-                    }
-                    if (contTablas == 4)
-                    {
-                        int contTr = 0;
-                        foreach (var nodo in tabla.ChildNodes)
-                        {
-                            if (nodo.Name == "tr") contTr++;
-                            if (contTr == 5)
+                            else
                             {
-                                string[] valor = nodo.InnerText.Split(':');
-                                valor[1] = valor[1].Remove(valor[1].Length - 3);
-
-                                printer.KitMant = Int32.Parse(valor[1]);
-                            }
-                            if (contTr == 6 && printer.Modelo == "Lexmark MS610dn")
-                            {
-                                string[] valor = nodo.InnerText.Split(':');
-                                valor[1] = valor[1].Remove(valor[1].Length - 3);
-
-                                printer.UImagen = Int32.Parse(valor[1]);
-                                contTr = 7;
-                            }
-                            if (contTr == 7 && printer.Modelo == "Lexmark MS812")
-                            {
-                                string[] valor = nodo.InnerText.Split(':');
-                                valor[1] = valor[1].Remove(valor[1].Length - 3);
-
-                                printer.UImagen = Int32.Parse(valor[1]);
-                                contTr = 8;
+                                this.printer.Toner = 0;
                             }
                         }
                     }
                 }
+                if (contTablas == 4)
+                {
+                    int contTr = 0;
+                    foreach (var nodo in tabla.ChildNodes)
+                    {
+                        if (nodo.Name == "tr") contTr++;
+                        if (contTr == 5 && nodo.Name == "tr")
+                        {
+                            string[] valor = nodo.InnerText.Split(':');
+                            valor[1] = valor[1].Remove(valor[1].Length - 3);
+
+                            this.printer.UImagen = Int32.Parse(valor[1]);
+                        }
+                        this.printer.KitMant = null;
+                    }
+                }
             }
-            return printer;
+        }
+
+        private void _Lex610()
+        {
+            this.url += "/cgi-bin/dynamic/printer/PrinterStatus.html";
+            this.doc = this.web.Load(this.url);
+
+            int contTablas = 0;
+            foreach (var tabla in doc.DocumentNode.SelectNodes("//table[@class='status_table']"))
+            {
+                contTablas++;
+                if (contTablas == 1)
+                {
+                    int contTr = 0;
+                    foreach (var nodo in tabla.ChildNodes)
+                    {
+                        if (nodo.Name == "tr") contTr++;
+                        if (contTr == 3)
+                        {
+                            string[] valor = nodo.InnerText.Split('~');
+                            if (valor.Length > 1)
+                            {
+                                valor[1] = valor[1].Remove(valor[1].Length - 1);
+                                this.printer.Toner = Int32.Parse(valor[1]);
+                            }
+                            else
+                            {
+                                this.printer.Toner = 0;
+                            }
+                        }
+                    }
+                }
+                if (contTablas == 4)
+                {
+                    int contTr = 0;
+                    foreach (var nodo in tabla.ChildNodes)
+                    {
+                        if (nodo.Name == "tr") contTr++;
+                        if (contTr == 5 && nodo.Name == "tr")
+                        {
+                            string[] valor = nodo.InnerText.Split(':');
+                            valor[1] = valor[1].Remove(valor[1].Length - 3);
+
+                            this.printer.KitMant = Int32.Parse(valor[1]);
+                        }
+                        if (contTr == 6 && nodo.Name == "tr")
+                        {
+                            string[] valor = nodo.InnerText.Split(':');
+                            valor[1] = valor[1].Remove(valor[1].Length - 3);
+
+                            this.printer.UImagen = Int32.Parse(valor[1]);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void _Lex812()
+        {
+            this.url += "/cgi-bin/dynamic/printer/PrinterStatus.html";
+            this.doc = this.web.Load(this.url);
+
+            int contTablas = 0;
+            foreach (var tabla in doc.DocumentNode.SelectNodes("//table[@class='status_table']"))
+            {
+                contTablas++;
+                if (contTablas == 1)
+                {
+                    int contTr = 0;
+                    foreach (var nodo in tabla.ChildNodes)
+                    {
+                        if (nodo.Name == "tr") contTr++;
+                        if (contTr == 3)
+                        {
+                            string[] valor = nodo.InnerText.Split('~');
+                            if (valor.Length > 1)
+                            {
+                                valor[1] = valor[1].Remove(valor[1].Length - 1);
+                                this.printer.Toner = Int32.Parse(valor[1]);
+                            }
+                            else
+                            {
+                                this.printer.Toner = 0;
+                            }
+                        }
+                    }
+                }
+                if (contTablas == 4)
+                {
+                    int contTr = 0;
+                    foreach (var nodo in tabla.ChildNodes)
+                    {
+                        if (nodo.Name == "tr") contTr++;
+                        if (contTr == 5 && nodo.Name == "tr")
+                        {
+                            string[] valor = nodo.InnerText.Split(':');
+                            valor[1] = valor[1].Remove(valor[1].Length - 3);
+
+                            this.printer.KitMant = Int32.Parse(valor[1]);
+                        }
+                        if (contTr == 7 && nodo.Name == "tr")
+                        {
+                            string[] valor = nodo.InnerText.Split(':');
+                            valor[1] = valor[1].Remove(valor[1].Length - 3);
+
+                            this.printer.UImagen = Int32.Parse(valor[1]);
+                        }
+                    }
+                }
+            }
         }
     }
 }

@@ -11,6 +11,6 @@ namespace Entities
         public String Modelo { get; set; }
         public int Toner { get; set; }
         public int UImagen { get; set; }
-        public int KitMant { get; set; }
+        public int ?KitMant { get; set; }
     }
 }
