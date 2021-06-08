@@ -33,5 +33,45 @@ namespace IO
 
             return retorno;
         }
+
+        public static StreamWriter openLogFile()
+        {
+             
+            string fileToWrite = AppDomain.CurrentDomain.BaseDirectory + "events.log";
+            List<string> lineas = new List<string>();
+
+            if (System.IO.File.Exists(fileToWrite))
+            {
+                using (StreamReader reader = new StreamReader(fileToWrite))
+                {
+                    string line;
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        lineas.Add(line);
+                    }
+                }
+            }
+            else
+            {
+                var file = System.IO.File.Create(fileToWrite);
+                file.Close();
+            }
+
+            StreamWriter writer = new StreamWriter(fileToWrite);
+            if (lineas.Count > 0)
+            {
+                foreach(string line in lineas)
+                {
+                    writer.WriteLine(line);
+                }
+            }
+
+            return writer;
+        }
+
+        public static void closeLogFile(StreamWriter writer)
+        {
+            writer.Close();
+        }
     }
 }

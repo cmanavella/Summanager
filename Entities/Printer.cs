@@ -8,9 +8,11 @@ namespace Entities
 {
     public class Printer
     {
+        public String Ip { get; set; }
+        public String Estado { get; set; }
         public String Modelo { get; set; }
-        public int Toner { get; set; }
-        public int UImagen { get; set; }
+        public int ?Toner { get; set; }
+        public int ?UImagen { get; set; }
         public int ?KitMant { get; set; }
     }
 }
