@@ -40,9 +40,63 @@ namespace Summanager
             return time.ToString("dd/MM/yyyy HH:mm:ss");
         }
 
+        private void _llenarDgv()
+        {
+            dgv.Columns.Add("ip", "Ip");
+            dgv.Columns.Add("modelo", "Modelo");
+            dgv.Columns.Add("estado", "Estado");
+            dgv.Columns.Add("toner", "Toner");
+            dgv.Columns.Add("uimagen", "U. Img.");
+            dgv.Columns.Add("kmant", "Kit Mant.");
+
+            foreach(var printer in printers)
+            {
+                string toner = "";
+                string uimagen = "";
+                string kitmant = "";
+
+                if (printer.Toner != null) toner = printer.Toner + "%";
+                if (printer.UImagen != null) uimagen = printer.UImagen + "%";
+                if (printer.KitMant != null) kitmant = printer.KitMant + "%";
+
+                dgv.Rows.Add(printer.Ip, printer.Modelo, printer.Estado, toner, uimagen, kitmant);
+            }
+            _colorearDgv();
+        }
+
+        private void _colorearDgv()
+        {
+            foreach(DataGridViewRow r in dgv.Rows)
+            {
+                if((string)r.Cells[2].Value == "Online")
+                {
+                    int toner = Int32.Parse(r.Cells[3].Value.ToString().Remove(r.Cells[3].Value.ToString().Length - 1));
+                    int uimagen = Int32.Parse(r.Cells[4].Value.ToString().Remove(r.Cells[4].Value.ToString().Length - 1));
+                    int kmant = -1;
+                    if ((string)r.Cells[1].Value != "Lexmark MS410dn")
+                    {
+                        kmant = Int32.Parse(r.Cells[5].Value.ToString().Remove(r.Cells[5].Value.ToString().Length - 1));
+                    }
+
+                    if(toner<=10 || uimagen<=10 || (kmant>=0 && kmant<=10))
+                    {
+                        r.DefaultCellStyle.BackColor = Color.Yellow;
+                    }
+                    if (toner <= 3 || uimagen <= 3 || (kmant >= 0 && kmant <= 3))
+                    {
+                        r.DefaultCellStyle.BackColor = Color.Red;
+                    }
+                }
+            }
+            dgv.Refresh();
+        }
+
         private void _analizar()
         {
             if (printers.Count > 0) printers.Clear();
+            dgv.Rows.Clear();
+            dgv.Columns.Clear();
+            dgv.Refresh();
 
             string msjeLog= "[" + _fechaHora() + "] INICIO NUEVO ANÁLISIS.";
             txtConsola.AppendText(msjeLog);
@@ -99,10 +153,15 @@ namespace Summanager
             txtConsola.AppendText(Environment.NewLine);
             logFile.WriteLine(msjeLog);
             progressBar1.Value = 0;
+            _llenarDgv();
+            btnAnalizar.Enabled = true;
+            btnDetener.Enabled = false;
         }
 
         private void btnAnalizar_Clic(object sender, MouseEventArgs e)
         {
+            btnAnalizar.Enabled = false;
+            btnDetener.Enabled = true;
             t = new Thread(_analizar);
             t.Start();
         }
@@ -120,6 +179,9 @@ namespace Summanager
             txtConsola.AppendText(Environment.NewLine);
             logFile.WriteLine(msjeLog);
             progressBar1.Value = 0;
+            _llenarDgv();
+            btnAnalizar.Enabled = true;
+            btnDetener.Enabled = false;
         }
 
         private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
