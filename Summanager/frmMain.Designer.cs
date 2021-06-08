@@ -29,7 +29,7 @@ namespace Summanager
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnAnalizar = new System.Windows.Forms.Button();
+            this.btnActualizar = new System.Windows.Forms.Button();
             this.txtConsola = new System.Windows.Forms.TextBox();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.btnDetener = new System.Windows.Forms.Button();
@@ -37,15 +37,15 @@ namespace Summanager
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.SuspendLayout();
             // 
-            // btnAnalizar
+            // btnActualizar
             // 
-            this.btnAnalizar.Location = new System.Drawing.Point(12, 12);
-            this.btnAnalizar.Name = "btnAnalizar";
-            this.btnAnalizar.Size = new System.Drawing.Size(116, 37);
-            this.btnAnalizar.TabIndex = 1;
-            this.btnAnalizar.Text = "Analizar";
-            this.btnAnalizar.UseVisualStyleBackColor = true;
-            this.btnAnalizar.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnAnalizar_Clic);
+            this.btnActualizar.Location = new System.Drawing.Point(12, 12);
+            this.btnActualizar.Name = "btnActualizar";
+            this.btnActualizar.Size = new System.Drawing.Size(116, 37);
+            this.btnActualizar.TabIndex = 1;
+            this.btnActualizar.Text = "Actualizar";
+            this.btnActualizar.UseVisualStyleBackColor = true;
+            this.btnActualizar.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnAnalizar_Clic);
             // 
             // txtConsola
             // 
@@ -100,7 +100,7 @@ namespace Summanager
             this.Controls.Add(this.btnDetener);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.txtConsola);
-            this.Controls.Add(this.btnAnalizar);
+            this.Controls.Add(this.btnActualizar);
             this.Name = "frmMain";
             this.Text = "frmMain";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmMain_FormClosed);
@@ -113,7 +113,7 @@ namespace Summanager
 
         #endregion
 
-        private System.Windows.Forms.Button btnAnalizar;
+        private System.Windows.Forms.Button btnActualizar;
         private System.Windows.Forms.Button btnDetener;
         private System.Windows.Forms.TextBox txtConsola;
         private System.Windows.Forms.ProgressBar progressBar1;

@@ -154,13 +154,13 @@ namespace Summanager
             logFile.WriteLine(msjeLog);
             progressBar1.Value = 0;
             _llenarDgv();
-            btnAnalizar.Enabled = true;
+            btnActualizar.Enabled = true;
             btnDetener.Enabled = false;
         }
 
         private void btnAnalizar_Clic(object sender, MouseEventArgs e)
         {
-            btnAnalizar.Enabled = false;
+            btnActualizar.Enabled = false;
             btnDetener.Enabled = true;
             t = new Thread(_analizar);
             t.Start();
@@ -169,6 +169,10 @@ namespace Summanager
         private void frmMain_Load(object sender, EventArgs e)
         {
             CheckForIllegalCrossThreadCalls = false;
+            btnActualizar.Enabled = false;
+            btnDetener.Enabled = true;
+            t = new Thread(_analizar);
+            t.Start();
         }
 
         private void btnDetener_Click(object sender, EventArgs e)
@@ -180,7 +184,7 @@ namespace Summanager
             logFile.WriteLine(msjeLog);
             progressBar1.Value = 0;
             _llenarDgv();
-            btnAnalizar.Enabled = true;
+            btnActualizar.Enabled = true;
             btnDetener.Enabled = false;
         }
 
