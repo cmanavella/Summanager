@@ -154,14 +154,22 @@ namespace Summanager
             logFile.WriteLine(msjeLog);
             progressBar1.Value = 0;
             _llenarDgv();
+            btnAbrir.Enabled = true;
+            btnGuardar.Enabled = true;
             btnActualizar.Enabled = true;
             btnDetener.Enabled = false;
+            btnImportar.Enabled = true;
+            btnExportar.Enabled = true;
         }
 
         private void btnAnalizar_Clic(object sender, MouseEventArgs e)
         {
+            btnAbrir.Enabled = false;
+            btnGuardar.Enabled = false;
             btnActualizar.Enabled = false;
             btnDetener.Enabled = true;
+            btnImportar.Enabled = false;
+            btnExportar.Enabled = false;
             t = new Thread(_analizar);
             t.Start();
         }
@@ -169,8 +177,12 @@ namespace Summanager
         private void frmMain_Load(object sender, EventArgs e)
         {
             CheckForIllegalCrossThreadCalls = false;
+            btnAbrir.Enabled = false;
+            btnGuardar.Enabled = false;
             btnActualizar.Enabled = false;
             btnDetener.Enabled = true;
+            btnImportar.Enabled = false;
+            btnExportar.Enabled = false;
             t = new Thread(_analizar);
             t.Start();
         }
@@ -184,8 +196,12 @@ namespace Summanager
             logFile.WriteLine(msjeLog);
             progressBar1.Value = 0;
             _llenarDgv();
+            btnAbrir.Enabled = true;
+            btnGuardar.Enabled = true;
             btnActualizar.Enabled = true;
             btnDetener.Enabled = false;
+            btnImportar.Enabled = true;
+            btnExportar.Enabled = true;
         }
 
         private void frmMain_FormClosed(object sender, FormClosedEventArgs e)

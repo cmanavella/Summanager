@@ -34,14 +34,18 @@ namespace Summanager
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.btnDetener = new System.Windows.Forms.Button();
             this.dgv = new System.Windows.Forms.DataGridView();
+            this.btnGuardar = new System.Windows.Forms.Button();
+            this.btnAbrir = new System.Windows.Forms.Button();
+            this.btnExportar = new System.Windows.Forms.Button();
+            this.btnImportar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.SuspendLayout();
             // 
             // btnActualizar
             // 
-            this.btnActualizar.Location = new System.Drawing.Point(12, 12);
+            this.btnActualizar.Location = new System.Drawing.Point(301, 12);
             this.btnActualizar.Name = "btnActualizar";
-            this.btnActualizar.Size = new System.Drawing.Size(116, 37);
+            this.btnActualizar.Size = new System.Drawing.Size(91, 37);
             this.btnActualizar.TabIndex = 1;
             this.btnActualizar.Text = "Actualizar";
             this.btnActualizar.UseVisualStyleBackColor = true;
@@ -69,9 +73,9 @@ namespace Summanager
             // btnDetener
             // 
             this.btnDetener.Enabled = false;
-            this.btnDetener.Location = new System.Drawing.Point(134, 12);
+            this.btnDetener.Location = new System.Drawing.Point(398, 12);
             this.btnDetener.Name = "btnDetener";
-            this.btnDetener.Size = new System.Drawing.Size(116, 37);
+            this.btnDetener.Size = new System.Drawing.Size(91, 37);
             this.btnDetener.TabIndex = 3;
             this.btnDetener.Text = "Detener";
             this.btnDetener.UseVisualStyleBackColor = true;
@@ -91,18 +95,58 @@ namespace Summanager
             this.dgv.Size = new System.Drawing.Size(776, 202);
             this.dgv.TabIndex = 4;
             // 
+            // btnGuardar
+            // 
+            this.btnGuardar.Location = new System.Drawing.Point(204, 12);
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(91, 37);
+            this.btnGuardar.TabIndex = 6;
+            this.btnGuardar.Text = "Guardar";
+            this.btnGuardar.UseVisualStyleBackColor = true;
+            // 
+            // btnAbrir
+            // 
+            this.btnAbrir.Location = new System.Drawing.Point(107, 12);
+            this.btnAbrir.Name = "btnAbrir";
+            this.btnAbrir.Size = new System.Drawing.Size(91, 37);
+            this.btnAbrir.TabIndex = 5;
+            this.btnAbrir.Text = "Abrir";
+            this.btnAbrir.UseVisualStyleBackColor = true;
+            // 
+            // btnExportar
+            // 
+            this.btnExportar.Location = new System.Drawing.Point(592, 12);
+            this.btnExportar.Name = "btnExportar";
+            this.btnExportar.Size = new System.Drawing.Size(91, 37);
+            this.btnExportar.TabIndex = 8;
+            this.btnExportar.Text = "Exportar";
+            this.btnExportar.UseVisualStyleBackColor = true;
+            // 
+            // btnImportar
+            // 
+            this.btnImportar.Location = new System.Drawing.Point(495, 12);
+            this.btnImportar.Name = "btnImportar";
+            this.btnImportar.Size = new System.Drawing.Size(91, 37);
+            this.btnImportar.TabIndex = 7;
+            this.btnImportar.Text = "Importar";
+            this.btnImportar.UseVisualStyleBackColor = true;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnExportar);
+            this.Controls.Add(this.btnImportar);
+            this.Controls.Add(this.btnGuardar);
+            this.Controls.Add(this.btnAbrir);
             this.Controls.Add(this.dgv);
             this.Controls.Add(this.btnDetener);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.txtConsola);
             this.Controls.Add(this.btnActualizar);
             this.Name = "frmMain";
-            this.Text = "frmMain";
+            this.Text = "SumManager v1.0.0.0";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmMain_FormClosed);
             this.Load += new System.EventHandler(this.frmMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
@@ -118,5 +162,9 @@ namespace Summanager
         private System.Windows.Forms.TextBox txtConsola;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.DataGridView dgv;
+        private System.Windows.Forms.Button btnGuardar;
+        private System.Windows.Forms.Button btnAbrir;
+        private System.Windows.Forms.Button btnExportar;
+        private System.Windows.Forms.Button btnImportar;
     }
 }
