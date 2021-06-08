@@ -31,6 +31,15 @@ namespace Summanager
             porcProces = 0;
             logFile = IO.File.openLogFile();
             printers = new List<Printer>();
+            _tituloForm();
+        }
+
+        private void _tituloForm()
+        {
+            string fileName = ips[0];
+            ips.RemoveAt(0);
+            fileName = fileName.Substring(1, fileName.Length - 2) + ".smp";
+            Text += " - " + fileName;
         }
 
         private static string _fechaHora()

@@ -38,6 +38,7 @@ namespace Summanager
             this.btnAbrir = new System.Windows.Forms.Button();
             this.btnExportar = new System.Windows.Forms.Button();
             this.btnImportar = new System.Windows.Forms.Button();
+            this.fileDialog = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.SuspendLayout();
             // 
@@ -131,6 +132,10 @@ namespace Summanager
             this.btnImportar.Text = "Importar";
             this.btnImportar.UseVisualStyleBackColor = true;
             // 
+            // fileDialog
+            // 
+            this.fileDialog.FileName = "openFileDialog1";
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -167,5 +172,6 @@ namespace Summanager
         private System.Windows.Forms.Button btnAbrir;
         private System.Windows.Forms.Button btnExportar;
         private System.Windows.Forms.Button btnImportar;
+        private System.Windows.Forms.OpenFileDialog fileDialog;
     }
 }
