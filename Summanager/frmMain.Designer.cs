@@ -145,6 +145,7 @@ namespace Summanager
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.txtConsola);
             this.Controls.Add(this.btnActualizar);
+            this.MaximizeBox = false;
             this.Name = "frmMain";
             this.Text = "SumManager v1.0.0.0";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmMain_FormClosed);
