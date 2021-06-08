@@ -13,15 +13,22 @@ namespace IO
         {
             List<string> retorno = new List<string>();
 
-            string fileToRead = AppDomain.CurrentDomain.BaseDirectory + "printers.cam";
+            string fileToRead = AppDomain.CurrentDomain.BaseDirectory + "current.smp";
 
-            using (StreamReader reader = new StreamReader(fileToRead))
+            if (System.IO.File.Exists(fileToRead))
             {
-                string line;
-                while ((line = reader.ReadLine()) != null)
+                using (StreamReader reader = new StreamReader(fileToRead))
                 {
-                    retorno.Add(line);
+                    string line;
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        retorno.Add(line);
+                    }
                 }
+            }
+            else
+            {
+                System.IO.File.Create(fileToRead);
             }
 
             return retorno;

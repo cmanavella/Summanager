@@ -30,7 +30,9 @@ namespace Summanager
         private void InitializeComponent()
         {
             this.btnAnalizar = new System.Windows.Forms.Button();
-            this.txtConsola = new System.Windows.Forms.TextBox();
+            txtConsola = new System.Windows.Forms.TextBox();
+            progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.btnDetener = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnAnalizar
@@ -45,25 +47,45 @@ namespace Summanager
             // 
             // txtConsola
             // 
-            this.txtConsola.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.txtConsola.ForeColor = System.Drawing.Color.Chartreuse;
-            this.txtConsola.Location = new System.Drawing.Point(12, 298);
-            this.txtConsola.Multiline = true;
-            this.txtConsola.Name = "txtConsola";
-            this.txtConsola.ReadOnly = true;
-            this.txtConsola.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtConsola.Size = new System.Drawing.Size(776, 140);
-            this.txtConsola.TabIndex = 1;
+            txtConsola.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            txtConsola.ForeColor = System.Drawing.Color.Chartreuse;
+            txtConsola.Location = new System.Drawing.Point(12, 279);
+            txtConsola.Multiline = true;
+            txtConsola.Name = "txtConsola";
+            txtConsola.ReadOnly = true;
+            txtConsola.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            txtConsola.Size = new System.Drawing.Size(776, 140);
+            txtConsola.TabIndex = 1;
+            // 
+            // progressBar1
+            // 
+            progressBar1.Location = new System.Drawing.Point(620, 425);
+            progressBar1.Name = "progressBar1";
+            progressBar1.Size = new System.Drawing.Size(168, 20);
+            progressBar1.TabIndex = 2;
+            // 
+            // btnDetener
+            // 
+            this.btnDetener.Location = new System.Drawing.Point(134, 12);
+            this.btnDetener.Name = "btnDetener";
+            this.btnDetener.Size = new System.Drawing.Size(116, 37);
+            this.btnDetener.TabIndex = 3;
+            this.btnDetener.Text = "Detener";
+            this.btnDetener.UseVisualStyleBackColor = true;
+            this.btnDetener.Click += new System.EventHandler(this.btnDetener_Click);
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.txtConsola);
+            this.Controls.Add(this.btnDetener);
+            this.Controls.Add(progressBar1);
+            this.Controls.Add(txtConsola);
             this.Controls.Add(this.btnAnalizar);
             this.Name = "frmMain";
             this.Text = "frmMain";
+            this.Load += new System.EventHandler(this.frmMain_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -72,6 +94,8 @@ namespace Summanager
         #endregion
 
         private System.Windows.Forms.Button btnAnalizar;
-        private System.Windows.Forms.TextBox txtConsola;
+        private System.Windows.Forms.Button btnDetener;
+        private static System.Windows.Forms.TextBox txtConsola;
+        private static System.Windows.Forms.ProgressBar progressBar1;
     }
 }
