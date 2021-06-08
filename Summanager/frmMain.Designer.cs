@@ -38,7 +38,8 @@ namespace Summanager
             this.btnAbrir = new System.Windows.Forms.Button();
             this.btnExportar = new System.Windows.Forms.Button();
             this.btnImportar = new System.Windows.Forms.Button();
-            this.fileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.SuspendLayout();
             // 
@@ -104,6 +105,7 @@ namespace Summanager
             this.btnGuardar.TabIndex = 6;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // btnAbrir
             // 
@@ -113,6 +115,7 @@ namespace Summanager
             this.btnAbrir.TabIndex = 5;
             this.btnAbrir.Text = "Abrir";
             this.btnAbrir.UseVisualStyleBackColor = true;
+            this.btnAbrir.Click += new System.EventHandler(this.btnAbrir_Click);
             // 
             // btnExportar
             // 
@@ -131,10 +134,6 @@ namespace Summanager
             this.btnImportar.TabIndex = 7;
             this.btnImportar.Text = "Importar";
             this.btnImportar.UseVisualStyleBackColor = true;
-            // 
-            // fileDialog
-            // 
-            this.fileDialog.FileName = "openFileDialog1";
             // 
             // frmMain
             // 
@@ -172,6 +171,7 @@ namespace Summanager
         private System.Windows.Forms.Button btnAbrir;
         private System.Windows.Forms.Button btnExportar;
         private System.Windows.Forms.Button btnImportar;
-        private System.Windows.Forms.OpenFileDialog fileDialog;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
     }
 }

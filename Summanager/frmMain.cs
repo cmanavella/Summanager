@@ -26,7 +26,7 @@ namespace Summanager
         public frmMain()
         {
             InitializeComponent();
-            ips = IO.File.readIpFile();
+            ips = IO.File.readCurrentFile();
             cantProces = 0;
             porcProces = 0;
             logFile = IO.File.openLogFile();
@@ -39,7 +39,9 @@ namespace Summanager
             string fileName = ips[0];
             ips.RemoveAt(0);
             fileName = fileName.Substring(1, fileName.Length - 2) + ".smp";
-            Text += " - " + fileName;
+            string[] titulo = Text.Split('-');
+
+            Text = titulo[0] + "-" + fileName;
         }
 
         private static string _fechaHora()
@@ -216,6 +218,95 @@ namespace Summanager
         private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
         {
             IO.File.closeLogFile(logFile);
+        }
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            saveFileDialog.InitialDirectory = "c:\\";
+            saveFileDialog.Filter = "SumManager File (*.smp)|*.smp";
+            saveFileDialog.FilterIndex = 1;
+            saveFileDialog.RestoreDirectory = true;
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string filePath = saveFileDialog.FileName;
+                try
+                {
+                    string msjeLog = "[" + _fechaHora() + "] Guardando archivo...";
+                    txtConsola.AppendText(msjeLog);
+                    txtConsola.AppendText(Environment.NewLine);
+                    logFile.WriteLine(msjeLog);
+
+                    IO.File.saveFile(filePath, ips);
+
+                    msjeLog = "[" + _fechaHora() + "] Archivo guardado con éxito.";
+                    txtConsola.AppendText(msjeLog);
+                    txtConsola.AppendText(Environment.NewLine);
+                    logFile.WriteLine(msjeLog);
+
+                    ips.Clear();
+                    ips = IO.File.readCurrentFile();
+                    _tituloForm();
+                    saveFileDialog.FileName = "";
+                } catch (Exception ex)
+                {
+                    string msjeLog = "[" + _fechaHora() + "] Error al guardar archivo: " +
+                        ex.Message;
+                    txtConsola.AppendText(msjeLog);
+                    txtConsola.AppendText(Environment.NewLine);
+                    logFile.WriteLine(msjeLog);
+                }
+            }
+        }
+
+        private void btnAbrir_Click(object sender, EventArgs e)
+        {
+            openFileDialog.InitialDirectory = "c:\\";
+            openFileDialog.Filter = "SumManager File (*.smp)|*.smp";
+            openFileDialog.FilterIndex = 1;
+            openFileDialog.RestoreDirectory = true;
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string filePath = openFileDialog.FileName;
+                try
+                {
+                    string msjeLog = "[" + _fechaHora() + "] Abriendo archivo...";
+                    txtConsola.AppendText(msjeLog);
+                    txtConsola.AppendText(Environment.NewLine);
+                    logFile.WriteLine(msjeLog);
+
+
+                    IO.File.openFile(filePath);
+
+                    msjeLog = "[" + _fechaHora() + "] Archivo abierto con éxito.";
+                    txtConsola.AppendText(msjeLog);
+                    txtConsola.AppendText(Environment.NewLine);
+                    logFile.WriteLine(msjeLog);
+
+                    ips.Clear();
+                    ips = IO.File.readCurrentFile();
+                    _tituloForm();
+                    saveFileDialog.FileName = "";
+
+                    //btnAbrir.Enabled = false;
+                    //btnGuardar.Enabled = false;
+                    //btnActualizar.Enabled = false;
+                    //btnDetener.Enabled = true;
+                    //btnImportar.Enabled = false;
+                    //btnExportar.Enabled = false;
+                    //t = new Thread(_analizar);
+                    //t.Start();
+                }
+                catch (Exception ex)
+                {
+                    string msjeLog = "[" + _fechaHora() + "] Error al abrir archivo: " +
+                        ex.Message;
+                    txtConsola.AppendText(msjeLog);
+                    txtConsola.AppendText(Environment.NewLine);
+                    logFile.WriteLine(msjeLog);
+                }
+            }
         }
     }
 }

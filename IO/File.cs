@@ -9,7 +9,7 @@ namespace IO
 {
     public class File
     {
-        public static List<string> readIpFile()
+        public static List<string> readCurrentFile()
         {
             List<string> retorno = new List<string>();
 
@@ -28,7 +28,15 @@ namespace IO
             }
             else
             {
-                System.IO.File.Create(fileToRead);
+                var file = System.IO.File.Create(fileToRead);
+                file.Close();
+
+                using (StreamWriter writer = new StreamWriter(fileToRead))
+                {
+                    string titulo = "[sin título]";
+                    writer.WriteLine(titulo);
+                    retorno.Add(titulo);
+                }
             }
 
             return retorno;
@@ -72,6 +80,65 @@ namespace IO
         public static void closeLogFile(StreamWriter writer)
         {
             writer.Close();
+        }
+
+        public static void openFile(string filePath)
+        {
+            List<string> ips = new List<string>();
+
+            using (StreamReader reader = new StreamReader(filePath))
+            {
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    ips.Add(line);
+                }
+            }
+
+            string currentFile = AppDomain.CurrentDomain.BaseDirectory + "current.smp";
+            using (StreamWriter writerCurrentFile = new StreamWriter(currentFile))
+            {
+                foreach (string ip in ips)
+                {
+                    writerCurrentFile.WriteLine(ip);
+                }
+            }
+        }
+
+        public static void saveFile(string filePath, List<string> ips)
+        {
+            string[] path = filePath.Split('\\');
+            string titulo = path[path.Length - 1].Substring(0, path[path.Length - 1].Length-4);
+
+            if (ips.Count > 0)
+            {
+                if (!System.IO.File.Exists(filePath))
+                {
+                    var file = System.IO.File.Create(filePath);
+                    file.Close();
+                }
+
+                using(StreamWriter writerNewFile = new StreamWriter(filePath))
+                {
+                    writerNewFile.WriteLine("[" + titulo + "]");
+
+                    foreach(string ip in ips)
+                    {
+                        writerNewFile.WriteLine(ip);
+                    }
+                }
+
+                string currentFile = AppDomain.CurrentDomain.BaseDirectory + "current.smp";
+                using (StreamWriter writerCurrentFile = new StreamWriter(currentFile))
+                {
+                    writerCurrentFile.WriteLine("[" + titulo + "]");
+
+                    foreach (string ip in ips)
+                    {
+                        writerCurrentFile.WriteLine(ip);
+                    }
+                }
+            }
         }
     }
 }
