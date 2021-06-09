@@ -288,17 +288,43 @@ namespace Summanager
                     ips = IO.File.readCurrentFile();
                     _tituloForm();
                     saveFileDialog.FileName = "";
-
-                    //btnAbrir.Enabled = false;
-                    //btnGuardar.Enabled = false;
-                    //btnActualizar.Enabled = false;
-                    //btnDetener.Enabled = true;
-                    //btnImportar.Enabled = false;
-                    //btnExportar.Enabled = false;
-                    //t = new Thread(_analizar);
-                    //t.Start();
                 }
                 catch (Exception ex)
+                {
+                    string msjeLog = "[" + _fechaHora() + "] Error al abrir archivo: " +
+                        ex.Message;
+                    txtConsola.AppendText(msjeLog);
+                    txtConsola.AppendText(Environment.NewLine);
+                    logFile.WriteLine(msjeLog);
+                }
+            }
+        }
+
+        private void btnExportar_Click(object sender, EventArgs e)
+        {
+            saveFileDialog.InitialDirectory = "c:\\";
+            saveFileDialog.Filter = "Libro de Excel (*.xlsx)|*.xlsx";
+            saveFileDialog.FilterIndex = 1;
+            saveFileDialog.RestoreDirectory = true;
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string filePath = saveFileDialog.FileName;
+                try
+                {
+                    string msjeLog = "[" + _fechaHora() + "] Exportando archivo...";
+                    txtConsola.AppendText(msjeLog);
+                    txtConsola.AppendText(Environment.NewLine);
+                    logFile.WriteLine(msjeLog);
+
+                    IO.File.exportExcelFile(filePath, printers);
+
+                    msjeLog = "[" + _fechaHora() + "] Archivo exportado con éxito.";
+                    txtConsola.AppendText(msjeLog);
+                    txtConsola.AppendText(Environment.NewLine);
+                    logFile.WriteLine(msjeLog);
+                }
+                catch(Exception ex)
                 {
                     string msjeLog = "[" + _fechaHora() + "] Error al abrir archivo: " +
                         ex.Message;

@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Entities;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Office.Interop.Excel;
 
 namespace IO
 {
@@ -138,6 +140,42 @@ namespace IO
                         writerCurrentFile.WriteLine(ip);
                     }
                 }
+            }
+        }
+
+        public static void exportExcelFile(string filePath, List<Printer> printers)
+        {
+            Application application = new Application();
+            Workbook libros = application.Workbooks.Add();
+            Worksheet hoja = (Worksheet) libros.Worksheets.Item[1];
+            try
+            {
+                hoja.Cells[1, 1] = "Ip";
+                hoja.Cells[1, 2] = "Modelo";
+                hoja.Cells[1, 3] = "Estado";
+                hoja.Cells[1, 4] = "Toner";
+                hoja.Cells[1, 5] = "U. Img.";
+                hoja.Cells[1, 6] = "Kit. Mant.";
+
+                int contador = 2;
+                foreach(Printer printer in printers)
+                {
+                    hoja.Cells[contador, 1] = printer.Ip.ToString();
+                    if(printer.Modelo!=null) hoja.Cells[contador, 2] = printer.Modelo.ToString();
+                    hoja.Cells[contador, 3] = printer.Estado.ToString();
+                    if (printer.Toner != null) hoja.Cells[contador, 4] = printer.Toner.ToString() + "%";
+                    if (printer.UImagen != null) hoja.Cells[contador, 5] = printer.UImagen.ToString() + "%";
+                    if (printer.KitMant != null) hoja.Cells[contador, 6] = printer.KitMant.ToString() + "%";
+
+                    contador++;
+                }
+
+                libros.SaveAs(filePath);
+            }
+            finally
+            {
+                libros.Close(true);
+                application.Quit();
             }
         }
     }
