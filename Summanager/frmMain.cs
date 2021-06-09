@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -333,6 +334,13 @@ namespace Summanager
                     logFile.WriteLine(msjeLog);
                 }
             }
+        }
+
+        private void dgv_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            string estado = dgv.SelectedCells[2].Value.ToString();
+            string ip = "http://" + dgv.SelectedCells[0].Value.ToString();
+            if(estado=="Online") Process.Start(ip);
         }
     }
 }
