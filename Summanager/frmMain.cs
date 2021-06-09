@@ -172,6 +172,7 @@ namespace Summanager
             btnDetener.Enabled = false;
             btnImportar.Enabled = true;
             btnExportar.Enabled = true;
+            t.Abort();
         }
 
         private void btnAnalizar_Clic(object sender, MouseEventArgs e)
