@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Office.Interop.Excel;
+using System.Drawing;
 
 namespace IO
 {
@@ -150,25 +151,75 @@ namespace IO
             Worksheet hoja = (Worksheet) libros.Worksheets.Item[1];
             try
             {
-                hoja.Cells[1, 1] = "Ip";
-                hoja.Cells[1, 2] = "Modelo";
-                hoja.Cells[1, 3] = "Estado";
-                hoja.Cells[1, 4] = "Toner";
-                hoja.Cells[1, 5] = "U. Img.";
-                hoja.Cells[1, 6] = "Kit. Mant.";
+                hoja.Cells[2, 2] = "Ip";
+                hoja.Cells[2, 3] = "Modelo";
+                hoja.Cells[2, 4] = "Estado";
+                hoja.Cells[2, 5] = "Toner";
+                hoja.Cells[2, 6] = "U. Img.";
+                hoja.Cells[2, 7] = "Kit. Mant.";
 
-                int contador = 2;
+                Range formatRange;
+                for (int i=2; i<=7; i++)
+                {
+                    formatRange = hoja.Cells[2, i];
+                    formatRange.BorderAround2(XlLineStyle.xlContinuous, XlBorderWeight.xlThin, XlColorIndex.xlColorIndexAutomatic);
+                }
+                formatRange = hoja.Range["B2", "G2"];
+                formatRange.Font.Bold = true;
+                formatRange.HorizontalAlignment = XlHAlign.xlHAlignCenter;
+                formatRange.BorderAround2(XlLineStyle.xlContinuous, XlBorderWeight.xlMedium, XlColorIndex.xlColorIndexAutomatic);
+
+                hoja.Columns[2].ColumnWidth = 14;
+                hoja.Columns[3].ColumnWidth = 17;
+                hoja.Columns[4].ColumnWidth = 7;
+
+                int contador = 3;
                 foreach(Printer printer in printers)
                 {
-                    hoja.Cells[contador, 1] = printer.Ip.ToString();
-                    if(printer.Modelo!=null) hoja.Cells[contador, 2] = printer.Modelo.ToString();
-                    hoja.Cells[contador, 3] = printer.Estado.ToString();
-                    if (printer.Toner != null) hoja.Cells[contador, 4] = printer.Toner.ToString() + "%";
-                    if (printer.UImagen != null) hoja.Cells[contador, 5] = printer.UImagen.ToString() + "%";
-                    if (printer.KitMant != null) hoja.Cells[contador, 6] = printer.KitMant.ToString() + "%";
+                    hoja.Cells[contador, 2] = printer.Ip.ToString();
+                    formatRange = hoja.Cells[contador, 2];
+                    formatRange.BorderAround2(XlLineStyle.xlContinuous, XlBorderWeight.xlThin, XlColorIndex.xlColorIndexAutomatic);
+
+                    if (printer.Modelo!=null) hoja.Cells[contador, 3] = printer.Modelo.ToString();
+                    formatRange = hoja.Cells[contador, 3];
+                    formatRange.BorderAround2(XlLineStyle.xlContinuous, XlBorderWeight.xlThin, XlColorIndex.xlColorIndexAutomatic);
+
+                    hoja.Cells[contador, 4] = printer.Estado.ToString();
+                    formatRange = hoja.Cells[contador, 4];
+                    formatRange.BorderAround2(XlLineStyle.xlContinuous, XlBorderWeight.xlThin, XlColorIndex.xlColorIndexAutomatic);
+
+                    if (printer.Toner != null) hoja.Cells[contador, 5] = printer.Toner.ToString() + "%";
+                    formatRange = hoja.Cells[contador, 5];
+                    formatRange.BorderAround2(XlLineStyle.xlContinuous, XlBorderWeight.xlThin, XlColorIndex.xlColorIndexAutomatic);
+
+                    if (printer.UImagen != null) hoja.Cells[contador, 6] = printer.UImagen.ToString() + "%";
+                    formatRange = hoja.Cells[contador, 6];
+                    formatRange.BorderAround2(XlLineStyle.xlContinuous, XlBorderWeight.xlThin, XlColorIndex.xlColorIndexAutomatic);
+
+                    if (printer.KitMant != null) hoja.Cells[contador, 7] = printer.KitMant.ToString() + "%";
+                    formatRange = hoja.Cells[contador, 7];
+                    formatRange.BorderAround2(XlLineStyle.xlContinuous, XlBorderWeight.xlThin, XlColorIndex.xlColorIndexAutomatic);
+
+                    if (printer.Estado == "Online")
+                    {
+                        if(printer.Toner<=10 || printer.UImagen<=10 || (printer.KitMant!=null && printer.KitMant <= 10))
+                        {
+                            formatRange = hoja.Range[hoja.Cells[contador, 2], hoja.Cells[contador, 7]];
+                            formatRange.Interior.Color = ColorTranslator.ToOle(Color.Yellow);
+                        }
+                        if (printer.Toner <= 3 || printer.UImagen <= 3 || (printer.KitMant != null && printer.KitMant <= 3))
+                        {
+                            formatRange = hoja.Range[hoja.Cells[contador, 2], hoja.Cells[contador, 7]];
+                            formatRange.Interior.Color = ColorTranslator.ToOle(Color.Red);
+                        }
+                    }
 
                     contador++;
                 }
+
+                string rangoFinal = "G" + (printers.Count + 2).ToString();
+                formatRange = hoja.Range["B3", rangoFinal];
+                formatRange.BorderAround2(XlLineStyle.xlContinuous, XlBorderWeight.xlMedium, XlColorIndex.xlColorIndexAutomatic);
 
                 libros.SaveAs(filePath);
             }
