@@ -109,15 +109,6 @@ namespace Summanager
             dgv.Invoke(new MethodInvoker(() => { dgv.Refresh(); }));
         }
 
-        //private void dgvRefresh()
-        //{
-        //    if (dgv.InvokeRequired)
-        //    {
-        //        var d = new SafeDgvRefreshDelegate();
-        //        dgv.Invoke(new SafeDgvRefreshDelegate, dgv.Refresh());
-        //    }
-        //}
-
         private void _analizar()
         {
             if (printers.Count > 0) printers.Clear();
@@ -215,7 +206,6 @@ namespace Summanager
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            //CheckForIllegalCrossThreadCalls = false;
             _threadAnalizar();
         }
 
