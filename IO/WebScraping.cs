@@ -58,20 +58,20 @@ namespace IO
         }
 
         private void _Lex410() {
-            this.url += "/cgi-bin/dynamic/printer/PrinterStatus.html";
+            this.url += Printer.L410_AFTER_URL;
             this.doc = this.web.Load(this.url);
 
             int contTablas = 0;
-            foreach (var tabla in doc.DocumentNode.SelectNodes("//table[@class='status_table']"))
+            foreach (var tabla in doc.DocumentNode.SelectNodes(Printer.L410_TABLE))
             {
                 contTablas++;
-                if (contTablas == 1)
+                if (contTablas == (int) Printer.L410_NUM_TABLA.TONER)
                 {
                     int contTr = 0;
                     foreach (var nodo in tabla.ChildNodes)
                     {
                         if (nodo.Name == "tr") contTr++;
-                        if (contTr == 3)
+                        if (contTr == (int) Printer.L410_NUM_TR.TONER)
                         {
                             string[] valor = nodo.InnerText.Split('~');
                             if (valor.Length > 1)
@@ -86,13 +86,13 @@ namespace IO
                         }
                     }
                 }
-                if (contTablas == 4)
+                if (contTablas == (int) Printer.L410_NUM_TABLA.UNIDAD_IMAGEN)
                 {
                     int contTr = 0;
                     foreach (var nodo in tabla.ChildNodes)
                     {
                         if (nodo.Name == "tr") contTr++;
-                        if (contTr == 5 && nodo.Name == "tr")
+                        if (contTr == (int)Printer.L410_NUM_TR.UNIDAD_IMAGEN && nodo.Name == "tr")
                         {
                             string[] valor = nodo.InnerText.Split(':');
                             valor[1] = valor[1].Remove(valor[1].Length - 3);
@@ -107,20 +107,20 @@ namespace IO
 
         private void _Lex610()
         {
-            this.url += "/cgi-bin/dynamic/printer/PrinterStatus.html";
+            this.url += Printer.L610_AFTER_URL;
             this.doc = this.web.Load(this.url);
 
             int contTablas = 0;
-            foreach (var tabla in doc.DocumentNode.SelectNodes("//table[@class='status_table']"))
+            foreach (var tabla in doc.DocumentNode.SelectNodes(Printer.L610_TABLE))
             {
                 contTablas++;
-                if (contTablas == 1)
+                if (contTablas == (int)Printer.L610_NUM_TABLA.TONER)
                 {
                     int contTr = 0;
                     foreach (var nodo in tabla.ChildNodes)
                     {
                         if (nodo.Name == "tr") contTr++;
-                        if (contTr == 3)
+                        if (contTr == (int)Printer.L610_NUM_TR.TONER)
                         {
                             string[] valor = nodo.InnerText.Split('~');
                             if (valor.Length > 1)
@@ -135,20 +135,20 @@ namespace IO
                         }
                     }
                 }
-                if (contTablas == 4)
+                if (contTablas == (int)Printer.L610_NUM_TABLA.UNIDAD_IMAGEN)
                 {
                     int contTr = 0;
                     foreach (var nodo in tabla.ChildNodes)
                     {
                         if (nodo.Name == "tr") contTr++;
-                        if (contTr == 5 && nodo.Name == "tr")
+                        if (contTr == (int)Printer.L610_NUM_TR.KIT_MANTENIMIENTO && nodo.Name == "tr")
                         {
                             string[] valor = nodo.InnerText.Split(':');
                             valor[1] = valor[1].Remove(valor[1].Length - 3);
 
                             this.printer.KitMant = Int32.Parse(valor[1]);
                         }
-                        if (contTr == 6 && nodo.Name == "tr")
+                        if (contTr == (int)Printer.L610_NUM_TR.UNIDAD_IMAGEN && nodo.Name == "tr")
                         {
                             string[] valor = nodo.InnerText.Split(':');
                             valor[1] = valor[1].Remove(valor[1].Length - 3);
@@ -162,20 +162,20 @@ namespace IO
 
         private void _Lex812()
         {
-            this.url += "/cgi-bin/dynamic/printer/PrinterStatus.html";
+            this.url += Printer.L812_AFTER_URL;
             this.doc = this.web.Load(this.url);
 
             int contTablas = 0;
-            foreach (var tabla in doc.DocumentNode.SelectNodes("//table[@class='status_table']"))
+            foreach (var tabla in doc.DocumentNode.SelectNodes(Printer.L812_TABLE))
             {
                 contTablas++;
-                if (contTablas == 1)
+                if (contTablas == (int)Printer.L812_NUM_TABLA.TONER)
                 {
                     int contTr = 0;
                     foreach (var nodo in tabla.ChildNodes)
                     {
                         if (nodo.Name == "tr") contTr++;
-                        if (contTr == 3)
+                        if (contTr == (int)Printer.L812_NUM_TR.TONER)
                         {
                             string[] valor = nodo.InnerText.Split('~');
                             if (valor.Length > 1)
@@ -190,20 +190,20 @@ namespace IO
                         }
                     }
                 }
-                if (contTablas == 4)
+                if (contTablas == (int)Printer.L812_NUM_TABLA.UNIDAD_IMAGEN)
                 {
                     int contTr = 0;
                     foreach (var nodo in tabla.ChildNodes)
                     {
                         if (nodo.Name == "tr") contTr++;
-                        if (contTr == 5 && nodo.Name == "tr")
+                        if (contTr == (int)Printer.L812_NUM_TR.KIT_MANTENIMIENTO && nodo.Name == "tr")
                         {
                             string[] valor = nodo.InnerText.Split(':');
                             valor[1] = valor[1].Remove(valor[1].Length - 3);
 
                             this.printer.KitMant = Int32.Parse(valor[1]);
                         }
-                        if (contTr == 7 && nodo.Name == "tr")
+                        if (contTr == (int)Printer.L812_NUM_TR.UNIDAD_IMAGEN && nodo.Name == "tr")
                         {
                             string[] valor = nodo.InnerText.Split(':');
                             valor[1] = valor[1].Remove(valor[1].Length - 3);

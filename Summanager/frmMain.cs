@@ -86,12 +86,12 @@ namespace Summanager
         {
             foreach(DataGridViewRow r in dgv.Rows)
             {
-                if((string)r.Cells[2].Value == "Online")
+                if((string)r.Cells[2].Value == Printer.ONLINE)
                 {
                     int toner = Int32.Parse(r.Cells[3].Value.ToString().Remove(r.Cells[3].Value.ToString().Length - 1));
                     int uimagen = Int32.Parse(r.Cells[4].Value.ToString().Remove(r.Cells[4].Value.ToString().Length - 1));
                     int kmant = -1;
-                    if ((string)r.Cells[1].Value != "Lexmark MS410dn")
+                    if ((string)r.Cells[1].Value != Printer.L410_TITLE)
                     {
                         kmant = Int32.Parse(r.Cells[5].Value.ToString().Remove(r.Cells[5].Value.ToString().Length - 1));
                     }
