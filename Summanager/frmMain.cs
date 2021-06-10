@@ -33,6 +33,10 @@ namespace Summanager
             logFile = IO.File.openLogFile();
             printers = new List<Printer>();
             _tituloForm();
+
+            ThreadStart operacion = new ThreadStart(_analizar);
+            t = new Thread(operacion);
+            t.IsBackground = true;
         }
 
         private void _tituloForm()
@@ -175,7 +179,7 @@ namespace Summanager
             t.Abort();
         }
 
-        private void btnAnalizar_Clic(object sender, MouseEventArgs e)
+        private void _threadAnalizar()
         {
             btnAbrir.Enabled = false;
             btnGuardar.Enabled = false;
@@ -183,21 +187,25 @@ namespace Summanager
             btnDetener.Enabled = true;
             btnImportar.Enabled = false;
             btnExportar.Enabled = false;
-            t = new Thread(_analizar);
+
+            if (!t.IsAlive)
+            {
+                ThreadStart operacion = new ThreadStart(_analizar);
+                t = new Thread(operacion);
+                t.IsBackground = true;
+            }
             t.Start();
+        }
+
+        private void btnAnalizar_Clic(object sender, MouseEventArgs e)
+        {
+            _threadAnalizar();
         }
 
         private void frmMain_Load(object sender, EventArgs e)
         {
             CheckForIllegalCrossThreadCalls = false;
-            btnAbrir.Enabled = false;
-            btnGuardar.Enabled = false;
-            btnActualizar.Enabled = false;
-            btnDetener.Enabled = true;
-            btnImportar.Enabled = false;
-            btnExportar.Enabled = false;
-            t = new Thread(_analizar);
-            t.Start();
+            _threadAnalizar();
         }
 
         private void btnDetener_Click(object sender, EventArgs e)
@@ -290,6 +298,7 @@ namespace Summanager
                     ips = IO.File.readCurrentFile();
                     _tituloForm();
                     saveFileDialog.FileName = "";
+                    _threadAnalizar();
                 }
                 catch (Exception ex)
                 {
