@@ -31,6 +31,11 @@ namespace Entities
             TONER = 3,
             UNIDAD_IMAGEN = 5
         }
+        
+        /**LEXMARK MS610 **/
+        public static readonly string L610_TITLE = "Lexmark MS610dn";
+        public static readonly string L610_AFTER_URL = "/cgi-bin/dynamic/printer/PrinterStatus.html";
+        public static readonly string L610_TABLE = "//table[@class='status_table']";
         public enum L610_NUM_TABLA
         {
             TONER = 1,
@@ -43,6 +48,11 @@ namespace Entities
             UNIDAD_IMAGEN = 6,
             KIT_MANTENIMIENTO = 5
         }
+
+        /** LEXMARK MS812 **/
+        public static readonly string L812_TITLE = "Lexmark MS812";
+        public static readonly string L812_AFTER_URL = "/cgi-bin/dynamic/printer/PrinterStatus.html";
+        public static readonly string L812_TABLE = "//table[@class='status_table']";
         public enum L812_NUM_TABLA
         {
             TONER = 1,
@@ -55,15 +65,5 @@ namespace Entities
             UNIDAD_IMAGEN = 7,
             KIT_MANTENIMIENTO = 5
         }
-
-        /**LEXMARK MS610 **/
-        public static readonly string L610_TITLE = "Lexmark MS610dn";
-        public static readonly string L610_AFTER_URL = "/cgi-bin/dynamic/printer/PrinterStatus.html";
-        public static readonly string L610_TABLE = "//table[@class='status_table']";
-
-        /** LEXMARK MS812 **/
-        public static readonly string L812_TITLE = "Lexmark MS812";
-        public static readonly string L812_AFTER_URL = "/cgi-bin/dynamic/printer/PrinterStatus.html";
-        public static readonly string L812_TABLE = "//table[@class='status_table']";
     }
 }
