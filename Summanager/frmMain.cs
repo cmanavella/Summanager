@@ -24,6 +24,8 @@ namespace Summanager
         private Thread t;
         private static StreamWriter logFile;
 
+        //private delegate void SafeDgvRefreshDelegate();
+
         public frmMain()
         {
             InitializeComponent();
@@ -34,8 +36,7 @@ namespace Summanager
             printers = new List<Printer>();
             _tituloForm();
 
-            ThreadStart operacion = new ThreadStart(_analizar);
-            t = new Thread(operacion);
+            t = new Thread(new ThreadStart(_analizar));
             t.IsBackground = true;
         }
 
@@ -58,12 +59,12 @@ namespace Summanager
 
         private void _llenarDgv()
         {
-            dgv.Columns.Add("ip", "Ip");
-            dgv.Columns.Add("modelo", "Modelo");
-            dgv.Columns.Add("estado", "Estado");
-            dgv.Columns.Add("toner", "Toner");
-            dgv.Columns.Add("uimagen", "U. Img.");
-            dgv.Columns.Add("kmant", "Kit Mant.");
+            dgv.Invoke(new MethodInvoker(() => { dgv.Columns.Add("ip", "Ip"); }));
+            dgv.Invoke(new MethodInvoker(() => { dgv.Columns.Add("modelo", "Modelo"); }));
+            dgv.Invoke(new MethodInvoker(() => { dgv.Columns.Add("estado", "Estado"); }));
+            dgv.Invoke(new MethodInvoker(() => { dgv.Columns.Add("toner", "Toner"); }));
+            dgv.Invoke(new MethodInvoker(() => { dgv.Columns.Add("uimagen", "U. Img."); }));
+            dgv.Invoke(new MethodInvoker(() => { dgv.Columns.Add("kmant", "Kit Mant."); }));
 
             foreach(var printer in printers)
             {
@@ -75,7 +76,8 @@ namespace Summanager
                 if (printer.UImagen != null) uimagen = printer.UImagen + "%";
                 if (printer.KitMant != null) kitmant = printer.KitMant + "%";
 
-                dgv.Rows.Add(printer.Ip, printer.Modelo, printer.Estado, toner, uimagen, kitmant);
+                dgv.Invoke(new MethodInvoker(() => { dgv.Rows.Add(printer.Ip, printer.Modelo, 
+                    printer.Estado, toner, uimagen, kitmant); }));
             }
             _colorearDgv();
         }
@@ -104,19 +106,28 @@ namespace Summanager
                     }
                 }
             }
-            dgv.Refresh();
+            dgv.Invoke(new MethodInvoker(() => { dgv.Refresh(); }));
         }
+
+        //private void dgvRefresh()
+        //{
+        //    if (dgv.InvokeRequired)
+        //    {
+        //        var d = new SafeDgvRefreshDelegate();
+        //        dgv.Invoke(new SafeDgvRefreshDelegate, dgv.Refresh());
+        //    }
+        //}
 
         private void _analizar()
         {
             if (printers.Count > 0) printers.Clear();
-            dgv.Rows.Clear();
-            dgv.Columns.Clear();
-            dgv.Refresh();
+            dgv.Invoke(new MethodInvoker(() => { dgv.Rows.Clear(); }));
+            dgv.Invoke(new MethodInvoker(() => { dgv.Columns.Clear(); }));
+            dgv.Invoke(new MethodInvoker(() => { dgv.Refresh(); }));
 
             string msjeLog= "[" + _fechaHora() + "] INICIO NUEVO ANÁLISIS.";
-            txtConsola.AppendText(msjeLog);
-            txtConsola.AppendText(Environment.NewLine);
+            txtConsola.Invoke(new MethodInvoker(() => { txtConsola.AppendText(msjeLog); }));
+            txtConsola.Invoke(new MethodInvoker(() => { txtConsola.AppendText(Environment.NewLine); }));
             logFile.WriteLine(msjeLog);
 
             cantProces = 0;
@@ -126,13 +137,13 @@ namespace Summanager
             {
                 cantProces++;
                 porcProces = cantProces * 100 / ips.Count;
-                progressBar1.Value = porcProces;
+                progressBar1.Invoke(new MethodInvoker(() => { progressBar1.Value = porcProces; }));
 
                 WebScraping webScrap = new WebScraping();
 
                 msjeLog = "[" + _fechaHora() + "] Analizando Ip '" + ip + "'...";
-                txtConsola.AppendText(msjeLog);
-                txtConsola.AppendText(Environment.NewLine);
+                txtConsola.Invoke(new MethodInvoker(() => { txtConsola.AppendText(msjeLog); }));
+                txtConsola.Invoke(new MethodInvoker(() => { txtConsola.AppendText(Environment.NewLine); }));
                 logFile.WriteLine(msjeLog);
                 try
                 {
@@ -140,8 +151,8 @@ namespace Summanager
                     msjeLog = "[" + _fechaHora() + "] Impresora Online: " + printer.Modelo + " Toner: " +
                         printer.Toner + "% - Unidad de Imagen: " + printer.UImagen + "%";
                     if (printer.KitMant != null) msjeLog += " - Kit de Mantenimiento: " + printer.KitMant + " % ";
-                    txtConsola.AppendText(msjeLog);
-                    txtConsola.AppendText(Environment.NewLine);
+                    txtConsola.Invoke(new MethodInvoker(() => { txtConsola.AppendText(msjeLog); }));
+                    txtConsola.Invoke(new MethodInvoker(() => { txtConsola.AppendText(Environment.NewLine); }));
                     logFile.WriteLine(msjeLog);
                     printer.Ip = ip;
                     printer.Estado = "Online";
@@ -150,8 +161,8 @@ namespace Summanager
                 catch (Exception ex)
                 {
                     msjeLog = "[" + _fechaHora() + "] Impresora Offline: " + ex.Message;
-                    txtConsola.AppendText(msjeLog);
-                    txtConsola.AppendText(Environment.NewLine);
+                    txtConsola.Invoke(new MethodInvoker(() => { txtConsola.AppendText(msjeLog); }));
+                    txtConsola.Invoke(new MethodInvoker(() => { txtConsola.AppendText(Environment.NewLine); }));
                     logFile.WriteLine(msjeLog);
                     Printer printer = new Printer();
                     printer.Ip = ip;
@@ -165,17 +176,18 @@ namespace Summanager
             }
 
             msjeLog = "[" + _fechaHora() + "] ANÁLISIS FINALIZADO.";
-            txtConsola.AppendText(msjeLog);
-            txtConsola.AppendText(Environment.NewLine);
+            txtConsola.Invoke(new MethodInvoker(() => { txtConsola.AppendText(msjeLog); }));
+            txtConsola.Invoke(new MethodInvoker(() => { txtConsola.AppendText(Environment.NewLine); }));
             logFile.WriteLine(msjeLog);
-            progressBar1.Value = 0;
+            progressBar1.Invoke(new MethodInvoker(() => { progressBar1.Value = 0; }));
             _llenarDgv();
-            btnAbrir.Enabled = true;
-            btnGuardar.Enabled = true;
-            btnActualizar.Enabled = true;
-            btnDetener.Enabled = false;
-            btnImportar.Enabled = true;
-            btnExportar.Enabled = true;
+
+            btnAbrir.Invoke(new MethodInvoker(() => { btnAbrir.Enabled = true; }));
+            btnGuardar.Invoke(new MethodInvoker(() => { btnGuardar.Enabled = true; }));
+            btnActualizar.Invoke(new MethodInvoker(() => { btnActualizar.Enabled = true; }));
+            btnDetener.Invoke(new MethodInvoker(() => { btnDetener.Enabled = false; }));
+            btnImportar.Invoke(new MethodInvoker(() => { btnImportar.Enabled = true; }));
+            btnExportar.Invoke(new MethodInvoker(() => { btnExportar.Enabled = true; }));
             t.Abort();
         }
 
@@ -190,8 +202,7 @@ namespace Summanager
 
             if (!t.IsAlive)
             {
-                ThreadStart operacion = new ThreadStart(_analizar);
-                t = new Thread(operacion);
+                t = new Thread(new ThreadStart(_analizar));
                 t.IsBackground = true;
             }
             t.Start();
@@ -204,7 +215,7 @@ namespace Summanager
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            CheckForIllegalCrossThreadCalls = false;
+            //CheckForIllegalCrossThreadCalls = false;
             _threadAnalizar();
         }
 
