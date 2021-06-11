@@ -24,8 +24,6 @@ namespace Summanager
         private Thread t;
         private static StreamWriter logFile;
 
-        //private delegate void SafeDgvRefreshDelegate();
-
         public frmMain()
         {
             InitializeComponent();
@@ -40,6 +38,9 @@ namespace Summanager
             t.IsBackground = true;
         }
 
+        /// <summary>
+        /// Change the Form Title.
+        /// </summary>
         private void _tituloForm()
         {
             string fileName = ips[0];
@@ -50,6 +51,10 @@ namespace Summanager
             Text = titulo[0] + "-" + fileName;
         }
 
+        /// <summary>
+        /// Gets the actual Datetime for its future use.
+        /// </summary>
+        /// <returns></returns>
         private static string _fechaHora()
         {
             DateTime time = DateTime.Now;
@@ -57,6 +62,12 @@ namespace Summanager
             return time.ToString("dd/MM/yyyy HH:mm:ss");
         }
 
+        /// <summary>
+        /// Load the DataGridView
+        /// </summary>
+        /// <remarks>
+        /// Load the DataGridView with a Collection of Printers and Color the diferents Rows as its need.
+        /// </remarks>
         private void _llenarDgv()
         {
             dgv.Invoke(new MethodInvoker(() => { dgv.Columns.Add("ip", "Ip"); }));
@@ -82,6 +93,9 @@ namespace Summanager
             _colorearDgv();
         }
 
+        /// <summary>
+        /// Color the DataGridView Row according to the Printer Information
+        /// </summary>
         private void _colorearDgv()
         {
             foreach(DataGridViewRow r in dgv.Rows)
@@ -109,6 +123,13 @@ namespace Summanager
             dgv.Invoke(new MethodInvoker(() => { dgv.Refresh(); }));
         }
 
+        /// <summary>
+        /// Analize the List of IPs.
+        /// </summary>
+        /// <remarks>
+        /// Analize all the List of IPs, write each move in the Console, move the ProgressBar and finally 
+        /// load the DataGridView.
+        /// </remarks>
         private void _analizar()
         {
             if (printers.Count > 0) printers.Clear();
@@ -182,6 +203,9 @@ namespace Summanager
             t.Abort();
         }
 
+        /// <summary>
+        /// Call the Method wich analize all List of IPs in other thread.
+        /// </summary>
         private void _threadAnalizar()
         {
             btnAbrir.Enabled = false;
@@ -199,6 +223,7 @@ namespace Summanager
             t.Start();
         }
 
+        /**EVENTS**/
         private void btnAnalizar_Clic(object sender, MouseEventArgs e)
         {
             _threadAnalizar();
