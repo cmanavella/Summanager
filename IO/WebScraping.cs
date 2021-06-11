@@ -26,22 +26,34 @@ namespace IO
             this.printer = new Printer();
         }
 
+        /// <summary>
+        /// Read a Printer IP.
+        /// </summary>
+        /// <remarks>
+        /// Allow read all the information in the HTML Printer Page and returns an Object Printer.
+        /// </remarks>
+        /// <param name="ip"></param>
+        /// <returns>Printer</returns>
         public Printer readIp(string ip)
         {
+            //The url Variable has a String with http://, just it need the IP Address.
             this.url += ip;
 
+            //Put a Timeout, set in 4000 miliseconds.
             this.web.PreRequest = delegate (HttpWebRequest webRequest)
             {
                 webRequest.Timeout = 4000;
                 return true;
             };
 
+            //Load de HTML Printer Page.
             this.doc = this.web.Load(this.url);
 
+            //Save the Page Title and then use it as Printer Model.
             var title = this.doc.DocumentNode.SelectNodes("//title").FirstOrDefault();
-
             this.printer.Modelo = title.InnerHtml;
 
+            //According to the Printer Model, call its custom method to complete the information about.
             switch (this.printer.Modelo)
             {
                 case "Lexmark MS812":
@@ -57,14 +69,21 @@ namespace IO
             return this.printer;
         }
 
+        /// <summary>
+        /// Lexmark MS410 Information
+        /// </summary>
+        /// <remarks>
+        /// Find inside the Lexmark MS410 HTML Page all information needed.
+        /// </remarks>
         private void _Lex410() {
-            this.url += Printer.L410_AFTER_URL;
-            this.doc = this.web.Load(this.url);
+            this.url += Printer.L410_AFTER_URL; 
+            this.doc = this.web.Load(this.url); 
 
             int contTablas = 0;
             foreach (var tabla in doc.DocumentNode.SelectNodes(Printer.L410_TABLE))
             {
                 contTablas++;
+
                 if (contTablas == (int) Printer.L410_NUM_TABLA.TONER)
                 {
                     int contTr = 0;
@@ -105,6 +124,12 @@ namespace IO
             }
         }
 
+        /// <summary>
+        /// Lexmark MS610 Information
+        /// </summary>
+        /// <remarks>
+        /// Find inside the Lexmark MS610 HTML Page all information needed.
+        /// </remarks>
         private void _Lex610()
         {
             this.url += Printer.L610_AFTER_URL;
@@ -160,6 +185,12 @@ namespace IO
             }
         }
 
+        /// <summary>
+        /// Lexmark MS812 Information
+        /// </summary>
+        /// <remarks>
+        /// Find inside the Lexmark MS812 HTML Page all information needed.
+        /// </remarks>
         private void _Lex812()
         {
             this.url += Printer.L812_AFTER_URL;
