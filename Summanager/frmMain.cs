@@ -52,6 +52,16 @@ namespace Summanager
         }
 
         /// <summary>
+        /// Return the Current File Title.
+        /// </summary>
+        /// <returns></returns>
+        private string _getCurrentTitle()
+        {
+            string[] splitTitle = Text.Split('-');
+            return splitTitle[1].Substring(0, splitTitle[1].Length - 4);
+        }
+
+        /// <summary>
         /// Gets the actual Datetime for its future use.
         /// </summary>
         /// <returns></returns>
@@ -283,7 +293,6 @@ namespace Summanager
                     ips.Clear();
                     ips = IO.File.readCurrentFile();
                     _tituloForm();
-                    saveFileDialog.FileName = "";
                 } catch (Exception ex)
                 {
                     string msjeLog = "[" + _fechaHora() + "] Error al guardar archivo: " +
@@ -293,6 +302,7 @@ namespace Summanager
                     logFile.WriteLine(msjeLog);
                 }
             }
+            saveFileDialog.FileName = "";
         }
 
         private void btnAbrir_Click(object sender, EventArgs e)
@@ -323,7 +333,6 @@ namespace Summanager
                     ips.Clear();
                     ips = IO.File.readCurrentFile();
                     _tituloForm();
-                    saveFileDialog.FileName = "";
                     _threadAnalizar();
                 }
                 catch (Exception ex)
@@ -335,6 +344,7 @@ namespace Summanager
                     logFile.WriteLine(msjeLog);
                 }
             }
+            openFileDialog.FileName = "";
         }
 
         private void btnExportar_Click(object sender, EventArgs e)
@@ -370,6 +380,7 @@ namespace Summanager
                     logFile.WriteLine(msjeLog);
                 }
             }
+            saveFileDialog.FileName = "";
         }
 
         private void dgv_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -377,6 +388,56 @@ namespace Summanager
             string estado = dgv.SelectedCells[2].Value.ToString();
             string ip = "http://" + dgv.SelectedCells[0].Value.ToString();
             if(estado=="Online") Process.Start(ip);
+        }
+
+        private void btnImportar_Click(object sender, EventArgs e)
+        {
+            openFileDialog.InitialDirectory = "c:\\";
+            openFileDialog.Filter = "Libro de Excel (*.xlsx;*.xls)|*.xlsx;*.xls";
+            openFileDialog.FilterIndex = 1;
+            openFileDialog.RestoreDirectory = true;
+
+            List<string> newIps = new List<string>();
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string filePath = openFileDialog.FileName;
+
+                try
+                {
+                    string msjeLog = "[" + _fechaHora() + "] Importando archivo...";
+                    txtConsola.AppendText(msjeLog);
+                    txtConsola.AppendText(Environment.NewLine);
+                    logFile.WriteLine(msjeLog);
+
+                    newIps = IO.File.importExcelFile(filePath);
+
+                    msjeLog = "[" + _fechaHora() + "] Archivo Importado con éxito.";
+                    txtConsola.AppendText(msjeLog);
+                    txtConsola.AppendText(Environment.NewLine);
+                    logFile.WriteLine(msjeLog);
+                }
+                catch(Exception ex)
+                {
+                    string msjeLog = "[" + _fechaHora() + "] Error al abrir archivo: " +
+                        ex.Message;
+                    txtConsola.AppendText(msjeLog);
+                    txtConsola.AppendText(Environment.NewLine);
+                    logFile.WriteLine(msjeLog);
+                }
+            }
+
+            openFileDialog.FileName = "";
+
+            if (newIps.Count > 0)
+            {
+                string fileTitle = "[" + _getCurrentTitle() + "]";
+                IO.File.writeCurrentFile(newIps, fileTitle);
+                ips.Clear();
+                ips = newIps;
+                ips.Insert(0, fileTitle);
+                _tituloForm();
+                _threadAnalizar();
+            }
         }
     }
 }

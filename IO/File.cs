@@ -143,10 +143,38 @@ namespace IO
                 }
             }
 
+            writeCurrentFile(ips);
+        }
+
+        /// <summary>
+        /// Write the Current File with a List of Ips.
+        /// </summary>
+        /// <param name="ips"></param>
+        public static void writeCurrentFile(List<string> ips)
+        {
             //Open the Current File and load it with the Opened File Information.
             string currentFile = AppDomain.CurrentDomain.BaseDirectory + "current.smp";
             using (StreamWriter writerCurrentFile = new StreamWriter(currentFile))
             {
+                foreach (string ip in ips)
+                {
+                    writerCurrentFile.WriteLine(ip);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Write the Current File with a List of Ips and a Title.
+        /// </summary>
+        /// <param name="ips"></param>
+        /// <param name="title"></param>
+        public static void writeCurrentFile(List<string> ips, string title)
+        {
+            //Open the Current File and load it with the Opened File Information.
+            string currentFile = AppDomain.CurrentDomain.BaseDirectory + "current.smp";
+            using (StreamWriter writerCurrentFile = new StreamWriter(currentFile))
+            {
+                writerCurrentFile.WriteLine(title);
                 foreach (string ip in ips)
                 {
                     writerCurrentFile.WriteLine(ip);
@@ -204,6 +232,89 @@ namespace IO
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// Import an Excel File.
+        /// </summary>
+        /// <remarks>
+        /// Import an Excel File with a list of Pinters inside into a List of Printers.
+        /// </remarks>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
+        public static List<string> importExcelFile(string filePath)
+        {
+            List<string> retorno = new List<string>();
+
+            Application application = new Application();
+            //Open a book
+            Workbook libros = application.Workbooks.Open(filePath);
+            //Open a sheet
+            Worksheet hoja = (Worksheet)libros.Worksheets.Item[1];
+
+            try
+            {
+                //Use a Range to access to Excel File.
+                Range range = hoja.UsedRange;
+                int row = 2; //Start with the second Row because the first one is used to the Column Headers.
+                string excelValue = (string)(range.Cells[row, 8]).Value2; //Get the first Excel data.
+                do 
+                {
+                    string ip = _makeIpAddress(excelValue); //Convert the Excel value in a ip.
+                    if (_isValidIp(ip)) retorno.Add(ip); //If the ip is valid, add it to the return variable.
+                    row++; //Add one to the Row counter.
+                    excelValue = (string)(range.Cells[row, 8]).Value2; //Get the next Excel Data.
+                } while (excelValue != null); //Do all while Excel Data is not null.
+            }
+            finally
+            {
+                //Finally close the Excel File.
+                libros.Close(true);
+                application.Quit();
+            }
+
+            return retorno;
+        }
+
+        /// <summary>
+        /// Is Valid Ip
+        /// </summary>
+        /// <remarks>
+        /// Evaluate if the Ip passing by parameter is Valid.
+        /// </remarks>
+        /// <param name="ip"></param>
+        /// <returns></returns>
+        private static bool _isValidIp(string ip)
+        {
+            bool isValid = true; //Variable to return
+            string[] splitIp = ip.Split('.'); //Split the string ip in each ip segment.
+            if (splitIp.Length == 4) //If the ip have 4 segments is valid.
+            {
+                for(int i=0; i < splitIp.Length; i++)
+                {
+                    if (Int32.Parse(splitIp[i]) < 0 || Int32.Parse(splitIp[i]) > 255) //Evaluate each ip segment is between 0 and 255.
+                    {
+                        isValid = false; //If not, the ip is not valid.
+                        i = splitIp.Length;
+                    }
+                }
+            }
+            else
+            {
+                isValid = false; //If the ip have not 4 segment is not valid.
+            }
+            return isValid;
+        }
+
+        /// <summary>
+        /// Construct an Ip address with a String.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        private static string _makeIpAddress(string value)
+        {
+            string[] splitValue = value.Split(' ');
+            return splitValue[0];
         }
 
         /// <summary>

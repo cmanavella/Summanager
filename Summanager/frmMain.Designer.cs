@@ -139,6 +139,7 @@ namespace Summanager
             this.btnImportar.TabIndex = 7;
             this.btnImportar.Text = "Importar";
             this.btnImportar.UseVisualStyleBackColor = true;
+            this.btnImportar.Click += new System.EventHandler(this.btnImportar_Click);
             // 
             // frmMain
             // 
