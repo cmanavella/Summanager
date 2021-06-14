@@ -439,5 +439,15 @@ namespace Summanager
                 _threadAnalizar();
             }
         }
+
+        private void btnCerrar_MouseClick(object sender, MouseEventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void btnMinimizar_MouseClick(object sender, MouseEventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
     }
 }

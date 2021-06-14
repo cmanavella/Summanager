@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entiti
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SumManager Installer", "SumManager Installer\SumManager Installer.vdproj", "{7EB40D67-3B8C-407C-B56B-0F0047416F98}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomControls", "CustomControls\CustomControls.csproj", "{C7D82790-2BB2-4D8C-9135-BB2DE44764C3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{64D1032D-7F82-4A14-9895-E661EBD40719}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7EB40D67-3B8C-407C-B56B-0F0047416F98}.Debug|Any CPU.ActiveCfg = Debug
 		{7EB40D67-3B8C-407C-B56B-0F0047416F98}.Release|Any CPU.ActiveCfg = Release
+		{C7D82790-2BB2-4D8C-9135-BB2DE44764C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7D82790-2BB2-4D8C-9135-BB2DE44764C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7D82790-2BB2-4D8C-9135-BB2DE44764C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7D82790-2BB2-4D8C-9135-BB2DE44764C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
