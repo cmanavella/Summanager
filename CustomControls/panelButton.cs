@@ -15,6 +15,8 @@ namespace CustomControls
         public panelButton()
         {
             InitializeComponent();
+
+            this.button1.MouseClick += Button1_MouseClick;
         }
 
         [Browsable(true), EditorBrowsable(EditorBrowsableState.Always), Bindable(true)]
@@ -29,6 +31,11 @@ namespace CustomControls
             {
                 button1.Text = value;
             }
+        }
+
+        private void Button1_MouseClick(object sender, MouseEventArgs e)
+        {
+            this.OnMouseClick(e);
         }
     }
 }
