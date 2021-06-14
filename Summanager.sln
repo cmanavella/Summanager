@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IO", "IO\IO.csproj", "{0FC3
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{64D1032D-7F82-4A14-9895-E661EBD40719}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SumManager Installer", "SumManager Installer\SumManager Installer.vdproj", "{7EB40D67-3B8C-407C-B56B-0F0047416F98}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,8 @@ Global
 		{64D1032D-7F82-4A14-9895-E661EBD40719}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64D1032D-7F82-4A14-9895-E661EBD40719}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{64D1032D-7F82-4A14-9895-E661EBD40719}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EB40D67-3B8C-407C-B56B-0F0047416F98}.Debug|Any CPU.ActiveCfg = Debug
+		{7EB40D67-3B8C-407C-B56B-0F0047416F98}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
