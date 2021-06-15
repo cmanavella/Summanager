@@ -42,6 +42,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="menuButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="menuButton.Designer.cs">
+      <DependentUpon>menuButton.cs</DependentUpon>
+    </Compile>
     <Compile Include="panelButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -52,6 +58,9 @@
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="menuButton.resx">
+      <DependentUpon>menuButton.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="panelButton.resx">
       <DependentUpon>panelButton.cs</DependentUpon>
     </EmbeddedResource>
