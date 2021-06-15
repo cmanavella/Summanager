@@ -1,4 +1,5 @@
 ﻿using Entities;
+using IO;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -6,12 +7,10 @@ using System.Drawing;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
-using IO;
-
 
 namespace Summanager
 {
-    public partial class frmEstados : Form
+    public partial class frmEstados : Summanager.frmContenido
     {
         private static List<string> ips;
         private List<Printer> printers;
@@ -98,7 +97,7 @@ namespace Summanager
 
                 dgv.Invoke(new MethodInvoker(() => {
                     dgv.Rows.Add(printer.Ip, printer.Modelo,
-printer.Estado, toner, uimagen, kitmant);
+                    printer.Estado, toner, uimagen, kitmant);
                 }));
             }
             _colorearDgv();
@@ -162,7 +161,7 @@ printer.Estado, toner, uimagen, kitmant);
                 porcProces = cantProces * 100 / ips.Count;
                 progressBar1.Invoke(new MethodInvoker(() => { progressBar1.Value = porcProces; }));
 
-                WebScraping webScrap = new WebScraping();
+                IO.WebScraping webScrap = new WebScraping();
 
                 msjeLog = "[" + _fechaHora() + "] Analizando Ip '" + ip + "'...";
                 txtConsola.Invoke(new MethodInvoker(() => { txtConsola.AppendText(msjeLog); }));

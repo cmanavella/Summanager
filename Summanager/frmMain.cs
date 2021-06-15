@@ -60,10 +60,18 @@ namespace Summanager
 
         private void _openChildForm(object child)
         {
+            List<Form> forms = panelContenido.Controls.OfType<Form>().ToList<Form>();
+
+            foreach(Form formOpen in forms)
+            {
+                formOpen.Close();
+            }
+
             if (this.panelContenido.Controls.Count > 0)
             {
                 this.panelContenido.Controls.RemoveAt(0);
             }
+
             Form form = child as Form;
             form.TopLevel = false;
             form.Dock = DockStyle.Fill;
@@ -107,11 +115,25 @@ namespace Summanager
             SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
 
+        private void btnStock_MouseClick(object sender, MouseEventArgs e)
+        {
+            _unselectMenuButtons();
+            btnStock.Selected = true;
+            _openChildForm(new frmStock());
+        }
+
         private void btnImpresoras_MouseClick(object sender, MouseEventArgs e)
         {
             _unselectMenuButtons();
-            btnImpresoras.Selected = true;
+            btnEstados.Selected = true;
             _openChildForm(new frmEstados(this));
+        }
+
+        private void btnConfiguracion_MouseClick(object sender, MouseEventArgs e)
+        {
+            _unselectMenuButtons();
+            btnConfiguracion.Selected = true;
+            _openChildForm(new frmConfiguracion());
         }
     }
 }
