@@ -37,6 +37,10 @@ namespace Summanager
             this.lblTitulo.Size = new System.Drawing.Size(87, 32);
             this.lblTitulo.Text = "Stock";
             // 
+            // panelMenu
+            // 
+            this.panelMenu.Visible = false;
+            // 
             // frmStock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);

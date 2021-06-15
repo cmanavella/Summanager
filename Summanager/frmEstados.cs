@@ -234,9 +234,42 @@ namespace Summanager
         }
 
         /*EVENTOS*/
-
-        private void btnAbrir_Click(object sender, EventArgs e)
+        private void btnDetener_Click(object sender, EventArgs e)
         {
+            t.Abort();
+            string msjeLog = "[" + _fechaHora() + "] ANÁLISIS FINALIZADO POR EL USUARIO.";
+            txtConsola.AppendText(msjeLog);
+            txtConsola.AppendText(Environment.NewLine);
+            logFile.WriteLine(msjeLog);
+            progressBar1.Value = 0;
+            _llenarDgv();
+            btnAbrir.Enabled = true;
+            btnGuardar.Enabled = true;
+            btnActualizar.Enabled = true;
+            btnDetener.Enabled = false;
+            btnImportar.Enabled = true;
+            btnExportar.Enabled = true;
+        }
+
+        private void dgv_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            string estado = dgv.SelectedCells[2].Value.ToString();
+            string ip = "http://" + dgv.SelectedCells[0].Value.ToString();
+            if (estado == "Online") Process.Start(ip);
+        }
+
+        private void frmEstados_Load(object sender, EventArgs e)
+        {
+            _threadAnalizar();
+        }
+
+        private void frmEstados_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            IO.File.closeLogFile(logFile);
+        }
+
+		private void btnAbrir_MouseClick(object sender, MouseEventArgs e)
+		{
             openFileDialog.InitialDirectory = "c:\\";
             openFileDialog.Filter = "SumManager File (*.smp)|*.smp";
             openFileDialog.FilterIndex = 1;
@@ -277,8 +310,8 @@ namespace Summanager
             openFileDialog.FileName = "";
         }
 
-        private void btnGuardar_Click(object sender, EventArgs e)
-        {
+		private void btnGuardar_MouseClick(object sender, MouseEventArgs e)
+		{
             saveFileDialog.InitialDirectory = "c:\\";
             saveFileDialog.Filter = "SumManager File (*.smp)|*.smp";
             saveFileDialog.FilterIndex = 1;
@@ -317,30 +350,8 @@ namespace Summanager
             saveFileDialog.FileName = "";
         }
 
-        private void btnActualizar_Click(object sender, EventArgs e)
-        {
-            _threadAnalizar();
-        }
-
-        private void btnDetener_Click(object sender, EventArgs e)
-        {
-            t.Abort();
-            string msjeLog = "[" + _fechaHora() + "] ANÁLISIS FINALIZADO POR EL USUARIO.";
-            txtConsola.AppendText(msjeLog);
-            txtConsola.AppendText(Environment.NewLine);
-            logFile.WriteLine(msjeLog);
-            progressBar1.Value = 0;
-            _llenarDgv();
-            btnAbrir.Enabled = true;
-            btnGuardar.Enabled = true;
-            btnActualizar.Enabled = true;
-            btnDetener.Enabled = false;
-            btnImportar.Enabled = true;
-            btnExportar.Enabled = true;
-        }
-
-        private void btnImportar_Click(object sender, EventArgs e)
-        {
+		private void btnImportar_MouseClick(object sender, MouseEventArgs e)
+		{
             openFileDialog.InitialDirectory = "c:\\";
             openFileDialog.Filter = "Libro de Excel (*.xlsx;*.xls)|*.xlsx;*.xls";
             openFileDialog.FilterIndex = 1;
@@ -389,8 +400,8 @@ namespace Summanager
             }
         }
 
-        private void btnExportar_Click(object sender, EventArgs e)
-        {
+		private void btnExportar_MouseClick(object sender, MouseEventArgs e)
+		{
             saveFileDialog.InitialDirectory = "c:\\";
             saveFileDialog.Filter = "Libro de Excel (*.xlsx)|*.xlsx";
             saveFileDialog.FilterIndex = 1;
@@ -425,21 +436,9 @@ namespace Summanager
             saveFileDialog.FileName = "";
         }
 
-        private void dgv_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            string estado = dgv.SelectedCells[2].Value.ToString();
-            string ip = "http://" + dgv.SelectedCells[0].Value.ToString();
-            if (estado == "Online") Process.Start(ip);
-        }
-
-        private void frmEstados_Load(object sender, EventArgs e)
-        {
+		private void btnActualizar_MouseClick(object sender, MouseEventArgs e)
+		{
             _threadAnalizar();
         }
-
-        private void frmEstados_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            IO.File.closeLogFile(logFile);
-        }
-    }
+	}
 }

@@ -37,6 +37,10 @@ namespace Summanager
             this.lblTitulo.Size = new System.Drawing.Size(200, 32);
             this.lblTitulo.Text = "Configuración";
             // 
+            // panelMenu
+            // 
+            this.panelMenu.Visible = false;
+            // 
             // frmConfiguracion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);

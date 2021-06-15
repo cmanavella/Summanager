@@ -48,6 +48,12 @@
     <Compile Include="menuButton.Designer.cs">
       <DependentUpon>menuButton.cs</DependentUpon>
     </Compile>
+    <Compile Include="menuChildButtom.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="menuChildButtom.Designer.cs">
+      <DependentUpon>menuChildButtom.cs</DependentUpon>
+    </Compile>
     <Compile Include="panelButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -60,6 +66,9 @@
   <ItemGroup>
     <EmbeddedResource Include="menuButton.resx">
       <DependentUpon>menuButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="menuChildButtom.resx">
+      <DependentUpon>menuChildButtom.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="panelButton.resx">
       <DependentUpon>panelButton.cs</DependentUpon>

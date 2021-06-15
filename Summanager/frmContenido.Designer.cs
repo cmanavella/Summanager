@@ -31,6 +31,7 @@ namespace Summanager
         {
             this.panelTitulo = new System.Windows.Forms.Panel();
             this.lblTitulo = new System.Windows.Forms.Label();
+            this.panelMenu = new System.Windows.Forms.Panel();
             this.panelTitulo.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -54,12 +55,22 @@ namespace Summanager
             this.lblTitulo.TabIndex = 0;
             this.lblTitulo.Text = "label1";
             // 
+            // panelMenu
+            // 
+            this.panelMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(159)))), ((int)(((byte)(206)))));
+            this.panelMenu.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelMenu.Location = new System.Drawing.Point(0, 49);
+            this.panelMenu.Name = "panelMenu";
+            this.panelMenu.Size = new System.Drawing.Size(795, 40);
+            this.panelMenu.TabIndex = 1;
+            // 
             // frmContenido
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(795, 515);
+            this.Controls.Add(this.panelMenu);
             this.Controls.Add(this.panelTitulo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmContenido";
@@ -74,5 +85,6 @@ namespace Summanager
 
         protected System.Windows.Forms.Panel panelTitulo;
         protected System.Windows.Forms.Label lblTitulo;
+        protected System.Windows.Forms.Panel panelMenu;
     }
 }

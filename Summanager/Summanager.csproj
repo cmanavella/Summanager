@@ -187,5 +187,17 @@
   <ItemGroup>
     <None Include="Resources\box.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\open-folder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save-file.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\excel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\refresh-page-option.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
