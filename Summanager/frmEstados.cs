@@ -14,8 +14,6 @@ namespace Summanager
     {
         private static List<string> ips;
         private List<Printer> printers;
-        private static int cantProces;
-        private static int porcProces;
         private Thread t;
         private static StreamWriter logFile;
         private Form frmMain;
@@ -24,9 +22,6 @@ namespace Summanager
         {
             InitializeComponent();
             ips = IO.File.readCurrentFile();
-            cantProces = 0;
-            porcProces = 0;
-            logFile = IO.File.openLogFile();
             printers = new List<Printer>();
 
             t = new Thread(new ThreadStart(_analizar));
@@ -57,17 +52,6 @@ namespace Summanager
         {
             string[] splitTitle = frmMain.Text.Split('-');
             return splitTitle[1].Substring(0, splitTitle[1].Length - 4);
-        }
-
-        /// <summary>
-        /// Gets the actual Datetime for its future use.
-        /// </summary>
-        /// <returns></returns>
-        private static string _fechaHora()
-        {
-            DateTime time = DateTime.Now;
-
-            return time.ToString("dd/MM/yyyy HH:mm:ss");
         }
 
         /// <summary>
@@ -147,45 +131,19 @@ namespace Summanager
             dgv.Invoke(new MethodInvoker(() => { dgv.Columns.Clear(); }));
             dgv.Invoke(new MethodInvoker(() => { dgv.Refresh(); }));
 
-            string msjeLog = "[" + _fechaHora() + "] INICIO NUEVO ANÁLISIS.";
-            txtConsola.Invoke(new MethodInvoker(() => { txtConsola.AppendText(msjeLog); }));
-            txtConsola.Invoke(new MethodInvoker(() => { txtConsola.AppendText(Environment.NewLine); }));
-            logFile.WriteLine(msjeLog);
-
-            cantProces = 0;
-            porcProces = 0;
-
             foreach (string ip in ips)
             {
-                cantProces++;
-                porcProces = cantProces * 100 / ips.Count;
-                progressBar1.Invoke(new MethodInvoker(() => { progressBar1.Value = porcProces; }));
+                WebScraping webScrap = new WebScraping();
 
-                IO.WebScraping webScrap = new WebScraping();
-
-                msjeLog = "[" + _fechaHora() + "] Analizando Ip '" + ip + "'...";
-                txtConsola.Invoke(new MethodInvoker(() => { txtConsola.AppendText(msjeLog); }));
-                txtConsola.Invoke(new MethodInvoker(() => { txtConsola.AppendText(Environment.NewLine); }));
-                logFile.WriteLine(msjeLog);
                 try
                 {
                     Printer printer = webScrap.readIp(ip);
-                    msjeLog = "[" + _fechaHora() + "] Impresora Online: " + printer.Modelo + " Toner: " +
-                        printer.Toner + "% - Unidad de Imagen: " + printer.UImagen + "%";
-                    if (printer.KitMant != null) msjeLog += " - Kit de Mantenimiento: " + printer.KitMant + " % ";
-                    txtConsola.Invoke(new MethodInvoker(() => { txtConsola.AppendText(msjeLog); }));
-                    txtConsola.Invoke(new MethodInvoker(() => { txtConsola.AppendText(Environment.NewLine); }));
-                    logFile.WriteLine(msjeLog);
                     printer.Ip = ip;
                     printer.Estado = "Online";
                     printers.Add(printer);
                 }
                 catch (Exception ex)
                 {
-                    msjeLog = "[" + _fechaHora() + "] Impresora Offline: " + ex.Message;
-                    txtConsola.Invoke(new MethodInvoker(() => { txtConsola.AppendText(msjeLog); }));
-                    txtConsola.Invoke(new MethodInvoker(() => { txtConsola.AppendText(Environment.NewLine); }));
-                    logFile.WriteLine(msjeLog);
                     Printer printer = new Printer();
                     printer.Ip = ip;
                     printer.Estado = "Offline";
@@ -197,19 +155,7 @@ namespace Summanager
                 }
             }
 
-            msjeLog = "[" + _fechaHora() + "] ANÁLISIS FINALIZADO.";
-            txtConsola.Invoke(new MethodInvoker(() => { txtConsola.AppendText(msjeLog); }));
-            txtConsola.Invoke(new MethodInvoker(() => { txtConsola.AppendText(Environment.NewLine); }));
-            logFile.WriteLine(msjeLog);
-            progressBar1.Invoke(new MethodInvoker(() => { progressBar1.Value = 0; }));
             _llenarDgv();
-
-            btnAbrir.Invoke(new MethodInvoker(() => { btnAbrir.Enabled = true; }));
-            btnGuardar.Invoke(new MethodInvoker(() => { btnGuardar.Enabled = true; }));
-            btnActualizar.Invoke(new MethodInvoker(() => { btnActualizar.Enabled = true; }));
-            btnDetener.Invoke(new MethodInvoker(() => { btnDetener.Enabled = false; }));
-            btnImportar.Invoke(new MethodInvoker(() => { btnImportar.Enabled = true; }));
-            btnExportar.Invoke(new MethodInvoker(() => { btnExportar.Enabled = true; }));
             t.Abort();
         }
 
@@ -218,13 +164,6 @@ namespace Summanager
         /// </summary>
         private void _threadAnalizar()
         {
-            btnAbrir.Enabled = false;
-            btnGuardar.Enabled = false;
-            btnActualizar.Enabled = false;
-            btnDetener.Enabled = true;
-            btnImportar.Enabled = false;
-            btnExportar.Enabled = false;
-
             if (!t.IsAlive)
             {
                 t = new Thread(new ThreadStart(_analizar));
@@ -237,18 +176,7 @@ namespace Summanager
         private void btnDetener_Click(object sender, EventArgs e)
         {
             t.Abort();
-            string msjeLog = "[" + _fechaHora() + "] ANÁLISIS FINALIZADO POR EL USUARIO.";
-            txtConsola.AppendText(msjeLog);
-            txtConsola.AppendText(Environment.NewLine);
-            logFile.WriteLine(msjeLog);
-            progressBar1.Value = 0;
             _llenarDgv();
-            btnAbrir.Enabled = true;
-            btnGuardar.Enabled = true;
-            btnActualizar.Enabled = true;
-            btnDetener.Enabled = false;
-            btnImportar.Enabled = true;
-            btnExportar.Enabled = true;
         }
 
         private void dgv_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -263,11 +191,6 @@ namespace Summanager
             _threadAnalizar();
         }
 
-        private void frmEstados_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            IO.File.closeLogFile(logFile);
-        }
-
 		private void btnAbrir_MouseClick(object sender, MouseEventArgs e)
 		{
             openFileDialog.InitialDirectory = "c:\\";
@@ -280,18 +203,7 @@ namespace Summanager
                 string filePath = openFileDialog.FileName;
                 try
                 {
-                    string msjeLog = "[" + _fechaHora() + "] Abriendo archivo...";
-                    txtConsola.AppendText(msjeLog);
-                    txtConsola.AppendText(Environment.NewLine);
-                    logFile.WriteLine(msjeLog);
-
-
                     IO.File.openFile(filePath);
-
-                    msjeLog = "[" + _fechaHora() + "] Archivo abierto con éxito.";
-                    txtConsola.AppendText(msjeLog);
-                    txtConsola.AppendText(Environment.NewLine);
-                    logFile.WriteLine(msjeLog);
 
                     ips.Clear();
                     ips = IO.File.readCurrentFile();
@@ -300,11 +212,7 @@ namespace Summanager
                 }
                 catch (Exception ex)
                 {
-                    string msjeLog = "[" + _fechaHora() + "] Error al abrir archivo: " +
-                        ex.Message;
-                    txtConsola.AppendText(msjeLog);
-                    txtConsola.AppendText(Environment.NewLine);
-                    logFile.WriteLine(msjeLog);
+                    MessageBox.Show(ex.Message);
                 }
             }
             openFileDialog.FileName = "";
@@ -322,17 +230,7 @@ namespace Summanager
                 string filePath = saveFileDialog.FileName;
                 try
                 {
-                    string msjeLog = "[" + _fechaHora() + "] Guardando archivo...";
-                    txtConsola.AppendText(msjeLog);
-                    txtConsola.AppendText(Environment.NewLine);
-                    logFile.WriteLine(msjeLog);
-
                     IO.File.saveFile(filePath, ips);
-
-                    msjeLog = "[" + _fechaHora() + "] Archivo guardado con éxito.";
-                    txtConsola.AppendText(msjeLog);
-                    txtConsola.AppendText(Environment.NewLine);
-                    logFile.WriteLine(msjeLog);
 
                     ips.Clear();
                     ips = IO.File.readCurrentFile();
@@ -340,11 +238,7 @@ namespace Summanager
                 }
                 catch (Exception ex)
                 {
-                    string msjeLog = "[" + _fechaHora() + "] Error al guardar archivo: " +
-                        ex.Message;
-                    txtConsola.AppendText(msjeLog);
-                    txtConsola.AppendText(Environment.NewLine);
-                    logFile.WriteLine(msjeLog);
+                    MessageBox.Show(ex.Message);
                 }
             }
             saveFileDialog.FileName = "";
@@ -364,25 +258,11 @@ namespace Summanager
 
                 try
                 {
-                    string msjeLog = "[" + _fechaHora() + "] Importando archivo...";
-                    txtConsola.AppendText(msjeLog);
-                    txtConsola.AppendText(Environment.NewLine);
-                    logFile.WriteLine(msjeLog);
-
                     newIps = IO.File.importExcelFile(filePath);
-
-                    msjeLog = "[" + _fechaHora() + "] Archivo Importado con éxito.";
-                    txtConsola.AppendText(msjeLog);
-                    txtConsola.AppendText(Environment.NewLine);
-                    logFile.WriteLine(msjeLog);
                 }
                 catch (Exception ex)
                 {
-                    string msjeLog = "[" + _fechaHora() + "] Error al abrir archivo: " +
-                        ex.Message;
-                    txtConsola.AppendText(msjeLog);
-                    txtConsola.AppendText(Environment.NewLine);
-                    logFile.WriteLine(msjeLog);
+                    MessageBox.Show(ex.Message);
                 }
             }
 
@@ -412,25 +292,11 @@ namespace Summanager
                 string filePath = saveFileDialog.FileName;
                 try
                 {
-                    string msjeLog = "[" + _fechaHora() + "] Exportando archivo...";
-                    txtConsola.AppendText(msjeLog);
-                    txtConsola.AppendText(Environment.NewLine);
-                    logFile.WriteLine(msjeLog);
-
                     IO.File.exportExcelFile(filePath, printers);
-
-                    msjeLog = "[" + _fechaHora() + "] Archivo exportado con éxito.";
-                    txtConsola.AppendText(msjeLog);
-                    txtConsola.AppendText(Environment.NewLine);
-                    logFile.WriteLine(msjeLog);
                 }
                 catch (Exception ex)
                 {
-                    string msjeLog = "[" + _fechaHora() + "] Error al abrir archivo: " +
-                        ex.Message;
-                    txtConsola.AppendText(msjeLog);
-                    txtConsola.AppendText(Environment.NewLine);
-                    logFile.WriteLine(msjeLog);
+                    MessageBox.Show(ex.Message);
                 }
             }
             saveFileDialog.FileName = "";

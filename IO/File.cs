@@ -61,67 +61,6 @@ namespace IO
         }
 
         /// <summary>
-        /// Open the Log File.
-        /// </summary>
-        /// <remarks>
-        /// Open the Log File and return it for its future use.
-        /// </remarks>
-        /// <returns>StreamWriter</returns>
-        public static StreamWriter openLogFile()
-        {
-             //Load the Load File inside a Variable.
-            string fileToWrite = AppDomain.CurrentDomain.BaseDirectory + "events.log";
-            //Make a List of String for save the Log File content.
-            List<string> lineas = new List<string>();
-
-            //Ask for the Log File exist.
-            if (System.IO.File.Exists(fileToWrite))
-            {
-                //If it exist, I read it and save its content for the future use.
-                //It's very important because if I write the File without write its last content, that information
-                //don't save itself. I have to save it.
-                using (StreamReader reader = new StreamReader(fileToWrite))
-                {
-                    string line;
-                    while ((line = reader.ReadLine()) != null)
-                    {
-                        lineas.Add(line);
-                    }
-                }
-            }
-            else
-            {
-                //If the Log File don't exist, I creat it.
-                var file = System.IO.File.Create(fileToWrite);
-                file.Close();
-            }
-
-            //Write all the Log File lines.
-            StreamWriter writer = new StreamWriter(fileToWrite);
-            if (lineas.Count > 0)
-            {
-                foreach(string line in lineas)
-                {
-                    writer.WriteLine(line);
-                }
-            }
-
-            return writer;
-        }
-
-        /// <summary>
-        /// Close a Log File
-        /// </summary>
-        /// <remarks>
-        /// Close a Log File passing by Parammeter.
-        /// </remarks>
-        /// <param name="writer"></param>
-        public static void closeLogFile(StreamWriter writer)
-        {
-            writer.Close();
-        }
-
-        /// <summary>
         /// Open a SMP File.
         /// </summary>
         /// <remarks>

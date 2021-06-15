@@ -38,12 +38,16 @@ namespace Summanager
 			this.btnImportar = new CustomControls.menuChildButtom();
 			this.btnGuardar = new CustomControls.menuChildButtom();
 			this.btnAbrir = new CustomControls.menuChildButtom();
-			this.progressBar1 = new System.Windows.Forms.ProgressBar();
-			this.txtConsola = new System.Windows.Forms.TextBox();
 			this.panelTitulo.SuspendLayout();
 			this.panelMenu.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
 			this.SuspendLayout();
+			// 
+			// panelTitulo
+			// 
+			this.panelTitulo.Controls.Add(this.btnDetener);
+			this.panelTitulo.Controls.SetChildIndex(this.btnDetener, 0);
+			this.panelTitulo.Controls.SetChildIndex(this.lblTitulo, 0);
 			// 
 			// lblTitulo
 			// 
@@ -65,21 +69,20 @@ namespace Summanager
 			this.dgv.AllowUserToResizeColumns = false;
 			this.dgv.AllowUserToResizeRows = false;
 			this.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.dgv.Location = new System.Drawing.Point(19, 187);
+			this.dgv.Location = new System.Drawing.Point(12, 95);
 			this.dgv.MultiSelect = false;
 			this.dgv.Name = "dgv";
 			this.dgv.ReadOnly = true;
 			this.dgv.RowHeadersVisible = false;
 			this.dgv.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
 			this.dgv.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.dgv.Size = new System.Drawing.Size(776, 202);
+			this.dgv.Size = new System.Drawing.Size(771, 408);
 			this.dgv.TabIndex = 22;
 			this.dgv.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dgv_MouseDoubleClick);
 			// 
 			// btnDetener
 			// 
-			this.btnDetener.Enabled = false;
-			this.btnDetener.Location = new System.Drawing.Point(381, 129);
+			this.btnDetener.Location = new System.Drawing.Point(632, 4);
 			this.btnDetener.Name = "btnDetener";
 			this.btnDetener.Size = new System.Drawing.Size(91, 37);
 			this.btnDetener.TabIndex = 21;
@@ -137,39 +140,13 @@ namespace Summanager
 			this.btnAbrir.Text = "Abrir";
 			this.btnAbrir.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnAbrir_MouseClick);
 			// 
-			// progressBar1
-			// 
-			this.progressBar1.Location = new System.Drawing.Point(620, 474);
-			this.progressBar1.Name = "progressBar1";
-			this.progressBar1.Size = new System.Drawing.Size(168, 20);
-			this.progressBar1.TabIndex = 20;
-			// 
-			// txtConsola
-			// 
-			this.txtConsola.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-			this.txtConsola.ForeColor = System.Drawing.Color.Chartreuse;
-			this.txtConsola.Location = new System.Drawing.Point(12, 376);
-			this.txtConsola.Multiline = true;
-			this.txtConsola.Name = "txtConsola";
-			this.txtConsola.ReadOnly = true;
-			this.txtConsola.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.txtConsola.Size = new System.Drawing.Size(776, 92);
-			this.txtConsola.TabIndex = 18;
-			// 
 			// frmEstados
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.ClientSize = new System.Drawing.Size(795, 515);
 			this.Controls.Add(this.dgv);
-			this.Controls.Add(this.btnDetener);
-			this.Controls.Add(this.progressBar1);
-			this.Controls.Add(this.txtConsola);
 			this.Name = "frmEstados";
-			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmEstados_FormClosed);
 			this.Load += new System.EventHandler(this.frmEstados_Load);
-			this.Controls.SetChildIndex(this.txtConsola, 0);
-			this.Controls.SetChildIndex(this.progressBar1, 0);
-			this.Controls.SetChildIndex(this.btnDetener, 0);
 			this.Controls.SetChildIndex(this.dgv, 0);
 			this.Controls.SetChildIndex(this.panelTitulo, 0);
 			this.Controls.SetChildIndex(this.panelMenu, 0);
@@ -178,7 +155,6 @@ namespace Summanager
 			this.panelMenu.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
 			this.ResumeLayout(false);
-			this.PerformLayout();
 
         }
 
@@ -192,7 +168,5 @@ namespace Summanager
 		private CustomControls.menuChildButtom btnExportar;
 		private CustomControls.menuChildButtom btnImportar;
 		private CustomControls.menuChildButtom btnActualizar;
-		private System.Windows.Forms.ProgressBar progressBar1;
-		private System.Windows.Forms.TextBox txtConsola;
 	}
 }
