@@ -40,6 +40,7 @@ namespace Summanager
             this.btnActualizar = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.panelTitulo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.SuspendLayout();
             // 
@@ -162,6 +163,7 @@ namespace Summanager
             this.Name = "frmEstados";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmEstados_FormClosed);
             this.Load += new System.EventHandler(this.frmEstados_Load);
+            this.Controls.SetChildIndex(this.panelTitulo, 0);
             this.Controls.SetChildIndex(this.btnActualizar, 0);
             this.Controls.SetChildIndex(this.txtConsola, 0);
             this.Controls.SetChildIndex(this.progressBar1, 0);
@@ -171,7 +173,8 @@ namespace Summanager
             this.Controls.SetChildIndex(this.btnGuardar, 0);
             this.Controls.SetChildIndex(this.btnImportar, 0);
             this.Controls.SetChildIndex(this.btnExportar, 0);
-            this.Controls.SetChildIndex(this.lblTitulo, 0);
+            this.panelTitulo.ResumeLayout(false);
+            this.panelTitulo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
