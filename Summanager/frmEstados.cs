@@ -14,10 +14,7 @@ namespace Summanager
     {
         private static List<string> ips;
         private List<Printer> printers;
-        private Thread t;
-        private Thread tCargando;
         private Form frmMain;
-        private frmCargando cargando;
 
         public frmEstados(Form frmMain)
         {
@@ -25,13 +22,8 @@ namespace Summanager
             ips = IO.File.readCurrentFile();
             printers = new List<Printer>();
 
-            t = new Thread(new ThreadStart(_analizar));
-            t.IsBackground = true;
-
             this.frmMain = frmMain;
             _tituloForm();
-
-            this.cargando = new frmCargando(ips.Count);
         }
 
         /// <summary>
@@ -120,79 +112,10 @@ namespace Summanager
             dgv.Invoke(new MethodInvoker(() => { dgv.Refresh(); }));
         }
 
-        /// <summary>
-        /// Analize the List of IPs.
-        /// </summary>
-        /// <remarks>
-        /// Analize all the List of IPs, write each move in the Console, move the ProgressBar and finally 
-        /// load the DataGridView.
-        /// </remarks>
-        private void _analizar()
-        {
-            tCargando = new Thread(new ThreadStart(_cargando));
-            tCargando.Start();
-
-            if (printers.Count > 0) printers.Clear();
-            dgv.Invoke(new MethodInvoker(() => { dgv.Rows.Clear(); }));
-            dgv.Invoke(new MethodInvoker(() => { dgv.Columns.Clear(); }));
-            dgv.Invoke(new MethodInvoker(() => { dgv.Refresh(); }));
-
-            foreach (string ip in ips)
-            {
-                WebScraping webScrap = new WebScraping();
-
-                this.cargando.Progress(ip);
-
-                try
-                {
-                    Printer printer = webScrap.readIp(ip);
-                    printer.Ip = ip;
-                    printer.Estado = "Online";
-                    printers.Add(printer);
-                }
-                catch (Exception ex)
-                {
-                    Printer printer = new Printer();
-                    printer.Ip = ip;
-                    printer.Estado = "Offline";
-                    printer.Modelo = null;
-                    printer.Toner = null;
-                    printer.UImagen = null;
-                    printer.KitMant = null;
-                    printers.Add(printer);
-                }
-            }
-            _llenarDgv();
-            t.Abort();
-            this.cargando.Close();
-            tCargando.Abort();
-        }
-
-
-
-        private void _cargando()
-        {
-            this.cargando.Show();
-        }
-
-        /// <summary>
-        /// Call the Method wich analize all List of IPs in other thread.
-        /// </summary>
-        private void _threadAnalizar()
-        {
-            if (!t.IsAlive)
-            {
-                t = new Thread(new ThreadStart(_analizar));
-                t.IsBackground = true;
-            }
-            t.Start();
-        }
-
         /*EVENTOS*/
         private void btnDetener_Click(object sender, EventArgs e)
         {
-            t.Abort();
-            _llenarDgv();
+            
         }
 
         private void dgv_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -204,7 +127,7 @@ namespace Summanager
 
         private void frmEstados_Load(object sender, EventArgs e)
         {
-            _threadAnalizar();
+            btnActualizar_MouseClick(sender, null);
         }
 
 		private void btnAbrir_MouseClick(object sender, MouseEventArgs e)
@@ -224,7 +147,7 @@ namespace Summanager
                     ips.Clear();
                     ips = IO.File.readCurrentFile();
                     _tituloForm();
-                    _threadAnalizar();
+                    btnActualizar_MouseClick(sender, null);
                 }
                 catch (Exception ex)
                 {
@@ -292,7 +215,7 @@ namespace Summanager
                 ips = newIps;
                 ips.Insert(0, fileTitle);
                 _tituloForm();
-                _threadAnalizar();
+                btnActualizar_MouseClick(sender, null);
             }
         }
 
@@ -320,7 +243,17 @@ namespace Summanager
 
 		private void btnActualizar_MouseClick(object sender, MouseEventArgs e)
 		{
-            _threadAnalizar();
+            if (printers.Count > 0) printers.Clear();
+            dgv.Rows.Clear();
+            dgv.Columns.Clear();
+            dgv.Refresh();
+
+            frmCargando cargando = new frmCargando(ips);
+            cargando.ShowDialog();
+
+            this.printers = cargando.Printers;
+
+            _llenarDgv();
         }
 	}
 }
