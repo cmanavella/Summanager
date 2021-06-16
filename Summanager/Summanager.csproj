@@ -79,6 +79,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmCargando.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCargando.Designer.cs">
+      <DependentUpon>frmCargando.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmConfiguracion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -111,6 +117,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmCargando.resx">
+      <DependentUpon>frmCargando.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmConfiguracion.resx">
       <DependentUpon>frmConfiguracion.cs</DependentUpon>
     </EmbeddedResource>

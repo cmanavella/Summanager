@@ -15,8 +15,9 @@ namespace Summanager
         private static List<string> ips;
         private List<Printer> printers;
         private Thread t;
-        private static StreamWriter logFile;
+        private Thread tCargando;
         private Form frmMain;
+        private frmCargando cargando;
 
         public frmEstados(Form frmMain)
         {
@@ -29,6 +30,8 @@ namespace Summanager
 
             this.frmMain = frmMain;
             _tituloForm();
+
+            this.cargando = new frmCargando(ips.Count);
         }
 
         /// <summary>
@@ -126,6 +129,9 @@ namespace Summanager
         /// </remarks>
         private void _analizar()
         {
+            tCargando = new Thread(new ThreadStart(_cargando));
+            tCargando.Start();
+
             if (printers.Count > 0) printers.Clear();
             dgv.Invoke(new MethodInvoker(() => { dgv.Rows.Clear(); }));
             dgv.Invoke(new MethodInvoker(() => { dgv.Columns.Clear(); }));
@@ -134,6 +140,8 @@ namespace Summanager
             foreach (string ip in ips)
             {
                 WebScraping webScrap = new WebScraping();
+
+                this.cargando.Progress(ip);
 
                 try
                 {
@@ -154,9 +162,17 @@ namespace Summanager
                     printers.Add(printer);
                 }
             }
-
             _llenarDgv();
             t.Abort();
+            this.cargando.Close();
+            tCargando.Abort();
+        }
+
+
+
+        private void _cargando()
+        {
+            this.cargando.Show();
         }
 
         /// <summary>
