@@ -1,11 +1,8 @@
 ﻿using Entities;
-using IO;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.IO;
-using System.Threading;
 using System.Windows.Forms;
 
 namespace Summanager
@@ -57,12 +54,12 @@ namespace Summanager
         /// </remarks>
         private void _llenarDgv()
         {
-            dgv.Invoke(new MethodInvoker(() => { dgv.Columns.Add("ip", "Ip"); }));
-            dgv.Invoke(new MethodInvoker(() => { dgv.Columns.Add("modelo", "Modelo"); }));
-            dgv.Invoke(new MethodInvoker(() => { dgv.Columns.Add("estado", "Estado"); }));
-            dgv.Invoke(new MethodInvoker(() => { dgv.Columns.Add("toner", "Toner"); }));
-            dgv.Invoke(new MethodInvoker(() => { dgv.Columns.Add("uimagen", "U. Img."); }));
-            dgv.Invoke(new MethodInvoker(() => { dgv.Columns.Add("kmant", "Kit Mant."); }));
+            dgv.Columns.Add("ip", "Ip");
+            dgv.Columns.Add("modelo", "Modelo");
+            dgv.Columns.Add("estado", "Estado");
+            dgv.Columns.Add("toner", "Toner");
+            dgv.Columns.Add("uimagen", "U. Img.");
+            dgv.Columns.Add("kmant", "Kit Mant.");
 
             foreach (var printer in printers)
             {
@@ -109,15 +106,10 @@ namespace Summanager
                     }
                 }
             }
-            dgv.Invoke(new MethodInvoker(() => { dgv.Refresh(); }));
+            dgv.Refresh();
         }
 
         /*EVENTOS*/
-        private void btnDetener_Click(object sender, EventArgs e)
-        {
-            
-        }
-
         private void dgv_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             string estado = dgv.SelectedCells[2].Value.ToString();
