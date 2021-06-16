@@ -196,13 +196,13 @@ namespace IO
                 //Use a Range to access to Excel File.
                 Range range = hoja.UsedRange;
                 int row = 2; //Start with the second Row because the first one is used to the Column Headers.
-                string excelValue = (string)(range.Cells[row, 8]).Value2; //Get the first Excel data.
+                string excelValue = (string)(range.Cells[row, 1]).Value2; //Get the first Excel data.
                 do 
                 {
-                    string ip = _makeIpAddress(excelValue); //Convert the Excel value in a ip.
+                    string ip = _makeIpAddress((string)(range.Cells[row, 8]).Value2); //Convert the Excel value in a ip.
                     if (_isValidIp(ip)) retorno.Add(ip); //If the ip is valid, add it to the return variable.
                     row++; //Add one to the Row counter.
-                    excelValue = (string)(range.Cells[row, 8]).Value2; //Get the next Excel Data.
+                    excelValue = (string)(range.Cells[row, 1]).Value2; //Get the next Excel Data.
                 } while (excelValue != null); //Do all while Excel Data is not null.
             }
             finally
