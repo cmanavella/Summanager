@@ -61,6 +61,13 @@ namespace Summanager
             dgv.Columns.Add("uimagen", "U. Img.");
             dgv.Columns.Add("kmant", "Kit Mant.");
 
+            foreach (DataGridViewColumn column in dgv.Columns)
+            {
+                column.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
+
+            dgv.Columns[1].Width = 260;
+
             foreach (var printer in printers)
             {
                 string toner = "";
@@ -98,11 +105,17 @@ namespace Summanager
 
                     if (toner <= 10 || uimagen <= 10 || (kmant >= 0 && kmant <= 10))
                     {
-                        r.DefaultCellStyle.BackColor = Color.Yellow;
+                        r.DefaultCellStyle.BackColor = Color.FromArgb(255,252,204);
+                        r.DefaultCellStyle.ForeColor = Color.Black;
+                        r.DefaultCellStyle.SelectionBackColor = Color.FromArgb(255, 250, 153);
+                        r.DefaultCellStyle.SelectionForeColor = Color.Black;
                     }
                     if (toner <= 3 || uimagen <= 3 || (kmant >= 0 && kmant <= 3))
                     {
-                        r.DefaultCellStyle.BackColor = Color.Red;
+                        r.DefaultCellStyle.BackColor = Color.FromArgb(251, 207, 208);
+                        r.DefaultCellStyle.ForeColor = Color.Black;
+                        r.DefaultCellStyle.SelectionBackColor = Color.FromArgb(248, 161, 164);
+                        r.DefaultCellStyle.SelectionForeColor = Color.Black;
                     }
                 }
             }
