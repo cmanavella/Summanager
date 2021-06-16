@@ -30,7 +30,6 @@ namespace Summanager
 		private void InitializeComponent()
 		{
             this.components = new System.ComponentModel.Container();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.lblAnalizando = new System.Windows.Forms.Label();
             this.lblPorcentaje = new System.Windows.Forms.Label();
             this.worker = new System.ComponentModel.BackgroundWorker();
@@ -44,21 +43,9 @@ namespace Summanager
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.progressBar1 = new CustomControls.progressBar();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // progressBar1
-            // 
-            this.progressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.progressBar1.BackColor = System.Drawing.Color.White;
-            this.progressBar1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(159)))), ((int)(((byte)(206)))));
-            this.progressBar1.Location = new System.Drawing.Point(3, 102);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(350, 11);
-            this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            this.progressBar1.TabIndex = 0;
             // 
             // lblAnalizando
             // 
@@ -195,12 +182,22 @@ namespace Summanager
             this.panel4.Size = new System.Drawing.Size(354, 1);
             this.panel4.TabIndex = 10;
             // 
+            // progressBar1
+            // 
+            this.progressBar1.BackColor = System.Drawing.Color.White;
+            this.progressBar1.Location = new System.Drawing.Point(4, 101);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(349, 10);
+            this.progressBar1.TabIndex = 12;
+            this.progressBar1.Value = 0;
+            // 
             // frmCargando
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(356, 116);
+            this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
@@ -211,7 +208,6 @@ namespace Summanager
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblPorcentaje);
             this.Controls.Add(this.lblAnalizando);
-            this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmCargando";
@@ -226,8 +222,6 @@ namespace Summanager
 		}
 
 		#endregion
-
-		private System.Windows.Forms.ProgressBar progressBar1;
 		private System.Windows.Forms.Label lblAnalizando;
 		private System.Windows.Forms.Label lblPorcentaje;
         private System.ComponentModel.BackgroundWorker worker;
@@ -241,5 +235,6 @@ namespace Summanager
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel4;
+        private CustomControls.progressBar progressBar1;
     }
 }

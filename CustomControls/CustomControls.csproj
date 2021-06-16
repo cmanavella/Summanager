@@ -60,6 +60,12 @@
     <Compile Include="panelButton.Designer.cs">
       <DependentUpon>panelButton.cs</DependentUpon>
     </Compile>
+    <Compile Include="progressBar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="progressBar.Designer.cs">
+      <DependentUpon>progressBar.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
@@ -72,6 +78,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="panelButton.resx">
       <DependentUpon>panelButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="progressBar.resx">
+      <DependentUpon>progressBar.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
