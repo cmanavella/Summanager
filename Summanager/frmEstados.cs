@@ -203,6 +203,7 @@ namespace Summanager
                 try
                 {
                     newIps = IO.File.importExcelFile(filePath);
+                    MessageBox.Show("Datos importados con éxito.");
                 }
                 catch (Exception ex)
                 {
@@ -237,6 +238,7 @@ namespace Summanager
                 try
                 {
                     IO.File.exportExcelFile(filePath, printers);
+                    MessageBox.Show("Datos exportados con éxito.");
                 }
                 catch (Exception ex)
                 {

@@ -282,17 +282,14 @@ namespace IO
                 hoja.Cells[2, 7] = "Kit. Mant.";
 
                 Range formatRange; //Element for formating the cells.
-                //Make the Columns Headers internal borders.
-                for (int i=2; i<=7; i++)
-                {
-                    formatRange = hoja.Cells[2, i];
-                    formatRange.BorderAround2(XlLineStyle.xlContinuous, XlBorderWeight.xlThin, XlColorIndex.xlColorIndexAutomatic);
-                }
+
                 //Make the Columns Headers external borders.
                 formatRange = hoja.Range["B2", "G2"];
                 formatRange.Font.Bold = true;
                 formatRange.HorizontalAlignment = XlHAlign.xlHAlignCenter;
                 formatRange.BorderAround2(XlLineStyle.xlContinuous, XlBorderWeight.xlMedium, XlColorIndex.xlColorIndexAutomatic);
+                formatRange.Interior.Color = ColorTranslator.ToOle(Color.FromArgb(114, 159, 206));
+                formatRange.Font.Color = ColorTranslator.ToOle(Color.White);
 
                 //Change some Column Width as I required.
                 hoja.Columns[2].ColumnWidth = 14;
@@ -306,27 +303,27 @@ namespace IO
                     //Write the Information and make the internar border of each cell.
                     hoja.Cells[contador, 2] = printer.Ip.ToString();
                     formatRange = hoja.Cells[contador, 2];
-                    formatRange.BorderAround2(XlLineStyle.xlContinuous, XlBorderWeight.xlThin, XlColorIndex.xlColorIndexAutomatic);
+                    //formatRange.BorderAround2(XlLineStyle.xlContinuous, XlBorderWeight.xlThin, XlColorIndex.xlColorIndexAutomatic);
 
                     if (printer.Modelo!=null) hoja.Cells[contador, 3] = printer.Modelo.ToString();
                     formatRange = hoja.Cells[contador, 3];
-                    formatRange.BorderAround2(XlLineStyle.xlContinuous, XlBorderWeight.xlThin, XlColorIndex.xlColorIndexAutomatic);
+                    //formatRange.BorderAround2(XlLineStyle.xlContinuous, XlBorderWeight.xlThin, XlColorIndex.xlColorIndexAutomatic);
 
                     hoja.Cells[contador, 4] = printer.Estado.ToString();
                     formatRange = hoja.Cells[contador, 4];
-                    formatRange.BorderAround2(XlLineStyle.xlContinuous, XlBorderWeight.xlThin, XlColorIndex.xlColorIndexAutomatic);
+                    //formatRange.BorderAround2(XlLineStyle.xlContinuous, XlBorderWeight.xlThin, XlColorIndex.xlColorIndexAutomatic);
 
                     if (printer.Toner != null) hoja.Cells[contador, 5] = printer.Toner.ToString() + "%";
                     formatRange = hoja.Cells[contador, 5];
-                    formatRange.BorderAround2(XlLineStyle.xlContinuous, XlBorderWeight.xlThin, XlColorIndex.xlColorIndexAutomatic);
+                    //formatRange.BorderAround2(XlLineStyle.xlContinuous, XlBorderWeight.xlThin, XlColorIndex.xlColorIndexAutomatic);
 
                     if (printer.UImagen != null) hoja.Cells[contador, 6] = printer.UImagen.ToString() + "%";
                     formatRange = hoja.Cells[contador, 6];
-                    formatRange.BorderAround2(XlLineStyle.xlContinuous, XlBorderWeight.xlThin, XlColorIndex.xlColorIndexAutomatic);
+                    //formatRange.BorderAround2(XlLineStyle.xlContinuous, XlBorderWeight.xlThin, XlColorIndex.xlColorIndexAutomatic);
 
                     if (printer.KitMant != null) hoja.Cells[contador, 7] = printer.KitMant.ToString() + "%";
                     formatRange = hoja.Cells[contador, 7];
-                    formatRange.BorderAround2(XlLineStyle.xlContinuous, XlBorderWeight.xlThin, XlColorIndex.xlColorIndexAutomatic);
+                    //formatRange.BorderAround2(XlLineStyle.xlContinuous, XlBorderWeight.xlThin, XlColorIndex.xlColorIndexAutomatic);
 
                     //Ask for the Printer State. It must Online.
                     if (printer.Estado == "Online")
@@ -335,12 +332,12 @@ namespace IO
                         if(printer.Toner<=10 || printer.UImagen<=10 || (printer.KitMant!=null && printer.KitMant <= 10))
                         {
                             formatRange = hoja.Range[hoja.Cells[contador, 2], hoja.Cells[contador, 7]];
-                            formatRange.Interior.Color = ColorTranslator.ToOle(Color.Yellow);
+                            formatRange.Interior.Color = ColorTranslator.ToOle(Color.FromArgb(255, 252, 204));
                         }
                         if (printer.Toner <= 3 || printer.UImagen <= 3 || (printer.KitMant != null && printer.KitMant <= 3))
                         {
                             formatRange = hoja.Range[hoja.Cells[contador, 2], hoja.Cells[contador, 7]];
-                            formatRange.Interior.Color = ColorTranslator.ToOle(Color.Red);
+                            formatRange.Interior.Color = ColorTranslator.ToOle(Color.FromArgb(251, 207, 208));
                         }
                     }
 
