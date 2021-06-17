@@ -1,6 +1,7 @@
 ﻿using Entities;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
@@ -9,15 +10,13 @@ namespace Summanager
 {
     public partial class frmEstados : Summanager.frmContenido
     {
-        private static List<string> ips;
         private List<Printer> printers;
         private Form frmMain;
 
         public frmEstados(Form frmMain)
         {
             InitializeComponent();
-            ips = IO.File.readCurrentFile();
-            printers = new List<Printer>();
+            printers = IO.File.readCurrentFile();
 
             this.frmMain = frmMain;
             _tituloForm();
@@ -29,11 +28,9 @@ namespace Summanager
         private void _tituloForm()
         {
             string[] titulo = frmMain.Text.Split('-');
-            if (ips.Count > 0)
+            if (printers.Count > 0)
             {
-                string fileName = ips[0];
-                ips.RemoveAt(0);
-                fileName = fileName.Substring(1, fileName.Length - 2) + ".smp";
+                string fileName = IO.File.GetCurrentFileTitle();
                 
 
                 frmMain.Text = titulo[0] + "-" + fileName;
@@ -62,7 +59,7 @@ namespace Summanager
         /// </remarks>
         private void _llenarDgv()
         {
-            if (ips.Count > 0)
+            if (printers.Count > 0)
             {
                 dgv.Columns.Add("ip", "Ip");
                 dgv.Columns.Add("modelo", "Modelo");
@@ -144,10 +141,10 @@ namespace Summanager
             {
                 string filePath = saveFileDialog.FileName;
                 
-                IO.File.saveFile(filePath, ips);
+                IO.File.saveFile(filePath, printers);
 
-                ips.Clear();
-                ips = IO.File.readCurrentFile();
+                printers.Clear();
+                printers = IO.File.readCurrentFile();
                 _tituloForm();
                 retorno = DialogResult.OK;
             }
@@ -187,8 +184,8 @@ namespace Summanager
                 {
                     IO.File.openFile(filePath);
 
-                    ips.Clear();
-                    ips = IO.File.readCurrentFile();
+                    printers.Clear();
+                    printers = IO.File.readCurrentFile();
                     _tituloForm();
                     btnActualizar_MouseClick(sender, null);
                 }
@@ -219,14 +216,14 @@ namespace Summanager
             openFileDialog.FilterIndex = 1;
             openFileDialog.RestoreDirectory = true;
 
-            List<string> newIps = new List<string>();
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 string filePath = openFileDialog.FileName;
 
                 try
                 {
-                    newIps = IO.File.importExcelFile(filePath);
+                    printers.Clear();
+                    printers = IO.File.importExcelFile(filePath);
                     MessageBox.Show("Datos importados con éxito.");
                 }
                 catch (Exception ex)
@@ -237,13 +234,8 @@ namespace Summanager
 
             openFileDialog.FileName = "";
 
-            if (newIps.Count > 0)
+            if (printers.Count > 0)
             {
-                string fileTitle = "[" + _getFileTitle() + "]";
-                IO.File.writeCurrentFile(newIps, fileTitle);
-                ips.Clear();
-                ips = newIps;
-                ips.Insert(0, fileTitle);
                 _tituloForm();
                 btnActualizar_MouseClick(sender, null);
             }
@@ -274,15 +266,14 @@ namespace Summanager
 
 		private void btnActualizar_MouseClick(object sender, MouseEventArgs e)
 		{
-            if (printers.Count > 0) printers.Clear();
             dgv.Rows.Clear();
             dgv.Columns.Clear();
             dgv.Refresh();
 
-            frmCargando cargando = new frmCargando(ips);
+            frmCargando cargando = new frmCargando(printers);
             cargando.ShowDialog();
 
-            this.printers = cargando.Printers;
+            this.printers = cargando.PrintersPassed;
 
             _llenarDgv();
         }

@@ -15,7 +15,6 @@ namespace Summanager
 	public partial class frmCargando : Form
 	{
 		private int procesado;
-		private List<string> ips;
 		private string currentIp;
 		private int seg;
 		private int min;
@@ -23,15 +22,16 @@ namespace Summanager
 		private int minEst;
 		private int tiempo;
 		private int procesadoAnterior;
+		private List<Printer> PrintersScrapped;
 
-		public List<Printer> Printers { get; set; }
+		public List<Printer> PrintersPassed { get; set; }
 
-		public frmCargando(List<string> ips)
+		public frmCargando(List<Printer> printers)
 		{
 			InitializeComponent();
-			this.ips = ips;
 			this.procesado = 0;
-			this.Printers = new List<Printer>();
+			this.PrintersPassed = printers;
+			this.PrintersScrapped = new List<Printer>();
 			this.tiempo = 0;
 			this.segEst = 0;
 			this.minEst = 0;
@@ -45,7 +45,7 @@ namespace Summanager
 
         private void worker_DoWork(object sender, DoWorkEventArgs e)
         {
-			foreach (string ip in this.ips)
+			foreach (Printer printer in this.PrintersPassed)
 			{
                 if (worker.CancellationPending)
                 {
@@ -54,36 +54,38 @@ namespace Summanager
                 }
 
 				this.procesado++;
-				this.currentIp = ip;
+				this.currentIp = printer.Ip;
 
                 WebScraping webScrap = new WebScraping();
 
 				try
 				{
-					Printer printer = webScrap.readIp(ip);
-					printer.Ip = ip;
-					printer.Estado = "Online";
-					this.Printers.Add(printer);
+					Printer printerScrapped = webScrap.readIp(printer.Ip);
+					printerScrapped.Ip = printer.Ip;
+					printerScrapped.Estado = "Online";
+					this.PrintersScrapped.Add(printerScrapped);
 				}
 				catch (Exception ex)
 				{
-					Printer printer = new Printer();
-					printer.Ip = ip;
-					printer.Estado = "Offline";
-					printer.Modelo = null;
-					printer.Toner = null;
-					printer.UImagen = null;
-					printer.KitMant = null;
-					this.Printers.Add(printer);
+					Printer printerScrapped = new Printer();
+					printerScrapped.Ip = printer.Ip;
+					printerScrapped.Estado = "Offline";
+					printerScrapped.Modelo = null;
+					printerScrapped.Toner = null;
+					printerScrapped.UImagen = null;
+					printerScrapped.KitMant = null;
+					this.PrintersScrapped.Add(printerScrapped);
 				}
-				this.worker.ReportProgress(this.procesado * 100 / this.ips.Count);
+				this.worker.ReportProgress(this.procesado * 100 / this.PrintersPassed.Count);
 			}
+			PrintersPassed.Clear();
+			PrintersPassed = PrintersScrapped;
 		}
 
         private void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
 			this.progressBar1.Value = e.ProgressPercentage;
-			this.lblAnalizando.Text = "Analizando Ip: " + this.currentIp + " (" + this.procesado + "/" + this.ips.Count + ")";
+			this.lblAnalizando.Text = "Analizando Ip: " + this.currentIp + " (" + this.procesado + "/" + this.PrintersPassed.Count + ")";
 			this.lblPorcentaje.Text = e.ProgressPercentage.ToString() + "%";
 		}
 
@@ -114,7 +116,7 @@ namespace Summanager
 				velocidad = 1d / this.tiempo;
             }
 
-			double restantes = this.ips.Count - this.procesado;
+			double restantes = this.PrintersPassed.Count - this.procesado;
 
 			segEst = (int)(restantes * velocidad);
 			minEst = segEst / 60;

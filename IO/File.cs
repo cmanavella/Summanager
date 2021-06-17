@@ -20,10 +20,10 @@ namespace IO
         /// Open, read and after returns a List of Strings with all IPs within Current File.
         /// </remarks>
         /// <returns>List of String</returns>
-        public static List<string> readCurrentFile()
+        public static List<Printer> readCurrentFile()
         {
             //Make a Return Variable. It's a List of Strings.
-            List<string> retorno = new List<string>();
+            List<Printer> retorno = new List<Printer>();
 
             //Load the Path and File Name where Current File is.
             string fileToRead = ConfigurationManager.AppSettings.Get("currentFile");
@@ -34,29 +34,31 @@ namespace IO
                 //If it exist. I read it.
                 using (StreamReader reader = new StreamReader(fileToRead))
                 {
+                    Printer printer;
                     string line;
                     //While I find a new line within the Current File, I load it inside a String.
                     while ((line = reader.ReadLine()) != null)
                     {
-                        //Add Line read inside Return Variable.
-                        retorno.Add(line);
+                        if(!(line.Substring(0,1)=="[" && line.Substring(line.Length - 1, 1) == "]"))
+                        {
+                            printer = new Printer();
+                            printer.Ip = line;
+                            //Add Line read inside Return Variable.
+                            retorno.Add(printer);
+                        }
                     }
                 }
             }
-            //else
-            //{
-            //    //If the Current File don't exist, I must creat it.
-            //    var file = System.IO.File.Create(fileToRead);
-            //    file.Close(); //Close it.
 
-            //    //Open it again to add just the Title inside.
-            //    using (StreamWriter writer = new StreamWriter(fileToRead))
-            //    {
-            //        string titulo = "[sin título]";
-            //        writer.WriteLine(titulo);
-            //        retorno.Add(titulo);
-            //    }
-            //}
+            return retorno;
+        }
+
+        public static string GetCurrentFileTitle()
+        {
+            string retorno;
+            string fileToRead = ConfigurationManager.AppSettings.Get("currentFile");
+
+            retorno = fileToRead;
 
             return retorno;
         }
@@ -70,56 +72,13 @@ namespace IO
         /// <param name="filePath"></param>
         public static void openFile(string filePath)
         {
-            //Make a List of String for save all the File Content.
-            List<string> ips = new List<string>();
+            var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            var settings = configFile.AppSettings.Settings;
 
-            //Read the File and save the information saved within the File.
-            using (StreamReader reader = new StreamReader(filePath))
-            {
-                string line;
-                while ((line = reader.ReadLine()) != null)
-                {
-                    ips.Add(line);
-                }
-            }
+            settings["currentFile"].Value = filePath;
 
-            writeCurrentFile(ips);
-        }
-
-        /// <summary>
-        /// Write the Current File with a List of Ips.
-        /// </summary>
-        /// <param name="ips"></param>
-        public static void writeCurrentFile(List<string> ips)
-        {
-            //Open the Current File and load it with the Opened File Information.
-            string currentFile = AppDomain.CurrentDomain.BaseDirectory + "current.smp";
-            using (StreamWriter writerCurrentFile = new StreamWriter(currentFile))
-            {
-                foreach (string ip in ips)
-                {
-                    writerCurrentFile.WriteLine(ip);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Write the Current File with a List of Ips and a Title.
-        /// </summary>
-        /// <param name="ips"></param>
-        /// <param name="title"></param>
-        public static void writeCurrentFile(List<string> ips, string title)
-        {
-            //Open the Current File and load it with the Opened File Information.
-            string currentFile = AppDomain.CurrentDomain.BaseDirectory + "current.smp";
-            using (StreamWriter writerCurrentFile = new StreamWriter(currentFile))
-            {
-                writerCurrentFile.WriteLine(title);
-                foreach (string ip in ips)
-                {
-                    writerCurrentFile.WriteLine(ip);
-                }
-            }
+            configFile.Save(ConfigurationSaveMode.Modified);
+            ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
         }
 
         /// <summary>
@@ -130,15 +89,10 @@ namespace IO
         /// </remarks>
         /// <param name="filePath"></param>
         /// <param name="ips"></param>
-        public static void saveFile(string filePath, List<string> ips)
+        public static void saveFile(string filePath, List<Printer> printers)
         {
-            //Split the File Path with its File Name for use the File Name as the File Title.
-            string[] path = filePath.Split('\\');
-            //Use the last Array of splited Path and cut it removing its extension.
-            string titulo = path[path.Length - 1].Substring(0, path[path.Length - 1].Length-4);
-
             //Ask for List of String that contain the IPs to ensure that it has more than 0 count.
-            if (ips.Count > 0)
+            if (printers.Count > 0)
             {
                 //Ask if the File exist. If not, I creat it.
                 if (!System.IO.File.Exists(filePath))
@@ -150,27 +104,14 @@ namespace IO
                 //Write the File.
                 using(StreamWriter writerNewFile = new StreamWriter(filePath))
                 {
-                    //Write the File Title at the first line.
-                    writerNewFile.WriteLine("[" + titulo + "]");
-
                     //Write all IPs passed by the Parameters.
-                    foreach(string ip in ips)
+                    foreach(Printer printer in printers)
                     {
-                        writerNewFile.WriteLine(ip);
+                        writerNewFile.WriteLine(printer.Ip);
                     }
                 }
 
-                //Open the Current File and overwrite it with the saved File Information.
-                string currentFile = AppDomain.CurrentDomain.BaseDirectory + "current.smp";
-                using (StreamWriter writerCurrentFile = new StreamWriter(currentFile))
-                {
-                    writerCurrentFile.WriteLine("[" + titulo + "]");
-
-                    foreach (string ip in ips)
-                    {
-                        writerCurrentFile.WriteLine(ip);
-                    }
-                }
+                openFile(filePath);
             }
         }
 
@@ -182,9 +123,9 @@ namespace IO
         /// </remarks>
         /// <param name="filePath"></param>
         /// <returns></returns>
-        public static List<string> importExcelFile(string filePath)
+        public static List<Printer> importExcelFile(string filePath)
         {
-            List<string> retorno = new List<string>();
+            List<Printer> retorno = new List<Printer>();
 
             Application application = new Application();
             //Open a book
@@ -200,8 +141,13 @@ namespace IO
                 string cellEval = (string)(range.Cells[row, 1]).Value2; //Get the first Excel data.
                 do 
                 {
+                    Printer printer = new Printer();
                     string ip = _makeIpAddress((string)(range.Cells[row, 8]).Value2); //Convert the Excel value in a ip.
-                    if (_isValidIp(ip)) retorno.Add(ip); //If the ip is valid, add it to the return variable.
+                    if (_isValidIp(ip))
+                    {
+                        printer.Ip = ip;
+                        retorno.Add(printer); //If the ip is valid, add it to the return variable.
+                    }
                     row++; //Add one to the Row counter.
                     cellEval = (string)(range.Cells[row, 1]).Value2; //Get the next Excel Data.
                 } while (cellEval != null); //Do all while Excel Data is not null.
