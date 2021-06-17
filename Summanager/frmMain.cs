@@ -20,6 +20,8 @@ namespace Summanager
 {
     public partial class frmMain : Form
     {
+        private frmEstados formEstados;
+
         //DLLs needed for Form Moving.
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
@@ -58,26 +60,47 @@ namespace Summanager
             }
         }
 
-        private void _openChildForm(object child)
+        private string _getApplicationTitle()
         {
+            string[] splitTitle = Text.Split('-');
+            return splitTitle[0];
+        }
+
+        private void _openChildForm(object child, object sender)
+        {
+            menuButton boton = sender as menuButton;
+             
             List<Form> forms = panelContenido.Controls.OfType<Form>().ToList<Form>();
+            DialogResult checkOpenFile = DialogResult.OK;
 
             foreach(Form formOpen in forms)
             {
-                formOpen.Close();
+                if (formOpen.GetType().Name == "frmEstados") checkOpenFile = _checkUnsavedFile();
+                if(checkOpenFile == DialogResult.OK) formOpen.Close();
             }
 
-            if (this.panelContenido.Controls.Count > 0)
+            if (checkOpenFile == DialogResult.OK)
             {
-                this.panelContenido.Controls.RemoveAt(0);
-            }
+                _unselectMenuButtons();
+                boton.Selected = true;
 
-            Form form = child as Form;
-            form.TopLevel = false;
-            form.Dock = DockStyle.Fill;
-            this.panelContenido.Controls.Add(form);
-            this.panelContenido.Tag = form;
-            form.Show();
+                if (this.panelContenido.Controls.Count > 0)
+                {
+                    this.panelContenido.Controls.RemoveAt(0);
+                }
+
+                Form form = child as Form;
+                if (form.GetType().Name != "frmEstados") this.Text = _getApplicationTitle();
+                form.TopLevel = false;
+                form.Dock = DockStyle.Fill;
+                this.panelContenido.Controls.Add(form);
+                this.panelContenido.Tag = form;
+                form.Show();
+            }
+            else
+            {
+                btnEstados.Selected = true;
+            }
         }
 
         private void _unselectMenuButtons()
@@ -92,10 +115,34 @@ namespace Summanager
             }
         }
 
+        private DialogResult _checkUnsavedFile()
+        {
+            DialogResult resultSave = DialogResult.OK;
+
+            if (this.Text.Substring(this.Text.Length - 1, 1) == "*")
+            {
+                DialogResult result = MessageBox.Show("El archivo no se ha guardado ¿Desea guardarlo?", "SumManager", MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    try
+                    {
+                        resultSave = this.formEstados.SaveAs();
+                    }
+                    catch (Exception ex)
+                    {
+                        resultSave = DialogResult.Cancel;
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+            }
+
+            return resultSave;
+        }
+
         /**EVENTS**/
         private void btnCerrar_MouseClick(object sender, MouseEventArgs e)
         {
-            Application.Exit();
+            if(_checkUnsavedFile() == DialogResult.OK) Application.Exit();
         }
 
         private void btnMinimizar_MouseClick(object sender, MouseEventArgs e)
@@ -117,23 +164,18 @@ namespace Summanager
 
         private void btnStock_MouseClick(object sender, MouseEventArgs e)
         {
-            _unselectMenuButtons();
-            btnStock.Selected = true;
-            _openChildForm(new frmStock());
+            _openChildForm(new frmStock(), sender);
         }
 
-        private void btnImpresoras_MouseClick(object sender, MouseEventArgs e)
+        private void btnEstados_MouseClick(object sender, MouseEventArgs e)
         {
-            _unselectMenuButtons();
-            btnEstados.Selected = true;
-            _openChildForm(new frmEstados(this));
+            this.formEstados = new frmEstados(this);
+            _openChildForm(this.formEstados, sender);
         }
 
         private void btnConfiguracion_MouseClick(object sender, MouseEventArgs e)
         {
-            _unselectMenuButtons();
-            btnConfiguracion.Selected = true;
-            _openChildForm(new frmConfiguracion());
+            _openChildForm(new frmConfiguracion(), sender);
         }
     }
 }

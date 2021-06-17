@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Office.Interop.Excel;
 using System.Drawing;
+using System.Configuration;
 
 namespace IO
 {
@@ -25,7 +26,7 @@ namespace IO
             List<string> retorno = new List<string>();
 
             //Load the Path and File Name where Current File is.
-            string fileToRead = AppDomain.CurrentDomain.BaseDirectory + "current.smp";
+            string fileToRead = ConfigurationManager.AppSettings.Get("currentFile");
 
             //Ask if the Current File exist.
             if (System.IO.File.Exists(fileToRead))
@@ -42,20 +43,20 @@ namespace IO
                     }
                 }
             }
-            else
-            {
-                //If the Current File don't exist, I must creat it.
-                var file = System.IO.File.Create(fileToRead);
-                file.Close(); //Close it.
+            //else
+            //{
+            //    //If the Current File don't exist, I must creat it.
+            //    var file = System.IO.File.Create(fileToRead);
+            //    file.Close(); //Close it.
 
-                //Open it again to add just the Title inside.
-                using (StreamWriter writer = new StreamWriter(fileToRead))
-                {
-                    string titulo = "[sin título]";
-                    writer.WriteLine(titulo);
-                    retorno.Add(titulo);
-                }
-            }
+            //    //Open it again to add just the Title inside.
+            //    using (StreamWriter writer = new StreamWriter(fileToRead))
+            //    {
+            //        string titulo = "[sin título]";
+            //        writer.WriteLine(titulo);
+            //        retorno.Add(titulo);
+            //    }
+            //}
 
             return retorno;
         }

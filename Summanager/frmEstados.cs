@@ -28,19 +28,27 @@ namespace Summanager
         /// </summary>
         private void _tituloForm()
         {
-            string fileName = ips[0];
-            ips.RemoveAt(0);
-            fileName = fileName.Substring(1, fileName.Length - 2) + ".smp";
             string[] titulo = frmMain.Text.Split('-');
+            if (ips.Count > 0)
+            {
+                string fileName = ips[0];
+                ips.RemoveAt(0);
+                fileName = fileName.Substring(1, fileName.Length - 2) + ".smp";
+                
 
-            frmMain.Text = titulo[0] + "-" + fileName;
+                frmMain.Text = titulo[0] + "-" + fileName;
+            }
+            else
+            {
+                frmMain.Text = titulo[0] + "-sin título";
+            }
         }
 
         /// <summary>
         /// Return the Current File Title.
         /// </summary>
         /// <returns></returns>
-        private string _getCurrentTitle()
+        private string _getFileTitle()
         {
             string[] splitTitle = frmMain.Text.Split('-');
             return splitTitle[1].Substring(0, splitTitle[1].Length - 4);
@@ -54,36 +62,36 @@ namespace Summanager
         /// </remarks>
         private void _llenarDgv()
         {
-            dgv.Columns.Add("ip", "Ip");
-            dgv.Columns.Add("modelo", "Modelo");
-            dgv.Columns.Add("estado", "Estado");
-            dgv.Columns.Add("toner", "Toner");
-            dgv.Columns.Add("uimagen", "U. Img.");
-            dgv.Columns.Add("kmant", "Kit Mant.");
-
-            foreach (DataGridViewColumn column in dgv.Columns)
+            if (ips.Count > 0)
             {
-                column.SortMode = DataGridViewColumnSortMode.NotSortable;
+                dgv.Columns.Add("ip", "Ip");
+                dgv.Columns.Add("modelo", "Modelo");
+                dgv.Columns.Add("estado", "Estado");
+                dgv.Columns.Add("toner", "Toner");
+                dgv.Columns.Add("uimagen", "U. Img.");
+                dgv.Columns.Add("kmant", "Kit Mant.");
+
+                foreach (DataGridViewColumn column in dgv.Columns)
+                {
+                    column.SortMode = DataGridViewColumnSortMode.NotSortable;
+                }
+
+                dgv.Columns[1].Width = 260;
+
+                foreach (var printer in printers)
+                {
+                    string toner = "";
+                    string uimagen = "";
+                    string kitmant = "";
+
+                    if (printer.Toner != null) toner = printer.Toner + "%";
+                    if (printer.UImagen != null) uimagen = printer.UImagen + "%";
+                    if (printer.KitMant != null) kitmant = printer.KitMant + "%";
+
+                    dgv.Rows.Add(printer.Ip, printer.Modelo, printer.Estado, toner, uimagen, kitmant);
+                }
+                _colorearDgv();
             }
-
-            dgv.Columns[1].Width = 260;
-
-            foreach (var printer in printers)
-            {
-                string toner = "";
-                string uimagen = "";
-                string kitmant = "";
-
-                if (printer.Toner != null) toner = printer.Toner + "%";
-                if (printer.UImagen != null) uimagen = printer.UImagen + "%";
-                if (printer.KitMant != null) kitmant = printer.KitMant + "%";
-
-                dgv.Invoke(new MethodInvoker(() => {
-                    dgv.Rows.Add(printer.Ip, printer.Modelo,
-                    printer.Estado, toner, uimagen, kitmant);
-                }));
-            }
-            _colorearDgv();
         }
 
         /// <summary>
@@ -120,6 +128,36 @@ namespace Summanager
                 }
             }
             dgv.Refresh();
+        }
+
+
+        public DialogResult SaveAs()
+        {
+            DialogResult retorno;
+
+            saveFileDialog.InitialDirectory = "c:\\";
+            saveFileDialog.Filter = "SumManager File (*.smp)|*.smp";
+            saveFileDialog.FilterIndex = 1;
+            saveFileDialog.RestoreDirectory = true;
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string filePath = saveFileDialog.FileName;
+                
+                IO.File.saveFile(filePath, ips);
+
+                ips.Clear();
+                ips = IO.File.readCurrentFile();
+                _tituloForm();
+                retorno = DialogResult.OK;
+            }
+            else
+            {
+                retorno = DialogResult.Cancel;
+            }
+            saveFileDialog.FileName = "";
+
+            return retorno;
         }
 
         /*EVENTOS*/
@@ -164,28 +202,14 @@ namespace Summanager
 
 		private void btnGuardar_MouseClick(object sender, MouseEventArgs e)
 		{
-            saveFileDialog.InitialDirectory = "c:\\";
-            saveFileDialog.Filter = "SumManager File (*.smp)|*.smp";
-            saveFileDialog.FilterIndex = 1;
-            saveFileDialog.RestoreDirectory = true;
-
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            try
             {
-                string filePath = saveFileDialog.FileName;
-                try
-                {
-                    IO.File.saveFile(filePath, ips);
-
-                    ips.Clear();
-                    ips = IO.File.readCurrentFile();
-                    _tituloForm();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
+                SaveAs();
             }
-            saveFileDialog.FileName = "";
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
 		private void btnImportar_MouseClick(object sender, MouseEventArgs e)
@@ -215,7 +239,7 @@ namespace Summanager
 
             if (newIps.Count > 0)
             {
-                string fileTitle = "[" + _getCurrentTitle() + "]";
+                string fileTitle = "[" + _getFileTitle() + "]";
                 IO.File.writeCurrentFile(newIps, fileTitle);
                 ips.Clear();
                 ips = newIps;
