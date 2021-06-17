@@ -196,14 +196,18 @@ namespace IO
                 //Use a Range to access to Excel File.
                 Range range = hoja.UsedRange;
                 int row = 2; //Start with the second Row because the first one is used to the Column Headers.
-                string excelValue = (string)(range.Cells[row, 1]).Value2; //Get the first Excel data.
+                string cellEval = (string)(range.Cells[row, 1]).Value2; //Get the first Excel data.
                 do 
                 {
                     string ip = _makeIpAddress((string)(range.Cells[row, 8]).Value2); //Convert the Excel value in a ip.
                     if (_isValidIp(ip)) retorno.Add(ip); //If the ip is valid, add it to the return variable.
                     row++; //Add one to the Row counter.
-                    excelValue = (string)(range.Cells[row, 1]).Value2; //Get the next Excel Data.
-                } while (excelValue != null); //Do all while Excel Data is not null.
+                    cellEval = (string)(range.Cells[row, 1]).Value2; //Get the next Excel Data.
+                } while (cellEval != null); //Do all while Excel Data is not null.
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
             }
             finally
             {
@@ -252,8 +256,60 @@ namespace IO
         /// <returns></returns>
         private static string _makeIpAddress(string value)
         {
-            string[] splitValue = value.Split(' ');
-            return splitValue[0];
+            string retorno = "";
+            char[] charsValue = value.ToCharArray();
+
+            //Find the dot positions in array char from string, and save it.
+            List<int> puntos = new List<int>();
+            int i = 0;
+            foreach(char c in charsValue)
+            {
+                if (c == '.') puntos.Add(i);
+                i++;
+            }
+
+            //If the List of dots has 3 items means there is an ip.
+            if (puntos.Count == 3)
+            {
+                int firstPos = 0;
+                int lastPos = charsValue.Length - 1;
+
+                //Analyze the first item of the List and determine wich is the first position of the first segment
+                //of ip in char array.
+                for (int j = puntos[0]; j >= 0; j--)
+                {
+                    if (Char.IsDigit(charsValue[j]) || j == puntos[0])
+                    {
+                        firstPos = j;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+
+                //Analyze the last item of the List and determine wich is the last position of the last segment
+                //of ip in char array.
+                for (int k = puntos[2]; k < charsValue.Length; k++)
+                {
+                    if (Char.IsDigit(charsValue[k]) || k == puntos[2])
+                    {
+                        lastPos = k;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+
+                //Make an ip whith the chars.
+                for(int l = firstPos; l <= lastPos; l++)
+                {
+                    retorno += charsValue[l];
+                }
+            }
+
+            return retorno;
         }
 
         /// <summary>
