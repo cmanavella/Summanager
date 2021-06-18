@@ -44,6 +44,8 @@ namespace Summanager
         {
             InitializeComponent();
             Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 15, 15));
+
+            this.Text = Application.ProductName + " v" + Application.ProductVersion;
         }
 
         [Browsable(true), EditorBrowsable(EditorBrowsableState.Always), Bindable(true)]
@@ -75,7 +77,7 @@ namespace Summanager
 
             foreach(Form formOpen in forms)
             {
-                if (formOpen.GetType().Name == "frmEstados") checkOpenFile = _checkUnsavedFile();
+                if (formOpen.GetType().Name == "FrmEstados") checkOpenFile = _checkUnsavedFile();
                 if(checkOpenFile == DialogResult.OK) formOpen.Close();
             }
 
@@ -90,7 +92,7 @@ namespace Summanager
                 }
 
                 Form form = child as Form;
-                if (form.GetType().Name != "frmEstados") this.Text = _getApplicationTitle();
+                if (form.GetType().Name != "FrmEstados") this.Text = _getApplicationTitle();
                 form.TopLevel = false;
                 form.Dock = DockStyle.Fill;
                 this.panelContenido.Controls.Add(form);
