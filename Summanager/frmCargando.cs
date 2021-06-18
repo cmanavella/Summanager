@@ -30,7 +30,7 @@ namespace Summanager
 		{
 			InitializeComponent();
 			this.procesado = 0;
-			this.PrintersPassed = printers;
+			this.PrintersPassed = printers.ToList();
 			this.PrintersScrapped = new List<Printer>();
 			this.tiempo = 0;
 			this.segEst = 0;

@@ -43,6 +43,7 @@ namespace IO
                         {
                             printer = new Printer();
                             printer.Ip = line;
+                            printer.Estado = Printer.NO_ANALIZADA;
                             //Add Line read inside Return Variable.
                             retorno.Add(printer);
                         }
@@ -146,6 +147,7 @@ namespace IO
                     if (_isValidIp(ip))
                     {
                         printer.Ip = ip;
+                        printer.Estado = Printer.NO_ANALIZADA;
                         retorno.Add(printer); //If the ip is valid, add it to the return variable.
                     }
                     row++; //Add one to the Row counter.

@@ -22,6 +22,8 @@ namespace Entities
         /// Return a String with Online Printer State, used inside all the System.
         /// </remarks>
         public static readonly string ONLINE = "Online";
+        public static readonly string OFFLINE = "Offline";
+        public static readonly string NO_ANALIZADA = "No Analizada";
 
         /** LEXMARK MS410 **/
         /// <summary>

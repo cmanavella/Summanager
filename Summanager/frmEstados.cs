@@ -162,7 +162,7 @@ namespace Summanager
         {
             string estado = dgv.SelectedCells[2].Value.ToString();
             string ip = "http://" + dgv.SelectedCells[0].Value.ToString();
-            if (estado == "Online") Process.Start(ip);
+            if (estado == Printer.ONLINE || estado == Printer.NO_ANALIZADA) Process.Start(ip);
         }
 
         private void frmEstados_Load(object sender, EventArgs e)
@@ -273,7 +273,13 @@ namespace Summanager
             frmCargando cargando = new frmCargando(printers);
             cargando.ShowDialog();
 
-            this.printers = cargando.PrintersPassed;
+            List<Printer> printersReturned = cargando.PrintersPassed;
+
+            foreach(Printer printer in printersReturned)
+            {
+                int i = this.printers.FindIndex(o => o.Ip == printer.Ip);
+                this.printers[i] = printer;
+            }
 
             _llenarDgv();
         }
