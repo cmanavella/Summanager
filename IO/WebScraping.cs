@@ -1,13 +1,8 @@
 ﻿using Entities;
 using HtmlAgilityPack;
-using ScrapySharp.Extensions;
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IO
 {
@@ -27,33 +22,30 @@ namespace IO
         }
 
         /// <summary>
-        /// Read a Printer IP.
+        /// Leo el Ip de una Impresora, ingresando en su página HTML.
         /// </summary>
-        /// <remarks>
-        /// Allow read all the information in the HTML Printer Page and returns an Object Printer.
-        /// </remarks>
         /// <param name="ip"></param>
         /// <returns>Printer</returns>
         public Printer readIp(string ip)
         {
-            //The url Variable has a String with http://, just it need the IP Address.
+            //La variable url ya contiene la cadena 'http://' por lo que le concateno el ip.
             this.url += ip;
 
-            //Put a Timeout, set in 4000 miliseconds.
+            //Pongo un TimeOut de 4 segundos para que no se demore tanto cuando la impresora es inaccesible.
             this.web.PreRequest = delegate (HttpWebRequest webRequest)
             {
                 webRequest.Timeout = 4000;
                 return true;
             };
 
-            //Load de HTML Printer Page.
+            //Cargo la página HTML de la Impresora.
             this.doc = this.web.Load(this.url);
 
-            //Save the Page Title and then use it as Printer Model.
+            //Almaceno el Title de la página HTML y lo uso como modelo de la Impresora.
             var title = this.doc.DocumentNode.SelectNodes("//title").FirstOrDefault();
             this.printer.Modelo = title.InnerHtml;
 
-            //According to the Printer Model, call its custom method to complete the information about.
+            //Según el modelo de la Impresora, llamo al método encargado de leer el resto de la información.
             switch (this.printer.Modelo)
             {
                 case "Lexmark MS812":
@@ -70,11 +62,8 @@ namespace IO
         }
 
         /// <summary>
-        /// Lexmark MS410 Information
+        /// Obtiene la información del Estado de Suministros de la página HTML de una Impresora Lexmark MS410
         /// </summary>
-        /// <remarks>
-        /// Find inside the Lexmark MS410 HTML Page all information needed.
-        /// </remarks>
         private void _Lex410() {
             this.url += Printer.L410_AFTER_URL; 
             this.doc = this.web.Load(this.url); 
@@ -125,11 +114,8 @@ namespace IO
         }
 
         /// <summary>
-        /// Lexmark MS610 Information
+        /// Obtiene la información del Estado de Suministros de la página HTML de una Impresora Lexmark MS610
         /// </summary>
-        /// <remarks>
-        /// Find inside the Lexmark MS610 HTML Page all information needed.
-        /// </remarks>
         private void _Lex610()
         {
             this.url += Printer.L610_AFTER_URL;
@@ -186,11 +172,8 @@ namespace IO
         }
 
         /// <summary>
-        /// Lexmark MS812 Information
+        /// Obtiene la información del Estado de Suministros de la página HTML de una Impresora Lexmark MS812
         /// </summary>
-        /// <remarks>
-        /// Find inside the Lexmark MS812 HTML Page all information needed.
-        /// </remarks>
         private void _Lex812()
         {
             this.url += Printer.L812_AFTER_URL;

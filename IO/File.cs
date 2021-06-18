@@ -14,6 +14,49 @@ namespace IO
     public class File
     {
         /// <summary>
+        /// Lee el archivo reciente con la extensión SMP cuya ruta está almacenda en el
+        /// Application Config.
+        /// </summary>
+        public static List<Printer> readCurrentFile()
+        {
+            List<Printer> retorno = new List<Printer>();
+
+            //Cargo la ruta del archivo reciente.
+            string fileToRead = ConfigurationManager.AppSettings.Get("currentFile");
+
+            //Pregunto si el archivo existe.
+            if (System.IO.File.Exists(fileToRead))
+            {
+                //Si existe lo leo.
+                using (StreamReader reader = new StreamReader(fileToRead))
+                {
+                    Printer printer;
+                    string line;
+                    //Mientras encuentre una línea dentro del archivo la leo y cargo esos datos en una
+                    //Lista de Impresoras.
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        if (!(line.Substring(0, 1) == "[" && line.Substring(line.Length - 1, 1) == "]"))
+                        {
+                            printer = new Printer();
+                            printer.Ip = line; //Cargo el ip almacenado
+                            printer.Estado = Printer.NO_ANALIZADA; //Seteo el estado de la Impresora en No Analizada.
+                            retorno.Add(printer);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                //Si por alguna extraña razón no encuentro el archivo limpio la variable que lo almacena en el
+                //Application Config.
+                ClearCurrentFile();
+            }
+
+            return retorno;
+        }
+
+        /// <summary>
         /// Limpia la variable que almacena el Archivo Reciente.
         /// </summary>
         public static void ClearCurrentFile()
