@@ -105,7 +105,7 @@ namespace IO
         /// </remarks>
         /// <param name="filePath"></param>
         /// <param name="ips"></param>
-        public static void saveFile(string filePath, List<Printer> printers)
+        public static void saveFileAs(string filePath, List<Printer> printers)
         {
             //Ask for List of String that contain the IPs to ensure that it has more than 0 count.
             if (printers.Count > 0)
@@ -128,6 +128,22 @@ namespace IO
                 }
 
                 openFile(filePath);
+            }
+        }
+
+        public static void saveFile(List<Printer> printers)
+        {
+            string filePath = ConfigurationManager.AppSettings.Get("currentFile");
+            if (printers.Count > 0)
+            {
+                using (StreamWriter writerNewFile = new StreamWriter(filePath))
+                {
+                    //Write all IPs passed by the Parameters.
+                    foreach (Printer printer in printers)
+                    {
+                        writerNewFile.WriteLine(printer.Ip);
+                    }
+                }
             }
         }
 

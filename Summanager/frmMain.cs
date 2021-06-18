@@ -128,7 +128,7 @@ namespace Summanager
                 {
                     try
                     {
-                        resultSave = this.formEstados.SaveAs();
+                        resultSave = this.formEstados.Save();
                     }
                     catch (Exception ex)
                     {

@@ -175,7 +175,7 @@ namespace Summanager
         }
 
 
-        public DialogResult SaveAs()
+        private DialogResult _saveAs()
         {
             DialogResult retorno;
 
@@ -188,7 +188,7 @@ namespace Summanager
             {
                 string filePath = saveFileDialog.FileName;
                 
-                IO.File.saveFile(filePath, printers);
+                IO.File.saveFileAs(filePath, printers);
 
                 printers.Clear();
                 printers = IO.File.readCurrentFile();
@@ -200,6 +200,27 @@ namespace Summanager
                 retorno = DialogResult.Cancel;
             }
             saveFileDialog.FileName = "";
+
+            return retorno;
+        }
+
+        public DialogResult Save()
+        {
+            DialogResult retorno;
+
+            string titulo = _getFileTitle();
+            if(titulo == "sin título*")
+            {
+                retorno = _saveAs();
+            }
+            else
+            {
+                IO.File.saveFile(this.printers);
+                printers.Clear();
+                printers = IO.File.readCurrentFile();
+                _tituloForm();
+                retorno = DialogResult.OK;
+            }
 
             return retorno;
         }
@@ -252,7 +273,7 @@ namespace Summanager
 		{
             try
             {
-                SaveAs();
+                Save();
                 _acomodarBotones();
             }
             catch (Exception ex)
@@ -348,6 +369,19 @@ namespace Summanager
             IO.File.ClearCurrentFile();
             _tituloForm();
             _acomodarBotones();
+        }
+
+        private void btnGuardarComo_MouseClick(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                _saveAs();
+                _acomodarBotones();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
