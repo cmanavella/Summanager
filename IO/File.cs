@@ -50,6 +50,16 @@ namespace IO
                     }
                 }
             }
+            else
+            {
+                var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                var settings = configFile.AppSettings.Settings;
+
+                settings["currentFile"].Value = "";
+
+                configFile.Save(ConfigurationSaveMode.Modified);
+                ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
+            }
 
             return retorno;
         }
