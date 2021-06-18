@@ -1,7 +1,7 @@
 ﻿
 namespace Summanager
 {
-    partial class frmContenido
+    partial class FrmContenido
     {
         /// <summary>
         /// Required designer variable.

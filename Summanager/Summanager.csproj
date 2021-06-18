@@ -66,7 +66,7 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>multifunction-printer.ico</ApplicationIcon>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -83,61 +83,61 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="frmCargando.cs">
+    <Compile Include="FrmCargando.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmCargando.Designer.cs">
-      <DependentUpon>frmCargando.cs</DependentUpon>
+    <Compile Include="FrmCargando.Designer.cs">
+      <DependentUpon>FrmCargando.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmConfiguracion.cs">
+    <Compile Include="FrmConfiguracion.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmConfiguracion.Designer.cs">
-      <DependentUpon>frmConfiguracion.cs</DependentUpon>
+    <Compile Include="FrmConfiguracion.Designer.cs">
+      <DependentUpon>FrmConfiguracion.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmContenido.cs">
+    <Compile Include="FrmContenido.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmContenido.Designer.cs">
-      <DependentUpon>frmContenido.cs</DependentUpon>
+    <Compile Include="FrmContenido.Designer.cs">
+      <DependentUpon>FrmContenido.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmEstados.cs">
+    <Compile Include="FrmEstados.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmEstados.Designer.cs">
-      <DependentUpon>frmEstados.cs</DependentUpon>
+    <Compile Include="FrmEstados.Designer.cs">
+      <DependentUpon>FrmEstados.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmMain.cs">
+    <Compile Include="FrmMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmMain.Designer.cs">
-      <DependentUpon>frmMain.cs</DependentUpon>
+    <Compile Include="FrmMain.Designer.cs">
+      <DependentUpon>FrmMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmStock.cs">
+    <Compile Include="FrmStock.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmStock.Designer.cs">
-      <DependentUpon>frmStock.cs</DependentUpon>
+    <Compile Include="FrmStock.Designer.cs">
+      <DependentUpon>FrmStock.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="frmCargando.resx">
-      <DependentUpon>frmCargando.cs</DependentUpon>
+    <EmbeddedResource Include="FrmCargando.resx">
+      <DependentUpon>FrmCargando.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmConfiguracion.resx">
-      <DependentUpon>frmConfiguracion.cs</DependentUpon>
+    <EmbeddedResource Include="FrmConfiguracion.resx">
+      <DependentUpon>FrmConfiguracion.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmContenido.resx">
-      <DependentUpon>frmContenido.cs</DependentUpon>
+    <EmbeddedResource Include="FrmContenido.resx">
+      <DependentUpon>FrmContenido.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmEstados.resx">
-      <DependentUpon>frmEstados.cs</DependentUpon>
+    <EmbeddedResource Include="FrmEstados.resx">
+      <DependentUpon>FrmEstados.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmMain.resx">
-      <DependentUpon>frmMain.cs</DependentUpon>
+    <EmbeddedResource Include="FrmMain.resx">
+      <DependentUpon>FrmMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmStock.resx">
-      <DependentUpon>frmStock.cs</DependentUpon>
+    <EmbeddedResource Include="FrmStock.resx">
+      <DependentUpon>FrmStock.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -219,7 +219,7 @@
     <None Include="Resources\stop.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="multifunction-printer.ico" />
+    <Content Include="icon.ico" />
     <None Include="Resources\new.png" />
     <None Include="Resources\save-as-file.png" />
   </ItemGroup>

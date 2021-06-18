@@ -8,9 +8,9 @@ using System.Windows.Forms;
 
 namespace Summanager
 {
-    public partial class frmStock : Summanager.frmContenido
+    public partial class FrmStock : Summanager.FrmContenido
     {
-        public frmStock()
+        public FrmStock()
         {
             InitializeComponent();
         }

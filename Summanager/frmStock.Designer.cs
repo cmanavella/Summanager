@@ -1,7 +1,7 @@
 ﻿
 namespace Summanager
 {
-    partial class frmStock
+    partial class FrmStock
     {
         /// <summary>
         /// Required designer variable.

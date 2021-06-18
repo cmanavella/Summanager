@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Summanager
 {
-    public partial class frmContenido : Form
+    public partial class FrmContenido : Form
     {
-        public frmContenido()
+        public FrmContenido()
         {
             InitializeComponent();
         }

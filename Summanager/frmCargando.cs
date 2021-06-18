@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace Summanager
 {
-	public partial class frmCargando : Form
+	public partial class FrmCargando : Form
 	{
 		private int procesado;
 		private string currentIp;
@@ -26,7 +26,7 @@ namespace Summanager
 
 		public List<Printer> PrintersPassed { get; set; }
 
-		public frmCargando(List<Printer> printers)
+		public FrmCargando(List<Printer> printers)
 		{
 			InitializeComponent();
 			this.procesado = 0;

@@ -1,7 +1,7 @@
 ﻿
 namespace Summanager
 {
-    partial class frmEstados
+    partial class FrmEstados
     {
         /// <summary>
         /// Variable del diseñador necesaria.
@@ -30,7 +30,7 @@ namespace Summanager
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmEstados));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmEstados));
             this.dgv = new System.Windows.Forms.DataGridView();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();

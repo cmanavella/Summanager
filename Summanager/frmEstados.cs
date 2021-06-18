@@ -8,12 +8,12 @@ using System.Windows.Forms;
 
 namespace Summanager
 {
-    public partial class frmEstados : Summanager.frmContenido
+    public partial class FrmEstados : Summanager.FrmContenido
     {
         private List<Printer> printers;
         private Form frmMain;
 
-        public frmEstados(Form frmMain)
+        public FrmEstados(Form frmMain)
         {
             InitializeComponent();
             printers = IO.File.readCurrentFile();
@@ -272,7 +272,7 @@ namespace Summanager
             dgv.Columns.Clear();
             dgv.Refresh();
 
-            frmCargando cargando = new frmCargando(printers);
+            FrmCargando cargando = new FrmCargando(printers);
             cargando.ShowDialog();
 
             List<Printer> printersReturned = cargando.PrintersPassed;

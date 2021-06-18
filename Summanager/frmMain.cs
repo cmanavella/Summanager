@@ -18,9 +18,9 @@ using CustomControls;
 
 namespace Summanager
 {
-    public partial class frmMain : Form
+    public partial class FrmMain : Form
     {
-        private frmEstados formEstados;
+        private FrmEstados formEstados;
 
         //DLLs needed for Form Moving.
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
@@ -40,7 +40,7 @@ namespace Summanager
             int nHeightEllipse // width of ellipse
         );
 
-        public frmMain()
+        public FrmMain()
         {
             InitializeComponent();
             Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 15, 15));
@@ -164,18 +164,18 @@ namespace Summanager
 
         private void btnStock_MouseClick(object sender, MouseEventArgs e)
         {
-            _openChildForm(new frmStock(), sender);
+            _openChildForm(new FrmStock(), sender);
         }
 
         private void btnEstados_MouseClick(object sender, MouseEventArgs e)
         {
-            this.formEstados = new frmEstados(this);
+            this.formEstados = new FrmEstados(this);
             _openChildForm(this.formEstados, sender);
         }
 
         private void btnConfiguracion_MouseClick(object sender, MouseEventArgs e)
         {
-            _openChildForm(new frmConfiguracion(), sender);
+            _openChildForm(new FrmConfiguracion(), sender);
         }
     }
 }
