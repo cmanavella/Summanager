@@ -200,9 +200,12 @@ namespace Summanager
         /*EVENTOS*/
         private void dgv_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            string estado = dgv.SelectedCells[2].Value.ToString();
-            string ip = "http://" + dgv.SelectedCells[0].Value.ToString();
-            if (estado == Printer.ONLINE || estado == Printer.NO_ANALIZADA) Process.Start(ip);
+            if (this.dgv.Rows.Count > 0)
+            {
+                string estado = dgv.SelectedCells[2].Value.ToString();
+                string ip = "http://" + dgv.SelectedCells[0].Value.ToString();
+                if (estado == Printer.ONLINE || estado == Printer.NO_ANALIZADA) Process.Start(ip);
+            }
         }
 
         private void frmEstados_Load(object sender, EventArgs e)
@@ -327,5 +330,15 @@ namespace Summanager
 
             _llenarDgv();
         }
-	}
+
+        private void btnNuevo_MouseClick(object sender, MouseEventArgs e)
+        {
+            this.printers.Clear();
+            this.dgv.Columns.Clear();
+            this.dgv.Rows.Clear();
+            this.dgv.Refresh();
+            _tituloForm();
+            _acomodarBotones();
+        }
+    }
 }
