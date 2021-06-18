@@ -20,6 +20,7 @@ namespace Summanager
 
             this.frmMain = frmMain;
             _tituloForm();
+            _acomodarBotones();
         }
 
         /// <summary>
@@ -50,7 +51,44 @@ namespace Summanager
         private string _getFileTitle()
         {
             string[] splitTitle = frmMain.Text.Split('-');
-            return splitTitle[1].Substring(0, splitTitle[1].Length - 4);
+            return splitTitle[1];
+        }
+
+        private void _acomodarBotones()
+        {
+            if(_getFileTitle() == "sin título")
+            {
+                this.btnAbrir.Enabled = true;
+                
+                if (this.printers.Count > 0)
+                {
+                    this.btnNuevo.Enabled = true;
+                    this.btnGuardar.Enabled = true;
+                    this.btnGuardarComo.Enabled = true;
+                    this.btnExportar.Enabled = true;
+                    this.btnActualizar.Enabled = true;
+                }
+                else
+                {
+                    this.btnNuevo.Enabled = false;
+                    this.btnGuardar.Enabled = false;
+                    this.btnGuardarComo.Enabled = false;
+                    this.btnExportar.Enabled = false;
+                    this.btnActualizar.Enabled = false;
+                }
+                this.btnImportar.Enabled = true;
+                this.btnExportar.Enabled = false;
+            }
+            else
+            {
+                this.btnNuevo.Enabled = true;
+                this.btnAbrir.Enabled = true;
+                this.btnGuardar.Enabled = true;
+                this.btnGuardarComo.Enabled = true;
+                this.btnImportar.Enabled = true;
+                this.btnExportar.Enabled = true;
+                this.btnActualizar.Enabled = true;
+            }
         }
 
         /// <summary>
@@ -197,6 +235,7 @@ namespace Summanager
                 }
             }
             openFileDialog.FileName = "";
+            _acomodarBotones();
         }
 
 		private void btnGuardar_MouseClick(object sender, MouseEventArgs e)
@@ -204,6 +243,7 @@ namespace Summanager
             try
             {
                 SaveAs();
+                _acomodarBotones();
             }
             catch (Exception ex)
             {
@@ -240,6 +280,7 @@ namespace Summanager
             {
                 _tituloForm();
                 btnActualizar_MouseClick(sender, null);
+                _acomodarBotones();
             }
         }
 
@@ -264,6 +305,7 @@ namespace Summanager
                 }
             }
             saveFileDialog.FileName = "";
+            _acomodarBotones();
         }
 
 		private void btnActualizar_MouseClick(object sender, MouseEventArgs e)
