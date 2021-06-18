@@ -32,11 +32,18 @@ namespace Summanager
             if (printers.Count > 0)
             {
                 string fileName = IO.File.GetCurrentFileTitle();
-
                 string[] splitFileName = fileName.Split('\\');
-                int index = splitFileName.Length - 1;
 
-                frmMain.Text = titulo[0] + "-" + splitFileName[index].Substring(0, splitFileName[index].Length - 4);
+                if (fileName.Length > 0)
+                {
+                    int index = splitFileName.Length - 1;
+
+                    frmMain.Text = titulo[0] + "-" + splitFileName[index].Substring(0, splitFileName[index].Length - 4);
+                }
+                else
+                {
+                    frmMain.Text = titulo[0] + "-sin título";
+                }
             }
             else
             {
@@ -282,6 +289,7 @@ namespace Summanager
             if (printers.Count > 0)
             {
                 _tituloForm();
+                frmMain.Text += "*";
                 btnActualizar_MouseClick(sender, null);
                 _acomodarBotones();
             }
@@ -337,6 +345,7 @@ namespace Summanager
             this.dgv.Columns.Clear();
             this.dgv.Rows.Clear();
             this.dgv.Refresh();
+            IO.File.ClearCurrentFile();
             _tituloForm();
             _acomodarBotones();
         }
