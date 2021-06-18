@@ -31,9 +31,11 @@ namespace Summanager
             if (printers.Count > 0)
             {
                 string fileName = IO.File.GetCurrentFileTitle();
-                
 
-                frmMain.Text = titulo[0] + "-" + fileName;
+                string[] splitFileName = fileName.Split('\\');
+                int index = splitFileName.Length - 1;
+
+                frmMain.Text = titulo[0] + "-" + splitFileName[index].Substring(0, splitFileName[index].Length - 4);
             }
             else
             {

@@ -34,6 +34,8 @@ namespace Summanager
             this.dgv = new System.Windows.Forms.DataGridView();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.btnNuevo = new CustomControls.menuChildButtom();
+            this.btnGuardarComo = new CustomControls.menuChildButtom();
             this.btnActualizar = new CustomControls.menuChildButtom();
             this.btnExportar = new CustomControls.menuChildButtom();
             this.btnImportar = new CustomControls.menuChildButtom();
@@ -51,6 +53,8 @@ namespace Summanager
             // 
             // panelMenu
             // 
+            this.panelMenu.Controls.Add(this.btnNuevo);
+            this.panelMenu.Controls.Add(this.btnGuardarComo);
             this.panelMenu.Controls.Add(this.btnActualizar);
             this.panelMenu.Controls.Add(this.btnExportar);
             this.panelMenu.Controls.Add(this.btnImportar);
@@ -98,6 +102,24 @@ namespace Summanager
             this.dgv.TabIndex = 22;
             this.dgv.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dgv_MouseDoubleClick);
             // 
+            // btnNuevo
+            // 
+            this.btnNuevo.Image = global::Summanager.Properties.Resources._new;
+            this.btnNuevo.Location = new System.Drawing.Point(12, 6);
+            this.btnNuevo.Name = "btnNuevo";
+            this.btnNuevo.Size = new System.Drawing.Size(76, 28);
+            this.btnNuevo.TabIndex = 6;
+            this.btnNuevo.Text = "Nuevo";
+            // 
+            // btnGuardarComo
+            // 
+            this.btnGuardarComo.Image = global::Summanager.Properties.Resources.save_file;
+            this.btnGuardarComo.Location = new System.Drawing.Point(260, 6);
+            this.btnGuardarComo.Name = "btnGuardarComo";
+            this.btnGuardarComo.Size = new System.Drawing.Size(145, 28);
+            this.btnGuardarComo.TabIndex = 5;
+            this.btnGuardarComo.Text = "Guardar como...";
+            // 
             // btnActualizar
             // 
             this.btnActualizar.Image = ((System.Drawing.Image)(resources.GetObject("btnActualizar.Image")));
@@ -111,7 +133,7 @@ namespace Summanager
             // btnExportar
             // 
             this.btnExportar.Image = ((System.Drawing.Image)(resources.GetObject("btnExportar.Image")));
-            this.btnExportar.Location = new System.Drawing.Point(285, 6);
+            this.btnExportar.Location = new System.Drawing.Point(509, 6);
             this.btnExportar.Name = "btnExportar";
             this.btnExportar.Size = new System.Drawing.Size(92, 28);
             this.btnExportar.TabIndex = 3;
@@ -121,7 +143,7 @@ namespace Summanager
             // btnImportar
             // 
             this.btnImportar.Image = ((System.Drawing.Image)(resources.GetObject("btnImportar.Image")));
-            this.btnImportar.Location = new System.Drawing.Point(187, 6);
+            this.btnImportar.Location = new System.Drawing.Point(411, 6);
             this.btnImportar.Name = "btnImportar";
             this.btnImportar.Size = new System.Drawing.Size(92, 28);
             this.btnImportar.TabIndex = 2;
@@ -130,8 +152,8 @@ namespace Summanager
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Image = ((System.Drawing.Image)(resources.GetObject("btnGuardar.Image")));
-            this.btnGuardar.Location = new System.Drawing.Point(89, 6);
+            this.btnGuardar.Image = global::Summanager.Properties.Resources.save_file;
+            this.btnGuardar.Location = new System.Drawing.Point(162, 6);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(92, 28);
             this.btnGuardar.TabIndex = 1;
@@ -141,7 +163,7 @@ namespace Summanager
             // btnAbrir
             // 
             this.btnAbrir.Image = ((System.Drawing.Image)(resources.GetObject("btnAbrir.Image")));
-            this.btnAbrir.Location = new System.Drawing.Point(12, 6);
+            this.btnAbrir.Location = new System.Drawing.Point(85, 6);
             this.btnAbrir.Name = "btnAbrir";
             this.btnAbrir.Size = new System.Drawing.Size(71, 28);
             this.btnAbrir.TabIndex = 0;
@@ -175,5 +197,7 @@ namespace Summanager
 		private CustomControls.menuChildButtom btnExportar;
 		private CustomControls.menuChildButtom btnImportar;
 		private CustomControls.menuChildButtom btnActualizar;
-	}
+        private CustomControls.menuChildButtom btnNuevo;
+        private CustomControls.menuChildButtom btnGuardarComo;
+    }
 }

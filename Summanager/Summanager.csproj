@@ -220,6 +220,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="multifunction-printer.ico" />
+    <None Include="Resources\new.png" />
+    <None Include="Resources\save-as-file.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
