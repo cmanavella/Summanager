@@ -77,7 +77,7 @@ namespace Summanager
 
             foreach(Form formOpen in forms)
             {
-                if (formOpen.GetType().Name == "FrmEstados") checkOpenFile = _checkUnsavedFile();
+                if (formOpen.GetType().Name == "FrmEstados") checkOpenFile = CheckUnsavedFile();
                 if(checkOpenFile == DialogResult.OK) formOpen.Close();
             }
 
@@ -117,7 +117,7 @@ namespace Summanager
             }
         }
 
-        private DialogResult _checkUnsavedFile()
+        public DialogResult CheckUnsavedFile()
         {
             DialogResult resultSave = DialogResult.OK;
 
@@ -144,7 +144,7 @@ namespace Summanager
         /**EVENTS**/
         private void btnCerrar_MouseClick(object sender, MouseEventArgs e)
         {
-            if(_checkUnsavedFile() == DialogResult.OK) Application.Exit();
+            if(CheckUnsavedFile() == DialogResult.OK) Application.Exit();
         }
 
         private void btnMinimizar_MouseClick(object sender, MouseEventArgs e)

@@ -11,9 +11,9 @@ namespace Summanager
     public partial class FrmEstados : Summanager.FrmContenido
     {
         private List<Printer> printers;
-        private Form frmMain;
+        private FrmMain frmMain;
 
-        public FrmEstados(Form frmMain)
+        public FrmEstados(FrmMain frmMain)
         {
             InitializeComponent();
             printers = IO.File.readCurrentFile();
@@ -339,6 +339,10 @@ namespace Summanager
 
                 if(result!=DialogResult.Cancel) _importar(result == DialogResult.Yes);
             }
+            else
+            {
+                _importar(true);
+            }
         }
 
 		private void btnExportar_MouseClick(object sender, MouseEventArgs e)
@@ -387,13 +391,16 @@ namespace Summanager
 
         private void btnNuevo_MouseClick(object sender, MouseEventArgs e)
         {
-            this.printers.Clear();
-            this.dgv.Columns.Clear();
-            this.dgv.Rows.Clear();
-            this.dgv.Refresh();
-            IO.File.ClearCurrentFile();
-            _tituloForm();
-            _acomodarBotones();
+            if(this.frmMain.CheckUnsavedFile() == DialogResult.OK)
+            {
+                this.printers.Clear();
+                this.dgv.Columns.Clear();
+                this.dgv.Rows.Clear();
+                this.dgv.Refresh();
+                IO.File.ClearCurrentFile();
+                _tituloForm();
+                _acomodarBotones();
+            }
         }
 
         private void btnGuardarComo_MouseClick(object sender, MouseEventArgs e)
