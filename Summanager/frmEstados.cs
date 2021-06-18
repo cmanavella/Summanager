@@ -282,8 +282,8 @@ namespace Summanager
             }
         }
 
-		private void btnImportar_MouseClick(object sender, MouseEventArgs e)
-		{
+        private void _importar(bool combinado)
+        {
             openFileDialog.InitialDirectory = "c:\\";
             openFileDialog.Filter = "Libro de Excel (*.xlsx;*.xls)|*.xlsx;*.xls";
             openFileDialog.FilterIndex = 1;
@@ -295,8 +295,20 @@ namespace Summanager
 
                 try
                 {
-                    printers.Clear();
-                    printers = IO.File.importExcelFile(filePath);
+                    if (combinado)
+                    {
+                        List<Printer> nuevas = IO.File.importExcelFile(filePath);
+                        
+                        foreach(Printer nueva in nuevas)
+                        {
+                            this.printers.Add(nueva);
+                        }
+                    }
+                    else
+                    {
+                        printers.Clear();
+                        printers = IO.File.importExcelFile(filePath);
+                    }
                     MessageBox.Show("Datos importados con éxito.");
                 }
                 catch (Exception ex)
@@ -311,8 +323,21 @@ namespace Summanager
             {
                 _tituloForm();
                 frmMain.Text += "*";
-                btnActualizar_MouseClick(sender, null);
+                btnActualizar_MouseClick(null, null);
                 _acomodarBotones();
+            }
+        }
+
+		private void btnImportar_MouseClick(object sender, MouseEventArgs e)
+		{
+            if(_getFileTitle() != "sin título")
+            {
+                var result = MessageBox.Show("¿Desea combinar la colección en el archivo actual con los datos importados? \n\nSi elige la opción " +
+                    "\"Sí\" se combinará la colección actual con los datos importados. Si elige " +
+                    "la opción \"No\" se borrará la colección actual y se generá una nueva a partir de los datos importado.",
+                    Application.ProductName, MessageBoxButtons.YesNoCancel);
+
+                if(result!=DialogResult.Cancel) _importar(result == DialogResult.Yes);
             }
         }
 
