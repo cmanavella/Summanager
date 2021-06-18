@@ -14,50 +14,8 @@ namespace IO
     public class File
     {
         /// <summary>
-        /// Read current.smp file.
+        /// Limpia la variable que almacena el Archivo Reciente.
         /// </summary>
-        /// <remarks>
-        /// Open, read and after returns a List of Strings with all IPs within Current File.
-        /// </remarks>
-        /// <returns>List of String</returns>
-        public static List<Printer> readCurrentFile()
-        {
-            //Make a Return Variable. It's a List of Strings.
-            List<Printer> retorno = new List<Printer>();
-
-            //Load the Path and File Name where Current File is.
-            string fileToRead = ConfigurationManager.AppSettings.Get("currentFile");
-
-            //Ask if the Current File exist.
-            if (System.IO.File.Exists(fileToRead))
-            {
-                //If it exist. I read it.
-                using (StreamReader reader = new StreamReader(fileToRead))
-                {
-                    Printer printer;
-                    string line;
-                    //While I find a new line within the Current File, I load it inside a String.
-                    while ((line = reader.ReadLine()) != null)
-                    {
-                        if(!(line.Substring(0,1)=="[" && line.Substring(line.Length - 1, 1) == "]"))
-                        {
-                            printer = new Printer();
-                            printer.Ip = line;
-                            printer.Estado = Printer.NO_ANALIZADA;
-                            //Add Line read inside Return Variable.
-                            retorno.Add(printer);
-                        }
-                    }
-                }
-            }
-            else
-            {
-                ClearCurrentFile();
-            }
-
-            return retorno;
-        }
-
         public static void ClearCurrentFile()
         {
             var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
@@ -69,6 +27,13 @@ namespace IO
             ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
         }
 
+        /// <summary>
+        /// Obtiene el Nombre del Archivo Reciente.
+        /// </summary>
+        /// <remarks>
+        /// Si no hay ningún archivo reciente devuelve un String vacío.
+        /// </remarks>
+        /// <returns></returns>
         public static string GetCurrentFileTitle()
         {
             string retorno;
@@ -80,11 +45,8 @@ namespace IO
         }
 
         /// <summary>
-        /// Open a SMP File.
+        /// Cambia la variable de configuración para que se almacene en ella la ruta del archivo abierto.
         /// </summary>
-        /// <remarks>
-        /// Open a SMP File for its use inside the System.
-        /// </remarks>
         /// <param name="filePath"></param>
         public static void openFile(string filePath)
         {
@@ -98,26 +60,23 @@ namespace IO
         }
 
         /// <summary>
-        /// Save a SMP File.
+        /// Guarda una Lista de Impresoras en una ruta determinada en un archivo con extensión SMP.
         /// </summary>
-        /// <remarks>
-        /// Allow save the Information within the Current File inside a SMP File.
-        /// </remarks>
         /// <param name="filePath"></param>
-        /// <param name="ips"></param>
+        /// <param name="printers"></param>
         public static void saveFileAs(string filePath, List<Printer> printers)
         {
-            //Ask for List of String that contain the IPs to ensure that it has more than 0 count.
+            //Pregunto si la Lista no está vacía.
             if (printers.Count > 0)
             {
-                //Ask if the File exist. If not, I creat it.
+                //Pregunto si el archivo que quiero guardar existe. Si no, lo creo.
                 if (!System.IO.File.Exists(filePath))
                 {
                     var file = System.IO.File.Create(filePath);
                     file.Close();
                 }
 
-                //Write the File.
+                //Escribo en el archivo.
                 using(StreamWriter writerNewFile = new StreamWriter(filePath))
                 {
                     //Write all IPs passed by the Parameters.
@@ -127,18 +86,23 @@ namespace IO
                     }
                 }
 
+                //Guardo el archivo como reciente.
                 openFile(filePath);
             }
         }
 
+        /// <summary>
+        /// Guarda una Lista de Impresoras en la ruta del archivo reciente.
+        /// </summary>
+        /// <param name="printers"></param>
         public static void saveFile(List<Printer> printers)
         {
             string filePath = ConfigurationManager.AppSettings.Get("currentFile");
-            if (printers.Count > 0)
+            if (printers.Count > 0) //Me aseguro que la Lista no esté vacía.
             {
                 using (StreamWriter writerNewFile = new StreamWriter(filePath))
                 {
-                    //Write all IPs passed by the Parameters.
+                    //Escribo el archivo.
                     foreach (Printer printer in printers)
                     {
                         writerNewFile.WriteLine(printer.Ip);
@@ -148,11 +112,8 @@ namespace IO
         }
 
         /// <summary>
-        /// Import an Excel File.
+        /// Importa datos de un archivo Excel.
         /// </summary>
-        /// <remarks>
-        /// Import an Excel File with a list of Pinters inside into a List of Printers.
-        /// </remarks>
         /// <param name="filePath"></param>
         /// <returns></returns>
         public static List<Printer> importExcelFile(string filePath)
@@ -160,38 +121,37 @@ namespace IO
             List<Printer> retorno = new List<Printer>();
 
             Application application = new Application();
-            //Open a book
+            //Abro un libro
             Workbook libros = application.Workbooks.Open(filePath);
-            //Open a sheet
+            //Abro una hoja
             Worksheet hoja = (Worksheet)libros.Worksheets.Item[1];
 
-            try
+            //Abro try para asegurarme que al final tanto el libro como la hoja son cerrados.
+            try 
             {
-                //Use a Range to access to Excel File.
+                //Uso Range para acceder al archivo Excel.
                 Range range = hoja.UsedRange;
-                int row = 2; //Start with the second Row because the first one is used to the Column Headers.
-                string cellEval = (string)(range.Cells[row, 1]).Value2; //Get the first Excel data.
+                int row = 2; //Seteo como primera fila la 2 ya que la priemera están los Headers del archivo.
+                //Uso la columna 1 como verificación, ya que muchas veces la columna usada para los Ip suele estar vacía
+                //y uso la celda vacía para determinar que es el fin del archivo.
+                string cellEval = (string)(range.Cells[row, 1]).Value2; 
                 do 
                 {
                     Printer printer = new Printer();
-                    string ip = _makeIpAddress((string)(range.Cells[row, 8]).Value2); //Convert the Excel value in a ip.
-                    if (_isValidIp(ip))
+                    string ip = _makeIpAddress((string)(range.Cells[row, 8]).Value2); //Leo la columna donde se encuentran las Ips y las transformo en ellas.
+                    if (_isValidIp(ip)) //Valido que la ip sea válida.
                     {
-                        printer.Ip = ip;
-                        printer.Estado = Printer.NO_ANALIZADA;
-                        retorno.Add(printer); //If the ip is valid, add it to the return variable.
+                        printer.Ip = ip; //Cargo la ip a un Objeto Impresora
+                        printer.Estado = Printer.NO_ANALIZADA; //Seteo el estado del Objeto Impresora como No Analizada.
+                        retorno.Add(printer); //Agrego la Impresora a la Lista de Retorno.
                     }
-                    row++; //Add one to the Row counter.
-                    cellEval = (string)(range.Cells[row, 1]).Value2; //Get the next Excel Data.
-                } while (cellEval != null); //Do all while Excel Data is not null.
-            }
-            catch(Exception ex)
-            {
-                Console.WriteLine(ex.Message);
+                    row++; //Cambio el contador de filas para pasar a la siguiente.
+                    cellEval = (string)(range.Cells[row, 1]).Value2; //Obtengo el valor de siguiente fila. Siempre uso la columna 1 para comparar.
+                } while (cellEval != null); //Pregunto si el valor devuelto no es nulo. Si no lo es, continúo con el bucle.
             }
             finally
             {
-                //Finally close the Excel File.
+                //Finalmente cierro todo lo referido al archivo de Excel.
                 libros.Close(true);
                 application.Quit();
             }
@@ -200,46 +160,43 @@ namespace IO
         }
 
         /// <summary>
-        /// Is Valid Ip
+        /// Comprueba que la Ip pasada por parámetro sea válida.
         /// </summary>
-        /// <remarks>
-        /// Evaluate if the Ip passing by parameter is Valid.
-        /// </remarks>
         /// <param name="ip"></param>
         /// <returns></returns>
         private static bool _isValidIp(string ip)
         {
-            bool isValid = true; //Variable to return
-            string[] splitIp = ip.Split('.'); //Split the string ip in each ip segment.
-            if (splitIp.Length == 4) //If the ip have 4 segments is valid.
+            bool isValid = true; //Variable a devolver.
+            string[] splitIp = ip.Split('.'); //Divido el string de ip en sus cuatro segmentos.
+            if (splitIp.Length == 4) //Valido que haya cuatro segmentos.
             {
                 for(int i=0; i < splitIp.Length; i++)
                 {
-                    if (Int32.Parse(splitIp[i]) < 0 || Int32.Parse(splitIp[i]) > 255) //Evaluate each ip segment is between 0 and 255.
+                    if (Int32.Parse(splitIp[i]) < 0 || Int32.Parse(splitIp[i]) > 255) //Evalúo que cada uno de los segmentos se encuentren entre 0 y 255.
                     {
-                        isValid = false; //If not, the ip is not valid.
-                        i = splitIp.Length;
+                        isValid = false; //Sino, la ip no es válida.
+                        break; //Salgo del bucle.
                     }
                 }
             }
             else
             {
-                isValid = false; //If the ip have not 4 segment is not valid.
+                isValid = false; //Si el ip no tiene cuatro segmentos, no es válida.
             }
             return isValid;
         }
 
         /// <summary>
-        /// Construct an Ip address with a String.
+        /// Extrae solo una ip de una cadena de string.
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
         private static string _makeIpAddress(string value)
         {
             string retorno = "";
-            char[] charsValue = value.ToCharArray();
+            char[] charsValue = value.ToCharArray(); //Armo un array de caracteres con la cadena de string para analizarlo caracter por caracter.
 
-            //Find the dot positions in array char from string, and save it.
+            //Busco las posiciones exactas de los puntos dentro del array y las guardo en una Lista.
             List<int> puntos = new List<int>();
             int i = 0;
             foreach(char c in charsValue)
@@ -248,14 +205,14 @@ namespace IO
                 i++;
             }
 
-            //If the List of dots has 3 items means there is an ip.
+            //Valido que la lista tenga tres posiciones, eso quiere decir que hay tres puntos y hay una ip.
             if (puntos.Count == 3)
             {
-                int firstPos = 0;
-                int lastPos = charsValue.Length - 1;
+                int firstPos = 0; //Almaceno la primera posición en el comienzo del Array
+                int lastPos = charsValue.Length - 1; //Almaceno la última posición en el final del Array.
 
-                //Analyze the first item of the List and determine wich is the first position of the first segment
-                //of ip in char array.
+                //Analizo la posición del primer punto, y en base a eso retrocedo posiciones hasta no tener más dígitos numéricos.
+                //Es ahí donde comienza la ip.
                 for (int j = puntos[0]; j >= 0; j--)
                 {
                     if (Char.IsDigit(charsValue[j]) || j == puntos[0])
@@ -268,8 +225,8 @@ namespace IO
                     }
                 }
 
-                //Analyze the last item of the List and determine wich is the last position of the last segment
-                //of ip in char array.
+                //Analizo la posición del último punto, y en base a eso avanzo posiciones hasta no tener más dígitos numéricos.
+                //Es ahí donde finaliza la ip.
                 for (int k = puntos[2]; k < charsValue.Length; k++)
                 {
                     if (Char.IsDigit(charsValue[k]) || k == puntos[2])
@@ -282,7 +239,7 @@ namespace IO
                     }
                 }
 
-                //Make an ip whith the chars.
+                //Ya determinado las pocisiones de comienzo de la ip y de su final, armo un nuevo string con la ip.
                 for(int l = firstPos; l <= lastPos; l++)
                 {
                     retorno += charsValue[l];
@@ -293,23 +250,20 @@ namespace IO
         }
 
         /// <summary>
-        /// Export Analyzed Printer Information in an Excel File.
+        /// Exporta una Lista de Impresoras a un archivo Excel.
         /// </summary>
-        /// <remarks>
-        /// Take all the Analyzed Printer Information and make a new Excel File with.
-        /// </remarks>
         /// <param name="filePath"></param>
         /// <param name="printers"></param>
         public static void exportExcelFile(string filePath, List<Printer> printers)
         {
             Application application = new Application();
-            //Make a book.
+            //Abro un libro.
             Workbook libros = application.Workbooks.Add();
-            //Make a sheet
+            //Abro una hoja.
             Worksheet hoja = (Worksheet) libros.Worksheets.Item[1];
             try
             {
-                //Write the Columns Headers
+                //Escribo las Cabeceras de Columnas.
                 hoja.Cells[2, 2] = "Ip";
                 hoja.Cells[2, 3] = "Modelo";
                 hoja.Cells[2, 4] = "Estado";
@@ -317,9 +271,9 @@ namespace IO
                 hoja.Cells[2, 6] = "U. Img.";
                 hoja.Cells[2, 7] = "Kit. Mant.";
 
-                Range formatRange; //Element for formating the cells.
+                Range formatRange; //Creo un rango para dar formato a todo.
 
-                //Make the Columns Headers external borders.
+                //Doy formato a las Cabeceras de Columna y creo su borde externo.
                 formatRange = hoja.Range["B2", "G2"];
                 formatRange.Font.Bold = true;
                 formatRange.HorizontalAlignment = XlHAlign.xlHAlignCenter;
@@ -327,41 +281,34 @@ namespace IO
                 formatRange.Interior.Color = ColorTranslator.ToOle(Color.FromArgb(114, 159, 206));
                 formatRange.Font.Color = ColorTranslator.ToOle(Color.White);
 
-                //Change some Column Width as I required.
+                //Cambio algunos anchos de Columna.
                 hoja.Columns[2].ColumnWidth = 14;
                 hoja.Columns[3].ColumnWidth = 17;
                 hoja.Columns[4].ColumnWidth = 7;
 
-                //Write each printer inside the Excel File and format it.
+                //Escribo cada una de las impresoras dentro de la Lista, comenzando en la Fila 3 ya que la 2 la uso para las Cabeceras.
                 int contador = 3;
                 foreach(Printer printer in printers)
                 {
-                    //Write the Information and make the internar border of each cell.
                     hoja.Cells[contador, 2] = printer.Ip.ToString();
                     formatRange = hoja.Cells[contador, 2];
-                    //formatRange.BorderAround2(XlLineStyle.xlContinuous, XlBorderWeight.xlThin, XlColorIndex.xlColorIndexAutomatic);
 
                     if (printer.Modelo!=null) hoja.Cells[contador, 3] = printer.Modelo.ToString();
                     formatRange = hoja.Cells[contador, 3];
-                    //formatRange.BorderAround2(XlLineStyle.xlContinuous, XlBorderWeight.xlThin, XlColorIndex.xlColorIndexAutomatic);
 
                     hoja.Cells[contador, 4] = printer.Estado.ToString();
                     formatRange = hoja.Cells[contador, 4];
-                    //formatRange.BorderAround2(XlLineStyle.xlContinuous, XlBorderWeight.xlThin, XlColorIndex.xlColorIndexAutomatic);
 
                     if (printer.Toner != null) hoja.Cells[contador, 5] = printer.Toner.ToString() + "%";
                     formatRange = hoja.Cells[contador, 5];
-                    //formatRange.BorderAround2(XlLineStyle.xlContinuous, XlBorderWeight.xlThin, XlColorIndex.xlColorIndexAutomatic);
 
                     if (printer.UImagen != null) hoja.Cells[contador, 6] = printer.UImagen.ToString() + "%";
                     formatRange = hoja.Cells[contador, 6];
-                    //formatRange.BorderAround2(XlLineStyle.xlContinuous, XlBorderWeight.xlThin, XlColorIndex.xlColorIndexAutomatic);
 
                     if (printer.KitMant != null) hoja.Cells[contador, 7] = printer.KitMant.ToString() + "%";
                     formatRange = hoja.Cells[contador, 7];
-                    //formatRange.BorderAround2(XlLineStyle.xlContinuous, XlBorderWeight.xlThin, XlColorIndex.xlColorIndexAutomatic);
 
-                    //Ask for the Printer State. It must Online.
+                    //Doy formato a las filas de acuerdo al estado del suministro. Primero me aseguro que la impresora esté Online.
                     if (printer.Estado == "Online")
                     {
                         //Paint the the complete row as required
@@ -380,7 +327,7 @@ namespace IO
                     contador++;
                 }
 
-                //Make the externar border.
+                //Creo los bordes externos.
                 string rangoFinal = "G" + (printers.Count + 2).ToString();
                 formatRange = hoja.Range["B3", rangoFinal];
                 formatRange.BorderAround2(XlLineStyle.xlContinuous, XlBorderWeight.xlMedium, XlColorIndex.xlColorIndexAutomatic);
@@ -389,7 +336,7 @@ namespace IO
             }
             finally
             {
-                //Finally close the Excel File.
+                //Finalmente cierro todo.
                 libros.Close(true);
                 application.Quit();
             }
