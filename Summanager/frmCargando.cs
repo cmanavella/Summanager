@@ -119,8 +119,10 @@ namespace Summanager
         {
 			//Con cada segundo que pasa hago todo lo siguiente.
 
-			//Aumento la variable sergundos en 1.
-			this.seg++;
+			//Aumento la variable tiempo en 1. Esta variable la uso como tiempo transcurrido generar para calcular
+			//la velocidad de procesamiento.
+			this.tiempo++;
+			this.seg++; //Aumento la variable segundos en 1.
 			//Pregunto si ha llegado a 60. Si lo hace, la reinicio en 0 y aumento la variable minutos en 1.
             if (this.seg == 60)
             {
@@ -130,26 +132,13 @@ namespace Summanager
 			//Muestro el tiempo transcurrido con las variables anteriores.
 			this.lblTranscurrido.Text = "Tiempo Transcurrido: " + this.min.ToString("00") + ":" + this.seg.ToString("00");
 
-			//Velocidad de procesamiento. La calculo en base a la diferencia entre lo procesado actualmente
-			//y lo que ya se ha procesado.
-			double velocidad = this.procesado - this.procesadoAnterior;
-
-			//Uso esta variable tiempo para contar el tiempo que transcurre cuando una Ip se traba, es decir
-			//cuando la velocidad de procesamiento llega a 0. En ese caso multiplico la velocidad que ya tenía por el tiempo.
-            if (velocidad > 0)
-            {
-				this.tiempo = 1;
-            }
-            else
-            {
-				this.tiempo++;
-				velocidad = 1d * this.tiempo;
-            }
+			//Velocidad de procesamiento. La calculo en base a lo procesado sobre el tiempo transcurrido.
+			double velocidad = (double)this.procesado / (double)this.tiempo;
 
 			//Necesito saber cuántas impresoras me faltan de procesar para obtener un tiempo estimado.
 			double restantes = this.PrintersPassed.Count - this.procesado;
 
-			segEst = (int)(restantes * velocidad); //Almaceno los segundos totales estimados.
+			segEst = (int)(restantes / velocidad); //Almaceno los segundos totales estimados.
 			minEst = segEst / 60; //En base a esos segundo calculo los minutos estimados.
 			segEst = segEst - (minEst * 60); //Almaceno los segundos que sobran
 
