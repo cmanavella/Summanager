@@ -11,6 +11,9 @@ namespace Summanager
     {
         private List<Printer> printers;
         private FrmMain frmMain;
+        private int online;
+        private int offline;
+        private int noAnalizadas;
 
         public FrmEstados(FrmMain frmMain)
         {
@@ -20,6 +23,10 @@ namespace Summanager
             this.frmMain = frmMain;
             _tituloForm();
             _acomodarBotones();
+
+            this.online = 0;
+            this.offline = 0;
+            this.noAnalizadas = 0;
         }
 
         /// <summary>
@@ -118,6 +125,9 @@ namespace Summanager
             //Compruebo que la Lista de Impresoras no esté vacía.
             if (printers.Count > 0)
             {
+                //Cuento todas las impresoras como No Analizadas.
+                this.noAnalizadas = this.printers.Count;
+
                 //Cargo los encabezados de las Columnas con sus respectivos nombres y textos a mostrar.
                 dgv.Columns.Add("ip", "Ip");
                 dgv.Columns.Add("modelo", "Modelo");
@@ -150,11 +160,27 @@ namespace Summanager
                     if (printer.UImagen != null) uimagen = printer.UImagen + "%";
                     if (printer.KitMant != null) kitmant = printer.KitMant + "%";
 
+                    //Si analizo, acomodo los datos para la estadistica.
+                    if (printer.Estado != Printer.NO_ANALIZADA)
+                    {
+                        this.noAnalizadas--; //Quito una del contador de No Analizadas.
+                        if (printer.Estado == Printer.ONLINE)
+                        {
+                            this.online++;
+                        }
+                        else
+                        {
+                            this.offline++;
+                        }
+                    }
+
                     //Agrego una nueva fila.
                     dgv.Rows.Add(printer.Ip, printer.Modelo, printer.Estado, toner, uimagen, kitmant);
                 }
                 //Llamo al método que colorea las filas.
                 _colorearDgv();
+
+                _getEstadisticas();
             }
         }
 
@@ -205,7 +231,22 @@ namespace Summanager
 
         private void _getEstadisticas()
         {
-            groupEstadisticas.Visible = true;
+            if (this.printers.Count > 0)
+            {
+                groupEstadisticas.Visible = true;
+
+                //Estadistica Online
+                this.estOnline.Count = this.online;
+                this.estOnline.Total = this.printers.Count;
+
+                //Estadistica Offline
+                this.estOffline.Count = this.offline;
+                this.estOffline.Total = this.printers.Count;
+
+                //Estadistica No Analizadas
+                this.estNoAna.Count = this.noAnalizadas;
+                this.estNoAna.Total = this.printers.Count;
+            }
         }
 
         /// <summary>
@@ -512,13 +553,14 @@ namespace Summanager
             }
 
             _llenarDgv(); //Cargo el DGV con lo analizado.
-
-            _getEstadisticas();
         }
 
         private void FrmEstados_Shown(object sender, EventArgs e)
         {
-            groupEstadisticas.Visible = false;
+            if (this.printers.Count <= 0)
+            {
+                groupEstadisticas.Visible = false;
+            }
         }
     }
 }

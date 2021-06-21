@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CircularProgressBar, Version=2.8.0.16, Culture=neutral, PublicKeyToken=310fd07b25df79b3, processorArchitecture=MSIL">
+      <HintPath>..\packages\CircularProgressBar.2.8.0.16\lib\net40\CircularProgressBar.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -40,6 +43,9 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WinFormAnimation, Version=1.6.0.4, Culture=neutral, PublicKeyToken=310fd07b25df79b3, processorArchitecture=MSIL">
+      <HintPath>..\packages\WinFormAnimation.1.6.0.4\lib\net40\WinFormAnimation.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomGroupBox.cs">
@@ -47,6 +53,12 @@
     </Compile>
     <Compile Include="CustomGroupBox.Designer.cs">
       <DependentUpon>CustomGroupBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Estadistica.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Estadistica.Designer.cs">
+      <DependentUpon>Estadistica.cs</DependentUpon>
     </Compile>
     <Compile Include="MenuButton.cs">
       <SubType>UserControl</SubType>
@@ -79,6 +91,9 @@
     <EmbeddedResource Include="CustomGroupBox.resx">
       <DependentUpon>CustomGroupBox.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Estadistica.resx">
+      <DependentUpon>Estadistica.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MenuButton.resx">
       <DependentUpon>MenuButton.cs</DependentUpon>
     </EmbeddedResource>
@@ -91,6 +106,9 @@
     <EmbeddedResource Include="ProgressBar.resx">
       <DependentUpon>ProgressBar.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
