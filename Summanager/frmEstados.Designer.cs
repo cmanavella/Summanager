@@ -42,9 +42,12 @@ namespace Summanager
             this.btnImportar = new CustomControls.MenuChildButtom();
             this.btnGuardar = new CustomControls.MenuChildButtom();
             this.btnAbrir = new CustomControls.MenuChildButtom();
+            this.circularProgressBar1 = new CircularProgressBar.CircularProgressBar();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.panelTitulo.SuspendLayout();
             this.panelMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblTitulo
@@ -182,10 +185,53 @@ namespace Summanager
             this.btnAbrir.Text = "Abrir";
             this.btnAbrir.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnAbrir_MouseClick);
             // 
+            // circularProgressBar1
+            // 
+            this.circularProgressBar1.AnimationFunction = WinFormAnimation.KnownAnimationFunctions.Liner;
+            this.circularProgressBar1.AnimationSpeed = 500;
+            this.circularProgressBar1.BackColor = System.Drawing.Color.Transparent;
+            this.circularProgressBar1.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.circularProgressBar1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
+            this.circularProgressBar1.InnerColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.circularProgressBar1.InnerMargin = 0;
+            this.circularProgressBar1.InnerWidth = -1;
+            this.circularProgressBar1.Location = new System.Drawing.Point(3, 3);
+            this.circularProgressBar1.MarqueeAnimationSpeed = 2000;
+            this.circularProgressBar1.Name = "circularProgressBar1";
+            this.circularProgressBar1.OuterColor = System.Drawing.Color.Gray;
+            this.circularProgressBar1.OuterMargin = -25;
+            this.circularProgressBar1.OuterWidth = 26;
+            this.circularProgressBar1.ProgressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
+            this.circularProgressBar1.ProgressWidth = 7;
+            this.circularProgressBar1.SecondaryFont = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.circularProgressBar1.Size = new System.Drawing.Size(55, 55);
+            this.circularProgressBar1.StartAngle = 270;
+            this.circularProgressBar1.Step = 1;
+            this.circularProgressBar1.SubscriptColor = System.Drawing.Color.FromArgb(((int)(((byte)(166)))), ((int)(((byte)(166)))), ((int)(((byte)(166)))));
+            this.circularProgressBar1.SubscriptMargin = new System.Windows.Forms.Padding(10, -35, 0, 0);
+            this.circularProgressBar1.SubscriptText = "";
+            this.circularProgressBar1.SuperscriptColor = System.Drawing.Color.FromArgb(((int)(((byte)(166)))), ((int)(((byte)(166)))), ((int)(((byte)(166)))));
+            this.circularProgressBar1.SuperscriptMargin = new System.Windows.Forms.Padding(10, 35, 0, 0);
+            this.circularProgressBar1.SuperscriptText = "";
+            this.circularProgressBar1.TabIndex = 26;
+            this.circularProgressBar1.Text = "68%";
+            this.circularProgressBar1.TextMargin = new System.Windows.Forms.Padding(2, 2, 0, 0);
+            this.circularProgressBar1.Value = 68;
+            // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.circularProgressBar1);
+            this.panel1.Location = new System.Drawing.Point(18, 351);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(83, 83);
+            this.panel1.TabIndex = 25;
+            // 
             // FrmEstados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(795, 515);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupEstadisticas);
             this.Controls.Add(this.dgv);
             this.Name = "FrmEstados";
@@ -195,10 +241,12 @@ namespace Summanager
             this.Controls.SetChildIndex(this.panelTitulo, 0);
             this.Controls.SetChildIndex(this.panelMenu, 0);
             this.Controls.SetChildIndex(this.groupEstadisticas, 0);
+            this.Controls.SetChildIndex(this.panel1, 0);
             this.panelTitulo.ResumeLayout(false);
             this.panelTitulo.PerformLayout();
             this.panelMenu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -215,5 +263,7 @@ namespace Summanager
         private CustomControls.MenuChildButtom btnNuevo;
         private CustomControls.MenuChildButtom btnGuardarComo;
         private CustomControls.CustomGroupBox groupEstadisticas;
+        private CircularProgressBar.CircularProgressBar circularProgressBar1;
+        private System.Windows.Forms.Panel panel1;
     }
 }
