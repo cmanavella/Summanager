@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace CustomControls
 {
-    public partial class panelButton : UserControl
+    public partial class PanelButton : UserControl
     {
-        public panelButton()
+        public PanelButton()
         {
             InitializeComponent();
 

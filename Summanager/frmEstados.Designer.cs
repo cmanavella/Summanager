@@ -34,13 +34,13 @@ namespace Summanager
             this.dgv = new System.Windows.Forms.DataGridView();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.btnNuevo = new CustomControls.menuChildButtom();
-            this.btnGuardarComo = new CustomControls.menuChildButtom();
-            this.btnActualizar = new CustomControls.menuChildButtom();
-            this.btnExportar = new CustomControls.menuChildButtom();
-            this.btnImportar = new CustomControls.menuChildButtom();
-            this.btnGuardar = new CustomControls.menuChildButtom();
-            this.btnAbrir = new CustomControls.menuChildButtom();
+            this.btnNuevo = new CustomControls.MenuChildButtom();
+            this.btnGuardarComo = new CustomControls.MenuChildButtom();
+            this.btnActualizar = new CustomControls.MenuChildButtom();
+            this.btnExportar = new CustomControls.MenuChildButtom();
+            this.btnImportar = new CustomControls.MenuChildButtom();
+            this.btnGuardar = new CustomControls.MenuChildButtom();
+            this.btnAbrir = new CustomControls.MenuChildButtom();
             this.panelTitulo.SuspendLayout();
             this.panelMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
@@ -194,12 +194,12 @@ namespace Summanager
         private System.Windows.Forms.DataGridView dgv;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
-		private CustomControls.menuChildButtom btnAbrir;
-		private CustomControls.menuChildButtom btnGuardar;
-		private CustomControls.menuChildButtom btnExportar;
-		private CustomControls.menuChildButtom btnImportar;
-		private CustomControls.menuChildButtom btnActualizar;
-        private CustomControls.menuChildButtom btnNuevo;
-        private CustomControls.menuChildButtom btnGuardarComo;
+		private CustomControls.MenuChildButtom btnAbrir;
+		private CustomControls.MenuChildButtom btnGuardar;
+		private CustomControls.MenuChildButtom btnExportar;
+		private CustomControls.MenuChildButtom btnImportar;
+		private CustomControls.MenuChildButtom btnActualizar;
+        private CustomControls.MenuChildButtom btnNuevo;
+        private CustomControls.MenuChildButtom btnGuardarComo;
     }
 }

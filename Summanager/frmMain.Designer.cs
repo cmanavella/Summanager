@@ -32,13 +32,13 @@ namespace Summanager
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.panelSuperior = new System.Windows.Forms.Panel();
             this.lblTitulo = new System.Windows.Forms.Label();
-            this.btnMinimizar = new CustomControls.panelButton();
-            this.btnCerrar = new CustomControls.panelButton();
+            this.btnMinimizar = new CustomControls.PanelButton();
+            this.btnCerrar = new CustomControls.PanelButton();
             this.panelLateral = new System.Windows.Forms.Panel();
             this.panelMenu = new System.Windows.Forms.Panel();
-            this.btnConfiguracion = new CustomControls.menuButton();
-            this.btnEstados = new CustomControls.menuButton();
-            this.btnStock = new CustomControls.menuButton();
+            this.btnConfiguracion = new CustomControls.MenuButton();
+            this.btnEstados = new CustomControls.MenuButton();
+            this.btnStock = new CustomControls.MenuButton();
             this.panelLogo = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -269,16 +269,16 @@ namespace Summanager
         private System.Windows.Forms.Panel panelLogo;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox logo;
-        private CustomControls.panelButton btnCerrar;
-        private CustomControls.panelButton btnMinimizar;
+        private CustomControls.PanelButton btnCerrar;
+        private CustomControls.PanelButton btnMinimizar;
         private System.Windows.Forms.Panel panelInferior;
         private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.Panel panelDerecho;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panelContenido;
-        private CustomControls.menuButton btnStock;
-        private CustomControls.menuButton btnEstados;
-        private CustomControls.menuButton btnConfiguracion;
+        private CustomControls.MenuButton btnStock;
+        private CustomControls.MenuButton btnEstados;
+        private CustomControls.MenuButton btnConfiguracion;
     }
 }

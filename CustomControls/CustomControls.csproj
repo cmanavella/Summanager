@@ -42,45 +42,45 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="menuButton.cs">
+    <Compile Include="MenuButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="menuButton.Designer.cs">
-      <DependentUpon>menuButton.cs</DependentUpon>
+    <Compile Include="MenuButton.Designer.cs">
+      <DependentUpon>MenuButton.cs</DependentUpon>
     </Compile>
-    <Compile Include="menuChildButtom.cs">
+    <Compile Include="MenuChildButtom.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="menuChildButtom.Designer.cs">
-      <DependentUpon>menuChildButtom.cs</DependentUpon>
+    <Compile Include="MenuChildButtom.Designer.cs">
+      <DependentUpon>MenuChildButtom.cs</DependentUpon>
     </Compile>
-    <Compile Include="panelButton.cs">
+    <Compile Include="PanelButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="panelButton.Designer.cs">
-      <DependentUpon>panelButton.cs</DependentUpon>
+    <Compile Include="PanelButton.Designer.cs">
+      <DependentUpon>PanelButton.cs</DependentUpon>
     </Compile>
-    <Compile Include="progressBar.cs">
+    <Compile Include="ProgressBar.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="progressBar.Designer.cs">
-      <DependentUpon>progressBar.cs</DependentUpon>
+    <Compile Include="ProgressBar.Designer.cs">
+      <DependentUpon>ProgressBar.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="menuButton.resx">
-      <DependentUpon>menuButton.cs</DependentUpon>
+    <EmbeddedResource Include="MenuButton.resx">
+      <DependentUpon>MenuButton.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="menuChildButtom.resx">
-      <DependentUpon>menuChildButtom.cs</DependentUpon>
+    <EmbeddedResource Include="MenuChildButtom.resx">
+      <DependentUpon>MenuChildButtom.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="panelButton.resx">
-      <DependentUpon>panelButton.cs</DependentUpon>
+    <EmbeddedResource Include="PanelButton.resx">
+      <DependentUpon>PanelButton.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="progressBar.resx">
-      <DependentUpon>progressBar.cs</DependentUpon>
+    <EmbeddedResource Include="ProgressBar.resx">
+      <DependentUpon>ProgressBar.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

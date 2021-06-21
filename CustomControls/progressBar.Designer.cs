@@ -1,7 +1,7 @@
 ﻿
 namespace CustomControls
 {
-    partial class progressBar
+    partial class ProgressBar
     {
         /// <summary> 
         /// Required designer variable.

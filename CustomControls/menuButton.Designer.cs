@@ -1,7 +1,7 @@
 ﻿
 namespace CustomControls
 {
-    partial class menuButton
+    partial class MenuButton
     {
         /// <summary> 
         /// Variable del diseñador necesaria.

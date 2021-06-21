@@ -1,7 +1,7 @@
 ﻿
 namespace CustomControls
 {
-    partial class panelButton
+    partial class PanelButton
     {
         /// <summary> 
         /// Variable del diseñador necesaria.

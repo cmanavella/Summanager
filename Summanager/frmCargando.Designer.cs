@@ -43,7 +43,7 @@ namespace Summanager
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.progressBar1 = new CustomControls.progressBar();
+            this.progressBar1 = new CustomControls.ProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -235,6 +235,6 @@ namespace Summanager
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel4;
-        private CustomControls.progressBar progressBar1;
+        private CustomControls.ProgressBar progressBar1;
     }
 }

@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace CustomControls
 {
-	public partial class menuChildButtom : UserControl
+	public partial class MenuChildButtom : UserControl
 	{
-		public menuChildButtom()
+		public MenuChildButtom()
 		{
 			InitializeComponent();
             this.button1.MouseClick += Button1_MouseClick;

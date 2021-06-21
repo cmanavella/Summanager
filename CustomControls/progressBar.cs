@@ -10,10 +10,10 @@ using System.Windows.Forms;
 
 namespace CustomControls
 {
-    public partial class progressBar : UserControl
+    public partial class ProgressBar : UserControl
     {
         private int value;
-        public progressBar()
+        public ProgressBar()
         {
             InitializeComponent();
             this.value = 0;

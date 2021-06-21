@@ -1,7 +1,7 @@
 ﻿
 namespace CustomControls
 {
-	partial class menuChildButtom
+	partial class MenuChildButtom
 	{
 		/// <summary> 
 		/// Required designer variable.

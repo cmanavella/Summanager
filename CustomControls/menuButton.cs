@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace CustomControls
 {
-    public partial class menuButton : UserControl
+    public partial class MenuButton : UserControl
     {
         private bool selected;
         private readonly Color panelNoSelected = Color.FromArgb(0, 137, 132);
@@ -19,7 +19,7 @@ namespace CustomControls
         private readonly Color buttonSelected = Color.White;
         private readonly Color buttonNoSelected = Color.FromArgb(165, 217, 216);
 
-        public menuButton()
+        public MenuButton()
         {
             InitializeComponent();
             this.button1.MouseClick += Button1_MouseClick;
