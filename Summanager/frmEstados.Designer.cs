@@ -42,11 +42,12 @@ namespace Summanager
             this.btnImportar = new CustomControls.MenuChildButtom();
             this.btnGuardar = new CustomControls.MenuChildButtom();
             this.btnAbrir = new CustomControls.MenuChildButtom();
-            this.circularProgressBar1 = new CircularProgressBar.CircularProgressBar();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.circularProgressBar1 = new CircularProgressBar.CircularProgressBar();
             this.panelTitulo.SuspendLayout();
             this.panelMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
+            this.groupEstadisticas.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -108,6 +109,7 @@ namespace Summanager
             // 
             // groupEstadisticas
             // 
+            this.groupEstadisticas.Controls.Add(this.panel1);
             this.groupEstadisticas.Location = new System.Drawing.Point(12, 328);
             this.groupEstadisticas.Name = "groupEstadisticas";
             this.groupEstadisticas.Size = new System.Drawing.Size(771, 180);
@@ -185,6 +187,15 @@ namespace Summanager
             this.btnAbrir.Text = "Abrir";
             this.btnAbrir.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnAbrir_MouseClick);
             // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.circularProgressBar1);
+            this.panel1.Location = new System.Drawing.Point(61, 30);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(83, 83);
+            this.panel1.TabIndex = 26;
+            // 
             // circularProgressBar1
             // 
             this.circularProgressBar1.AnimationFunction = WinFormAnimation.KnownAnimationFunctions.Liner;
@@ -218,20 +229,10 @@ namespace Summanager
             this.circularProgressBar1.TextMargin = new System.Windows.Forms.Padding(2, 2, 0, 0);
             this.circularProgressBar1.Value = 68;
             // 
-            // panel1
-            // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.circularProgressBar1);
-            this.panel1.Location = new System.Drawing.Point(18, 351);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(83, 83);
-            this.panel1.TabIndex = 25;
-            // 
             // FrmEstados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(795, 515);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupEstadisticas);
             this.Controls.Add(this.dgv);
             this.Name = "FrmEstados";
@@ -241,11 +242,12 @@ namespace Summanager
             this.Controls.SetChildIndex(this.panelTitulo, 0);
             this.Controls.SetChildIndex(this.panelMenu, 0);
             this.Controls.SetChildIndex(this.groupEstadisticas, 0);
-            this.Controls.SetChildIndex(this.panel1, 0);
             this.panelTitulo.ResumeLayout(false);
             this.panelTitulo.PerformLayout();
             this.panelMenu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
+            this.groupEstadisticas.ResumeLayout(false);
+            this.groupEstadisticas.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -263,7 +265,7 @@ namespace Summanager
         private CustomControls.MenuChildButtom btnNuevo;
         private CustomControls.MenuChildButtom btnGuardarComo;
         private CustomControls.CustomGroupBox groupEstadisticas;
-        private CircularProgressBar.CircularProgressBar circularProgressBar1;
         private System.Windows.Forms.Panel panel1;
+        private CircularProgressBar.CircularProgressBar circularProgressBar1;
     }
 }
