@@ -203,6 +203,11 @@ namespace Summanager
             dgv.Refresh(); //Refresco el DGV para que se apliquen los cambios.
         }
 
+        private void _getEstadisticas()
+        {
+            groupEstadisticas.Visible = true;
+        }
+
         /// <summary>
         /// Guarda un archivo con un Nombre Específico en una Ruta deseada con extensión 'SMP'.
         /// </summary>
@@ -362,6 +367,9 @@ namespace Summanager
                 this.dgv.Columns.Clear(); 
                 this.dgv.Rows.Clear();
                 this.dgv.Refresh();
+
+                groupEstadisticas.Visible = false;
+
                 //Limpio la variable de Application Config que almacena la ruta del archivo reciente.
                 IO.File.ClearCurrentFile();
                 _tituloForm(); //Actualizo el Título del Form Main.
@@ -488,6 +496,8 @@ namespace Summanager
             dgv.Columns.Clear();
             dgv.Refresh();
 
+            groupEstadisticas.Visible = false;
+
             //Llamo al Form Cargando para que analice la Lista de Impresoras pasadas por parámetros.
             FrmCargando cargando = new FrmCargando(printers);
             cargando.ShowDialog(); //Lo muestro como un dialog para que mientras analiza no se pueda hacer nada.
@@ -502,6 +512,13 @@ namespace Summanager
             }
 
             _llenarDgv(); //Cargo el DGV con lo analizado.
+
+            _getEstadisticas();
+        }
+
+        private void FrmEstados_Shown(object sender, EventArgs e)
+        {
+            groupEstadisticas.Visible = false;
         }
     }
 }

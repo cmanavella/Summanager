@@ -34,6 +34,7 @@ namespace Summanager
             this.dgv = new System.Windows.Forms.DataGridView();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.groupEstadisticas = new CustomControls.CustomGroupBox();
             this.btnNuevo = new CustomControls.MenuChildButtom();
             this.btnGuardarComo = new CustomControls.MenuChildButtom();
             this.btnActualizar = new CustomControls.MenuChildButtom();
@@ -98,9 +99,18 @@ namespace Summanager
             this.dgv.ShowCellToolTips = false;
             this.dgv.ShowEditingIcon = false;
             this.dgv.ShowRowErrors = false;
-            this.dgv.Size = new System.Drawing.Size(771, 408);
+            this.dgv.Size = new System.Drawing.Size(771, 227);
             this.dgv.TabIndex = 22;
             this.dgv.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dgv_MouseDoubleClick);
+            // 
+            // groupEstadisticas
+            // 
+            this.groupEstadisticas.Location = new System.Drawing.Point(12, 328);
+            this.groupEstadisticas.Name = "groupEstadisticas";
+            this.groupEstadisticas.Size = new System.Drawing.Size(771, 180);
+            this.groupEstadisticas.TabIndex = 23;
+            this.groupEstadisticas.Text = "Estadísticas";
+            this.groupEstadisticas.Visible = false;
             // 
             // btnNuevo
             // 
@@ -176,12 +186,15 @@ namespace Summanager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(795, 515);
+            this.Controls.Add(this.groupEstadisticas);
             this.Controls.Add(this.dgv);
             this.Name = "FrmEstados";
             this.Load += new System.EventHandler(this.frmEstados_Load);
+            this.Shown += new System.EventHandler(this.FrmEstados_Shown);
             this.Controls.SetChildIndex(this.dgv, 0);
             this.Controls.SetChildIndex(this.panelTitulo, 0);
             this.Controls.SetChildIndex(this.panelMenu, 0);
+            this.Controls.SetChildIndex(this.groupEstadisticas, 0);
             this.panelTitulo.ResumeLayout(false);
             this.panelTitulo.PerformLayout();
             this.panelMenu.ResumeLayout(false);
@@ -201,5 +214,6 @@ namespace Summanager
 		private CustomControls.MenuChildButtom btnActualizar;
         private CustomControls.MenuChildButtom btnNuevo;
         private CustomControls.MenuChildButtom btnGuardarComo;
+        private CustomControls.CustomGroupBox groupEstadisticas;
     }
 }
