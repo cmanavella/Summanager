@@ -34,7 +34,7 @@ namespace Summanager
             // 
             // panelTitulo
             // 
-            this.panelTitulo.Size = new System.Drawing.Size(800, 49);
+            this.panelTitulo.Size = new System.Drawing.Size(1050, 49);
             // 
             // lblTitulo
             // 
@@ -43,13 +43,13 @@ namespace Summanager
             // 
             // panelMenu
             // 
-            this.panelMenu.Size = new System.Drawing.Size(800, 40);
+            this.panelMenu.Size = new System.Drawing.Size(1050, 40);
             this.panelMenu.Visible = false;
             // 
             // FrmStock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.ClientSize = new System.Drawing.Size(800, 837);
+            this.ClientSize = new System.Drawing.Size(1050, 690);
             this.Name = "FrmStock";
             this.panelTitulo.ResumeLayout(false);
             this.panelTitulo.PerformLayout();

@@ -41,7 +41,7 @@ namespace Summanager
             this.panelTitulo.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTitulo.Location = new System.Drawing.Point(0, 0);
             this.panelTitulo.Name = "panelTitulo";
-            this.panelTitulo.Size = new System.Drawing.Size(800, 49);
+            this.panelTitulo.Size = new System.Drawing.Size(1050, 49);
             this.panelTitulo.TabIndex = 0;
             // 
             // lblTitulo
@@ -61,7 +61,7 @@ namespace Summanager
             this.panelMenu.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelMenu.Location = new System.Drawing.Point(0, 49);
             this.panelMenu.Name = "panelMenu";
-            this.panelMenu.Size = new System.Drawing.Size(800, 40);
+            this.panelMenu.Size = new System.Drawing.Size(1050, 40);
             this.panelMenu.TabIndex = 1;
             // 
             // FrmContenido
@@ -69,7 +69,7 @@ namespace Summanager
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(800, 837);
+            this.ClientSize = new System.Drawing.Size(1050, 690);
             this.Controls.Add(this.panelMenu);
             this.Controls.Add(this.panelTitulo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

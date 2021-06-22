@@ -115,7 +115,7 @@ namespace Summanager
             this.dgv.ShowCellToolTips = false;
             this.dgv.ShowEditingIcon = false;
             this.dgv.ShowRowErrors = false;
-            this.dgv.Size = new System.Drawing.Size(771, 227);
+            this.dgv.Size = new System.Drawing.Size(1023, 227);
             this.dgv.TabIndex = 22;
             this.dgv.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dgv_MouseDoubleClick);
             // 
@@ -126,7 +126,7 @@ namespace Summanager
             this.groupEstadisticas.Controls.Add(this.customGroupBox1);
             this.groupEstadisticas.Location = new System.Drawing.Point(12, 328);
             this.groupEstadisticas.Name = "groupEstadisticas";
-            this.groupEstadisticas.Size = new System.Drawing.Size(771, 494);
+            this.groupEstadisticas.Size = new System.Drawing.Size(1023, 347);
             this.groupEstadisticas.TabIndex = 23;
             this.groupEstadisticas.Text = "Estadísticas";
             this.groupEstadisticas.Visible = false;
@@ -136,7 +136,7 @@ namespace Summanager
             this.customGroupBox3.Controls.Add(this.estKitMantCritico);
             this.customGroupBox3.Controls.Add(this.estUnImgCritico);
             this.customGroupBox3.Controls.Add(this.estTonerCritico);
-            this.customGroupBox3.Location = new System.Drawing.Point(133, 334);
+            this.customGroupBox3.Location = new System.Drawing.Point(510, 182);
             this.customGroupBox3.Name = "customGroupBox3";
             this.customGroupBox3.Size = new System.Drawing.Size(498, 146);
             this.customGroupBox3.TabIndex = 11;
@@ -177,11 +177,11 @@ namespace Summanager
             this.customGroupBox2.Controls.Add(this.estNoAna);
             this.customGroupBox2.Controls.Add(this.estOffline);
             this.customGroupBox2.Controls.Add(this.estOnline);
-            this.customGroupBox2.Location = new System.Drawing.Point(133, 30);
+            this.customGroupBox2.Location = new System.Drawing.Point(257, 30);
             this.customGroupBox2.Name = "customGroupBox2";
             this.customGroupBox2.Size = new System.Drawing.Size(498, 146);
             this.customGroupBox2.TabIndex = 10;
-            this.customGroupBox2.Text = "Suministro en Riesgo";
+            this.customGroupBox2.Text = "Estados de Conexión";
             // 
             // estNoAna
             // 
@@ -218,7 +218,7 @@ namespace Summanager
             this.customGroupBox1.Controls.Add(this.estKitMantRiesgo);
             this.customGroupBox1.Controls.Add(this.estUnImgRiesgo);
             this.customGroupBox1.Controls.Add(this.estTonerRiesgo);
-            this.customGroupBox1.Location = new System.Drawing.Point(133, 182);
+            this.customGroupBox1.Location = new System.Drawing.Point(6, 182);
             this.customGroupBox1.Name = "customGroupBox1";
             this.customGroupBox1.Size = new System.Drawing.Size(498, 146);
             this.customGroupBox1.TabIndex = 9;
@@ -277,7 +277,7 @@ namespace Summanager
             // btnActualizar
             // 
             this.btnActualizar.Image = ((System.Drawing.Image)(resources.GetObject("btnActualizar.Image")));
-            this.btnActualizar.Location = new System.Drawing.Point(682, 6);
+            this.btnActualizar.Location = new System.Drawing.Point(934, 6);
             this.btnActualizar.Name = "btnActualizar";
             this.btnActualizar.Size = new System.Drawing.Size(101, 28);
             this.btnActualizar.TabIndex = 4;
@@ -327,7 +327,7 @@ namespace Summanager
             // FrmEstados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.ClientSize = new System.Drawing.Size(800, 837);
+            this.ClientSize = new System.Drawing.Size(1050, 690);
             this.Controls.Add(this.groupEstadisticas);
             this.Controls.Add(this.dgv);
             this.Name = "FrmEstados";

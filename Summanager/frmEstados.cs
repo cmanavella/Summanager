@@ -157,7 +157,7 @@ namespace Summanager
                 }
 
                 //Agrando la segunda Columna.
-                dgv.Columns[1].Width = 260;
+                dgv.Columns[1].Width = 510;
 
                 //Recorro la Lista de Impresoras para cargarlas.
                 foreach (var printer in printers)

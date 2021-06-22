@@ -63,7 +63,7 @@ namespace Summanager
             this.panelSuperior.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelSuperior.Location = new System.Drawing.Point(0, 0);
             this.panelSuperior.Name = "panelSuperior";
-            this.panelSuperior.Size = new System.Drawing.Size(1005, 30);
+            this.panelSuperior.Size = new System.Drawing.Size(1255, 30);
             this.panelSuperior.TabIndex = 9;
             this.panelSuperior.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelSuperior_MouseDown);
             // 
@@ -82,7 +82,7 @@ namespace Summanager
             // btnMinimizar
             // 
             this.btnMinimizar.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnMinimizar.Location = new System.Drawing.Point(945, 0);
+            this.btnMinimizar.Location = new System.Drawing.Point(1195, 0);
             this.btnMinimizar.Name = "btnMinimizar";
             this.btnMinimizar.Size = new System.Drawing.Size(30, 30);
             this.btnMinimizar.TabIndex = 12;
@@ -92,7 +92,7 @@ namespace Summanager
             // btnCerrar
             // 
             this.btnCerrar.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnCerrar.Location = new System.Drawing.Point(975, 0);
+            this.btnCerrar.Location = new System.Drawing.Point(1225, 0);
             this.btnCerrar.Name = "btnCerrar";
             this.btnCerrar.Size = new System.Drawing.Size(30, 30);
             this.btnCerrar.TabIndex = 11;
@@ -107,7 +107,7 @@ namespace Summanager
             this.panelLateral.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelLateral.Location = new System.Drawing.Point(0, 30);
             this.panelLateral.Name = "panelLateral";
-            this.panelLateral.Size = new System.Drawing.Size(200, 837);
+            this.panelLateral.Size = new System.Drawing.Size(200, 690);
             this.panelLateral.TabIndex = 10;
             // 
             // panelMenu
@@ -119,7 +119,7 @@ namespace Summanager
             this.panelMenu.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelMenu.Location = new System.Drawing.Point(0, 150);
             this.panelMenu.Name = "panelMenu";
-            this.panelMenu.Size = new System.Drawing.Size(200, 687);
+            this.panelMenu.Size = new System.Drawing.Size(200, 540);
             this.panelMenu.TabIndex = 1;
             // 
             // btnConfiguracion
@@ -213,18 +213,18 @@ namespace Summanager
             // 
             this.panelInferior.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
             this.panelInferior.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelInferior.Location = new System.Drawing.Point(0, 867);
+            this.panelInferior.Location = new System.Drawing.Point(0, 720);
             this.panelInferior.Name = "panelInferior";
-            this.panelInferior.Size = new System.Drawing.Size(1000, 5);
+            this.panelInferior.Size = new System.Drawing.Size(1250, 5);
             this.panelInferior.TabIndex = 11;
             // 
             // panelDerecho
             // 
             this.panelDerecho.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
             this.panelDerecho.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panelDerecho.Location = new System.Drawing.Point(1000, 30);
+            this.panelDerecho.Location = new System.Drawing.Point(1250, 30);
             this.panelDerecho.Name = "panelDerecho";
-            this.panelDerecho.Size = new System.Drawing.Size(5, 842);
+            this.panelDerecho.Size = new System.Drawing.Size(5, 695);
             this.panelDerecho.TabIndex = 12;
             // 
             // panelContenido
@@ -233,14 +233,14 @@ namespace Summanager
             this.panelContenido.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelContenido.Location = new System.Drawing.Point(200, 30);
             this.panelContenido.Name = "panelContenido";
-            this.panelContenido.Size = new System.Drawing.Size(800, 837);
+            this.panelContenido.Size = new System.Drawing.Size(1050, 690);
             this.panelContenido.TabIndex = 13;
             // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1005, 872);
+            this.ClientSize = new System.Drawing.Size(1255, 725);
             this.Controls.Add(this.panelContenido);
             this.Controls.Add(this.panelLateral);
             this.Controls.Add(this.panelInferior);
