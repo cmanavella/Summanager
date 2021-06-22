@@ -12,9 +12,7 @@ namespace Summanager
     {
         private List<Printer> printers;
         private FrmMain frmMain;
-        private int online;
-        private int offline;
-        private int noAnalizadas;
+        private Estadistica estadistica;
 
         public FrmEstados(FrmMain frmMain)
         {
@@ -24,10 +22,6 @@ namespace Summanager
             this.frmMain = frmMain;
             _tituloForm();
             _acomodarBotones();
-
-            this.online = 0;
-            this.offline = 0;
-            this.noAnalizadas = 0;
         }
 
         /// <summary>
@@ -123,11 +117,13 @@ namespace Summanager
         /// </summary>
         private void _llenarDgv()
         {
+            estadistica = new Estadistica();
+
             //Compruebo que la Lista de Impresoras no esté vacía.
             if (printers.Count > 0)
             {
                 //Cuento todas las impresoras como No Analizadas.
-                this.noAnalizadas = this.printers.Count;
+                this.estadistica.NoAnalizadas = this.printers.Count;
 
                 //Cargo los encabezados de las Columnas con sus respectivos nombres y textos a mostrar.
                 dgv.Columns.Add("ip", "Ip");
@@ -164,14 +160,14 @@ namespace Summanager
                     //Si analizo, acomodo los datos para la estadistica.
                     if (printer.Estado != Printer.NO_ANALIZADA)
                     {
-                        this.noAnalizadas--; //Quito una del contador de No Analizadas.
+                        this.estadistica.NoAnalizadas--; //Quito una del contador de No Analizadas.
                         if (printer.Estado == Printer.ONLINE)
                         {
-                            this.online++;
+                            this.estadistica.Online++;
                         }
                         else
                         {
-                            this.offline++;
+                            this.estadistica.Offline++;
                         }
                     }
 
@@ -225,6 +221,17 @@ namespace Summanager
                         r.DefaultCellStyle.SelectionBackColor = Color.FromArgb(248, 161, 164);
                         r.DefaultCellStyle.SelectionForeColor = Color.Black;
                     }
+
+                    //Hago la Estadística de los Suministros.
+                    //Primero con lo de riesgo.
+                    if(toner<=10 && toner > 3) this.estadistica.TonerRiesgo++;
+                    if (uimagen <= 10 && uimagen > 3) this.estadistica.UnImgRiesgo++;
+                    if (kmant <= 10 && kmant > 3) this.estadistica.KitMantRiesgo++;
+
+                    //Sigo con los críticos
+                    if (toner >= 0 && toner <= 3) this.estadistica.TonerCritico++;
+                    if (uimagen >= 0 && uimagen <= 3) this.estadistica.UnImgCritico++;
+                    if (kmant >= 0 && kmant <= 3) this.estadistica.KitMantCritico++;
                 }
             }
             dgv.Refresh(); //Refresco el DGV para que se apliquen los cambios.
@@ -236,17 +243,29 @@ namespace Summanager
             {
                 groupEstadisticas.Visible = true;
 
-                //Estadistica Online
-                this.estOnline.Count = this.online;
+                //Estadistica Estados
+                this.estOnline.Count = this.estadistica.Online;
                 this.estOnline.Total = this.printers.Count;
-
-                //Estadistica Offline
-                this.estOffline.Count = this.offline;
+                this.estOffline.Count = this.estadistica.Offline;
                 this.estOffline.Total = this.printers.Count;
-
-                //Estadistica No Analizadas
-                this.estNoAna.Count = this.noAnalizadas;
+                this.estNoAna.Count = this.estadistica.NoAnalizadas;
                 this.estNoAna.Total = this.printers.Count;
+
+                //Estadística Suministros Riesgo
+                this.estTonerRiesgo.Count = this.estadistica.TonerRiesgo;
+                this.estTonerRiesgo.Total = this.estadistica.Online;
+                this.estUnImgRiesgo.Count = this.estadistica.UnImgRiesgo;
+                this.estUnImgRiesgo.Total = this.estadistica.Online;
+                this.estKitMantRiesgo.Count = this.estadistica.KitMantRiesgo;
+                this.estKitMantRiesgo.Total = this.estadistica.Online;
+
+                //Estadística Suministros Críticos
+                this.estTonerCritico.Count = this.estadistica.TonerCritico;
+                this.estTonerCritico.Total = this.estadistica.Online;
+                this.estUnImgCritico.Count = this.estadistica.UnImgCritico;
+                this.estUnImgCritico.Total = this.estadistica.Online;
+                this.estKitMantCritico.Count = this.estadistica.KitMantCritico;
+                this.estKitMantCritico.Total = this.estadistica.Online;
             }
         }
 
