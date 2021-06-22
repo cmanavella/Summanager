@@ -29,15 +29,24 @@ namespace Summanager
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmEstados));
             this.dgv = new System.Windows.Forms.DataGridView();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.groupEstadisticas = new CustomControls.CustomGroupBox();
+            this.customGroupBox3 = new CustomControls.CustomGroupBox();
+            this.estKitMantCritico = new CustomControls.Estadistica();
+            this.estUnImgCritico = new CustomControls.Estadistica();
+            this.estTonerCritico = new CustomControls.Estadistica();
+            this.customGroupBox2 = new CustomControls.CustomGroupBox();
             this.estNoAna = new CustomControls.Estadistica();
             this.estOffline = new CustomControls.Estadistica();
             this.estOnline = new CustomControls.Estadistica();
+            this.customGroupBox1 = new CustomControls.CustomGroupBox();
+            this.estKitMantRiesgo = new CustomControls.Estadistica();
+            this.estUnImgRiesgo = new CustomControls.Estadistica();
+            this.estTonerRiesgo = new CustomControls.Estadistica();
             this.btnNuevo = new CustomControls.MenuChildButtom();
             this.btnGuardarComo = new CustomControls.MenuChildButtom();
             this.btnActualizar = new CustomControls.MenuChildButtom();
@@ -49,6 +58,9 @@ namespace Summanager
             this.panelMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.groupEstadisticas.SuspendLayout();
+            this.customGroupBox3.SuspendLayout();
+            this.customGroupBox2.SuspendLayout();
+            this.customGroupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblTitulo
@@ -76,14 +88,14 @@ namespace Summanager
             this.dgv.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgv.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgv.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(159)))), ((int)(((byte)(206)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(159)))), ((int)(((byte)(206)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(159)))), ((int)(((byte)(206)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(159)))), ((int)(((byte)(206)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgv.EnableHeadersVisualStyles = false;
             this.dgv.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(159)))), ((int)(((byte)(206)))));
@@ -109,45 +121,138 @@ namespace Summanager
             // 
             // groupEstadisticas
             // 
-            this.groupEstadisticas.Controls.Add(this.estNoAna);
-            this.groupEstadisticas.Controls.Add(this.estOffline);
-            this.groupEstadisticas.Controls.Add(this.estOnline);
+            this.groupEstadisticas.Controls.Add(this.customGroupBox3);
+            this.groupEstadisticas.Controls.Add(this.customGroupBox2);
+            this.groupEstadisticas.Controls.Add(this.customGroupBox1);
             this.groupEstadisticas.Location = new System.Drawing.Point(12, 328);
             this.groupEstadisticas.Name = "groupEstadisticas";
-            this.groupEstadisticas.Size = new System.Drawing.Size(771, 180);
+            this.groupEstadisticas.Size = new System.Drawing.Size(771, 494);
             this.groupEstadisticas.TabIndex = 23;
             this.groupEstadisticas.Text = "Estadísticas";
             this.groupEstadisticas.Visible = false;
             // 
+            // customGroupBox3
+            // 
+            this.customGroupBox3.Controls.Add(this.estKitMantCritico);
+            this.customGroupBox3.Controls.Add(this.estUnImgCritico);
+            this.customGroupBox3.Controls.Add(this.estTonerCritico);
+            this.customGroupBox3.Location = new System.Drawing.Point(133, 334);
+            this.customGroupBox3.Name = "customGroupBox3";
+            this.customGroupBox3.Size = new System.Drawing.Size(498, 146);
+            this.customGroupBox3.TabIndex = 11;
+            this.customGroupBox3.Text = "Suministro Críticos";
+            // 
+            // estKitMantCritico
+            // 
+            this.estKitMantCritico.Count = 0;
+            this.estKitMantCritico.Location = new System.Drawing.Point(328, 25);
+            this.estKitMantCritico.Name = "estKitMantCritico";
+            this.estKitMantCritico.Size = new System.Drawing.Size(150, 100);
+            this.estKitMantCritico.TabIndex = 8;
+            this.estKitMantCritico.Text = "Kit de Mantenimiento";
+            this.estKitMantCritico.Total = 0;
+            // 
+            // estUnImgCritico
+            // 
+            this.estUnImgCritico.Count = 0;
+            this.estUnImgCritico.Location = new System.Drawing.Point(172, 25);
+            this.estUnImgCritico.Name = "estUnImgCritico";
+            this.estUnImgCritico.Size = new System.Drawing.Size(150, 100);
+            this.estUnImgCritico.TabIndex = 7;
+            this.estUnImgCritico.Text = "Unidad de Imagen";
+            this.estUnImgCritico.Total = 0;
+            // 
+            // estTonerCritico
+            // 
+            this.estTonerCritico.Count = 0;
+            this.estTonerCritico.Location = new System.Drawing.Point(16, 25);
+            this.estTonerCritico.Name = "estTonerCritico";
+            this.estTonerCritico.Size = new System.Drawing.Size(150, 100);
+            this.estTonerCritico.TabIndex = 6;
+            this.estTonerCritico.Text = "Toner";
+            this.estTonerCritico.Total = 0;
+            // 
+            // customGroupBox2
+            // 
+            this.customGroupBox2.Controls.Add(this.estNoAna);
+            this.customGroupBox2.Controls.Add(this.estOffline);
+            this.customGroupBox2.Controls.Add(this.estOnline);
+            this.customGroupBox2.Location = new System.Drawing.Point(133, 30);
+            this.customGroupBox2.Name = "customGroupBox2";
+            this.customGroupBox2.Size = new System.Drawing.Size(498, 146);
+            this.customGroupBox2.TabIndex = 10;
+            this.customGroupBox2.Text = "Suministro en Riesgo";
+            // 
             // estNoAna
             // 
             this.estNoAna.Count = 0;
-            this.estNoAna.Location = new System.Drawing.Point(318, 22);
+            this.estNoAna.Location = new System.Drawing.Point(330, 23);
             this.estNoAna.Name = "estNoAna";
             this.estNoAna.Size = new System.Drawing.Size(150, 100);
-            this.estNoAna.TabIndex = 8;
+            this.estNoAna.TabIndex = 11;
             this.estNoAna.Text = "No Analizadas";
             this.estNoAna.Total = 0;
             // 
             // estOffline
             // 
             this.estOffline.Count = 0;
-            this.estOffline.Location = new System.Drawing.Point(162, 22);
+            this.estOffline.Location = new System.Drawing.Point(174, 23);
             this.estOffline.Name = "estOffline";
             this.estOffline.Size = new System.Drawing.Size(150, 100);
-            this.estOffline.TabIndex = 7;
+            this.estOffline.TabIndex = 10;
             this.estOffline.Text = "Offline";
             this.estOffline.Total = 0;
             // 
             // estOnline
             // 
             this.estOnline.Count = 0;
-            this.estOnline.Location = new System.Drawing.Point(6, 22);
+            this.estOnline.Location = new System.Drawing.Point(18, 23);
             this.estOnline.Name = "estOnline";
             this.estOnline.Size = new System.Drawing.Size(150, 100);
-            this.estOnline.TabIndex = 6;
+            this.estOnline.TabIndex = 9;
             this.estOnline.Text = "Online";
             this.estOnline.Total = 0;
+            // 
+            // customGroupBox1
+            // 
+            this.customGroupBox1.Controls.Add(this.estKitMantRiesgo);
+            this.customGroupBox1.Controls.Add(this.estUnImgRiesgo);
+            this.customGroupBox1.Controls.Add(this.estTonerRiesgo);
+            this.customGroupBox1.Location = new System.Drawing.Point(133, 182);
+            this.customGroupBox1.Name = "customGroupBox1";
+            this.customGroupBox1.Size = new System.Drawing.Size(498, 146);
+            this.customGroupBox1.TabIndex = 9;
+            this.customGroupBox1.Text = "Suministro en Riesgo";
+            // 
+            // estKitMantRiesgo
+            // 
+            this.estKitMantRiesgo.Count = 0;
+            this.estKitMantRiesgo.Location = new System.Drawing.Point(328, 25);
+            this.estKitMantRiesgo.Name = "estKitMantRiesgo";
+            this.estKitMantRiesgo.Size = new System.Drawing.Size(150, 100);
+            this.estKitMantRiesgo.TabIndex = 8;
+            this.estKitMantRiesgo.Text = "Kit de Mantenimiento";
+            this.estKitMantRiesgo.Total = 0;
+            // 
+            // estUnImgRiesgo
+            // 
+            this.estUnImgRiesgo.Count = 0;
+            this.estUnImgRiesgo.Location = new System.Drawing.Point(172, 25);
+            this.estUnImgRiesgo.Name = "estUnImgRiesgo";
+            this.estUnImgRiesgo.Size = new System.Drawing.Size(150, 100);
+            this.estUnImgRiesgo.TabIndex = 7;
+            this.estUnImgRiesgo.Text = "Unidad de Imagen";
+            this.estUnImgRiesgo.Total = 0;
+            // 
+            // estTonerRiesgo
+            // 
+            this.estTonerRiesgo.Count = 0;
+            this.estTonerRiesgo.Location = new System.Drawing.Point(16, 25);
+            this.estTonerRiesgo.Name = "estTonerRiesgo";
+            this.estTonerRiesgo.Size = new System.Drawing.Size(150, 100);
+            this.estTonerRiesgo.TabIndex = 6;
+            this.estTonerRiesgo.Text = "Toner";
+            this.estTonerRiesgo.Total = 0;
             // 
             // btnNuevo
             // 
@@ -222,7 +327,7 @@ namespace Summanager
             // FrmEstados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.ClientSize = new System.Drawing.Size(795, 515);
+            this.ClientSize = new System.Drawing.Size(800, 837);
             this.Controls.Add(this.groupEstadisticas);
             this.Controls.Add(this.dgv);
             this.Name = "FrmEstados";
@@ -238,6 +343,12 @@ namespace Summanager
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
             this.groupEstadisticas.ResumeLayout(false);
             this.groupEstadisticas.PerformLayout();
+            this.customGroupBox3.ResumeLayout(false);
+            this.customGroupBox3.PerformLayout();
+            this.customGroupBox2.ResumeLayout(false);
+            this.customGroupBox2.PerformLayout();
+            this.customGroupBox1.ResumeLayout(false);
+            this.customGroupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -254,8 +365,17 @@ namespace Summanager
         private CustomControls.MenuChildButtom btnNuevo;
         private CustomControls.MenuChildButtom btnGuardarComo;
         private CustomControls.CustomGroupBox groupEstadisticas;
+        private CustomControls.CustomGroupBox customGroupBox3;
+        private CustomControls.Estadistica estKitMantCritico;
+        private CustomControls.Estadistica estUnImgCritico;
+        private CustomControls.Estadistica estTonerCritico;
+        private CustomControls.CustomGroupBox customGroupBox2;
         private CustomControls.Estadistica estNoAna;
         private CustomControls.Estadistica estOffline;
         private CustomControls.Estadistica estOnline;
+        private CustomControls.CustomGroupBox customGroupBox1;
+        private CustomControls.Estadistica estKitMantRiesgo;
+        private CustomControls.Estadistica estUnImgRiesgo;
+        private CustomControls.Estadistica estTonerRiesgo;
     }
 }

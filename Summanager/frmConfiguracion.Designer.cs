@@ -32,6 +32,10 @@ namespace Summanager
             this.panelTitulo.SuspendLayout();
             this.SuspendLayout();
             // 
+            // panelTitulo
+            // 
+            this.panelTitulo.Size = new System.Drawing.Size(800, 49);
+            // 
             // lblTitulo
             // 
             this.lblTitulo.Size = new System.Drawing.Size(200, 32);
@@ -39,13 +43,14 @@ namespace Summanager
             // 
             // panelMenu
             // 
+            this.panelMenu.Size = new System.Drawing.Size(800, 40);
             this.panelMenu.Visible = false;
             // 
-            // frmConfiguracion
+            // FrmConfiguracion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.ClientSize = new System.Drawing.Size(795, 515);
-            this.Name = "frmConfiguracion";
+            this.ClientSize = new System.Drawing.Size(800, 837);
+            this.Name = "FrmConfiguracion";
             this.panelTitulo.ResumeLayout(false);
             this.panelTitulo.PerformLayout();
             this.ResumeLayout(false);
