@@ -35,6 +35,8 @@ namespace Summanager
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.groupEstadisticas = new CustomControls.CustomGroupBox();
+            this.estNoAna = new CustomControls.Estadistica();
+            this.estOffline = new CustomControls.Estadistica();
             this.estOnline = new CustomControls.Estadistica();
             this.btnNuevo = new CustomControls.MenuChildButtom();
             this.btnGuardarComo = new CustomControls.MenuChildButtom();
@@ -43,8 +45,6 @@ namespace Summanager
             this.btnImportar = new CustomControls.MenuChildButtom();
             this.btnGuardar = new CustomControls.MenuChildButtom();
             this.btnAbrir = new CustomControls.MenuChildButtom();
-            this.estOffline = new CustomControls.Estadistica();
-            this.estNoAna = new CustomControls.Estadistica();
             this.panelTitulo.SuspendLayout();
             this.panelMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
@@ -118,6 +118,26 @@ namespace Summanager
             this.groupEstadisticas.TabIndex = 23;
             this.groupEstadisticas.Text = "Estadísticas";
             this.groupEstadisticas.Visible = false;
+            // 
+            // estNoAna
+            // 
+            this.estNoAna.Count = 0;
+            this.estNoAna.Location = new System.Drawing.Point(318, 22);
+            this.estNoAna.Name = "estNoAna";
+            this.estNoAna.Size = new System.Drawing.Size(150, 100);
+            this.estNoAna.TabIndex = 8;
+            this.estNoAna.Text = "No Analizadas";
+            this.estNoAna.Total = 0;
+            // 
+            // estOffline
+            // 
+            this.estOffline.Count = 0;
+            this.estOffline.Location = new System.Drawing.Point(162, 22);
+            this.estOffline.Name = "estOffline";
+            this.estOffline.Size = new System.Drawing.Size(150, 100);
+            this.estOffline.TabIndex = 7;
+            this.estOffline.Text = "Offline";
+            this.estOffline.Total = 0;
             // 
             // estOnline
             // 
@@ -198,26 +218,6 @@ namespace Summanager
             this.btnAbrir.TabIndex = 0;
             this.btnAbrir.Text = "Abrir";
             this.btnAbrir.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnAbrir_MouseClick);
-            // 
-            // estOffline
-            // 
-            this.estOffline.Count = 0;
-            this.estOffline.Location = new System.Drawing.Point(162, 22);
-            this.estOffline.Name = "estOffline";
-            this.estOffline.Size = new System.Drawing.Size(150, 100);
-            this.estOffline.TabIndex = 7;
-            this.estOffline.Text = "Offline";
-            this.estOffline.Total = 0;
-            // 
-            // estNoAna
-            // 
-            this.estNoAna.Count = 0;
-            this.estNoAna.Location = new System.Drawing.Point(318, 22);
-            this.estNoAna.Name = "estNoAna";
-            this.estNoAna.Size = new System.Drawing.Size(150, 100);
-            this.estNoAna.TabIndex = 8;
-            this.estNoAna.Text = "No Analizadas";
-            this.estNoAna.Total = 0;
             // 
             // FrmEstados
             // 

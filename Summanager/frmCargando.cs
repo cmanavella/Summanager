@@ -21,7 +21,6 @@ namespace Summanager
 		private int segEst;
 		private int minEst;
 		private int tiempo;
-		private int procesadoAnterior;
 		private List<Printer> PrintersScrapped;
 
 		public List<Printer> PrintersPassed { get; set; }
@@ -35,7 +34,6 @@ namespace Summanager
 			this.tiempo = 1;
 			this.segEst = 0;
 			this.minEst = 0;
-			this.procesadoAnterior = 0;
 		}
 
         private void frmCargando_Load(object sender, EventArgs e)
@@ -144,11 +142,11 @@ namespace Summanager
 
 			//Muestro el tiempo estimado-
 			this.lblEstimado.Text = "Tiempo Estimado: " + this.minEst.ToString("00") + ":" + this.segEst.ToString("00");
-			this.procesadoAnterior = this.procesado; //Cargo lo procesado a lo ya procesado.
 		}
 
         private void btnDetener_Click(object sender, EventArgs e)
         {
+			this.label1.Text = "Deteniendo...";
 			//Detiene el análisis.
 			worker.CancelAsync();
         }
