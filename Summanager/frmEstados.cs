@@ -19,6 +19,7 @@ namespace Summanager
             InitializeComponent();
             
             this.frmMain = frmMain;
+            this.printers = new List<Printer>();
         }
 
         /// <summary>
@@ -29,39 +30,30 @@ namespace Summanager
             //Daivido el título existente en dos, separados por un '-'.
             string[] titulo = frmMain.Text.Split('-');
 
-            //Me fijo que la Lista de Impresoras no sea nula y si no lo es, que no esté vacía. Si no lo está significa que ya hay un 
+            //Me fijo que la Lista de Impresoras no esté vacía. Si no lo está significa que ya hay un 
             //archivo abierto y que por ende tiene un nombre.
-            if (this.printers != null)
+            if (printers.Count > 0)
             {
-                if (printers.Count > 0)
+                string fileName = IO.File.GetCurrentFileTitle(); //Obtengo la ruta del archivo abierto.
+                string[] splitFileName = fileName.Split('\\'); //Lo divido para extraer solo el nombre del archivo.
+
+                //Si el string devuelto tiene contenido anexo el nombre del archivo sin su extensión al Título del 
+                //Form Main.
+                if (fileName.Length > 0)
                 {
-                    string fileName = IO.File.GetCurrentFileTitle(); //Obtengo la ruta del archivo abierto.
-                    string[] splitFileName = fileName.Split('\\'); //Lo divido para extraer solo el nombre del archivo.
+                    int index = splitFileName.Length - 1;
 
-                    //Si el string devuelto tiene contenido anexo el nombre del archivo sin su extensión al Título del 
-                    //Form Main.
-                    if (fileName.Length > 0)
-                    {
-                        int index = splitFileName.Length - 1;
-
-                        frmMain.Text = titulo[0] + "-" + splitFileName[index].Substring(0, splitFileName[index].Length - 4);
-                    }
-                    else
-                    {
-                        //Si está vacío muestro sin título como si fuera un archivo nuevo.
-                        frmMain.Text = titulo[0] + "-sin título";
-                    }
+                    frmMain.Text = titulo[0] + "-" + splitFileName[index].Substring(0, splitFileName[index].Length - 4);
                 }
                 else
                 {
-                    //Si la Lista de Impresoras está vacía, significa que no hay archivo abierto, por lo que muestro la leyenda
-                    //sin título.
+                    //Si está vacío muestro sin título como si fuera un archivo nuevo.
                     frmMain.Text = titulo[0] + "-sin título";
                 }
             }
             else
             {
-                //Si la Lista de Impresoras es nula, significa que no hay archivo abierto, por lo que muestro la leyenda
+                //Si la Lista de Impresoras está vacía, significa que no hay archivo abierto, por lo que muestro la leyenda
                 //sin título.
                 frmMain.Text = titulo[0] + "-sin título";
             }
@@ -87,24 +79,13 @@ namespace Summanager
             {
                 this.btnAbrir.Enabled = true;
 
-                if (printers != null)
+                if (this.printers.Count > 0)
                 {
-                    if (this.printers.Count > 0)
-                    {
-                        this.btnNuevo.Enabled = true;
-                        this.btnGuardar.Enabled = true;
-                        this.btnGuardarComo.Enabled = true;
-                        this.btnExportar.Enabled = true;
-                        this.btnActualizar.Enabled = true;
-                    }
-                    else
-                    {
-                        this.btnNuevo.Enabled = false;
-                        this.btnGuardar.Enabled = false;
-                        this.btnGuardarComo.Enabled = false;
-                        this.btnExportar.Enabled = false;
-                        this.btnActualizar.Enabled = false;
-                    }
+                    this.btnNuevo.Enabled = true;
+                    this.btnGuardar.Enabled = true;
+                    this.btnGuardarComo.Enabled = true;
+                    this.btnExportar.Enabled = true;
+                    this.btnActualizar.Enabled = true;
                 }
                 else
                 {
@@ -453,15 +434,12 @@ namespace Summanager
             //Chequeo que el archivo esté guardado. Si lo está, puedo crear un nuevo archivo.
             if (this.frmMain.CheckUnsavedFile() == DialogResult.OK)
             {
-                //Me fijo que la lista de impresoras no sea nula.
-                if (this.printers != null)
-                {
-                    this.printers.Clear(); //Limpio la Lista de Impresoras.
-                                           //Limpio el DGV.
-                    this.dgv.Columns.Clear();
-                    this.dgv.Rows.Clear();
-                    this.dgv.Refresh();
-                }
+                
+                this.printers.Clear(); //Limpio la Lista de Impresoras.
+                                        //Limpio el DGV.
+                this.dgv.Columns.Clear();
+                this.dgv.Rows.Clear();
+                this.dgv.Refresh();
                 groupEstadisticas.Visible = false;
 
                 //Limpio la variable de Application Config que almacena la ruta del archivo reciente.
@@ -496,8 +474,8 @@ namespace Summanager
                 }
                 catch (Exception ex)
                 {
-                    int exCode = -2146233033;
-                    if (ex.HResult == exCode)
+                    //Filtro para mostrar el error del Archivo Roto.
+                    if (ex.GetType().Name == "FormatException")
                     {
                         MessageBox.Show("No se puede acceder al archivo.", Application.ProductName + ": Archivo dañado",
                             MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -506,7 +484,7 @@ namespace Summanager
                     {
                         MessageBox.Show(ex.Message); //Si huibo un error, lo muestro.
                     }
-                    btnNuevo_MouseClick(null, null);
+                btnNuevo_MouseClick(null, null);
                 }
             }
             openFileDialog.FileName = ""; //Limpio el OFD.
@@ -602,33 +580,28 @@ namespace Summanager
 
             groupEstadisticas.Visible = false;
 
-            if (printers != null)
+            //Llamo al Form Cargando para que analice la Lista de Impresoras pasadas por parámetros.
+            FrmCargando cargando = new FrmCargando(printers);
+            cargando.ShowDialog(); //Lo muestro como un dialog para que mientras analiza no se pueda hacer nada.
+
+            List<Printer> printersReturned = cargando.PrintersPassed; //Cargo una nueva Lista de Impresoras con lo devuelto.
+
+            //Actualizo la Lista de Impresoras actual con la devuelta por el Form Cargando.
+            foreach (Printer printer in printersReturned)
             {
-                //Llamo al Form Cargando para que analice la Lista de Impresoras pasadas por parámetros.
-                FrmCargando cargando = new FrmCargando(printers);
-                cargando.ShowDialog(); //Lo muestro como un dialog para que mientras analiza no se pueda hacer nada.
-
-                List<Printer> printersReturned = cargando.PrintersPassed; //Cargo una nueva Lista de Impresoras con lo devuelto.
-
-                //Actualizo la Lista de Impresoras actual con la devuelta por el Form Cargando.
-                foreach (Printer printer in printersReturned)
-                {
-                    int i = this.printers.FindIndex(o => o.Ip == printer.Ip);
-                    this.printers[i] = printer;
-                }
-
-                _llenarDgv(); //Cargo el DGV con lo analizado.
+                int i = this.printers.FindIndex(o => o.Ip == printer.Ip);
+                this.printers[i] = printer;
             }
+
+            _llenarDgv(); //Cargo el DGV con lo analizado.
         }
 
         private void FrmEstados_Shown(object sender, EventArgs e)
         {
-            if (this.printers != null)
+            
+            if (this.printers.Count <= 0)
             {
-                if (this.printers.Count <= 0)
-                {
-                    groupEstadisticas.Visible = false;
-                }
+                groupEstadisticas.Visible = false;
             }
         }
     }
