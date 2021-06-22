@@ -27,23 +27,17 @@ namespace IO
             //Pregunto si el archivo existe.
             if (System.IO.File.Exists(fileToRead))
             {
-                //Si existe lo leo.
-                using (StreamReader reader = new StreamReader(fileToRead))
+                string cadena = _desencriptar(fileToRead); //Desencripto el archivo.
+
+                //Separo la cadena por sus saltos de líneas en un array de strings.
+                string[] splitCadena = cadena.Split('\n');
+                //Recorro cada elemento separado de la cadena.
+                foreach(string split in splitCadena)
                 {
-                    Printer printer;
-                    string line;
-                    //Mientras encuentre una línea dentro del archivo la leo y cargo esos datos en una
-                    //Lista de Impresoras.
-                    while ((line = reader.ReadLine()) != null)
-                    {
-                        if (!(line.Substring(0, 1) == "[" && line.Substring(line.Length - 1, 1) == "]"))
-                        {
-                            printer = new Printer();
-                            printer.Ip = line; //Cargo el ip almacenado
-                            printer.Estado = Printer.NO_ANALIZADA; //Seteo el estado de la Impresora en No Analizada.
-                            retorno.Add(printer);
-                        }
-                    }
+                    Printer printer = new Printer();
+                    printer.Ip = split; //Cargo el ip almacenado con el string leído actualmente. Ese valor es la Ip.
+                    printer.Estado = Printer.NO_ANALIZADA; //Seteo el estado de la Impresora en No Analizada.
+                    retorno.Add(printer); //Agrego la Impresora a la Listas de Retorno.
                 }
             }
             else
@@ -131,6 +125,9 @@ namespace IO
 
                 //Guardo el archivo como reciente.
                 openFile(filePath);
+
+                //Una vez guardado, encripto el archivo.
+                _encriptar(filePath);
             }
         }
 
@@ -151,6 +148,7 @@ namespace IO
                         writerNewFile.WriteLine(printer.Ip);
                     }
                 }
+                _encriptar(filePath); //Una vez guardado, encripto el archivo.
             }
         }
 
@@ -383,6 +381,77 @@ namespace IO
                 libros.Close(true);
                 application.Quit();
             }
+        }
+
+        /// <summary>
+        /// Toma un archivo de extensión SMP ya creado y lo encripta.
+        /// </summary>
+        /// <remarks>
+        /// Se debe pasar por parámetro la ruta del archivo.
+        /// </remarks>
+        /// <param name="filePath"></param>
+        private static void _encriptar(string filePath)
+        {
+            string result = String.Empty; //Variable usada para trabajar.
+
+            //Leo el archivo SMP línea por línea.
+            using (StreamReader reader = new StreamReader(filePath))
+            {
+                string line; //Variable para traer la línea leída.
+                bool primera = true; //Variable que uso como bandera para saber si estoy leyendo la primer línea.
+                while ((line = reader.ReadLine()) != null)
+                {
+                    if (primera)
+                    {
+                        //Si es la primera línea, la agrego directamente a la variable result.
+                        result = line;
+                        primera = false; //Seteo la variable bandera en 'false' porque ya leí la primera línea.
+                    }
+                    else
+                    {
+                        //Si no es la primera línea a la variable result le concateno un 'salto de línea' seguido por la 
+                        //línea leída.
+                        result += '\n' + line;
+                    }
+                    
+                }
+            }
+
+            //Encripto la variable result.
+            byte[] encrypted = Encoding.Unicode.GetBytes(result);
+            result = Convert.ToBase64String(encrypted);
+
+            //Sobreescribo el archivo pasado por parámetro con la cadena (result) ya encriptada.
+            using(StreamWriter writer = new StreamWriter(filePath))
+            {
+                writer.Write(result);
+            }
+        }
+
+        /// <summary>
+        /// Toma un archivo de extensión SMP pasado por parámetro, lo desencripta y devuelve un string.
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns>
+        /// La cadena devuelta ya incluye los saltos de línea. Solo hay que separarlos para armar una Lista o Array.
+        /// </returns>
+        /// <remarks>
+        /// Para separar la cadena devuelta, usar .Split('\n').
+        /// </remarks>
+        private static string _desencriptar(string filePath)
+        {
+            string cadena;
+            //Leo el archivo pasado por parámetro y cargo lo leído en la variable cadena.
+            using (StreamReader reader = new StreamReader(filePath))
+            {
+                cadena = reader.ReadLine();
+            }
+
+            //Desencripto la variable cadena para devolverla como resultado.
+            byte[] decryted = Convert.FromBase64String(cadena);
+            cadena = Encoding.Unicode.GetString(decryted);
+
+            return cadena;
         }
     }
 }
