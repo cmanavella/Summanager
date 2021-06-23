@@ -30,12 +30,15 @@ namespace IO
                 string cadena = _desencriptar(fileToRead); //Desencripto el archivo.
 
                 //Separo la cadena por sus saltos de líneas en un array de strings.
-                string[] splitCadena = cadena.Split('\n');
+                string[] splitLinea = cadena.Split('\n');
                 //Recorro cada elemento separado de la cadena.
-                foreach(string split in splitCadena)
+                foreach(string linea in splitLinea)
                 {
+                    //Divido el elemento split nuevamente ya que en él se guarda el Ip y la Oficina.
+                    string[] elemento = linea.Split('\\');
                     Printer printer = new Printer();
-                    printer.Ip = split; //Cargo el ip almacenado con el string leído actualmente. Ese valor es la Ip.
+                    printer.Ip = elemento[0]; //Cargo el ip almacenado con el string leído actualmente. Ese valor es la Ip.
+                    if(elemento.Count() > 1) printer.Oficina = elemento[1]; //Cargo la oficina almacenada. Si la tiene cargada el archivo.
                     printer.Estado = Printer.NO_ANALIZADA; //Seteo el estado de la Impresora en No Analizada.
                     retorno.Add(printer); //Agrego la Impresora a la Listas de Retorno.
                 }
@@ -119,7 +122,7 @@ namespace IO
                     //Write all IPs passed by the Parameters.
                     foreach(Printer printer in printers)
                     {
-                        writerNewFile.WriteLine(printer.Ip);
+                        writerNewFile.WriteLine(printer.Ip + "\\" + printer.Oficina);
                     }
                 }
 
@@ -145,7 +148,7 @@ namespace IO
                     //Escribo el archivo.
                     foreach (Printer printer in printers)
                     {
-                        writerNewFile.WriteLine(printer.Ip);
+                        writerNewFile.WriteLine(printer.Ip + "\\" + printer.Oficina);
                     }
                 }
                 _encriptar(filePath); //Una vez guardado, encripto el archivo.
@@ -180,10 +183,12 @@ namespace IO
                 {
                     Printer printer = new Printer();
                     string ip = _makeIpAddress((string)(range.Cells[row, 8]).Value2); //Leo la columna donde se encuentran las Ips y las transformo en ellas.
+                    string oficina = (string)(range.Cells[row, 5]).Value2; //Leo la columna donde se encuentra la Oficina.
                     if (_isValidIp(ip)) //Valido que la ip sea válida.
                     {
                         printer.Ip = ip; //Cargo la ip a un Objeto Impresora
                         printer.Estado = Printer.NO_ANALIZADA; //Seteo el estado del Objeto Impresora como No Analizada.
+                        printer.Oficina = oficina; //Cargo la oficina a un Objeto Impresora.
                         retorno.Add(printer); //Agrego la Impresora a la Lista de Retorno.
                     }
                     row++; //Cambio el contador de filas para pasar a la siguiente.

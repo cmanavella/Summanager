@@ -157,6 +157,9 @@ namespace Summanager
         /// </summary>
         private void _llenarDgv()
         {
+            //Ordeno la Lista de Impresoras por la Oficina.
+            this.printers.Sort((x, y) => x.Oficina.CompareTo(y.Oficina));
+            
             estadistica = new Estadistica();
 
             //Compruebo que la Lista de Impresoras no esté vacía.
@@ -168,10 +171,11 @@ namespace Summanager
                 //Cargo los encabezados de las Columnas con sus respectivos nombres y textos a mostrar.
                 dgv.Columns.Add("ip", "Ip");
                 dgv.Columns.Add("modelo", "Modelo");
+                dgv.Columns.Add("oficina", "Oficina");
                 dgv.Columns.Add("estado", "Estado");
                 dgv.Columns.Add("toner", "Toner");
-                dgv.Columns.Add("uimagen", "U. Img.");
-                dgv.Columns.Add("kmant", "Kit Mant.");
+                dgv.Columns.Add("uimagen", "UI");
+                dgv.Columns.Add("kmant", "KM");
 
                 //Desactivo la Opción de Ordenar las Columnas al hacer clic en su encabezado.
                 foreach (DataGridViewColumn column in dgv.Columns)
@@ -179,8 +183,12 @@ namespace Summanager
                     column.SortMode = DataGridViewColumnSortMode.NotSortable;
                 }
 
-                //Agrando la segunda Columna.
-                dgv.Columns[1].Width = 510;
+                //Modifico el tamaño de algunas Columnas.
+                dgv.Columns[1].Width = 150;
+                dgv.Columns[2].Width = 510;
+                dgv.Columns[4].Width = 50;
+                dgv.Columns[5].Width = 50;
+                dgv.Columns[6].Width = 50;
 
                 //Recorro la Lista de Impresoras para cargarlas.
                 foreach (var printer in printers)
@@ -212,7 +220,7 @@ namespace Summanager
                     }
 
                     //Agrego una nueva fila.
-                    dgv.Rows.Add(printer.Ip, printer.Modelo, printer.Estado, toner, uimagen, kitmant);
+                    dgv.Rows.Add(printer.Ip, printer.Modelo, printer.Oficina, printer.Estado, toner, uimagen, kitmant);
                 }
                 //Llamo al método que colorea las filas.
                 _colorearDgv();
@@ -231,18 +239,18 @@ namespace Summanager
             {
                 //Consulto el estado de conectividad de la Impresora. Para colorear debe ser Online, ya que si la Impresora
                 //está Offline o no ha sido analizada no tiene sentido colorearla.
-                if ((string)r.Cells[2].Value == Printer.ONLINE)
+                if ((string)r.Cells[3].Value == Printer.ONLINE)
                 {
                     //Cargo los suministros en variables para su mejor manejo.
-                    int toner = Int32.Parse(r.Cells[3].Value.ToString().Remove(r.Cells[3].Value.ToString().Length - 1));
-                    int uimagen = Int32.Parse(r.Cells[4].Value.ToString().Remove(r.Cells[4].Value.ToString().Length - 1));
+                    int toner = Int32.Parse(r.Cells[4].Value.ToString().Remove(r.Cells[4].Value.ToString().Length - 1));
+                    int uimagen = Int32.Parse(r.Cells[5].Value.ToString().Remove(r.Cells[5].Value.ToString().Length - 1));
                     int kmant = -1; //Ya que como no es un suministro que tengan todos los modelos, primero lo seteo en -1.
                     
                     //Consulto si la Impresora analizada no es una Lexmark MS410.
                     if ((string)r.Cells[1].Value != Printer.L410_TITLE)
                     {
                         //Si no lo es, cargo el valor del Kit de Mantenimiento.
-                        kmant = Int32.Parse(r.Cells[5].Value.ToString().Remove(r.Cells[5].Value.ToString().Length - 1));
+                        kmant = Int32.Parse(r.Cells[6].Value.ToString().Remove(r.Cells[6].Value.ToString().Length - 1));
                     }
 
                     //Si los valores de los Estados de los Suministros son menores a 10, pinto la fila de amarillo.
@@ -448,7 +456,7 @@ namespace Summanager
             //Primero pregunto que haya elementos cargados en el DGV.
             if (this.dgv.Rows.Count > 0)
             {
-                string estado = dgv.SelectedCells[2].Value.ToString(); //Obtengo el Estado de la Impresora.
+                string estado = dgv.SelectedCells[3].Value.ToString(); //Obtengo el Estado de la Impresora.
                 string ip = "http://" + dgv.SelectedCells[0].Value.ToString(); //Concateno 'http://' con el Ip de la Impresora.
                 //Abro la página HTTP de la Impresora si esta se encuentra Online o no ha sido analizada.
                 if (estado == Printer.ONLINE || estado == Printer.NO_ANALIZADA) Process.Start(ip);

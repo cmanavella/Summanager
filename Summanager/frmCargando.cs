@@ -71,6 +71,7 @@ namespace Summanager
 					//concepción puramente mía, cargo estos dos datos de forma manual.
 					printerScrapped.Ip = printer.Ip;
 					printerScrapped.Estado = "Online";
+					printerScrapped.Oficina = printer.Oficina;
 
 					//Agrego la impresora a una Lista de Impresoras distinta a la que le pasé al Form.
 					//De esta manera no altero la Lista original.
@@ -83,6 +84,7 @@ namespace Summanager
 					printerScrapped.Ip = printer.Ip;
 					printerScrapped.Estado = "Offline";
 					printerScrapped.Modelo = null;
+					printerScrapped.Oficina = printer.Oficina;
 					printerScrapped.Toner = null;
 					printerScrapped.UImagen = null;
 					printerScrapped.KitMant = null;
