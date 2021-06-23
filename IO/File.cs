@@ -300,7 +300,7 @@ namespace IO
         /// </summary>
         /// <param name="filePath"></param>
         /// <param name="printers"></param>
-        public static void exportExcelFile(string filePath, List<Printer> printers)
+        public static void exportExcelFile(string filePath, List<Printer> printers, Estadistica estadistica)
         {
             Application application = new Application();
             //Abro un libro.
@@ -312,15 +312,16 @@ namespace IO
                 //Escribo las Cabeceras de Columnas.
                 hoja.Cells[2, 2] = "Ip";
                 hoja.Cells[2, 3] = "Modelo";
-                hoja.Cells[2, 4] = "Estado";
-                hoja.Cells[2, 5] = "Toner";
-                hoja.Cells[2, 6] = "U. Img.";
-                hoja.Cells[2, 7] = "Kit. Mant.";
+                hoja.Cells[2, 4] = "Oficina";
+                hoja.Cells[2, 5] = "Estado";
+                hoja.Cells[2, 6] = "Toner";
+                hoja.Cells[2, 7] = "U. Img.";
+                hoja.Cells[2, 8] = "Kit. Mant.";
 
                 Range formatRange; //Creo un rango para dar formato a todo.
 
                 //Doy formato a las Cabeceras de Columna y creo su borde externo.
-                formatRange = hoja.Range["B2", "G2"];
+                formatRange = hoja.Range["B2", "H2"];
                 formatRange.Font.Bold = true;
                 formatRange.HorizontalAlignment = XlHAlign.xlHAlignCenter;
                 formatRange.BorderAround2(XlLineStyle.xlContinuous, XlBorderWeight.xlMedium, XlColorIndex.xlColorIndexAutomatic);
@@ -330,29 +331,20 @@ namespace IO
                 //Cambio algunos anchos de Columna.
                 hoja.Columns[2].ColumnWidth = 14;
                 hoja.Columns[3].ColumnWidth = 17;
-                hoja.Columns[4].ColumnWidth = 7;
+                hoja.Columns[4].ColumnWidth = 64;
+                hoja.Columns[5].ColumnWidth = 7;
 
                 //Escribo cada una de las impresoras dentro de la Lista, comenzando en la Fila 3 ya que la 2 la uso para las Cabeceras.
                 int contador = 3;
                 foreach(Printer printer in printers)
                 {
                     hoja.Cells[contador, 2] = printer.Ip.ToString();
-                    formatRange = hoja.Cells[contador, 2];
-
                     if (printer.Modelo!=null) hoja.Cells[contador, 3] = printer.Modelo.ToString();
-                    formatRange = hoja.Cells[contador, 3];
-
-                    hoja.Cells[contador, 4] = printer.Estado.ToString();
-                    formatRange = hoja.Cells[contador, 4];
-
-                    if (printer.Toner != null) hoja.Cells[contador, 5] = printer.Toner.ToString() + "%";
-                    formatRange = hoja.Cells[contador, 5];
-
-                    if (printer.UImagen != null) hoja.Cells[contador, 6] = printer.UImagen.ToString() + "%";
-                    formatRange = hoja.Cells[contador, 6];
-
-                    if (printer.KitMant != null) hoja.Cells[contador, 7] = printer.KitMant.ToString() + "%";
-                    formatRange = hoja.Cells[contador, 7];
+                    hoja.Cells[contador, 4] = printer.Oficina;
+                    hoja.Cells[contador, 5] = printer.Estado.ToString();
+                    if (printer.Toner != null) hoja.Cells[contador, 6] = printer.Toner.ToString() + "%";
+                    if (printer.UImagen != null) hoja.Cells[contador, 7] = printer.UImagen.ToString() + "%";
+                    if (printer.KitMant != null) hoja.Cells[contador, 8] = printer.KitMant.ToString() + "%";
 
                     //Doy formato a las filas de acuerdo al estado del suministro. Primero me aseguro que la impresora esté Online.
                     if (printer.Estado == "Online")
@@ -360,12 +352,12 @@ namespace IO
                         //Paint the the complete row as required
                         if(printer.Toner<=10 || printer.UImagen<=10 || (printer.KitMant!=null && printer.KitMant <= 10))
                         {
-                            formatRange = hoja.Range[hoja.Cells[contador, 2], hoja.Cells[contador, 7]];
+                            formatRange = hoja.Range[hoja.Cells[contador, 2], hoja.Cells[contador, 8]];
                             formatRange.Interior.Color = ColorTranslator.ToOle(Color.FromArgb(255, 252, 204));
                         }
                         if (printer.Toner <= 3 || printer.UImagen <= 3 || (printer.KitMant != null && printer.KitMant <= 3))
                         {
-                            formatRange = hoja.Range[hoja.Cells[contador, 2], hoja.Cells[contador, 7]];
+                            formatRange = hoja.Range[hoja.Cells[contador, 2], hoja.Cells[contador, 8]];
                             formatRange.Interior.Color = ColorTranslator.ToOle(Color.FromArgb(251, 207, 208));
                         }
                     }
@@ -374,7 +366,7 @@ namespace IO
                 }
 
                 //Creo los bordes externos.
-                string rangoFinal = "G" + (printers.Count + 2).ToString();
+                string rangoFinal = "H" + (printers.Count + 2).ToString();
                 formatRange = hoja.Range["B3", rangoFinal];
                 formatRange.BorderAround2(XlLineStyle.xlContinuous, XlBorderWeight.xlMedium, XlColorIndex.xlColorIndexAutomatic);
 

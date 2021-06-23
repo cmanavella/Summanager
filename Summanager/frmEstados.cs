@@ -614,7 +614,7 @@ namespace Summanager
                 try
                 {
                     //Exporto el archivo Excel.
-                    IO.File.exportExcelFile(filePath, printers);
+                    IO.File.exportExcelFile(filePath, this.printers, this.estadistica);
                     MessageBox.Show("Datos exportados con éxito."); //Muestro mensaje de éxito.
                 }
                 catch (Exception ex)
