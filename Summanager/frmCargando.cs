@@ -76,7 +76,7 @@ namespace Summanager
 					//De esta manera no altero la Lista original.
 					this.PrintersScrapped.Add(printerScrapped);
 				}
-				catch (Exception ex)
+				catch (Exception)
 				{
 					//Si no puede leer la Ip la Impresora está Offline. Asique seteo los valores manualmente.
 					Printer printerScrapped = new Printer();

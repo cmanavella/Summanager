@@ -13,8 +13,6 @@ namespace Summanager
         private List<Printer> printers;
         private FrmMain frmMain;
         private Estadistica estadistica;
-        private string openIniDirec;
-        private string saveIniDirec;
 
         public FrmEstados(FrmMain frmMain)
         {
@@ -22,9 +20,48 @@ namespace Summanager
             
             this.frmMain = frmMain;
             this.printers = new List<Printer>();
+        }
 
-            this.openIniDirec = "c:\\";
-            this.saveIniDirec = "c:\\";
+        /// <summary>
+        /// Devuelve la última ruta guardada que usó un OpenFileDialog.
+        /// </summary>
+        /// <returns></returns>
+        private string _getOpenDirectory()
+        {
+            string retorno = String.Empty;
+            string openDirectory = IO.File.GetOpenDirectory();
+            //Me fijo que el OpenDirectory no esté vacío
+            if (openDirectory != String.Empty)
+            {
+                retorno = openDirectory; //Seteo el Initial Directory del OpenFileDialog.
+            }
+            else
+            {
+                //Si el OpenDirectory está vacío, seteo en C:
+                retorno = "c:\\";
+            }
+            return retorno;
+        }
+
+        /// <summary>
+        /// Devuelve la última ruta guardada que usó un SaveFileDialog.
+        /// </summary>
+        /// <returns></returns>
+        private string _getSaveDirectory()
+        {
+            string retorno = String.Empty;
+            string saveDirectory = IO.File.GetSaveDirectory();
+            //Me fijo que el SaveDirectory no esté vacío
+            if (saveDirectory != String.Empty)
+            {
+                retorno = saveDirectory; //Seteo el Initial Directory del SaveFileDialog.
+            }
+            else
+            {
+                //Si el SaveDirectory está vacío, seteo en C:
+                retorno = "c:\\";
+            }
+            return retorno;
         }
 
         /// <summary>
@@ -273,43 +310,6 @@ namespace Summanager
         }
 
         /// <summary>
-        /// Guarda un archivo con un Nombre Específico en una Ruta deseada con extensión 'SMP'.
-        /// </summary>
-        /// <returns></returns>
-        private DialogResult _saveAs()
-        {
-            DialogResult retorno; //Variable de retorno.
-
-            //Abro y seteo el SaveFileDialog.
-            saveFileDialog.InitialDirectory = saveIniDirec;
-            saveFileDialog.Filter = "SumManager File (*.smp)|*.smp";
-            saveFileDialog.FilterIndex = 1;
-            saveFileDialog.RestoreDirectory = true;
-
-            //Pregunto si se ha decidido a guardar el archivo.
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                //Cargo la ruta y el nombre del archivo.
-                string filePath = saveFileDialog.FileName;
-                
-                //Llamo al método que lo crea si no existe y lo guarda.
-                IO.File.saveFileAs(filePath, printers);
-
-                printers.Clear(); //Limpio la Lista de Impresoras.
-                printers = IO.File.readCurrentFile(); //Leo el archivo guardado y cargo con él la Lista de Impresoras.
-                _tituloForm(); //Actualizo el Título del Form Main.
-                retorno = DialogResult.OK; //Cargo en la variable de retorno que todo ha salido OK.
-            }
-            else
-            {
-                retorno = DialogResult.Cancel; //Cargo en la variable de retorno el resultado de la cancelación.
-            }
-            saveFileDialog.FileName = ""; //Limpio el SaveFileDialog.
-
-            return retorno; //Devuelvo el resultado.
-        }
-
-        /// <summary>
         /// Permite importar a la Lista de Impresoras datos que se obtienen de leer un archivo Excel con un formato específico.
         /// </summary>
         /// <remarks>
@@ -319,7 +319,7 @@ namespace Summanager
         private void _importar(bool combinado)
         {
             //Seteo el OpenFileDialog
-            openFileDialog.InitialDirectory = this.openIniDirec;
+            openFileDialog.InitialDirectory = _getOpenDirectory();
             openFileDialog.Filter = "Libro de Excel (*.xlsx;*.xls)|*.xlsx;*.xls";
             openFileDialog.FilterIndex = 1;
             openFileDialog.RestoreDirectory = true;
@@ -359,6 +359,7 @@ namespace Summanager
                 }
             }
 
+            IO.File.SetOpenDirectory(openFileDialog.FileName); //Guardo el último directorio.
             openFileDialog.FileName = ""; //Limpio el OFD.
 
             //Pregunto si la Lista de Impresoras no está vacia.
@@ -366,10 +367,49 @@ namespace Summanager
             {
                 _tituloForm(); //Actualizo el Título del Form Main.
                 //A ese título le concateno al final el caracter '*' que es mi bandera para saber si un archivo ha sido modificado.
-                frmMain.Text += "*"; 
+                frmMain.Text += "*";
                 btnActualizar_MouseClick(null, null); //Analizo la Lista de Impresoras.
                 _acomodarBotones(); //Acomodo los botones.
             }
+        }
+
+        /// <summary>
+        /// Guarda un archivo con un Nombre Específico en una Ruta deseada con extensión 'SMP'.
+        /// </summary>
+        /// <returns></returns>
+        private DialogResult _saveAs()
+        {
+            DialogResult retorno; //Variable de retorno.
+
+            //Abro y seteo el SaveFileDialog.
+            saveFileDialog.InitialDirectory = _getSaveDirectory();
+            saveFileDialog.Filter = "SumManager File (*.smp)|*.smp";
+            saveFileDialog.FilterIndex = 1;
+            saveFileDialog.RestoreDirectory = true;
+
+            //Pregunto si se ha decidido a guardar el archivo.
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                //Cargo la ruta y el nombre del archivo.
+                string filePath = saveFileDialog.FileName;
+                
+                //Llamo al método que lo crea si no existe y lo guarda.
+                IO.File.saveFileAs(filePath, printers);
+
+                printers.Clear(); //Limpio la Lista de Impresoras.
+                printers = IO.File.readCurrentFile(); //Leo el archivo guardado y cargo con él la Lista de Impresoras.
+                _tituloForm(); //Actualizo el Título del Form Main.
+                retorno = DialogResult.OK; //Cargo en la variable de retorno que todo ha salido OK.
+            }
+            else
+            {
+                retorno = DialogResult.Cancel; //Cargo en la variable de retorno el resultado de la cancelación.
+            }
+
+            IO.File.SetSaveDirectory(this.saveFileDialog.FileName); //Guardo el último directorio.
+            saveFileDialog.FileName = ""; //Limpio el SaveFileDialog.
+
+            return retorno; //Devuelvo el resultado.
         }
 
         /// <summary>
@@ -457,7 +497,7 @@ namespace Summanager
         private void btnAbrir_MouseClick(object sender, MouseEventArgs e)
 		{
             //Seteo el OpenFileDialog.
-            openFileDialog.InitialDirectory = this.openIniDirec;
+            openFileDialog.InitialDirectory = _getOpenDirectory();
             openFileDialog.Filter = "SumManager File (*.smp)|*.smp";
             openFileDialog.FilterIndex = 1;
             openFileDialog.RestoreDirectory = true;
@@ -492,31 +532,10 @@ namespace Summanager
                 btnNuevo_MouseClick(null, null);
                 }
             }
+
+            IO.File.SetOpenDirectory(openFileDialog.FileName); //Guardo el último directorio.
             openFileDialog.FileName = ""; //Limpio el OFD.
-            this.openIniDirec = _getFilePath(openFileDialog.FileName);
             _acomodarBotones(); //Acomodo los botones.
-        }
-
-        private string _getFilePath(string filePath)
-        {
-            string retorno = String.Empty;
-
-            string[] split = filePath.Split('\\');
-
-            bool primero = true;
-            for(int i=0; i < split.Length - 1; i++)
-            {
-                if (primero)
-                {
-                    retorno = split[i];
-                }
-                else
-                {
-                    retorno += split[i];
-                }
-            }
-
-            return retorno;
         }
 
 		private void btnGuardar_MouseClick(object sender, MouseEventArgs e)
@@ -574,7 +593,7 @@ namespace Summanager
             //Exporta una Lista de Impresoras a un archivo de Excel. 
 
             //Seteo el SaveFileDialog.
-            saveFileDialog.InitialDirectory = saveIniDirec;
+            saveFileDialog.InitialDirectory = _getSaveDirectory();
             saveFileDialog.Filter = "Libro de Excel (*.xlsx)|*.xlsx";
             saveFileDialog.FilterIndex = 1;
             saveFileDialog.RestoreDirectory = true;
@@ -595,6 +614,8 @@ namespace Summanager
                     MessageBox.Show(ex.Message); //Si huibo un error, lo muestro.
                 }
             }
+
+            IO.File.SetSaveDirectory(this.saveFileDialog.FileName); //Guardo el último directorio.
             saveFileDialog.FileName = ""; //Limpio el SFD.
             _acomodarBotones(); //Acomodo botones.
         }

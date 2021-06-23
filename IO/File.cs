@@ -384,6 +384,102 @@ namespace IO
         }
 
         /// <summary>
+        /// Devuelve la última ruta guardada que usó un OpenFileDialog.
+        /// </summary>
+        /// <returns></returns>
+        public static string GetOpenDirectory()
+        {
+            string path = ConfigurationManager.AppSettings.Get("openDirectory");
+            //Compruebo que el directorio exista. Si no, devuelvo C:
+            if (!Directory.Exists(path)) path = "c:\\";
+            return path;
+        }
+
+        /// <summary>
+        /// Devuelve la última ruta guardada que usó un SaveFileDialog.
+        /// </summary>
+        /// <returns></returns>
+        public static string GetSaveDirectory()
+        {
+            string path = ConfigurationManager.AppSettings.Get("saveDirectory");
+            //Compruebo que el directorio exista. Si no, devuelvo C:
+            if (!Directory.Exists(path)) path = "c:\\";
+            return path;
+        }
+
+        /// <summary>
+        /// Almacena una ruta para usarse en el OpenFileDialog
+        /// </summary>
+        /// <param name="filePath"></param>
+        public static void SetOpenDirectory(string filePath)
+        {
+            //Me fijo que el File Path no esté vacío. Si lo está, no hago nada.
+            if (filePath != String.Empty)
+            {
+                //Como recibo el path completo, debo quitar de él el nombre del archivo.
+                string[] split = filePath.Split('\\');
+                bool primero = true;
+
+                for (int i = 0; i < split.Length - 1; i++)
+                {
+                    if (primero)
+                    {
+                        filePath = split[i];
+                        primero = false;
+                    }
+                    else
+                    {
+                        filePath += "\\" + split[i];
+                    }
+                }
+
+                var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                var settings = configFile.AppSettings.Settings;
+
+                settings["openDirectory"].Value = filePath;
+
+                configFile.Save(ConfigurationSaveMode.Modified);
+                ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
+            }
+        }
+
+        /// <summary>
+        /// Almacena una ruta para usarse en el SaveFileDialog
+        /// </summary>
+        /// <param name="filePath"></param>
+        public static void SetSaveDirectory(string filePath)
+        {
+            //Me fijo que el File Path no esté vacío. Si lo está, no hago nada.
+            if (filePath != String.Empty)
+            {
+                //Como recibo el path completo, debo quitar de él el nombre del archivo.
+                string[] split = filePath.Split('\\');
+                bool primero = true;
+
+                for (int i = 0; i < split.Length - 1; i++)
+                {
+                    if (primero)
+                    {
+                        filePath = split[i];
+                        primero = false;
+                    }
+                    else
+                    {
+                        filePath += "\\" + split[i];
+                    }
+                }
+
+                var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                var settings = configFile.AppSettings.Settings;
+
+                settings["saveDirectory"].Value = filePath;
+
+                configFile.Save(ConfigurationSaveMode.Modified);
+                ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
+            }
+        }
+
+        /// <summary>
         /// Toma un archivo de extensión SMP ya creado y lo encripta.
         /// </summary>
         /// <remarks>
@@ -413,7 +509,7 @@ namespace IO
                         //línea leída.
                         result += '\n' + line;
                     }
-                    
+
                 }
             }
 
@@ -422,7 +518,7 @@ namespace IO
             result = Convert.ToBase64String(encrypted);
 
             //Sobreescribo el archivo pasado por parámetro con la cadena (result) ya encriptada.
-            using(StreamWriter writer = new StreamWriter(filePath))
+            using (StreamWriter writer = new StreamWriter(filePath))
             {
                 writer.Write(result);
             }
