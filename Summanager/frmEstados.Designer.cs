@@ -34,6 +34,7 @@ namespace Summanager
             this.dgv = new System.Windows.Forms.DataGridView();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.cmbPrueba = new CustomControls.ComboBox();
             this.groupEstadisticas = new CustomControls.CustomGroupBox();
             this.customGroupBox3 = new CustomControls.CustomGroupBox();
             this.estKitMantCritico = new CustomControls.Estadistica();
@@ -54,6 +55,7 @@ namespace Summanager
             this.btnImportar = new CustomControls.MenuChildButtom();
             this.btnGuardar = new CustomControls.MenuChildButtom();
             this.btnAbrir = new CustomControls.MenuChildButtom();
+            this.button1 = new System.Windows.Forms.Button();
             this.panelTitulo.SuspendLayout();
             this.panelMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
@@ -99,7 +101,7 @@ namespace Summanager
             this.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgv.EnableHeadersVisualStyles = false;
             this.dgv.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(159)))), ((int)(((byte)(206)))));
-            this.dgv.Location = new System.Drawing.Point(12, 95);
+            this.dgv.Location = new System.Drawing.Point(12, 128);
             this.dgv.MultiSelect = false;
             this.dgv.Name = "dgv";
             this.dgv.ReadOnly = true;
@@ -115,9 +117,19 @@ namespace Summanager
             this.dgv.ShowCellToolTips = false;
             this.dgv.ShowEditingIcon = false;
             this.dgv.ShowRowErrors = false;
-            this.dgv.Size = new System.Drawing.Size(1023, 227);
+            this.dgv.Size = new System.Drawing.Size(1023, 194);
             this.dgv.TabIndex = 22;
             this.dgv.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dgv_MouseDoubleClick);
+            // 
+            // cmbPrueba
+            // 
+            this.cmbPrueba.BackColor = System.Drawing.Color.White;
+            this.cmbPrueba.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cmbPrueba.Location = new System.Drawing.Point(54, 95);
+            this.cmbPrueba.MinimumSize = new System.Drawing.Size(136, 27);
+            this.cmbPrueba.Name = "cmbPrueba";
+            this.cmbPrueba.Size = new System.Drawing.Size(136, 27);
+            this.cmbPrueba.TabIndex = 24;
             // 
             // groupEstadisticas
             // 
@@ -324,10 +336,22 @@ namespace Summanager
             this.btnAbrir.Text = "Abrir";
             this.btnAbrir.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnAbrir_MouseClick);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(236, 101);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(51, 20);
+            this.button1.TabIndex = 25;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // FrmEstados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(1050, 690);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.cmbPrueba);
             this.Controls.Add(this.groupEstadisticas);
             this.Controls.Add(this.dgv);
             this.Name = "FrmEstados";
@@ -337,6 +361,8 @@ namespace Summanager
             this.Controls.SetChildIndex(this.panelTitulo, 0);
             this.Controls.SetChildIndex(this.panelMenu, 0);
             this.Controls.SetChildIndex(this.groupEstadisticas, 0);
+            this.Controls.SetChildIndex(this.cmbPrueba, 0);
+            this.Controls.SetChildIndex(this.button1, 0);
             this.panelTitulo.ResumeLayout(false);
             this.panelTitulo.PerformLayout();
             this.panelMenu.ResumeLayout(false);
@@ -377,5 +403,7 @@ namespace Summanager
         private CustomControls.Estadistica estKitMantRiesgo;
         private CustomControls.Estadistica estUnImgRiesgo;
         private CustomControls.Estadistica estTonerRiesgo;
+        private CustomControls.ComboBox cmbPrueba;
+        private System.Windows.Forms.Button button1;
     }
 }

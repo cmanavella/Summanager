@@ -20,6 +20,9 @@ namespace Summanager
             
             this.frmMain = frmMain;
             this.printers = new List<Printer>();
+
+            this.cmbPrueba.Add(0, "Hola");
+            this.cmbPrueba.Add(1, "Mundo");
         }
 
         /// <summary>
@@ -660,6 +663,11 @@ namespace Summanager
             {
                 groupEstadisticas.Visible = false;
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(cmbPrueba.SelectedItem().Text);
         }
     }
 }
