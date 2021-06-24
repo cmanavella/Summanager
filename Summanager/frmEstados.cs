@@ -669,5 +669,10 @@ namespace Summanager
         {
             MessageBox.Show(cmbPrueba.SelectedItem().Text);
         }
+
+        private void cmbPrueba_ItemSelectedChange(object sender, EventArgs e)
+        {
+            MessageBox.Show(this.cmbPrueba.SelectedItem().Text);
+        }
     }
 }

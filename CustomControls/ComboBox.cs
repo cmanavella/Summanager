@@ -24,6 +24,9 @@ namespace CustomControls
         /// </summary>
         public List<Item> Items { get; }
 
+        [Browsable(true)]
+        public event EventHandler ItemSelectedChange;
+
         public ComboBox()
         {
             InitializeComponent();
@@ -178,6 +181,7 @@ namespace CustomControls
             this.lblItemText.Text = this.Items[index].Text; //Paso el texto al Label que lo muestra.
             this.itemSelected = this.Items[index]; //Guaro el item seleccionado.
             ComboBox_MouseClick(null, null); //Ejecuto el evento Clic del combo.
+            this.ItemSelectedChange(null, null);
         }
 
         /// <summary>

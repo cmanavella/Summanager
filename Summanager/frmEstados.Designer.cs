@@ -34,6 +34,8 @@ namespace Summanager
             this.dgv = new System.Windows.Forms.DataGridView();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.button1 = new System.Windows.Forms.Button();
+            this.textBox1 = new CustomControls.TextBox();
             this.cmbPrueba = new CustomControls.ComboBox();
             this.groupEstadisticas = new CustomControls.CustomGroupBox();
             this.customGroupBox3 = new CustomControls.CustomGroupBox();
@@ -55,7 +57,6 @@ namespace Summanager
             this.btnImportar = new CustomControls.MenuChildButtom();
             this.btnGuardar = new CustomControls.MenuChildButtom();
             this.btnAbrir = new CustomControls.MenuChildButtom();
-            this.button1 = new System.Windows.Forms.Button();
             this.panelTitulo.SuspendLayout();
             this.panelMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
@@ -121,6 +122,27 @@ namespace Summanager
             this.dgv.TabIndex = 22;
             this.dgv.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dgv_MouseDoubleClick);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(236, 101);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(51, 20);
+            this.button1.TabIndex = 25;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.BackColor = System.Drawing.Color.White;
+            this.textBox1.IsMaskared = false;
+            this.textBox1.Location = new System.Drawing.Point(348, 109);
+            this.textBox1.MaskText = "Hola";
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(228, 24);
+            this.textBox1.TabIndex = 26;
+            this.textBox1.Text = "Mundo";
+            // 
             // cmbPrueba
             // 
             this.cmbPrueba.BackColor = System.Drawing.Color.White;
@@ -130,6 +152,7 @@ namespace Summanager
             this.cmbPrueba.Name = "cmbPrueba";
             this.cmbPrueba.Size = new System.Drawing.Size(136, 27);
             this.cmbPrueba.TabIndex = 24;
+            this.cmbPrueba.ItemSelectedChange += new System.EventHandler(this.cmbPrueba_ItemSelectedChange);
             // 
             // groupEstadisticas
             // 
@@ -336,20 +359,11 @@ namespace Summanager
             this.btnAbrir.Text = "Abrir";
             this.btnAbrir.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnAbrir_MouseClick);
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(236, 101);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(51, 20);
-            this.button1.TabIndex = 25;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // FrmEstados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(1050, 690);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.cmbPrueba);
             this.Controls.Add(this.groupEstadisticas);
@@ -363,6 +377,7 @@ namespace Summanager
             this.Controls.SetChildIndex(this.groupEstadisticas, 0);
             this.Controls.SetChildIndex(this.cmbPrueba, 0);
             this.Controls.SetChildIndex(this.button1, 0);
+            this.Controls.SetChildIndex(this.textBox1, 0);
             this.panelTitulo.ResumeLayout(false);
             this.panelTitulo.PerformLayout();
             this.panelMenu.ResumeLayout(false);
@@ -405,5 +420,6 @@ namespace Summanager
         private CustomControls.Estadistica estTonerRiesgo;
         private CustomControls.ComboBox cmbPrueba;
         private System.Windows.Forms.Button button1;
+        private CustomControls.TextBox textBox1;
     }
 }
