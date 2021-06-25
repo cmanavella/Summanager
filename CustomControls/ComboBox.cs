@@ -181,7 +181,7 @@ namespace CustomControls
             this.lblItemText.Text = this.Items[index].Text; //Paso el texto al Label que lo muestra.
             this.itemSelected = this.Items[index]; //Guaro el item seleccionado.
             ComboBox_MouseClick(null, null); //Ejecuto el evento Clic del combo.
-            this.ItemSelectedChange(null, null);
+            if (this.ItemSelectedChange != null) this.ItemSelectedChange(null, null); //Disparo el Handler si este no es null.
         }
 
         /// <summary>

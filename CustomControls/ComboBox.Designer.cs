@@ -47,19 +47,18 @@ namespace CustomControls
             // 
             this.bordeInferior.BackColor = System.Drawing.Color.Gray;
             this.bordeInferior.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bordeInferior.Location = new System.Drawing.Point(0, 26);
+            this.bordeInferior.Location = new System.Drawing.Point(0, 25);
             this.bordeInferior.Name = "bordeInferior";
-            this.bordeInferior.Size = new System.Drawing.Size(136, 1);
+            this.bordeInferior.Size = new System.Drawing.Size(136, 2);
             this.bordeInferior.TabIndex = 0;
             // 
             // division
             // 
-            this.division.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.division.BackColor = System.Drawing.Color.Gray;
-            this.division.Location = new System.Drawing.Point(109, 1);
+            this.division.Dock = System.Windows.Forms.DockStyle.Right;
+            this.division.Location = new System.Drawing.Point(108, 0);
             this.division.Name = "division";
-            this.division.Size = new System.Drawing.Size(1, 24);
+            this.division.Size = new System.Drawing.Size(2, 25);
             this.division.TabIndex = 1;
             // 
             // icon
@@ -70,11 +69,11 @@ namespace CustomControls
             this.icon.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
             this.icon.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.icon.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.icon.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.icon.Font = new System.Drawing.Font("Arial Black", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.icon.ForeColor = System.Drawing.Color.Gray;
             this.icon.Location = new System.Drawing.Point(110, 0);
             this.icon.Name = "icon";
-            this.icon.Size = new System.Drawing.Size(26, 26);
+            this.icon.Size = new System.Drawing.Size(26, 25);
             this.icon.TabIndex = 2;
             this.icon.Text = "V";
             this.icon.UseVisualStyleBackColor = true;
@@ -96,15 +95,13 @@ namespace CustomControls
             // 
             // lblItemText
             // 
-            this.lblItemText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblItemText.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblItemText.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblItemText.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblItemText.ForeColor = System.Drawing.Color.Gray;
             this.lblItemText.Location = new System.Drawing.Point(0, 0);
             this.lblItemText.Name = "lblItemText";
             this.lblItemText.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
-            this.lblItemText.Size = new System.Drawing.Size(109, 26);
+            this.lblItemText.Size = new System.Drawing.Size(108, 25);
             this.lblItemText.TabIndex = 3;
             this.lblItemText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
