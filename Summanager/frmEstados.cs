@@ -1,6 +1,7 @@
 ﻿using Entities;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Threading;
@@ -127,6 +128,25 @@ namespace Summanager
             this.cmbSuministro.Add(2, "Crítico");
         }
 
+        private void _filtrar()
+        {
+            if (!this.txtFiltro.IsMaskared)
+            {
+                if (this.txtFiltro.Text.Length > 0)
+                {
+                    (this.dgv.DataSource as DataTable).DefaultView.RowFilter = String.Format("[{0}] LIKE '%{1}%'", "oficina", this.txtFiltro.Text);
+                }
+                else
+                {
+                    (this.dgv.DataSource as DataTable).DefaultView.RowFilter = null;
+                }
+            }
+            else
+            {
+                (this.dgv.DataSource as DataTable).DefaultView.RowFilter = null;
+            }
+        }
+
         /// <summary>
         /// Acomoda los botones del Form Estados de acuerdo a si es un nuevo archivo (fijándome en el Título del
         /// Form Main) o si la Lista de Impresoras está vacía.
@@ -181,30 +201,19 @@ namespace Summanager
             //Compruebo que la Lista de Impresoras no esté vacía.
             if (printers.Count > 0)
             {
+                DataTable dataTable = new DataTable();
+
                 //Cuento todas las impresoras como No Analizadas.
                 this.estadistica.NoAnalizadas = this.printers.Count;
 
                 //Cargo los encabezados de las Columnas con sus respectivos nombres y textos a mostrar.
-                dgv.Columns.Add("ip", "Ip");
-                dgv.Columns.Add("modelo", "Modelo");
-                dgv.Columns.Add("oficina", "Oficina");
-                dgv.Columns.Add("estado", "Estado");
-                dgv.Columns.Add("toner", "Toner");
-                dgv.Columns.Add("uimagen", "UI");
-                dgv.Columns.Add("kmant", "KM");
-
-                //Desactivo la Opción de Ordenar las Columnas al hacer clic en su encabezado.
-                foreach (DataGridViewColumn column in dgv.Columns)
-                {
-                    column.SortMode = DataGridViewColumnSortMode.NotSortable;
-                }
-
-                //Modifico el tamaño de algunas Columnas.
-                dgv.Columns[1].Width = 150;
-                dgv.Columns[2].Width = 510;
-                dgv.Columns[4].Width = 50;
-                dgv.Columns[5].Width = 50;
-                dgv.Columns[6].Width = 50;
+                dataTable.Columns.Add("Ip", typeof(string));
+                dataTable.Columns.Add("Modelo", typeof(string));
+                dataTable.Columns.Add("Oficina", typeof(string));
+                dataTable.Columns.Add("Estado", typeof(string));
+                dataTable.Columns.Add("Toner", typeof(string));
+                dataTable.Columns.Add("UI", typeof(string));
+                dataTable.Columns.Add("KM", typeof(string));
 
                 //Recorro la Lista de Impresoras para cargarlas.
                 foreach (var printer in printers)
@@ -236,8 +245,24 @@ namespace Summanager
                     }
 
                     //Agrego una nueva fila.
-                    dgv.Rows.Add(printer.Ip, printer.Modelo, printer.Oficina, printer.Estado, toner, uimagen, kitmant);
+                    dataTable.Rows.Add(printer.Ip, printer.Modelo, printer.Oficina, printer.Estado, toner, uimagen, kitmant);
                 }
+
+                this.dgv.DataSource = dataTable;
+
+                //Desactivo la Opción de Ordenar las Columnas al hacer clic en su encabezado.
+                foreach (DataGridViewColumn column in dgv.Columns)
+                {
+                    column.SortMode = DataGridViewColumnSortMode.NotSortable;
+                }
+
+                //Modifico el tamaño de algunas Columnas.
+                dgv.Columns[1].Width = 150;
+                dgv.Columns[2].Width = 510;
+                dgv.Columns[4].Width = 50;
+                dgv.Columns[5].Width = 50;
+                dgv.Columns[6].Width = 50;
+
                 //Llamo al método que colorea las filas.
                 _colorearDgv();
 
@@ -676,6 +701,11 @@ namespace Summanager
             {
                 groupEstadisticas.Visible = false;
             }
+        }
+
+        private void txtFiltro_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            _filtrar();
         }
     }
 }
