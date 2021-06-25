@@ -21,8 +21,7 @@ namespace Summanager
             this.frmMain = frmMain;
             this.printers = new List<Printer>();
 
-            this.cmbPrueba.Add(0, "Hola");
-            this.cmbPrueba.Add(1, "Mundo");
+            _cargarCombos();
         }
 
         /// <summary>
@@ -112,6 +111,20 @@ namespace Summanager
         {
             string[] splitTitle = frmMain.Text.Split('-');
             return splitTitle[1];
+        }
+
+        private void _cargarCombos()
+        {
+            //Cargo el Combo Estados
+            this.cmbEstados.Add(0, "-- Seleccione --");
+            this.cmbEstados.Add(1, "Online");
+            this.cmbEstados.Add(2, "Offline");
+            this.cmbEstados.Add(3, "No Analizada");
+
+            //Cargo el Combo Suministros.
+            this.cmbSuministro.Add(0, "-- Seleccione --");
+            this.cmbSuministro.Add(1, "En Riesgo");
+            this.cmbSuministro.Add(2, "Crítico");
         }
 
         /// <summary>
@@ -663,16 +676,6 @@ namespace Summanager
             {
                 groupEstadisticas.Visible = false;
             }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show(cmbPrueba.SelectedItem().Text);
-        }
-
-        private void cmbPrueba_ItemSelectedChange(object sender, EventArgs e)
-        {
-            MessageBox.Show(this.cmbPrueba.SelectedItem().Text);
         }
     }
 }

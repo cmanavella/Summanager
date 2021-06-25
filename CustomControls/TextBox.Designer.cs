@@ -37,9 +37,9 @@ namespace CustomControls
             // 
             this.bordeInferior.BackColor = System.Drawing.Color.Gray;
             this.bordeInferior.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bordeInferior.Location = new System.Drawing.Point(0, 23);
+            this.bordeInferior.Location = new System.Drawing.Point(0, 18);
             this.bordeInferior.Name = "bordeInferior";
-            this.bordeInferior.Size = new System.Drawing.Size(228, 1);
+            this.bordeInferior.Size = new System.Drawing.Size(228, 2);
             this.bordeInferior.TabIndex = 0;
             // 
             // textBox1
@@ -52,6 +52,7 @@ namespace CustomControls
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(228, 16);
             this.textBox1.TabIndex = 1;
+            this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
             // TextBox
             // 
@@ -61,7 +62,10 @@ namespace CustomControls
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.bordeInferior);
             this.Name = "TextBox";
-            this.Size = new System.Drawing.Size(228, 24);
+            this.Size = new System.Drawing.Size(228, 20);
+            this.Enter += new System.EventHandler(this.TextBox_Enter);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyUp);
+            this.Leave += new System.EventHandler(this.TextBox_Leave);
             this.ResumeLayout(false);
             this.PerformLayout();
 

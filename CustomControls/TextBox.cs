@@ -18,6 +18,9 @@ namespace CustomControls
         private string maskText;
         private string normalText;
 
+        //[Browsable(true)]
+        //public new event KeyPressEventHandler KeyPress;
+
         public TextBox()
         {
             InitializeComponent();
@@ -33,6 +36,12 @@ namespace CustomControls
             //Para, posteriormente, alternarlos de acuerdo a lo que necesite.
             this.maskText = String.Empty;
             this.normalText = String.Empty;
+
+            //Conecto los eventos del TextBox verdadero con los del Control.
+            this.textBox1.Enter += this.TextBox_Enter;
+            this.textBox1.Leave += this.TextBox_Leave;
+            this.textBox1.KeyUp += this.TextBox_KeyUp;
+            //this.textBox1.KeyPress += this.TextBox_KeyPress;
         }
 
         /// <summary>
@@ -97,6 +106,52 @@ namespace CustomControls
                 this.maskText = value;
                 if (this.isMaskared) this.textBox1.Text = this.maskText;
             }
+        }
+        
+        /*
+         * EVENTOS
+         * */
+        private void TextBox_Enter(object sender, EventArgs e)
+        {
+            //Siempre que entro seteo los colores.
+            this.bordeInferior.BackColor = this.colorFocused;
+            this.textBox1.ForeColor = this.colorFocused;
+
+            //Si está mascarado, borro el texto.
+            if (this.isMaskared)
+            {
+                this.textBox1.Text = String.Empty;
+            }
+        }
+
+        private void TextBox_Leave(object sender, EventArgs e)
+        {
+            //Cuando salgo del control, siempre cambio el color del borde.
+            this.bordeInferior.BackColor = this.colorUnfocused;
+
+            //Si está mascarado, vuelvo a colocar el MaskText y cambio el color del Text.
+            if (this.isMaskared) 
+            { 
+                this.textBox1.Text = this.maskText;
+                this.textBox1.ForeColor = this.colorUnfocused;
+            }
+        }
+
+        private void TextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (this.textBox1.Text.Length > 0)
+            {
+                this.isMaskared = false;
+            }
+            else
+            {
+                this.isMaskared = true;
+            }
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            this.OnKeyPress(e);
         }
     }
 }

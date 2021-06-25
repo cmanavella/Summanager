@@ -34,9 +34,6 @@ namespace Summanager
             this.dgv = new System.Windows.Forms.DataGridView();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.button1 = new System.Windows.Forms.Button();
-            this.textBox1 = new CustomControls.TextBox();
-            this.cmbPrueba = new CustomControls.ComboBox();
             this.groupEstadisticas = new CustomControls.CustomGroupBox();
             this.customGroupBox3 = new CustomControls.CustomGroupBox();
             this.estKitMantCritico = new CustomControls.Estadistica();
@@ -57,6 +54,11 @@ namespace Summanager
             this.btnImportar = new CustomControls.MenuChildButtom();
             this.btnGuardar = new CustomControls.MenuChildButtom();
             this.btnAbrir = new CustomControls.MenuChildButtom();
+            this.cmbSuministro = new CustomControls.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.cmbEstados = new CustomControls.ComboBox();
+            this.txtFiltro = new CustomControls.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.panelTitulo.SuspendLayout();
             this.panelMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
@@ -102,7 +104,7 @@ namespace Summanager
             this.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgv.EnableHeadersVisualStyles = false;
             this.dgv.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(159)))), ((int)(((byte)(206)))));
-            this.dgv.Location = new System.Drawing.Point(12, 128);
+            this.dgv.Location = new System.Drawing.Point(12, 130);
             this.dgv.MultiSelect = false;
             this.dgv.Name = "dgv";
             this.dgv.ReadOnly = true;
@@ -118,41 +120,9 @@ namespace Summanager
             this.dgv.ShowCellToolTips = false;
             this.dgv.ShowEditingIcon = false;
             this.dgv.ShowRowErrors = false;
-            this.dgv.Size = new System.Drawing.Size(1023, 194);
+            this.dgv.Size = new System.Drawing.Size(1023, 192);
             this.dgv.TabIndex = 22;
             this.dgv.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dgv_MouseDoubleClick);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(236, 101);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(51, 20);
-            this.button1.TabIndex = 25;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // textBox1
-            // 
-            this.textBox1.BackColor = System.Drawing.Color.White;
-            this.textBox1.IsMaskared = false;
-            this.textBox1.Location = new System.Drawing.Point(348, 109);
-            this.textBox1.MaskText = "Hola";
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(228, 24);
-            this.textBox1.TabIndex = 26;
-            this.textBox1.Text = "Mundo";
-            // 
-            // cmbPrueba
-            // 
-            this.cmbPrueba.BackColor = System.Drawing.Color.White;
-            this.cmbPrueba.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cmbPrueba.Location = new System.Drawing.Point(54, 95);
-            this.cmbPrueba.MinimumSize = new System.Drawing.Size(136, 27);
-            this.cmbPrueba.Name = "cmbPrueba";
-            this.cmbPrueba.Size = new System.Drawing.Size(136, 27);
-            this.cmbPrueba.TabIndex = 24;
-            this.cmbPrueba.ItemSelectedChange += new System.EventHandler(this.cmbPrueba_ItemSelectedChange);
             // 
             // groupEstadisticas
             // 
@@ -359,13 +329,68 @@ namespace Summanager
             this.btnAbrir.Text = "Abrir";
             this.btnAbrir.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnAbrir_MouseClick);
             // 
+            // cmbSuministro
+            // 
+            this.cmbSuministro.BackColor = System.Drawing.Color.White;
+            this.cmbSuministro.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cmbSuministro.Location = new System.Drawing.Point(613, 97);
+            this.cmbSuministro.MinimumSize = new System.Drawing.Size(136, 27);
+            this.cmbSuministro.Name = "cmbSuministro";
+            this.cmbSuministro.Size = new System.Drawing.Size(169, 27);
+            this.cmbSuministro.TabIndex = 28;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
+            this.label2.Location = new System.Drawing.Point(531, 104);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(76, 17);
+            this.label2.TabIndex = 27;
+            this.label2.Text = "Suministro:";
+            // 
+            // cmbEstados
+            // 
+            this.cmbEstados.BackColor = System.Drawing.Color.White;
+            this.cmbEstados.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cmbEstados.Location = new System.Drawing.Point(356, 97);
+            this.cmbEstados.MinimumSize = new System.Drawing.Size(136, 27);
+            this.cmbEstados.Name = "cmbEstados";
+            this.cmbEstados.Size = new System.Drawing.Size(169, 27);
+            this.cmbEstados.TabIndex = 26;
+            // 
+            // txtFiltro
+            // 
+            this.txtFiltro.BackColor = System.Drawing.Color.White;
+            this.txtFiltro.IsMaskared = true;
+            this.txtFiltro.Location = new System.Drawing.Point(12, 104);
+            this.txtFiltro.MaskText = "Filtrar por Ip, Modelo u Oficina";
+            this.txtFiltro.Name = "txtFiltro";
+            this.txtFiltro.Size = new System.Drawing.Size(270, 20);
+            this.txtFiltro.TabIndex = 25;
+            this.txtFiltro.Text = "Filtrar por Ip, Modelo u Oficina";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
+            this.label1.Location = new System.Drawing.Point(294, 104);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(56, 17);
+            this.label1.TabIndex = 24;
+            this.label1.Text = "Estado:";
+            // 
             // FrmEstados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(1050, 690);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.cmbPrueba);
+            this.Controls.Add(this.cmbSuministro);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.cmbEstados);
+            this.Controls.Add(this.txtFiltro);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.groupEstadisticas);
             this.Controls.Add(this.dgv);
             this.Name = "FrmEstados";
@@ -375,9 +400,11 @@ namespace Summanager
             this.Controls.SetChildIndex(this.panelTitulo, 0);
             this.Controls.SetChildIndex(this.panelMenu, 0);
             this.Controls.SetChildIndex(this.groupEstadisticas, 0);
-            this.Controls.SetChildIndex(this.cmbPrueba, 0);
-            this.Controls.SetChildIndex(this.button1, 0);
-            this.Controls.SetChildIndex(this.textBox1, 0);
+            this.Controls.SetChildIndex(this.label1, 0);
+            this.Controls.SetChildIndex(this.txtFiltro, 0);
+            this.Controls.SetChildIndex(this.cmbEstados, 0);
+            this.Controls.SetChildIndex(this.label2, 0);
+            this.Controls.SetChildIndex(this.cmbSuministro, 0);
             this.panelTitulo.ResumeLayout(false);
             this.panelTitulo.PerformLayout();
             this.panelMenu.ResumeLayout(false);
@@ -391,6 +418,7 @@ namespace Summanager
             this.customGroupBox1.ResumeLayout(false);
             this.customGroupBox1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -418,8 +446,10 @@ namespace Summanager
         private CustomControls.Estadistica estKitMantRiesgo;
         private CustomControls.Estadistica estUnImgRiesgo;
         private CustomControls.Estadistica estTonerRiesgo;
-        private CustomControls.ComboBox cmbPrueba;
-        private System.Windows.Forms.Button button1;
-        private CustomControls.TextBox textBox1;
+        private CustomControls.ComboBox cmbSuministro;
+        private System.Windows.Forms.Label label2;
+        private CustomControls.ComboBox cmbEstados;
+        private CustomControls.TextBox txtFiltro;
+        private System.Windows.Forms.Label label1;
     }
 }
