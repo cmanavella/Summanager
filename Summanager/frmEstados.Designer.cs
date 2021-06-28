@@ -29,11 +29,16 @@ namespace Summanager
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmEstados));
             this.dgv = new System.Windows.Forms.DataGridView();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cmbSuministro = new CustomControls.ComboBox();
+            this.cmbEstados = new CustomControls.ComboBox();
+            this.txtFiltro = new CustomControls.TextBox();
             this.groupEstadisticas = new CustomControls.CustomGroupBox();
             this.customGroupBox3 = new CustomControls.CustomGroupBox();
             this.estKitMantCritico = new CustomControls.Estadistica();
@@ -54,11 +59,6 @@ namespace Summanager
             this.btnImportar = new CustomControls.MenuChildButtom();
             this.btnGuardar = new CustomControls.MenuChildButtom();
             this.btnAbrir = new CustomControls.MenuChildButtom();
-            this.cmbSuministro = new CustomControls.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.cmbEstados = new CustomControls.ComboBox();
-            this.txtFiltro = new CustomControls.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.panelTitulo.SuspendLayout();
             this.panelMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
@@ -93,14 +93,14 @@ namespace Summanager
             this.dgv.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgv.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgv.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(159)))), ((int)(((byte)(206)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(159)))), ((int)(((byte)(206)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(159)))), ((int)(((byte)(206)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(159)))), ((int)(((byte)(206)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgv.EnableHeadersVisualStyles = false;
             this.dgv.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(159)))), ((int)(((byte)(206)))));
@@ -122,7 +122,64 @@ namespace Summanager
             this.dgv.ShowRowErrors = false;
             this.dgv.Size = new System.Drawing.Size(1023, 192);
             this.dgv.TabIndex = 22;
+            this.dgv.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgv_DataBindingComplete);
             this.dgv.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dgv_MouseDoubleClick);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
+            this.label2.Location = new System.Drawing.Point(531, 104);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(76, 17);
+            this.label2.TabIndex = 27;
+            this.label2.Text = "Suministro:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
+            this.label1.Location = new System.Drawing.Point(294, 104);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(56, 17);
+            this.label1.TabIndex = 24;
+            this.label1.Text = "Estado:";
+            // 
+            // cmbSuministro
+            // 
+            this.cmbSuministro.BackColor = System.Drawing.Color.White;
+            this.cmbSuministro.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cmbSuministro.Location = new System.Drawing.Point(613, 97);
+            this.cmbSuministro.MinimumSize = new System.Drawing.Size(136, 27);
+            this.cmbSuministro.Name = "cmbSuministro";
+            this.cmbSuministro.Size = new System.Drawing.Size(169, 27);
+            this.cmbSuministro.TabIndex = 28;
+            this.cmbSuministro.ItemSelectedChange += new System.EventHandler(this.cmbSuministro_ItemSelectedChange);
+            // 
+            // cmbEstados
+            // 
+            this.cmbEstados.BackColor = System.Drawing.Color.White;
+            this.cmbEstados.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cmbEstados.Location = new System.Drawing.Point(356, 97);
+            this.cmbEstados.MinimumSize = new System.Drawing.Size(136, 27);
+            this.cmbEstados.Name = "cmbEstados";
+            this.cmbEstados.Size = new System.Drawing.Size(169, 27);
+            this.cmbEstados.TabIndex = 26;
+            this.cmbEstados.ItemSelectedChange += new System.EventHandler(this.cmbEstados_ItemSelectedChange);
+            // 
+            // txtFiltro
+            // 
+            this.txtFiltro.BackColor = System.Drawing.Color.White;
+            this.txtFiltro.IsMaskared = true;
+            this.txtFiltro.Location = new System.Drawing.Point(12, 104);
+            this.txtFiltro.MaskText = "Filtrar por Ip, Modelo u Oficina";
+            this.txtFiltro.Name = "txtFiltro";
+            this.txtFiltro.Size = new System.Drawing.Size(270, 20);
+            this.txtFiltro.TabIndex = 25;
+            this.txtFiltro.Text = "Filtrar por Ip, Modelo u Oficina";
+            this.txtFiltro.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtFiltro_KeyUp);
             // 
             // groupEstadisticas
             // 
@@ -328,60 +385,6 @@ namespace Summanager
             this.btnAbrir.TabIndex = 0;
             this.btnAbrir.Text = "Abrir";
             this.btnAbrir.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnAbrir_MouseClick);
-            // 
-            // cmbSuministro
-            // 
-            this.cmbSuministro.BackColor = System.Drawing.Color.White;
-            this.cmbSuministro.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cmbSuministro.Location = new System.Drawing.Point(613, 97);
-            this.cmbSuministro.MinimumSize = new System.Drawing.Size(136, 27);
-            this.cmbSuministro.Name = "cmbSuministro";
-            this.cmbSuministro.Size = new System.Drawing.Size(169, 27);
-            this.cmbSuministro.TabIndex = 28;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
-            this.label2.Location = new System.Drawing.Point(531, 104);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(76, 17);
-            this.label2.TabIndex = 27;
-            this.label2.Text = "Suministro:";
-            // 
-            // cmbEstados
-            // 
-            this.cmbEstados.BackColor = System.Drawing.Color.White;
-            this.cmbEstados.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cmbEstados.Location = new System.Drawing.Point(356, 97);
-            this.cmbEstados.MinimumSize = new System.Drawing.Size(136, 27);
-            this.cmbEstados.Name = "cmbEstados";
-            this.cmbEstados.Size = new System.Drawing.Size(169, 27);
-            this.cmbEstados.TabIndex = 26;
-            // 
-            // txtFiltro
-            // 
-            this.txtFiltro.BackColor = System.Drawing.Color.White;
-            this.txtFiltro.IsMaskared = true;
-            this.txtFiltro.Location = new System.Drawing.Point(12, 104);
-            this.txtFiltro.MaskText = "Filtrar por Ip, Modelo u Oficina";
-            this.txtFiltro.Name = "txtFiltro";
-            this.txtFiltro.Size = new System.Drawing.Size(270, 20);
-            this.txtFiltro.TabIndex = 25;
-            this.txtFiltro.Text = "Filtrar por Ip, Modelo u Oficina";
-            this.txtFiltro.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtFiltro_KeyPress);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
-            this.label1.Location = new System.Drawing.Point(294, 104);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(56, 17);
-            this.label1.TabIndex = 24;
-            this.label1.Text = "Estado:";
             // 
             // FrmEstados
             // 

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -128,18 +129,56 @@ namespace Summanager
             this.cmbSuministro.Add(2, "Crítico");
         }
 
+        /// <summary>
+        /// Permite filtrar el DataGridView
+        /// </summary>
         private void _filtrar()
         {
-            if (!this.txtFiltro.IsMaskared)
+            //Armo el StringBuilder de filtro vacío.
+            StringBuilder filtro = new StringBuilder();
+
+            //Pregunto si el texto no está mascarado y si tiene algo escrito.
+            if (!this.txtFiltro.IsMaskared && this.txtFiltro.Text.Length > 0)
             {
-                if (this.txtFiltro.Text.Length > 0)
+                //Si se cumple la condición armo el filtro, analizando la columna que armé con las tres columnas que quiero analizar con el textbox.
+                //Uso LIKE para que filtre con cualquier coincidencia.
+                filtro.Append("[FiltroTextBox] LIKE '%" + this.txtFiltro.Text + "%'");
+            }
+            //Evaluo si el ComboEstados tiene un valor mayor a 0. Eso significa que elegí un elemento.
+            if (this.cmbEstados.SelectedItem().Value > 0)
+            {
+                //Pregunto si el filtro ya tiene contenido. Si lo tiene agrego AND para que se filtre solo si se cumplen las condiciones anteriores.
+                if (filtro.Length > 0) filtro.Append("AND");
+                filtro.Append("[Estado] = '" + this.cmbEstados.SelectedItem().Text + "'");
+            }
+            //Evaluo si el ComboSuministros tiene un valor mayor a 0 para saber si hay un elemento seleccionado.
+            if (this.cmbSuministro.SelectedItem().Value > 0)
+            {
+                //Me fijo en su valor. Si es 1 debo hacer un filtro para los Suministros en riesgo. Si es 2 lo debo hacer para los Críticos.
+                if (this.cmbSuministro.SelectedItem().Value == 1)
                 {
-                    (this.dgv.DataSource as DataTable).DefaultView.RowFilter = String.Format("[{0}] LIKE '%{1}%'", "oficina", this.txtFiltro.Text);
+                    //Pregunto si el filtro ya tiene contenido. Si lo tiene agrego AND para que se filtre solo si se cumplen las condiciones anteriores.
+                    if (filtro.Length > 0) filtro.Append("AND");
+                    //Compruebo que cada una de las columnas numéricas se encuentren en rango de riesgo que es entre 3 y 10.
+                    filtro.Append("(([FiltroToner] > 3 AND [FiltroToner] <= 10) OR ");
+                    filtro.Append("([FiltroUI] > 3 AND [FiltroUI] <= 10) OR ");
+                    filtro.Append("([FiltroKM] > 3 AND [FiltroKM] <= 10))");
                 }
                 else
                 {
-                    (this.dgv.DataSource as DataTable).DefaultView.RowFilter = null;
+                    //Pregunto si el filtro ya tiene contenido. Si lo tiene agrego AND para que se filtre solo si se cumplen las condiciones anteriores.
+                    if (filtro.Length > 0) filtro.Append("AND");
+                    //Compruebo que cada una de las columnas numéricas se encuentren en rango crítico que es entre 0 y 3.
+                    filtro.Append("(([FiltroToner] >= 0 AND [FiltroToner] <= 3) OR ");
+                    filtro.Append("([FiltroUI] >= 0 AND [FiltroUI] <= 3) OR ");
+                    filtro.Append("([FiltroKM] >= 0 AND [FiltroKM] <= 3))");
                 }
+            }
+
+            //Analizo si el filtro no está vacío. Si no lo está, filtro. Si se encuentra vacío borro el filtro en el DGV.
+            if (filtro.Length > 0)
+            {
+                (this.dgv.DataSource as DataTable).DefaultView.RowFilter = filtro.ToString();
             }
             else
             {
@@ -214,6 +253,12 @@ namespace Summanager
                 dataTable.Columns.Add("Toner", typeof(string));
                 dataTable.Columns.Add("UI", typeof(string));
                 dataTable.Columns.Add("KM", typeof(string));
+                //Creo una columna especial con un string que contiene todos los valores de las columnas que quiero filtrar con el TextBox.
+                dataTable.Columns.Add("FiltroTextBox", typeof(string));
+                //Creo una columna oculta por cada suministro para filtrar luego.
+                dataTable.Columns.Add("FiltroToner", typeof(int));
+                dataTable.Columns.Add("FiltroUI", typeof(int));
+                dataTable.Columns.Add("FiltroKM", typeof(int));
 
                 //Recorro la Lista de Impresoras para cargarlas.
                 foreach (var printer in printers)
@@ -224,11 +269,29 @@ namespace Summanager
                     string uimagen = "";
                     string kitmant = "";
 
+                    //Creo las variables numericas de los suministros para agregarlas a su respectiva columna usada para filtrarlos.
+                    //Las seteo a todas en -1.
+                    int filtroToner = -1;
+                    int filtroUI = -1;
+                    int filtroKM = -1;
+
                     //Compruebo que los suministros no sean nulos. Si no lo son, concateno el valor del suministro seguido
-                    //por el signo '%'
-                    if (printer.Toner != null) toner = printer.Toner + "%";
-                    if (printer.UImagen != null) uimagen = printer.UImagen + "%";
-                    if (printer.KitMant != null) kitmant = printer.KitMant + "%";
+                    //por el signo '%' y coloco su valor en su respectiva variable numérica.
+                    if (printer.Toner != null) 
+                    {
+                        toner = printer.Toner + "%";
+                        filtroToner = (int)printer.Toner;
+                    }
+                    if (printer.UImagen != null)
+                    { 
+                        uimagen = printer.UImagen + "%";
+                        filtroUI = (int)printer.UImagen;
+                    }
+                    if (printer.KitMant != null) 
+                    { 
+                        kitmant = printer.KitMant + "%";
+                        filtroKM = (int)printer.KitMant;
+                    }
 
                     //Si analizo, acomodo los datos para la estadistica.
                     if (printer.Estado != Printer.NO_ANALIZADA)
@@ -244,11 +307,26 @@ namespace Summanager
                         }
                     }
 
+                    //Uso StringBuilder para armar la cadena de filtro para el TextBox.
+                    StringBuilder filtroTextBox = new StringBuilder();
+                    filtroTextBox.Append(printer.Ip);
+                    filtroTextBox.Append("\t");
+                    filtroTextBox.Append(printer.Modelo);
+                    filtroTextBox.Append("\t");
+                    filtroTextBox.Append(printer.Oficina);
+
                     //Agrego una nueva fila.
-                    dataTable.Rows.Add(printer.Ip, printer.Modelo, printer.Oficina, printer.Estado, toner, uimagen, kitmant);
+                    dataTable.Rows.Add(printer.Ip, printer.Modelo, printer.Oficina, printer.Estado, toner, uimagen, kitmant, filtroTextBox,
+                        filtroToner, filtroUI, filtroKM);
                 }
 
                 this.dgv.DataSource = dataTable;
+
+                //Oculto las columnas filtros
+                this.dgv.Columns["FiltroTextBox"].Visible = false;
+                this.dgv.Columns["FiltroToner"].Visible = false;
+                this.dgv.Columns["FiltroUI"].Visible = false;
+                this.dgv.Columns["FiltroKM"].Visible = false;
 
                 //Desactivo la Opción de Ordenar las Columnas al hacer clic en su encabezado.
                 foreach (DataGridViewColumn column in dgv.Columns)
@@ -262,11 +340,6 @@ namespace Summanager
                 dgv.Columns[4].Width = 50;
                 dgv.Columns[5].Width = 50;
                 dgv.Columns[6].Width = 50;
-
-                //Llamo al método que colorea las filas.
-                _colorearDgv();
-
-                _getEstadisticas();
             }
         }
 
@@ -323,6 +396,7 @@ namespace Summanager
                     if (kmant >= 0 && kmant <= 3) this.estadistica.KitMantCritico++;
                 }
             }
+            _getEstadisticas();
             dgv.Refresh(); //Refresco el DGV para que se apliquen los cambios.
         }
 
@@ -672,9 +746,8 @@ namespace Summanager
 		private void btnActualizar_MouseClick(object sender, MouseEventArgs e)
 		{
             //Limpio el DGV.
-            dgv.Rows.Clear();
-            dgv.Columns.Clear();
-            dgv.Refresh();
+            this.dgv.DataSource = null;
+            this.dgv.Refresh();
 
             groupEstadisticas.Visible = false;
 
@@ -703,9 +776,24 @@ namespace Summanager
             }
         }
 
-        private void txtFiltro_KeyPress(object sender, KeyPressEventArgs e)
+        private void txtFiltro_KeyUp(object sender, KeyEventArgs e)
         {
             _filtrar();
+        }
+
+        private void cmbEstados_ItemSelectedChange(object sender, EventArgs e)
+        {
+            _filtrar();
+        }
+
+        private void cmbSuministro_ItemSelectedChange(object sender, EventArgs e)
+        {
+            _filtrar();
+        }
+
+        private void dgv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            _colorearDgv();
         }
     }
 }

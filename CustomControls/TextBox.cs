@@ -18,9 +18,6 @@ namespace CustomControls
         private string maskText;
         private string normalText;
 
-        //[Browsable(true)]
-        //public new event KeyPressEventHandler KeyPress;
-
         public TextBox()
         {
             InitializeComponent();
@@ -40,8 +37,6 @@ namespace CustomControls
             //Conecto los eventos del TextBox verdadero con los del Control.
             this.textBox1.Enter += this.TextBox_Enter;
             this.textBox1.Leave += this.TextBox_Leave;
-            this.textBox1.KeyUp += this.TextBox_KeyUp;
-            //this.textBox1.KeyPress += this.TextBox_KeyPress;
         }
 
         /// <summary>
@@ -149,9 +144,9 @@ namespace CustomControls
             }
         }
 
-        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        private void textBox1_KeyUp(object sender, KeyEventArgs e)
         {
-            this.OnKeyPress(e);
+            this.OnKeyUp(e);
         }
     }
 }
