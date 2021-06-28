@@ -210,6 +210,30 @@ namespace CustomControls
             return retorno;
         }
 
+        private void _nextItem()
+        {
+            int index = this.itemSelected.Value;
+            //Compruebo que el Index no sea el último así hago el Next
+            if (index < this.Items.Count - 1)
+            {
+                this.lblItemText.Text = this.Items[index + 1].Text; //Paso el texto al Label que lo muestra.
+                this.itemSelected = this.Items[index + 1]; //Guaro el item seleccionado.
+                if (this.ItemSelectedChange != null) this.ItemSelectedChange(null, null); //Disparo el Handler si este no es null.
+            }
+        }
+
+        private void _beforeItem()
+        {
+            int index = this.itemSelected.Value;
+            //Compruebo que el Index no sea el primero así hago el Before
+            if (index > 0)
+            {
+                this.lblItemText.Text = this.Items[index - 1].Text; //Paso el texto al Label que lo muestra.
+                this.itemSelected = this.Items[index - 1]; //Guaro el item seleccionado.
+                if (this.ItemSelectedChange != null) this.ItemSelectedChange(null, null); //Disparo el Handler si este no es null.
+            }
+        }
+
         /*
          * EVENTOS.
          */
@@ -291,6 +315,8 @@ namespace CustomControls
             this.FlatAppearance.BorderSize = 0;
             //Seteo el cursor usado al pasar el mouse encima.
             this.Cursor = Cursors.Hand;
+
+            this.TabStop = false;
 
             //Acomodo la fuente.
             this.Font = new Font("Century Gothic", 8.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));

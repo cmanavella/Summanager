@@ -307,6 +307,17 @@ namespace Summanager
                         }
                     }
 
+                    //Hago la Estadística de los Suministros.
+                    //Primero con lo de riesgo.
+                    if (filtroToner <= 10 && filtroToner > 3) this.estadistica.TonerRiesgo++;
+                    if (filtroUI <= 10 && filtroUI > 3) this.estadistica.UnImgRiesgo++;
+                    if (filtroKM <= 10 && filtroKM > 3) this.estadistica.KitMantRiesgo++;
+
+                    //Sigo con los críticos
+                    if (filtroToner >= 0 && filtroToner <= 3) this.estadistica.TonerCritico++;
+                    if (filtroUI >= 0 && filtroUI <= 3) this.estadistica.UnImgCritico++;
+                    if (filtroKM >= 0 && filtroKM <= 3) this.estadistica.KitMantCritico++;
+
                     //Uso StringBuilder para armar la cadena de filtro para el TextBox.
                     StringBuilder filtroTextBox = new StringBuilder();
                     filtroTextBox.Append(printer.Ip);
@@ -340,6 +351,8 @@ namespace Summanager
                 dgv.Columns[4].Width = 50;
                 dgv.Columns[5].Width = 50;
                 dgv.Columns[6].Width = 50;
+
+                _getEstadisticas();
             }
         }
 
@@ -383,21 +396,17 @@ namespace Summanager
                         r.DefaultCellStyle.SelectionBackColor = Color.FromArgb(248, 161, 164);
                         r.DefaultCellStyle.SelectionForeColor = Color.Black;
                     }
-
-                    //Hago la Estadística de los Suministros.
-                    //Primero con lo de riesgo.
-                    if(toner<=10 && toner > 3) this.estadistica.TonerRiesgo++;
-                    if (uimagen <= 10 && uimagen > 3) this.estadistica.UnImgRiesgo++;
-                    if (kmant <= 10 && kmant > 3) this.estadistica.KitMantRiesgo++;
-
-                    //Sigo con los críticos
-                    if (toner >= 0 && toner <= 3) this.estadistica.TonerCritico++;
-                    if (uimagen >= 0 && uimagen <= 3) this.estadistica.UnImgCritico++;
-                    if (kmant >= 0 && kmant <= 3) this.estadistica.KitMantCritico++;
                 }
             }
-            _getEstadisticas();
+            
             dgv.Refresh(); //Refresco el DGV para que se apliquen los cambios.
+
+            //Muestro los elementos del Filtro.
+            this.txtFiltro.Visible = true;
+            this.lblEstado.Visible = true;
+            this.cmbEstados.Visible = true;
+            this.lblSuministro.Visible = true;
+            this.cmbSuministro.Visible = true;
         }
 
         private void _getEstadisticas()
@@ -749,6 +758,12 @@ namespace Summanager
             this.dgv.DataSource = null;
             this.dgv.Refresh();
 
+            //Oculto elementos
+            this.txtFiltro.Visible = false;
+            this.lblEstado.Visible = false;
+            this.cmbEstados.Visible = false;
+            this.lblSuministro.Visible = false;
+            this.cmbSuministro.Visible = false;
             groupEstadisticas.Visible = false;
 
             //Llamo al Form Cargando para que analice la Lista de Impresoras pasadas por parámetros.

@@ -34,8 +34,8 @@ namespace Summanager
             this.dgv = new System.Windows.Forms.DataGridView();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblSuministro = new System.Windows.Forms.Label();
+            this.lblEstado = new System.Windows.Forms.Label();
             this.cmbSuministro = new CustomControls.ComboBox();
             this.cmbEstados = new CustomControls.ComboBox();
             this.txtFiltro = new CustomControls.TextBox();
@@ -125,27 +125,29 @@ namespace Summanager
             this.dgv.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgv_DataBindingComplete);
             this.dgv.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dgv_MouseDoubleClick);
             // 
-            // label2
+            // lblSuministro
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
-            this.label2.Location = new System.Drawing.Point(531, 104);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(76, 17);
-            this.label2.TabIndex = 27;
-            this.label2.Text = "Suministro:";
+            this.lblSuministro.AutoSize = true;
+            this.lblSuministro.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSuministro.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
+            this.lblSuministro.Location = new System.Drawing.Point(531, 104);
+            this.lblSuministro.Name = "lblSuministro";
+            this.lblSuministro.Size = new System.Drawing.Size(76, 17);
+            this.lblSuministro.TabIndex = 27;
+            this.lblSuministro.Text = "Suministro:";
+            this.lblSuministro.Visible = false;
             // 
-            // label1
+            // lblEstado
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
-            this.label1.Location = new System.Drawing.Point(294, 104);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(56, 17);
-            this.label1.TabIndex = 24;
-            this.label1.Text = "Estado:";
+            this.lblEstado.AutoSize = true;
+            this.lblEstado.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEstado.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
+            this.lblEstado.Location = new System.Drawing.Point(294, 104);
+            this.lblEstado.Name = "lblEstado";
+            this.lblEstado.Size = new System.Drawing.Size(56, 17);
+            this.lblEstado.TabIndex = 24;
+            this.lblEstado.Text = "Estado:";
+            this.lblEstado.Visible = false;
             // 
             // cmbSuministro
             // 
@@ -156,6 +158,7 @@ namespace Summanager
             this.cmbSuministro.Name = "cmbSuministro";
             this.cmbSuministro.Size = new System.Drawing.Size(169, 27);
             this.cmbSuministro.TabIndex = 28;
+            this.cmbSuministro.Visible = false;
             this.cmbSuministro.ItemSelectedChange += new System.EventHandler(this.cmbSuministro_ItemSelectedChange);
             // 
             // cmbEstados
@@ -167,6 +170,7 @@ namespace Summanager
             this.cmbEstados.Name = "cmbEstados";
             this.cmbEstados.Size = new System.Drawing.Size(169, 27);
             this.cmbEstados.TabIndex = 26;
+            this.cmbEstados.Visible = false;
             this.cmbEstados.ItemSelectedChange += new System.EventHandler(this.cmbEstados_ItemSelectedChange);
             // 
             // txtFiltro
@@ -179,6 +183,7 @@ namespace Summanager
             this.txtFiltro.Size = new System.Drawing.Size(270, 20);
             this.txtFiltro.TabIndex = 25;
             this.txtFiltro.Text = "Filtrar por Ip, Modelo u Oficina";
+            this.txtFiltro.Visible = false;
             this.txtFiltro.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtFiltro_KeyUp);
             // 
             // groupEstadisticas
@@ -391,10 +396,10 @@ namespace Summanager
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(1050, 690);
             this.Controls.Add(this.cmbSuministro);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lblSuministro);
             this.Controls.Add(this.cmbEstados);
             this.Controls.Add(this.txtFiltro);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblEstado);
             this.Controls.Add(this.groupEstadisticas);
             this.Controls.Add(this.dgv);
             this.Name = "FrmEstados";
@@ -404,10 +409,10 @@ namespace Summanager
             this.Controls.SetChildIndex(this.panelTitulo, 0);
             this.Controls.SetChildIndex(this.panelMenu, 0);
             this.Controls.SetChildIndex(this.groupEstadisticas, 0);
-            this.Controls.SetChildIndex(this.label1, 0);
+            this.Controls.SetChildIndex(this.lblEstado, 0);
             this.Controls.SetChildIndex(this.txtFiltro, 0);
             this.Controls.SetChildIndex(this.cmbEstados, 0);
-            this.Controls.SetChildIndex(this.label2, 0);
+            this.Controls.SetChildIndex(this.lblSuministro, 0);
             this.Controls.SetChildIndex(this.cmbSuministro, 0);
             this.panelTitulo.ResumeLayout(false);
             this.panelTitulo.PerformLayout();
@@ -451,9 +456,9 @@ namespace Summanager
         private CustomControls.Estadistica estUnImgRiesgo;
         private CustomControls.Estadistica estTonerRiesgo;
         private CustomControls.ComboBox cmbSuministro;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblSuministro;
         private CustomControls.ComboBox cmbEstados;
         private CustomControls.TextBox txtFiltro;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblEstado;
     }
 }

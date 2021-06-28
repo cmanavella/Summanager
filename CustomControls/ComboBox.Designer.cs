@@ -75,6 +75,7 @@ namespace CustomControls
             this.icon.Name = "icon";
             this.icon.Size = new System.Drawing.Size(26, 25);
             this.icon.TabIndex = 2;
+            this.icon.TabStop = false;
             this.icon.Text = "V";
             this.icon.UseVisualStyleBackColor = true;
             // 
