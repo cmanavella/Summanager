@@ -121,7 +121,7 @@ namespace Summanager
             this.dgv.ShowEditingIcon = false;
             this.dgv.ShowRowErrors = false;
             this.dgv.Size = new System.Drawing.Size(1023, 192);
-            this.dgv.TabIndex = 22;
+            this.dgv.TabIndex = 5;
             this.dgv.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgv_DataBindingComplete);
             this.dgv.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dgv_MouseDoubleClick);
             // 
@@ -157,7 +157,7 @@ namespace Summanager
             this.cmbSuministro.MinimumSize = new System.Drawing.Size(136, 27);
             this.cmbSuministro.Name = "cmbSuministro";
             this.cmbSuministro.Size = new System.Drawing.Size(169, 27);
-            this.cmbSuministro.TabIndex = 28;
+            this.cmbSuministro.TabIndex = 4;
             this.cmbSuministro.Visible = false;
             this.cmbSuministro.ItemSelectedChange += new System.EventHandler(this.cmbSuministro_ItemSelectedChange);
             // 
@@ -169,7 +169,7 @@ namespace Summanager
             this.cmbEstados.MinimumSize = new System.Drawing.Size(136, 27);
             this.cmbEstados.Name = "cmbEstados";
             this.cmbEstados.Size = new System.Drawing.Size(169, 27);
-            this.cmbEstados.TabIndex = 26;
+            this.cmbEstados.TabIndex = 3;
             this.cmbEstados.Visible = false;
             this.cmbEstados.ItemSelectedChange += new System.EventHandler(this.cmbEstados_ItemSelectedChange);
             // 
@@ -181,7 +181,7 @@ namespace Summanager
             this.txtFiltro.MaskText = "Filtrar por Ip, Modelo u Oficina";
             this.txtFiltro.Name = "txtFiltro";
             this.txtFiltro.Size = new System.Drawing.Size(270, 20);
-            this.txtFiltro.TabIndex = 25;
+            this.txtFiltro.TabIndex = 2;
             this.txtFiltro.Text = "Filtrar por Ip, Modelo u Oficina";
             this.txtFiltro.Visible = false;
             this.txtFiltro.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtFiltro_KeyUp);
@@ -327,7 +327,7 @@ namespace Summanager
             this.btnNuevo.Location = new System.Drawing.Point(12, 6);
             this.btnNuevo.Name = "btnNuevo";
             this.btnNuevo.Size = new System.Drawing.Size(76, 28);
-            this.btnNuevo.TabIndex = 6;
+            this.btnNuevo.TabIndex = 0;
             this.btnNuevo.Text = "Nuevo";
             this.btnNuevo.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnNuevo_MouseClick);
             // 
@@ -337,7 +337,7 @@ namespace Summanager
             this.btnGuardarComo.Location = new System.Drawing.Point(260, 6);
             this.btnGuardarComo.Name = "btnGuardarComo";
             this.btnGuardarComo.Size = new System.Drawing.Size(145, 28);
-            this.btnGuardarComo.TabIndex = 5;
+            this.btnGuardarComo.TabIndex = 3;
             this.btnGuardarComo.Text = "Guardar como...";
             this.btnGuardarComo.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnGuardarComo_MouseClick);
             // 
@@ -347,7 +347,7 @@ namespace Summanager
             this.btnActualizar.Location = new System.Drawing.Point(934, 6);
             this.btnActualizar.Name = "btnActualizar";
             this.btnActualizar.Size = new System.Drawing.Size(101, 28);
-            this.btnActualizar.TabIndex = 4;
+            this.btnActualizar.TabIndex = 6;
             this.btnActualizar.Text = "Actualizar";
             this.btnActualizar.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnActualizar_MouseClick);
             // 
@@ -357,7 +357,7 @@ namespace Summanager
             this.btnExportar.Location = new System.Drawing.Point(509, 6);
             this.btnExportar.Name = "btnExportar";
             this.btnExportar.Size = new System.Drawing.Size(92, 28);
-            this.btnExportar.TabIndex = 3;
+            this.btnExportar.TabIndex = 5;
             this.btnExportar.Text = "Exportar";
             this.btnExportar.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnExportar_MouseClick);
             // 
@@ -367,7 +367,7 @@ namespace Summanager
             this.btnImportar.Location = new System.Drawing.Point(411, 6);
             this.btnImportar.Name = "btnImportar";
             this.btnImportar.Size = new System.Drawing.Size(92, 28);
-            this.btnImportar.TabIndex = 2;
+            this.btnImportar.TabIndex = 4;
             this.btnImportar.Text = "Importar";
             this.btnImportar.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnImportar_MouseClick);
             // 
@@ -377,7 +377,7 @@ namespace Summanager
             this.btnGuardar.Location = new System.Drawing.Point(162, 6);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(92, 28);
-            this.btnGuardar.TabIndex = 1;
+            this.btnGuardar.TabIndex = 2;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnGuardar_MouseClick);
             // 
@@ -387,7 +387,7 @@ namespace Summanager
             this.btnAbrir.Location = new System.Drawing.Point(85, 6);
             this.btnAbrir.Name = "btnAbrir";
             this.btnAbrir.Size = new System.Drawing.Size(71, 28);
-            this.btnAbrir.TabIndex = 0;
+            this.btnAbrir.TabIndex = 1;
             this.btnAbrir.Text = "Abrir";
             this.btnAbrir.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnAbrir_MouseClick);
             // 
@@ -403,6 +403,7 @@ namespace Summanager
             this.Controls.Add(this.groupEstadisticas);
             this.Controls.Add(this.dgv);
             this.Name = "FrmEstados";
+            this.Text = "";
             this.Load += new System.EventHandler(this.frmEstados_Load);
             this.Shown += new System.EventHandler(this.FrmEstados_Shown);
             this.Controls.SetChildIndex(this.dgv, 0);

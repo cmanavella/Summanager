@@ -311,40 +311,56 @@ namespace IO
             {
                 //Escribo las Cabeceras de Columnas.
                 hoja.Cells[2, 2] = "Ip";
-                hoja.Cells[2, 3] = "Modelo";
-                hoja.Cells[2, 4] = "Oficina";
-                hoja.Cells[2, 5] = "Estado";
-                hoja.Cells[2, 6] = "Toner";
-                hoja.Cells[2, 7] = "U. Img.";
-                hoja.Cells[2, 8] = "Kit. Mant.";
+                hoja.Cells[2, 4] = "Modelo";
+                hoja.Cells[2, 6] = "Oficina";
+                hoja.Cells[2, 12] = "Estado";
+                hoja.Cells[2, 13] = "Toner";
+                hoja.Cells[2, 14] = "U. Img.";
+                hoja.Cells[2, 15] = "Kit. Mant.";
 
                 Range formatRange; //Creo un rango para dar formato a todo.
 
                 //Doy formato a las Cabeceras de Columna y creo su borde externo.
-                formatRange = hoja.Range["B2", "H2"];
+                formatRange = hoja.Range["B2", "O2"];
                 formatRange.Font.Bold = true;
                 formatRange.HorizontalAlignment = XlHAlign.xlHAlignCenter;
                 formatRange.BorderAround2(XlLineStyle.xlContinuous, XlBorderWeight.xlMedium, XlColorIndex.xlColorIndexAutomatic);
                 formatRange.Interior.Color = ColorTranslator.ToOle(Color.FromArgb(114, 159, 206));
                 formatRange.Font.Color = ColorTranslator.ToOle(Color.White);
 
+                //Combino las celdas cabeceras que necesitan verse en varias celdas.
+                formatRange = hoja.Range["B2", "C2"];
+                formatRange.Merge();
+                formatRange = hoja.Range["D2", "E2"];
+                formatRange.Merge();
+                formatRange = hoja.Range["F2", "K2"];
+                formatRange.Merge();
+
                 //Cambio algunos anchos de Columna.
-                hoja.Columns[2].ColumnWidth = 14;
-                hoja.Columns[3].ColumnWidth = 17;
-                hoja.Columns[4].ColumnWidth = 64;
-                hoja.Columns[5].ColumnWidth = 7;
+                //hoja.Columns[2].ColumnWidth = 14;
+                //hoja.Columns[3].ColumnWidth = 17;
+                //hoja.Columns[4].ColumnWidth = 64;
+                //hoja.Columns[5].ColumnWidth = 7;
 
                 //Escribo cada una de las impresoras dentro de la Lista, comenzando en la Fila 3 ya que la 2 la uso para las Cabeceras.
-                int contador = 3;
+                int fila = 3;
                 foreach(Printer printer in printers)
                 {
-                    hoja.Cells[contador, 2] = printer.Ip.ToString();
-                    if (printer.Modelo!=null) hoja.Cells[contador, 3] = printer.Modelo.ToString();
-                    hoja.Cells[contador, 4] = printer.Oficina;
-                    hoja.Cells[contador, 5] = printer.Estado.ToString();
-                    if (printer.Toner != null) hoja.Cells[contador, 6] = printer.Toner.ToString() + "%";
-                    if (printer.UImagen != null) hoja.Cells[contador, 7] = printer.UImagen.ToString() + "%";
-                    if (printer.KitMant != null) hoja.Cells[contador, 8] = printer.KitMant.ToString() + "%";
+                    hoja.Cells[fila, 2] = printer.Ip.ToString();
+                    if (printer.Modelo!=null) hoja.Cells[fila, 4] = printer.Modelo.ToString();
+                    hoja.Cells[fila, 6] = printer.Oficina;
+                    hoja.Cells[fila, 12] = printer.Estado.ToString();
+                    if (printer.Toner != null) hoja.Cells[fila, 13] = printer.Toner.ToString() + "%";
+                    if (printer.UImagen != null) hoja.Cells[fila, 14] = printer.UImagen.ToString() + "%";
+                    if (printer.KitMant != null) hoja.Cells[fila, 15] = printer.KitMant.ToString() + "%";
+
+                    //Combio celdas de acuerdo a si combiné su cabecera.
+                    formatRange = hoja.Range[hoja.Cells[fila, 2], hoja.Cells[fila, 3]];
+                    formatRange.Merge();
+                    formatRange = hoja.Range[hoja.Cells[fila, 4], hoja.Cells[fila, 5]];
+                    formatRange.Merge();
+                    formatRange = hoja.Range[hoja.Cells[fila, 6], hoja.Cells[fila, 11]];
+                    formatRange.Merge();
 
                     //Doy formato a las filas de acuerdo al estado del suministro. Primero me aseguro que la impresora esté Online.
                     if (printer.Estado == "Online")
@@ -352,22 +368,94 @@ namespace IO
                         //Paint the the complete row as required
                         if(printer.Toner<=10 || printer.UImagen<=10 || (printer.KitMant!=null && printer.KitMant <= 10))
                         {
-                            formatRange = hoja.Range[hoja.Cells[contador, 2], hoja.Cells[contador, 8]];
+                            formatRange = hoja.Range[hoja.Cells[fila, 2], hoja.Cells[fila, 15]];
                             formatRange.Interior.Color = ColorTranslator.ToOle(Color.FromArgb(255, 252, 204));
                         }
                         if (printer.Toner <= 3 || printer.UImagen <= 3 || (printer.KitMant != null && printer.KitMant <= 3))
                         {
-                            formatRange = hoja.Range[hoja.Cells[contador, 2], hoja.Cells[contador, 8]];
+                            formatRange = hoja.Range[hoja.Cells[fila, 2], hoja.Cells[fila, 15]];
                             formatRange.Interior.Color = ColorTranslator.ToOle(Color.FromArgb(251, 207, 208));
                         }
                     }
 
-                    contador++;
+                    fila++;
                 }
 
                 //Creo los bordes externos.
-                string rangoFinal = "H" + (printers.Count + 2).ToString();
+                string rangoFinal = "O" + (printers.Count + 2).ToString();
                 formatRange = hoja.Range["B3", rangoFinal];
+                formatRange.BorderAround2(XlLineStyle.xlContinuous, XlBorderWeight.xlMedium, XlColorIndex.xlColorIndexAutomatic);
+
+                //Escribo el total.
+                hoja.Cells[fila, 2] = "Total:";
+                formatRange = hoja.Cells[fila, 2];
+                formatRange.Font.Bold = true;
+                formatRange.HorizontalAlignment = XlHAlign.xlHAlignRight;
+                formatRange.Interior.Color = ColorTranslator.ToOle(Color.FromArgb(114, 159, 206));
+                formatRange.Font.Color = ColorTranslator.ToOle(Color.White);
+                hoja.Cells[fila, 3] = printers.Count;
+                formatRange = hoja.Cells[fila, 3];
+                formatRange.HorizontalAlignment = XlHAlign.xlHAlignCenter;
+
+                //Hago los bordes externos del total.
+                formatRange = hoja.Range[hoja.Cells[fila, 2], hoja.Cells[fila, 3]];
+                formatRange.BorderAround2(XlLineStyle.xlContinuous, XlBorderWeight.xlMedium, XlColorIndex.xlColorIndexAutomatic);
+
+                fila += 2;
+
+                //Escribo las Cabeceras de Columnas de Estadisticas.
+                hoja.Cells[fila, 2] = "Estados";
+                hoja.Cells[fila, 3] = "Cant.";
+                hoja.Cells[fila, 4] = "Porc.";
+                hoja.Cells[fila, 5] = "Sum Riesgo";
+                hoja.Cells[fila, 6] = "Cant.";
+                hoja.Cells[fila, 7] = "Porc.";
+                hoja.Cells[fila, 8] = "Sum Crítico";
+                hoja.Cells[fila, 9] = "Cant.";
+                hoja.Cells[fila, 10] = "Porc.";
+
+                //Doy formato a las Cabeceras de Columna y creo su borde externo.
+                formatRange = hoja.Range[hoja.Cells[fila, 2], hoja.Cells[fila, 10]];
+                formatRange.Font.Bold = true;
+                formatRange.HorizontalAlignment = XlHAlign.xlHAlignCenter;
+                formatRange.BorderAround2(XlLineStyle.xlContinuous, XlBorderWeight.xlMedium, XlColorIndex.xlColorIndexAutomatic);
+                formatRange.Interior.Color = ColorTranslator.ToOle(Color.FromArgb(114, 159, 206));
+                formatRange.Font.Color = ColorTranslator.ToOle(Color.White);
+
+                fila++;
+                //Cargo las estadísticas
+                hoja.Cells[fila, 2] = "Online";
+                hoja.Cells[fila, 3] = estadistica.Online.ToString();
+                hoja.Cells[fila, 4] = (estadistica.Online * 100 / printers.Count).ToString() + "%";
+                hoja.Cells[fila, 5] = "Toner";
+                hoja.Cells[fila, 6] = estadistica.TonerRiesgo.ToString();
+                hoja.Cells[fila, 7] = (estadistica.TonerRiesgo * 100 / estadistica.Online).ToString() + "%";
+                hoja.Cells[fila, 8] = "Toner";
+                hoja.Cells[fila, 9] = estadistica.TonerCritico.ToString();
+                hoja.Cells[fila, 10] = (estadistica.TonerCritico * 100 / estadistica.Online).ToString() + "%";
+                fila++;
+                hoja.Cells[fila, 2] = "Offline";
+                hoja.Cells[fila, 3] = estadistica.Offline.ToString();
+                hoja.Cells[fila, 4] = (estadistica.Offline * 100 / printers.Count).ToString() + "%";
+                hoja.Cells[fila, 5] = "U. Img.";
+                hoja.Cells[fila, 6] = estadistica.UnImgRiesgo.ToString();
+                hoja.Cells[fila, 7] = (estadistica.UnImgRiesgo * 100 / estadistica.Online).ToString() + "%";
+                hoja.Cells[fila, 8] = "U. Img.";
+                hoja.Cells[fila, 9] = estadistica.UnImgCritico.ToString();
+                hoja.Cells[fila, 10] = (estadistica.UnImgCritico * 100 / estadistica.Online).ToString() + "%";
+                fila++;
+                hoja.Cells[fila, 2] = "No Analiz.";
+                hoja.Cells[fila, 3] = estadistica.NoAnalizadas.ToString();
+                hoja.Cells[fila, 4] = (estadistica.NoAnalizadas * 100 / printers.Count).ToString() + "%";
+                hoja.Cells[fila, 5] = "K. Mant.";
+                hoja.Cells[fila, 6] = estadistica.KitMantRiesgo.ToString();
+                hoja.Cells[fila, 7] = (estadistica.KitMantRiesgo * 100 / estadistica.Online).ToString() + "%";
+                hoja.Cells[fila, 8] = "K. Mant.";
+                hoja.Cells[fila, 9] = estadistica.KitMantCritico.ToString();
+                hoja.Cells[fila, 10] = (estadistica.KitMantCritico * 100 / estadistica.Online).ToString() + "%";
+
+                //Hago el borde externo
+                formatRange = hoja.Range[hoja.Cells[fila - 3, 2], hoja.Cells[fila, 10]];
                 formatRange.BorderAround2(XlLineStyle.xlContinuous, XlBorderWeight.xlMedium, XlColorIndex.xlColorIndexAutomatic);
 
                 libros.SaveAs(filePath);
