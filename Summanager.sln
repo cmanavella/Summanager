@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entiti
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomControls", "CustomControls\CustomControls.csproj", "{C7D82790-2BB2-4D8C-9135-BB2DE44764C3}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{7AEA7881-9AD8-43C8-8328-F78CF581C17A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,8 @@ Global
 		{C7D82790-2BB2-4D8C-9135-BB2DE44764C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C7D82790-2BB2-4D8C-9135-BB2DE44764C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C7D82790-2BB2-4D8C-9135-BB2DE44764C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AEA7881-9AD8-43C8-8328-F78CF581C17A}.Debug|Any CPU.ActiveCfg = Debug
+		{7AEA7881-9AD8-43C8-8328-F78CF581C17A}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
