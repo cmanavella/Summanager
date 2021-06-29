@@ -402,6 +402,8 @@ namespace Summanager
             dgv.Refresh(); //Refresco el DGV para que se apliquen los cambios.
 
             //Muestro los elementos del Filtro.
+            this.lblTotal.Text = "Total: " + this.printers.Count;
+            this.lblTotal.Visible = true;
             this.txtFiltro.Visible = true;
             this.lblEstado.Visible = true;
             this.cmbEstados.Visible = true;
@@ -759,6 +761,7 @@ namespace Summanager
             this.dgv.Refresh();
 
             //Oculto elementos
+            this.lblTotal.Visible = false;
             this.txtFiltro.Visible = false;
             this.lblEstado.Visible = false;
             this.cmbEstados.Visible = false;

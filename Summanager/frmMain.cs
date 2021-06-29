@@ -42,7 +42,7 @@ namespace Summanager
             InitializeComponent();
             Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 15, 15));
 
-            this.Text = Application.ProductName + " v" + Application.ProductVersion + "(Beta)";
+            this.Text = Application.ProductName + " v" + Application.ProductVersion;
         }
 
         [Browsable(true), EditorBrowsable(EditorBrowsableState.Always), Bindable(true)]

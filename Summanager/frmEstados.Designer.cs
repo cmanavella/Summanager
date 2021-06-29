@@ -59,6 +59,7 @@ namespace Summanager
             this.btnImportar = new CustomControls.MenuChildButtom();
             this.btnGuardar = new CustomControls.MenuChildButtom();
             this.btnAbrir = new CustomControls.MenuChildButtom();
+            this.lblTotal = new System.Windows.Forms.Label();
             this.panelTitulo.SuspendLayout();
             this.panelMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
@@ -120,7 +121,7 @@ namespace Summanager
             this.dgv.ShowCellToolTips = false;
             this.dgv.ShowEditingIcon = false;
             this.dgv.ShowRowErrors = false;
-            this.dgv.Size = new System.Drawing.Size(1023, 192);
+            this.dgv.Size = new System.Drawing.Size(1023, 178);
             this.dgv.TabIndex = 5;
             this.dgv.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgv_DataBindingComplete);
             this.dgv.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dgv_MouseDoubleClick);
@@ -391,10 +392,24 @@ namespace Summanager
             this.btnAbrir.Text = "Abrir";
             this.btnAbrir.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnAbrir_MouseClick);
             // 
+            // lblTotal
+            // 
+            this.lblTotal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
+            this.lblTotal.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotal.ForeColor = System.Drawing.Color.White;
+            this.lblTotal.Location = new System.Drawing.Point(948, 311);
+            this.lblTotal.Name = "lblTotal";
+            this.lblTotal.Size = new System.Drawing.Size(87, 23);
+            this.lblTotal.TabIndex = 28;
+            this.lblTotal.Text = "label1";
+            this.lblTotal.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblTotal.Visible = false;
+            // 
             // FrmEstados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(1050, 690);
+            this.Controls.Add(this.lblTotal);
             this.Controls.Add(this.cmbSuministro);
             this.Controls.Add(this.lblSuministro);
             this.Controls.Add(this.cmbEstados);
@@ -415,6 +430,7 @@ namespace Summanager
             this.Controls.SetChildIndex(this.cmbEstados, 0);
             this.Controls.SetChildIndex(this.lblSuministro, 0);
             this.Controls.SetChildIndex(this.cmbSuministro, 0);
+            this.Controls.SetChildIndex(this.lblTotal, 0);
             this.panelTitulo.ResumeLayout(false);
             this.panelTitulo.PerformLayout();
             this.panelMenu.ResumeLayout(false);
@@ -461,5 +477,6 @@ namespace Summanager
         private CustomControls.ComboBox cmbEstados;
         private CustomControls.TextBox txtFiltro;
         private System.Windows.Forms.Label lblEstado;
+        private System.Windows.Forms.Label lblTotal;
     }
 }
