@@ -89,7 +89,16 @@ namespace IO
                             }
                             else
                             {
-                                this.printer.Toner = 0;
+                                valor = nodo.InnerText.Split(' ');
+                                if (valor.Length > 1)
+                                {
+                                    valor[4] = valor[4].Remove(valor[4].Length - 1);
+                                    this.printer.Toner = Int32.Parse(valor[4]);
+                                }
+                                else
+                                {
+                                    this.printer.Toner = 0;
+                                }
                             }
                         }
                     }
