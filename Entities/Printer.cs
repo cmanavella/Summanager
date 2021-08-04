@@ -173,5 +173,15 @@ namespace Entities
             UNIDAD_IMAGEN = 7,
             KIT_MANTENIMIENTO = 5
         }
+
+        /** LEXMARK MS410 **/
+        /// <summary>
+        /// Lexmark MS410 Title.
+        /// </summary>
+        /// <remarks>
+        /// Devuelve un string con lo quie figura en la etiqueta Title de la página HTML de una Impresora 
+        /// Lexmark MS622.
+        /// </remarks>
+        public static readonly string L622_TITLE = "Lexmark MS622de";
     }
 }

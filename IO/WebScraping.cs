@@ -3,6 +3,8 @@ using HtmlAgilityPack;
 using System;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace IO
 {
@@ -57,6 +59,9 @@ namespace IO
                 case "Lexmark MS410dn":
                     _Lex410();
                     break;
+                case "Lexmark MS622de":
+                    _Lex622();
+                    break;
             }
             return this.printer;
         }
@@ -64,22 +69,23 @@ namespace IO
         /// <summary>
         /// Obtiene la información del Estado de Suministros de la página HTML de una Impresora Lexmark MS410
         /// </summary>
-        private void _Lex410() {
-            this.url += Printer.L410_AFTER_URL; 
-            this.doc = this.web.Load(this.url); 
+        private void _Lex410()
+        {
+            this.url += Printer.L410_AFTER_URL;
+            this.doc = this.web.Load(this.url);
 
             int contTablas = 0;
             foreach (var tabla in doc.DocumentNode.SelectNodes(Printer.L410_TABLE))
             {
                 contTablas++;
 
-                if (contTablas == (int) Printer.L410_NUM_TABLA.TONER)
+                if (contTablas == (int)Printer.L410_NUM_TABLA.TONER)
                 {
                     int contTr = 0;
                     foreach (var nodo in tabla.ChildNodes)
                     {
                         if (nodo.Name == "tr") contTr++;
-                        if (contTr == (int) Printer.L410_NUM_TR.TONER)
+                        if (contTr == (int)Printer.L410_NUM_TR.TONER)
                         {
                             string[] valor = nodo.InnerText.Split('~');
                             if (valor.Length > 1)
@@ -103,7 +109,7 @@ namespace IO
                         }
                     }
                 }
-                if (contTablas == (int) Printer.L410_NUM_TABLA.UNIDAD_IMAGEN)
+                if (contTablas == (int)Printer.L410_NUM_TABLA.UNIDAD_IMAGEN)
                 {
                     int contTr = 0;
                     foreach (var nodo in tabla.ChildNodes)
@@ -236,6 +242,23 @@ namespace IO
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// Obtiene la información del Estado de Suministros de la página HTML de una Impresora Lexmark MS410
+        /// </summary>
+        private void _Lex622()
+        {
+            this.printer.Toner = 0;
+            this.printer.UImagen = 0;
+            this.printer.KitMant = 0;
+
+            //var httpClient = new HttpClient();
+            //var message = await httpClient.GetAsync(url);
+            //if (message.StatusCode == HttpStatusCode.OK)
+            //{
+            //    string HTML = await message.Content.ReadAsStringAsync();
+            //}
         }
     }
 }
