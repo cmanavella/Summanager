@@ -617,7 +617,6 @@ namespace Summanager
                 this.printers.Clear(); //Limpio la Lista de Impresoras.
                                         //Limpio el DGV.
                 this.dgv.Columns.Clear();
-                this.dgv.Rows.Clear();
                 this.dgv.Refresh();
                 groupEstadisticas.Visible = false;
 
@@ -625,6 +624,7 @@ namespace Summanager
                 IO.File.ClearCurrentFile();
                 _tituloForm(); //Actualizo el Título del Form Main.
                 _acomodarBotones(); //Acomodo los botones.
+                this.lblTotal.Visible = false;
             }
         }
 
