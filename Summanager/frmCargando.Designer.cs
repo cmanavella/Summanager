@@ -44,7 +44,6 @@ namespace Summanager
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.progressBar1 = new CustomControls.ProgressBar();
-            this.browser = new WebKit.WebKitBrowser();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -192,24 +191,12 @@ namespace Summanager
             this.progressBar1.TabIndex = 12;
             this.progressBar1.Value = 0;
             // 
-            // browser
-            // 
-            this.browser.BackColor = System.Drawing.Color.White;
-            this.browser.Location = new System.Drawing.Point(102, 12);
-            this.browser.Name = "browser";
-            this.browser.Size = new System.Drawing.Size(137, 83);
-            this.browser.TabIndex = 13;
-            this.browser.Url = null;
-            this.browser.Visible = false;
-            this.browser.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.browser_DocumentCompleted);
-            // 
             // FrmCargando
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(356, 116);
-            this.Controls.Add(this.browser);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
@@ -249,6 +236,5 @@ namespace Summanager
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel4;
         private CustomControls.ProgressBar progressBar1;
-        private WebKit.WebKitBrowser browser;
     }
 }

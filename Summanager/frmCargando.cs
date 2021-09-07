@@ -76,10 +76,10 @@ namespace Summanager
 					printerScrapped.Estado = "Online";
 					printerScrapped.Oficina = printer.Oficina;
 
-					if (printerScrapped.Modelo == Printer.L622_TITLE)
-					{
-						printerScrapped = _scrappL622(printerScrapped);
-					}
+					//if (printerScrapped.Modelo == Printer.L622_TITLE)
+					//{
+					//	//printerScrapped = _scrappL622(printerScrapped);
+					//}
 
 					//Agrego la impresora a una Lista de Impresoras distinta a la que le pasé al Form.
 					//De esta manera no altero la Lista original.
@@ -161,24 +161,9 @@ namespace Summanager
 			worker.CancelAsync();
         }
 
-		private Printer _scrappL622(Printer printer)
-        {
-			Printer retorno = printer;
-
-            string url = "http://" + printer.Ip + "/";
-
-			this.browser.Navigate(url);
-
-            Thread.Sleep(4000);
-
-            //string code = this.browser.StringByEvaluatingJavaScriptFromString("document.documentElement.innerHTML");
-
-            return retorno;
-        }
-
-        private void browser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
-        {
-			string code = this.browser.DocumentText;
-		}
+		//private Printer _scrappL622(Printer printer)
+  //      {
+			
+  //      }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using Entities;
 using HtmlAgilityPack;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 using System;
 using System.IO;
 using System.Linq;
@@ -62,7 +64,7 @@ namespace IO
                     _Lex410();
                     break;
                 case "Lexmark MS622de":
-                    _Lex622(this.url);
+                    _Lex622();
                     break;
             }
             return this.printer;
@@ -249,8 +251,7 @@ namespace IO
         /// <summary>
         /// Obtiene la información del Estado de Suministros de la página HTML de una Impresora Lexmark MS622
         /// </summary>
-        /// <param name="url"></param>
-        private void _Lex622(string url)
+        private void _Lex622()
         {
             //HttpWebRequest request = (HttpWebRequest)WebRequest.Create(this.url);
             //HttpWebResponse response = (HttpWebResponse)request.GetResponse();
@@ -268,6 +269,8 @@ namespace IO
             //    response.Close();
             //    readStream.Close();
             //}
+
+            IWebDriver driver = new ChromeDriver();
 
             this.printer.Toner = 0;
             this.printer.UImagen = 0;
