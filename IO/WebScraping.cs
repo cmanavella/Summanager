@@ -1,9 +1,11 @@
 ﻿using Entities;
 using HtmlAgilityPack;
 using System;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace IO
@@ -60,7 +62,7 @@ namespace IO
                     _Lex410();
                     break;
                 case "Lexmark MS622de":
-                    _Lex622();
+                    _Lex622(this.url);
                     break;
             }
             return this.printer;
@@ -245,10 +247,28 @@ namespace IO
         }
 
         /// <summary>
-        /// Obtiene la información del Estado de Suministros de la página HTML de una Impresora Lexmark MS410
+        /// Obtiene la información del Estado de Suministros de la página HTML de una Impresora Lexmark MS622
         /// </summary>
-        private void _Lex622()
+        /// <param name="url"></param>
+        private void _Lex622(string url)
         {
+            //HttpWebRequest request = (HttpWebRequest)WebRequest.Create(this.url);
+            //HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+
+            //if (response.StatusCode == HttpStatusCode.OK)
+            //{
+            //    Stream receiveStream = response.GetResponseStream();
+            //    StreamReader readStream = null;
+            //    if (String.IsNullOrWhiteSpace(response.CharacterSet))
+            //        readStream = new StreamReader(receiveStream);
+            //    else
+            //        readStream = new StreamReader(receiveStream,
+            //            Encoding.GetEncoding(response.CharacterSet));
+            //    string data = readStream.ReadToEnd();
+            //    response.Close();
+            //    readStream.Close();
+            //}
+
             this.printer.Toner = 0;
             this.printer.UImagen = 0;
             this.printer.KitMant = 0;

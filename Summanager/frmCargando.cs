@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -24,6 +25,8 @@ namespace Summanager
 		private List<Printer> PrintersScrapped;
 
 		public List<Printer> PrintersPassed { get; set; }
+
+		public FrmCargando(): this(null) { }
 
 		public FrmCargando(List<Printer> printers)
 		{
@@ -61,11 +64,11 @@ namespace Summanager
 
                 WebScraping webScrap = new WebScraping();
 
-				try
-				{
-					//Intento leer el Ip de la impresora. Si puedo, guardo esa Impresora para almacenarla
-					//posteriormente en una Lista.
-					Printer printerScrapped = webScrap.readIp(printer.Ip);
+                try
+                {
+                    //Intento leer el Ip de la impresora. Si puedo, guardo esa Impresora para almacenarla
+                    //posteriormente en una Lista.
+                    Printer printerScrapped = webScrap.readIp(printer.Ip);
 
 					//Como la técnica que uso no devuelve el Ip analizado y el estado de la impresora es una
 					//concepción puramente mía, cargo estos dos datos de forma manual.
@@ -73,26 +76,31 @@ namespace Summanager
 					printerScrapped.Estado = "Online";
 					printerScrapped.Oficina = printer.Oficina;
 
+					if (printerScrapped.Modelo == Printer.L622_TITLE)
+					{
+						printerScrapped = _scrappL622(printerScrapped);
+					}
+
 					//Agrego la impresora a una Lista de Impresoras distinta a la que le pasé al Form.
 					//De esta manera no altero la Lista original.
 					this.PrintersScrapped.Add(printerScrapped);
-				}
-				catch (Exception)
-				{
-					//Si no puede leer la Ip la Impresora está Offline. Asique seteo los valores manualmente.
-					Printer printerScrapped = new Printer();
-					printerScrapped.Ip = printer.Ip;
-					printerScrapped.Estado = "Offline";
-					printerScrapped.Modelo = null;
-					printerScrapped.Oficina = printer.Oficina;
-					printerScrapped.Toner = null;
-					printerScrapped.UImagen = null;
-					printerScrapped.KitMant = null;
-					this.PrintersScrapped.Add(printerScrapped);
-				}
-				//Le digo al BGW que reporte el progreso, pasándole el porcentaje de lo procesado con cada Impresora
-				//analizada.
-				this.worker.ReportProgress(this.procesado * 100 / this.PrintersPassed.Count);
+                }
+                catch (Exception)
+                {
+                    //Si no puede leer la Ip la Impresora está Offline. Asique seteo los valores manualmente.
+                    Printer printerScrapped = new Printer();
+                    printerScrapped.Ip = printer.Ip;
+                    printerScrapped.Estado = "Offline";
+                    printerScrapped.Modelo = null;
+                    printerScrapped.Oficina = printer.Oficina;
+                    printerScrapped.Toner = null;
+                    printerScrapped.UImagen = null;
+                    printerScrapped.KitMant = null;
+                    this.PrintersScrapped.Add(printerScrapped);
+                }
+                //Le digo al BGW que reporte el progreso, pasándole el porcentaje de lo procesado con cada Impresora
+                //analizada.
+                this.worker.ReportProgress(this.procesado * 100 / this.PrintersPassed.Count);
 			}
 
 			//Cargo a la Lista de Impresoras pasadas la Lista de Impresoras analizadas.
@@ -152,5 +160,25 @@ namespace Summanager
 			//Detiene el análisis.
 			worker.CancelAsync();
         }
+
+		private Printer _scrappL622(Printer printer)
+        {
+			Printer retorno = printer;
+
+            string url = "http://" + printer.Ip + "/";
+
+			this.browser.Navigate(url);
+
+            Thread.Sleep(4000);
+
+            //string code = this.browser.StringByEvaluatingJavaScriptFromString("document.documentElement.innerHTML");
+
+            return retorno;
+        }
+
+        private void browser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+			string code = this.browser.DocumentText;
+		}
     }
 }

@@ -234,7 +234,7 @@ namespace Summanager
         {
             //Ordeno la Lista de Impresoras por la Oficina.
             this.printers.Sort((x, y) => x.Oficina.CompareTo(y.Oficina));
-            
+
             estadistica = new Estadistica();
 
             //Compruebo que la Lista de Impresoras no esté vacía.
