@@ -118,25 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="btnNuevo.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
-        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAB3RJTUUH5QYSDCkl+VX47QAAAINJREFU
-        OE/tkzESQDAQRYNDKbiAYziE1h3UelzKRUiy/sqOiUiRQpk/8xr576tWcYiostZuxpgTUAytdYdeDYpb
-        8oOPbUzy4QH8ZAIz+qWoLvwYk3ykM4IdDKK6pAyAXurfJA68YEf0PMDJAz8MpBxTCNKI/pzziocjLEY4
-        0F3cRSp1AZDrOj27fuIdAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="btnGuardarComo.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
-        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAB3RJTUUH5QYPFQYK8RzqZAAAAKlJREFU
-        OE9j+P///00gBoEXDEAApBdDuChgE1TuBhC/AmJVEB8MQLJQQKwBIHAJiDlBYuQaAALTQGKUGAAC0ZQa
-        8BabAWZAHIqGrXEY8B/ZgN9A7AfExjiwOxB/A2IUgGwAWWBwGfALiD2BGJv/kTFIDUgtGCAbAIsFayCO
-        xYFhsfECiMEAmwHY0gEMLCbGAD4gFseB+YgxAOTHEhzYE5sBsNRFhhf+XwcAofBmPOF3cvwAAAAASUVO
-        RK5CYII=
-</value>
-  </data>
   <data name="btnActualizar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
@@ -167,16 +148,6 @@
         NrMIIXRwiHPM07ANE3o4xgVucI93/JCm2vD9odN+sm5xKQ08SDLL4G2gu2niVa1uNLjiSctYT7SMyG5l
         WlTW6kaDI/bTc4Q7rHAlEGRRF4v49sWVQJCJkmKKTxlIuBIccIA3zHGGFa4EFzxrGV641TLiPoM23GfQ
         hiSwjA08v7IksCylwX+XyYI19etcpGGDLHsD8Yrt3XAG72QAAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="btnGuardar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
-        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAB3RJTUUH5QYPFQYK8RzqZAAAAKlJREFU
-        OE9j+P///00gBoEXDEAApBdDuChgE1TuBhC/AmJVEB8MQLJQQKwBIHAJiDlBYuQaAALTQGKUGAAC0ZQa
-        8BabAWZAHIqGrXEY8B/ZgN9A7AfExjiwOxB/A2IUgGwAWWBwGfALiD2BGJv/kTFIDUgtGCAbAIsFayCO
-        xYFhsfECiMEAmwHY0gEMLCbGAD4gFseB+YgxAOTHEhzYE5sBsNRFhhf+XwcAofBmPOF3cvwAAAAASUVO
-        RK5CYII=
 </value>
   </data>
   <data name="btnAbrir.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
