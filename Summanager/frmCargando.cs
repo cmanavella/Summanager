@@ -40,25 +40,26 @@ namespace Summanager
 			this.tiempo = 1;
 			this.segEst = 0;
 			this.minEst = 0;
+        }
 
+		private void FrmCargando_Shown(object sender, EventArgs e)
+		{
+			MessageBox.Show("Shown");
 			//En esta parte cargo el driver de Chrome de Selenium con sus opciones de ejecución para luego pasarlo a la 
 			//clase WebScrapping que los usa para analizar, de momento, a las impresoras Lexmark MS622.
 
 			//Primero configuro el Chrome Browser, que se usa para revisar las impresoras, para que no se vea.
-            ChromeOptions options = new ChromeOptions();
-            options.AddArgument("--headless");
+			ChromeOptions options = new ChromeOptions();
+			options.AddArgument("--headless");
 			//Luego configuro el CMD del Selenium para que tampoco se vea.
-            var chromeDriverService = ChromeDriverService.CreateDefaultService();
-            chromeDriverService.HideCommandPromptWindow = true;
+			var chromeDriverService = ChromeDriverService.CreateDefaultService();
+			chromeDriverService.HideCommandPromptWindow = true;
 			//Abro el driver y el browser y los dejo listos para ser usados.
-            this.webDriver = new ChromeDriver(chromeDriverService, options);
-        }
+			this.webDriver = new ChromeDriver(chromeDriverService, options);
 
-        private void frmCargando_Load(object sender, EventArgs e)
-        {
 			//Si el BackGround Worker no está ocupado lo pongo a funcionar.
 			if (!worker.IsBusy) worker.RunWorkerAsync();
-        }
+		}
 
         private void worker_DoWork(object sender, DoWorkEventArgs e)
         {
@@ -179,10 +180,5 @@ namespace Summanager
 			//Detiene el análisis.
 			worker.CancelAsync();
         }
-
-		//private Printer _scrappL622(Printer printer)
-  //      {
-			
-  //      }
     }
 }

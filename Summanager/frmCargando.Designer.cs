@@ -214,7 +214,7 @@ namespace Summanager
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmCargando";
-            this.Load += new System.EventHandler(this.frmCargando_Load);
+            this.Shown += new System.EventHandler(this.FrmCargando_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
