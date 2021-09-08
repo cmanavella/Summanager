@@ -257,13 +257,22 @@ namespace IO
         /// </summary>
         private void _Lex622()
         {
+            //Primero seteo los valores de los suministros en 0, por si ocurre algun error.
             this.printer.Toner = 0;
             this.printer.UImagen = 0;
             this.printer.KitMant = 0;
 
+            //Le indico a Selenium que vaya a la página de la impresora mediante su IP.
             this.driver.Navigate().GoToUrl(this.url);
+            //Seteo el driver para que por cada búsqueda dentro de la pagina de la impresora, espere 5 segundos. 
+            //De esa manera le doy tiempo a que analice correctamente.
             this.driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
 
+            /*Busco dentro de la pagina cada uno de los suministros. Primero busco el contenedor de cada uno de ellos (siempre es un li).
+            Luego obtengo todos los elementos div del contenedor. Cuando tengo esos div los recorro uno a uno preguntándo por el que tiene
+            la información del suministro. Le quito el símbolo % al string devuelto y lo convierto en un entero.
+            Repito el proceso por cada uno de los suministros de la impresora.
+             */
             IWebElement container = this.driver.FindElement(By.XPath("//li[@id='TonerSupplies']"));
             ReadOnlyCollection<IWebElement> containerElements = container.FindElements(By.TagName("div"));
             foreach(IWebElement div in containerElements)

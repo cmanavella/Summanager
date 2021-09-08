@@ -41,10 +41,16 @@ namespace Summanager
 			this.segEst = 0;
 			this.minEst = 0;
 
+			//En esta parte cargo el driver de Chrome de Selenium con sus opciones de ejecución para luego pasarlo a la 
+			//clase WebScrapping que los usa para analizar, de momento, a las impresoras Lexmark MS622.
+
+			//Primero configuro el Chrome Browser, que se usa para revisar las impresoras, para que no se vea.
             ChromeOptions options = new ChromeOptions();
             options.AddArgument("--headless");
+			//Luego configuro el CMD del Selenium para que tampoco se vea.
             var chromeDriverService = ChromeDriverService.CreateDefaultService();
             chromeDriverService.HideCommandPromptWindow = true;
+			//Abro el driver y el browser y los dejo listos para ser usados.
             this.webDriver = new ChromeDriver(chromeDriverService, options);
         }
 
@@ -71,6 +77,7 @@ namespace Summanager
 				this.procesado++; 
 				this.currentIp = printer.Ip; //Almaceno la Ip que se está procesando para usarla también con el Timer.
 
+				//Paso a la instancia del Objeto WebScrapping el driver de Selenium que necesita para analizar.
                 WebScraping webScrap = new WebScraping(this.webDriver);
 
                 try
