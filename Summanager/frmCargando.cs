@@ -1,5 +1,7 @@
 ﻿using Entities;
 using IO;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,6 +25,7 @@ namespace Summanager
 		private int minEst;
 		private int tiempo;
 		private List<Printer> PrintersScrapped;
+		private IWebDriver webDriver;
 
 		public List<Printer> PrintersPassed { get; set; }
 
@@ -37,7 +40,13 @@ namespace Summanager
 			this.tiempo = 1;
 			this.segEst = 0;
 			this.minEst = 0;
-		}
+
+            ChromeOptions options = new ChromeOptions();
+            options.AddArgument("--headless");
+            var chromeDriverService = ChromeDriverService.CreateDefaultService();
+            chromeDriverService.HideCommandPromptWindow = true;
+            this.webDriver = new ChromeDriver(chromeDriverService, options);
+        }
 
         private void frmCargando_Load(object sender, EventArgs e)
         {
@@ -62,7 +71,7 @@ namespace Summanager
 				this.procesado++; 
 				this.currentIp = printer.Ip; //Almaceno la Ip que se está procesando para usarla también con el Timer.
 
-                WebScraping webScrap = new WebScraping();
+                WebScraping webScrap = new WebScraping(this.webDriver);
 
                 try
                 {
@@ -97,11 +106,14 @@ namespace Summanager
                     printerScrapped.UImagen = null;
                     printerScrapped.KitMant = null;
                     this.PrintersScrapped.Add(printerScrapped);
-                }
+				}
+
                 //Le digo al BGW que reporte el progreso, pasándole el porcentaje de lo procesado con cada Impresora
                 //analizada.
                 this.worker.ReportProgress(this.procesado * 100 / this.PrintersPassed.Count);
 			}
+			this.webDriver.Close();
+			this.webDriver.Quit();
 
 			//Cargo a la Lista de Impresoras pasadas la Lista de Impresoras analizadas.
 			PrintersPassed.Clear();

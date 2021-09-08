@@ -3,6 +3,8 @@ using HtmlAgilityPack;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
+using System.Collections.ObjectModel;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -18,13 +20,15 @@ namespace IO
         private HtmlDocument doc;
         private string url;
         private Printer printer;
+        private IWebDriver driver;
 
-        public WebScraping()
+        public WebScraping(IWebDriver driver)
         {
             this.web = new HtmlWeb();
             this.doc = new HtmlDocument();
             this.url = "http://";
             this.printer = new Printer();
+            this.driver = driver;
         }
 
         /// <summary>
@@ -253,35 +257,42 @@ namespace IO
         /// </summary>
         private void _Lex622()
         {
-            //HttpWebRequest request = (HttpWebRequest)WebRequest.Create(this.url);
-            //HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-
-            //if (response.StatusCode == HttpStatusCode.OK)
-            //{
-            //    Stream receiveStream = response.GetResponseStream();
-            //    StreamReader readStream = null;
-            //    if (String.IsNullOrWhiteSpace(response.CharacterSet))
-            //        readStream = new StreamReader(receiveStream);
-            //    else
-            //        readStream = new StreamReader(receiveStream,
-            //            Encoding.GetEncoding(response.CharacterSet));
-            //    string data = readStream.ReadToEnd();
-            //    response.Close();
-            //    readStream.Close();
-            //}
-
-            IWebDriver driver = new ChromeDriver();
-
             this.printer.Toner = 0;
             this.printer.UImagen = 0;
             this.printer.KitMant = 0;
 
-            //var httpClient = new HttpClient();
-            //var message = await httpClient.GetAsync(url);
-            //if (message.StatusCode == HttpStatusCode.OK)
-            //{
-            //    string HTML = await message.Content.ReadAsStringAsync();
-            //}
+            this.driver.Navigate().GoToUrl(this.url);
+            this.driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+
+            IWebElement container = this.driver.FindElement(By.XPath("//li[@id='TonerSupplies']"));
+            ReadOnlyCollection<IWebElement> containerElements = container.FindElements(By.TagName("div"));
+            foreach(IWebElement div in containerElements)
+            {
+                if (div.GetAttribute("class") == "progress-inner BlackGauge")
+                {
+                    this.printer.Toner = Int32.Parse(div.GetAttribute("title").Substring(0, div.GetAttribute("title").Length - 1));
+                }
+            }
+
+            container = this.driver.FindElement(By.XPath("//li[@id='PCDrumStatus']"));
+            containerElements = container.FindElements(By.TagName("div"));
+            foreach (IWebElement div in containerElements)
+            {
+                if (div.GetAttribute("class") == "progress-inner BlackGauge")
+                {
+                    this.printer.UImagen = Int32.Parse(div.GetAttribute("title").Substring(0, div.GetAttribute("title").Length - 1));
+                }
+            }
+
+            container = this.driver.FindElement(By.XPath("//li[@id='FuserSuppliesStatus']"));
+            containerElements = container.FindElements(By.TagName("div"));
+            foreach (IWebElement div in containerElements)
+            {
+                if (div.GetAttribute("class") == "progress-inner BlackGauge")
+                {
+                    this.printer.KitMant = Int32.Parse(div.GetAttribute("title").Substring(0, div.GetAttribute("title").Length - 1));
+                }
+            }
         }
     }
 }
