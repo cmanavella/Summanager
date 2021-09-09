@@ -756,6 +756,8 @@ namespace Summanager
 
 		private void btnActualizar_MouseClick(object sender, MouseEventArgs e)
 		{
+            this.lblActualizacion.Visible = false;
+
             //Limpio el DGV.
             this.dgv.DataSource = null;
             this.dgv.Refresh();
@@ -783,6 +785,9 @@ namespace Summanager
             }
 
             _llenarDgv(); //Cargo el DGV con lo analizado.
+
+            this.lblActualizacion.Text = "Última actualización: " + Fecha.ParceFecha(DateTime.Now);
+            this.lblActualizacion.Visible = true;
         }
 
         private void FrmEstados_Shown(object sender, EventArgs e)

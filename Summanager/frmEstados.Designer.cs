@@ -60,6 +60,7 @@ namespace Summanager
             this.btnGuardar = new CustomControls.MenuChildButtom();
             this.btnAbrir = new CustomControls.MenuChildButtom();
             this.lblTotal = new System.Windows.Forms.Label();
+            this.lblActualizacion = new System.Windows.Forms.Label();
             this.panelTitulo.SuspendLayout();
             this.panelMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
@@ -68,6 +69,12 @@ namespace Summanager
             this.customGroupBox2.SuspendLayout();
             this.customGroupBox1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // panelTitulo
+            // 
+            this.panelTitulo.Controls.Add(this.lblActualizacion);
+            this.panelTitulo.Controls.SetChildIndex(this.lblTitulo, 0);
+            this.panelTitulo.Controls.SetChildIndex(this.lblActualizacion, 0);
             // 
             // lblTitulo
             // 
@@ -405,6 +412,18 @@ namespace Summanager
             this.lblTotal.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.lblTotal.Visible = false;
             // 
+            // lblActualizacion
+            // 
+            this.lblActualizacion.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblActualizacion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
+            this.lblActualizacion.Location = new System.Drawing.Point(346, 22);
+            this.lblActualizacion.Name = "lblActualizacion";
+            this.lblActualizacion.Size = new System.Drawing.Size(689, 19);
+            this.lblActualizacion.TabIndex = 25;
+            this.lblActualizacion.Text = "Última actualización: 09 de septiembre de 2021 22:22:22";
+            this.lblActualizacion.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblActualizacion.Visible = false;
+            // 
             // FrmEstados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -478,5 +497,6 @@ namespace Summanager
         private CustomControls.TextBox txtFiltro;
         private System.Windows.Forms.Label lblEstado;
         private System.Windows.Forms.Label lblTotal;
+        private System.Windows.Forms.Label lblActualizacion;
     }
 }

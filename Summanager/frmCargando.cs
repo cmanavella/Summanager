@@ -44,7 +44,6 @@ namespace Summanager
 
 		private void FrmCargando_Shown(object sender, EventArgs e)
 		{
-			MessageBox.Show("Shown");
 			//En esta parte cargo el driver de Chrome de Selenium con sus opciones de ejecución para luego pasarlo a la 
 			//clase WebScrapping que los usa para analizar, de momento, a las impresoras Lexmark MS622.
 
@@ -92,11 +91,6 @@ namespace Summanager
 					printerScrapped.Ip = printer.Ip;
 					printerScrapped.Estado = "Online";
 					printerScrapped.Oficina = printer.Oficina;
-
-					//if (printerScrapped.Modelo == Printer.L622_TITLE)
-					//{
-					//	//printerScrapped = _scrappL622(printerScrapped);
-					//}
 
 					//Agrego la impresora a una Lista de Impresoras distinta a la que le pasé al Form.
 					//De esta manera no altero la Lista original.
