@@ -113,9 +113,9 @@ namespace Summanager
             // panelMenu
             // 
             this.panelMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
+            this.panelMenu.Controls.Add(this.btnStock);
             this.panelMenu.Controls.Add(this.btnConfiguracion);
             this.panelMenu.Controls.Add(this.btnEstados);
-            this.panelMenu.Controls.Add(this.btnStock);
             this.panelMenu.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelMenu.Location = new System.Drawing.Point(0, 150);
             this.panelMenu.Name = "panelMenu";
@@ -126,7 +126,7 @@ namespace Summanager
             // 
             this.btnConfiguracion.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnConfiguracion.Image = global::Summanager.Properties.Resources.gear;
-            this.btnConfiguracion.Location = new System.Drawing.Point(0, 90);
+            this.btnConfiguracion.Location = new System.Drawing.Point(0, 45);
             this.btnConfiguracion.Name = "btnConfiguracion";
             this.btnConfiguracion.Selected = false;
             this.btnConfiguracion.Size = new System.Drawing.Size(200, 45);
@@ -138,7 +138,7 @@ namespace Summanager
             // 
             this.btnEstados.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnEstados.Image = global::Summanager.Properties.Resources.printing;
-            this.btnEstados.Location = new System.Drawing.Point(0, 45);
+            this.btnEstados.Location = new System.Drawing.Point(0, 0);
             this.btnEstados.Name = "btnEstados";
             this.btnEstados.Selected = false;
             this.btnEstados.Size = new System.Drawing.Size(200, 45);
@@ -150,12 +150,13 @@ namespace Summanager
             // 
             this.btnStock.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnStock.Image = global::Summanager.Properties.Resources.box;
-            this.btnStock.Location = new System.Drawing.Point(0, 0);
+            this.btnStock.Location = new System.Drawing.Point(0, 90);
             this.btnStock.Name = "btnStock";
             this.btnStock.Selected = false;
             this.btnStock.Size = new System.Drawing.Size(200, 45);
             this.btnStock.TabIndex = 1;
             this.btnStock.Text = "Stock";
+            this.btnStock.Visible = false;
             this.btnStock.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnStock_MouseClick);
             // 
             // panelLogo
