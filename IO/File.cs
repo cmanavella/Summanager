@@ -14,6 +14,83 @@ namespace IO
     public class File
     {
         /// <summary>
+        /// Busca en el Archivo de Configuración si está activada la opción de Actualización Automática de Estados de Impresoras.
+        /// </summary>
+        /// <returns></returns>
+        public static bool getActualizacionEstados()
+        {
+            bool retorno = false;
+
+            //Traigo el string de la variable almacenada en el Archivo de Configuración.
+            string cmstr = ConfigurationManager.AppSettings.Get("actualizarEstados");
+
+            //Si no está vacío convierto ese string en bool.
+            if (cmstr != null && cmstr == "true") retorno = true;
+
+            return retorno;
+        }
+
+        /// <summary>
+        /// Almacena en el Archivo de Configuración el estado de la opción de Actualización Automática de Estados de Impresoras.
+        /// </summary>
+        /// <returns></returns>
+        public static void setActualizacionEstados(bool estado)
+        {
+            string strEstado;
+
+            //Convierto el bool a string.
+            if (estado)
+            {
+                strEstado = "true";
+            }
+            else
+            {
+                strEstado = "false";
+            }
+
+            //Cambio la variable almacenada en el Archivo de Configuración.
+            var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            var settings = configFile.AppSettings.Settings;
+            settings["actualizarEstados"].Value = strEstado;
+            configFile.Save(ConfigurationSaveMode.Modified);
+            ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
+        }
+
+        /// <summary>
+        /// Busca en el Archivo de Configuración el período de Actualización Automática de Estados de Impresoras.
+        /// </summary>
+        /// <returns></returns>
+        public static int getPeriodo()
+        {
+            int periodo = 0;
+
+            //Traigo el string de la variable almacenada en el Archivo de Configuración.
+            string cmstr = ConfigurationManager.AppSettings.Get("periodoActualizacion");
+
+            //Si la variable no está vacía la convierto en string.
+            if (cmstr != null)
+            {
+                if(cmstr.Length > 0) periodo = Int32.Parse(cmstr);
+            }
+
+            return periodo;
+        }
+
+        /// <summary>
+        /// Almacena en el Archivo de Configuración el período de Actualización Automática de Estados de Impresoras.
+        /// </summary>
+        /// <returns></returns>
+        public static void setPeriodo(int periodo)
+        {
+            //Cambio la variable almacenada en el Archivo de Configuración.
+            var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            var settings = configFile.AppSettings.Settings;
+            settings["periodoActualizacion"].Value = periodo.ToString();
+            configFile.Save(ConfigurationSaveMode.Modified);
+            ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
+        }
+
+        /// <summary>
         /// Lee el archivo reciente con la extensión SMP cuya ruta está almacenda en el
         /// Application Config.
         /// </summary>

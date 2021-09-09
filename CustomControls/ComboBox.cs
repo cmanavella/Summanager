@@ -176,11 +176,11 @@ namespace CustomControls
         /// Permite seleccionar un Ítem específico.
         /// </summary>
         /// <param name="index"></param>
-        public void SelectItem(int index)
+        public void SelectItem(int index, bool esCodigo)
         {
             this.lblItemText.Text = this.Items[index].Text; //Paso el texto al Label que lo muestra.
             this.itemSelected = this.Items[index]; //Guaro el item seleccionado.
-            ComboBox_MouseClick(null, null); //Ejecuto el evento Clic del combo.
+            if(!esCodigo) ComboBox_MouseClick(null, null); //Ejecuto el evento Clic del combo, si este método no es llamado desde código y si por el clic del mouse.
             if (this.ItemSelectedChange != null) this.ItemSelectedChange(null, null); //Disparo el Handler si este no es null.
         }
 
@@ -330,7 +330,7 @@ namespace CustomControls
         private void ItemButton_MouseClick(object sender, MouseEventArgs e)
         {
             //Selecciono el Item del Combo de acuerdo al Value del Combo.
-            this.combo.SelectItem(this.Value);
+            this.combo.SelectItem(this.Value, false);
         }
     }
 }
