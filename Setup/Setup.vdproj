@@ -5660,15 +5660,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:SumManager"
-        "ProductCode" = "8:{B16F98F3-85EC-4897-8911-B0BD43A39AA1}"
-        "PackageCode" = "8:{4661EE6A-3417-4FF4-B124-8EB2A40D6ED4}"
+        "ProductCode" = "8:{5F3A8DDE-940C-457C-A33C-6B8F0FDBDD61}"
+        "PackageCode" = "8:{1FCD4213-B5AD-4C6C-ADFF-D737DB4C8315}"
         "UpgradeCode" = "8:{780B6009-3394-490B-8087-9494E4506954}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:2.9.5"
+        "ProductVersion" = "8:2.9.6"
         "Manufacturer" = "8:Poder Judicial Córdoba"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -5783,7 +5783,7 @@
         {
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_4D3625613B4948748C0DDCEBBC5101D2"
             {
-            "Name" = "8:SumManager 2.9.5"
+            "Name" = "8:SumManager 2.9.6"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
