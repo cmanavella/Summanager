@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Text;
@@ -70,10 +71,16 @@ namespace Summanager
         /// </summary>
         private void _guardar()
         {
-            File.setActualizacionEstados(this.chkAutomatico.Checked);
-            File.setPeriodo(this.cmbPeriodo.SelectedItem().Value);
+            try
+            {
+                File.setActualizacionEstados(this.chkAutomatico.Checked);
+                File.setPeriodo(this.cmbPeriodo.SelectedItem().Value);
 
-            MessageBox.Show("Configuración guardada con éxito.");
+                MessageBox.Show("Configuración guardada con éxito.");
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void btnAceptar_MouseClick(object sender, MouseEventArgs e)
@@ -122,6 +129,12 @@ namespace Summanager
                 this.cmbPeriodo.SelectItem(this.periodo, true);
             }
             _guardar();  //Guardo los cambios.
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None)
+                    .FilePath);
         }
     }
 }

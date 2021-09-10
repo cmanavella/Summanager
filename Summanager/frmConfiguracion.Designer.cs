@@ -34,6 +34,7 @@ namespace Summanager
             this.cmbPeriodo = new CustomControls.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.chkAutomatico = new System.Windows.Forms.CheckBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.panelTitulo.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -97,10 +98,21 @@ namespace Summanager
             this.chkAutomatico.UseVisualStyleBackColor = true;
             this.chkAutomatico.CheckedChanged += new System.EventHandler(this.chkAutomatico_CheckedChanged);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(57, 200);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 16;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // FrmConfiguracion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(1050, 690);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnAceptar);
             this.Controls.Add(this.cmbPeriodo);
@@ -114,6 +126,7 @@ namespace Summanager
             this.Controls.SetChildIndex(this.cmbPeriodo, 0);
             this.Controls.SetChildIndex(this.btnAceptar, 0);
             this.Controls.SetChildIndex(this.btnCancelar, 0);
+            this.Controls.SetChildIndex(this.button1, 0);
             this.panelTitulo.ResumeLayout(false);
             this.panelTitulo.PerformLayout();
             this.ResumeLayout(false);
@@ -128,5 +141,6 @@ namespace Summanager
         private CustomControls.ComboBox cmbPeriodo;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox chkAutomatico;
+        private System.Windows.Forms.Button button1;
     }
 }
