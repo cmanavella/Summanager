@@ -29,6 +29,7 @@ namespace Summanager
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmEstados));
             this.dgv = new System.Windows.Forms.DataGridView();
@@ -61,6 +62,7 @@ namespace Summanager
             this.btnAbrir = new CustomControls.MenuChildButtom();
             this.lblTotal = new System.Windows.Forms.Label();
             this.lblActualizacion = new System.Windows.Forms.Label();
+            this.timerContador = new System.Windows.Forms.Timer(this.components);
             this.panelTitulo.SuspendLayout();
             this.panelMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
@@ -424,6 +426,11 @@ namespace Summanager
             this.lblActualizacion.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.lblActualizacion.Visible = false;
             // 
+            // timerContador
+            // 
+            this.timerContador.Interval = 1000;
+            this.timerContador.Tick += new System.EventHandler(this.timerContador_Tick);
+            // 
             // FrmEstados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -498,5 +505,6 @@ namespace Summanager
         private System.Windows.Forms.Label lblEstado;
         private System.Windows.Forms.Label lblTotal;
         private System.Windows.Forms.Label lblActualizacion;
+        private System.Windows.Forms.Timer timerContador;
     }
 }

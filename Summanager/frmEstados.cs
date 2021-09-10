@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using IO;
 
 namespace Summanager
 {
@@ -15,6 +16,10 @@ namespace Summanager
         private List<Printer> printers;
         private FrmMain frmMain;
         private Estadistica estadistica;
+        private bool automatizo;
+        private Int64 periodo;
+        private Int64 contador;
+
 
         public FrmEstados(FrmMain frmMain)
         {
@@ -22,6 +27,9 @@ namespace Summanager
             
             this.frmMain = frmMain;
             this.printers = new List<Printer>();
+            this.automatizo = File.getActualizacionEstados();
+            this.periodo = Periodo.GetPeriodo(File.getPeriodo());
+            this.contador = 0;
 
             _cargarCombos();
         }
@@ -756,6 +764,8 @@ namespace Summanager
 
 		private void btnActualizar_MouseClick(object sender, MouseEventArgs e)
 		{
+            //Si automatizo, apago el Timer Contador antes de actualizar. De esa manera trato de que no haya problemas
+            if (automatizo) this.timerContador.Enabled = false;
             //Oculto la etiqueta la última actualización.
             this.lblActualizacion.Visible = false;
 
@@ -793,6 +803,13 @@ namespace Summanager
             this.lblActualizacion.Visible = true;
             //Filtro el DGV.
             _filtrar();
+
+            //Si automatizo la actualización pongo el contador en 0 y enciendo el Timer.
+            if (this.automatizo)
+            {
+                this.contador = 0;
+                this.timerContador.Enabled = true;
+            }
         }
 
         private void FrmEstados_Shown(object sender, EventArgs e)
@@ -822,6 +839,15 @@ namespace Summanager
         private void dgv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             _colorearDgv();
+        }
+
+        private void timerContador_Tick(object sender, EventArgs e)
+        {
+            this.contador++;
+            if(contador == this.periodo)
+            {
+                btnActualizar_MouseClick(null, null);
+            }
         }
     }
 }
