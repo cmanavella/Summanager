@@ -45,18 +45,17 @@ namespace Summanager
             // btnCancelar
             // 
             this.btnCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancelar.Enabled = false;
             this.btnCancelar.Image = null;
             this.btnCancelar.Location = new System.Drawing.Point(319, 124);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(80, 28);
             this.btnCancelar.TabIndex = 15;
             this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnCancelar_MouseClick);
             // 
             // btnAceptar
             // 
             this.btnAceptar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAceptar.Enabled = false;
             this.btnAceptar.Image = null;
             this.btnAceptar.Location = new System.Drawing.Point(233, 124);
             this.btnAceptar.Name = "btnAceptar";

@@ -16,20 +16,26 @@ namespace Summanager
 
         public FrmConfiguracion()
         {
+            //Cargo los valores almacenados en el Configuration Manager en variables locales.
             this.automatizo = File.getActualizacionEstados();
             this.periodo = File.getPeriodo();
 
             InitializeComponent();
-            _cargarCombo();
+            _cargarCombo(); //Cargo el Combo Período
 
+            //Cargo el valor de Automatizo en el CheckBox.
             this.chkAutomatico.Checked = this.automatizo;
 
+            //Solo si el valor del CheckBox es True, selecciono el Item correspondiente del Combo Período.
             if (this.chkAutomatico.Checked)
             {
                 this.cmbPeriodo.SelectItem(this.periodo, true);
             }
         }
 
+        /// <summary>
+        /// Carga el Combo Período con todas las opciones de Período disponibles.
+        /// </summary>
         private void _cargarCombo()
         {
             //Cargo el Combo Periodo
@@ -48,45 +54,74 @@ namespace Summanager
 
         private void chkAutomatico_CheckedChanged(object sender, EventArgs e)
         {
+            //Activo o desactivo el Combo Período según esté o no activado el CheckBox Automatizo.
             if (chkAutomatico.Checked)
             {
-                cmbPeriodo.Enabled = true;
+                this.cmbPeriodo.Enabled = true;
             }
             else
             {
-                cmbPeriodo.Enabled = false;
+                this.cmbPeriodo.Enabled = false;
             }
+        }
+
+        /// <summary>
+        /// Almacena en el Configuration Manager los cambios realizados.
+        /// </summary>
+        private void _guardar()
+        {
+            File.setActualizacionEstados(this.chkAutomatico.Checked);
+            File.setPeriodo(this.cmbPeriodo.SelectedItem().Value);
+
+            MessageBox.Show("Configuración guardada con éxito.");
         }
 
         private void btnAceptar_MouseClick(object sender, MouseEventArgs e)
         {
-            if (this.chkAutomatico.Checked)
+            //Para guardar los cambios debo validar primero que el CheckBox Automatizo esté activado y que el Combo Período 
+            //tenga un valor seleccionado.
+            if (this.chkAutomatico.Checked  && this.cmbPeriodo.SelectedItem().Value > 0)
             {
-                if (this.cmbPeriodo.SelectedItem().Value > 0)
-                {
-                    this.automatizo = this.chkAutomatico.Checked;
-                    this.periodo = this.cmbPeriodo.SelectedItem().Value;
-
-                    File.setActualizacionEstados(this.automatizo);
-                    File.setPeriodo(this.periodo);
-
-                    MessageBox.Show("Configuración guardada con éxito.");
-                }
-                else
-                {
-                    MessageBox.Show("Debe definir un período.");
-                }
+                _guardar();
+                    
             }
+            //Si no se cumple cualquiera de las dos condiciones anteriores, verifico solo que el CheckBox no esté activado para guardar.
+            else if (!this.chkAutomatico.Checked)
+            {
+                this.cmbPeriodo.SelectItem(0, true);
+                _guardar();
+            }
+            //Si llego hasta acá, significa que el CheckBox no está activado y que no se ha seleccionado ningún Item del Combo Período.
             else
             {
-                this.automatizo = this.chkAutomatico.Checked;
-                this.periodo = 0;
-
-                File.setActualizacionEstados(this.automatizo);
-                File.setPeriodo(this.periodo);
-
-                MessageBox.Show("Configuración guardada con éxito.");
+                MessageBox.Show("Debe definir un período.");
             }
+        }
+
+        private void btnCancelar_MouseClick(object sender, MouseEventArgs e)
+        {
+            //Usando las variables locales las comparo con el CheckBox y el Combo para, en caso de que estos cambien, vuelvan al estado que tienen en 
+            //Configuration Manager.
+
+            //Valido que el CheckBox haya cambiado.
+            if (this.automatizo != this.chkAutomatico.Checked)
+            {
+                //Cambio el estado del CheckBox
+                this.chkAutomatico.Checked = this.automatizo;
+
+                //Si el CheckBox está activado y el Combo Período cambió, lo vuelvo a su estado.
+                if (this.automatizo && (this.periodo != this.cmbPeriodo.SelectedItem().Value))
+                {
+                    this.cmbPeriodo.SelectItem(this.periodo, true);
+                }else if (!this.automatizo) //Si el CheckBox no está activado, el Combo debe estar en estado "Seleccione".
+                {
+                    this.cmbPeriodo.SelectItem(0, true);
+                }
+            }else if (this.periodo != this.cmbPeriodo.SelectedItem().Value) //Si el CheckBox no cambió, me fijo si el Combo lo ha hecho y lo cambio.
+            {
+                this.cmbPeriodo.SelectItem(this.periodo, true);
+            }
+            _guardar();  //Guardo los cambios.
         }
     }
 }
