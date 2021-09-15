@@ -188,7 +188,7 @@ namespace Summanager
             {
                 (this.dgv.DataSource as DataTable).DefaultView.RowFilter = filtro.ToString();
             }
-            else
+            else if(this.dgv.Rows.Count > 0)
             {
                 (this.dgv.DataSource as DataTable).DefaultView.RowFilter = null;
             }
