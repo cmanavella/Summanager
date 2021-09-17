@@ -50,8 +50,22 @@ namespace IO
 
             //Cambio la variable almacenada en el Archivo de Configuración.
             var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            var settings = configFile.AppSettings.Settings;
-            settings["actualizarEstados"].Value = strEstado;
+
+            //En esta parte abro la sección settings para verificar que la variable existe.
+            AppSettingsSection section = (AppSettingsSection)configFile.GetSection("appSettings");
+            KeyValueConfigurationCollection app_settings = section.Settings;
+            KeyValueConfigurationElement key = app_settings["actualizarEstados"];
+            if(key == null) //Si la variable no existe, la creo.
+            {
+                KeyValueConfigurationElement new_key = new KeyValueConfigurationElement("actualizarEstados", strEstado);
+                app_settings.Add(new_key);
+            }
+            else //Si existe la guardo.
+            {
+                var settings = configFile.AppSettings.Settings;
+                settings["actualizarEstados"].Value = strEstado;
+            }
+
             configFile.Save(ConfigurationSaveMode.Modified);
             ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
         }
@@ -84,8 +98,20 @@ namespace IO
         {
             //Cambio la variable almacenada en el Archivo de Configuración.
             var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            var settings = configFile.AppSettings.Settings;
-            settings["periodoActualizacion"].Value = periodo.ToString();
+            //En esta parte abro la sección settings para verificar que la variable existe.
+            AppSettingsSection section = (AppSettingsSection)configFile.GetSection("appSettings");
+            KeyValueConfigurationCollection app_settings = section.Settings;
+            KeyValueConfigurationElement key = app_settings["periodoActualizacion"];
+            if (key == null) //Si la variable no existe, la creo.
+            {
+                KeyValueConfigurationElement new_key = new KeyValueConfigurationElement("periodoActualizacion", periodo.ToString());
+                app_settings.Add(new_key);
+            }
+            else //Si existe la guardo.
+            {
+                var settings = configFile.AppSettings.Settings;
+                settings["periodoActualizacion"].Value = periodo.ToString();
+            }
             configFile.Save(ConfigurationSaveMode.Modified);
             ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
         }

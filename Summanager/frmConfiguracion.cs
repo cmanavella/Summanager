@@ -130,11 +130,5 @@ namespace Summanager
             }
             _guardar();  //Guardo los cambios.
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show(ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None)
-                    .FilePath);
-        }
     }
 }
