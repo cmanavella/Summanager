@@ -70,6 +70,8 @@ namespace IO
                 case "Lexmark MS622de":
                     _Lex622();
                     break;
+                default:
+                    throw new Exception();
             }
             return this.printer;
         }
