@@ -14,6 +14,8 @@ namespace CustomControls
     {
         private Color colorFocused;
         private Color colorUnfocused;
+        private Color botonHover;
+        private Color botonNormal;
         private bool isMaskared;
         private string maskText;
         private string normalText;
@@ -25,6 +27,9 @@ namespace CustomControls
             this.colorFocused = Color.FromArgb(0, 137, 132);
             //Color usado para colorear los elementos cuando el combo no tiene foco.
             this.colorUnfocused = Color.Gray;
+
+            this.botonHover = Color.FromArgb(153, 0, 0);
+            this.botonNormal = this.colorUnfocused;
 
             //Variable que uso para saber si el texto es mascarado o no.
             this.isMaskared = true;
@@ -112,6 +117,9 @@ namespace CustomControls
             this.bordeInferior.BackColor = this.colorFocused;
             this.textBox1.ForeColor = this.colorFocused;
 
+            //Hago visible el botón para borrar.
+            this.btnBorrar.Visible = true;
+
             //Si está mascarado, borro el texto.
             if (this.isMaskared)
             {
@@ -123,6 +131,9 @@ namespace CustomControls
         {
             //Cuando salgo del control, siempre cambio el color del borde.
             this.bordeInferior.BackColor = this.colorUnfocused;
+
+            //Oculto el botón borrar.
+            this.btnBorrar.Visible = false;
 
             //Si está mascarado, vuelvo a colocar el MaskText y cambio el color del Text.
             if (this.isMaskared) 
@@ -147,6 +158,22 @@ namespace CustomControls
         private void textBox1_KeyUp(object sender, KeyEventArgs e)
         {
             this.OnKeyUp(e);
+        }
+
+        private void btnBorrar_MouseEnter(object sender, EventArgs e)
+        {
+            this.btnBorrar.ForeColor = this.botonHover;
+        }
+
+        private void btnBorrar_MouseLeave(object sender, EventArgs e)
+        {
+            this.btnBorrar.ForeColor = this.botonNormal;
+        }
+
+        private void btnBorrar_MouseClick(object sender, MouseEventArgs e)
+        {
+            this.textBox1.Text = String.Empty;
+            this.textBox1_KeyUp(null, null);
         }
     }
 }
