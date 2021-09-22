@@ -175,6 +175,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\clear.png" />
     <Content Include="SumManager.exe.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -37,6 +37,10 @@ namespace Summanager
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.lblSuministro = new System.Windows.Forms.Label();
             this.lblEstado = new System.Windows.Forms.Label();
+            this.lblTotal = new System.Windows.Forms.Label();
+            this.lblActualizacion = new System.Windows.Forms.Label();
+            this.timerContador = new System.Windows.Forms.Timer(this.components);
+            this.btnLimpiar = new CustomControls.MenuChildButtom();
             this.cmbSuministro = new CustomControls.ComboBox();
             this.cmbEstados = new CustomControls.ComboBox();
             this.txtFiltro = new CustomControls.TextBox();
@@ -60,9 +64,6 @@ namespace Summanager
             this.btnImportar = new CustomControls.MenuChildButtom();
             this.btnGuardar = new CustomControls.MenuChildButtom();
             this.btnAbrir = new CustomControls.MenuChildButtom();
-            this.lblTotal = new System.Windows.Forms.Label();
-            this.lblActualizacion = new System.Windows.Forms.Label();
-            this.timerContador = new System.Windows.Forms.Timer(this.components);
             this.panelTitulo.SuspendLayout();
             this.panelMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
@@ -158,6 +159,47 @@ namespace Summanager
             this.lblEstado.TabIndex = 24;
             this.lblEstado.Text = "Estado:";
             this.lblEstado.Visible = false;
+            // 
+            // lblTotal
+            // 
+            this.lblTotal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
+            this.lblTotal.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotal.ForeColor = System.Drawing.Color.White;
+            this.lblTotal.Location = new System.Drawing.Point(948, 311);
+            this.lblTotal.Name = "lblTotal";
+            this.lblTotal.Size = new System.Drawing.Size(87, 23);
+            this.lblTotal.TabIndex = 28;
+            this.lblTotal.Text = "label1";
+            this.lblTotal.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblTotal.Visible = false;
+            // 
+            // lblActualizacion
+            // 
+            this.lblActualizacion.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblActualizacion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
+            this.lblActualizacion.Location = new System.Drawing.Point(346, 22);
+            this.lblActualizacion.Name = "lblActualizacion";
+            this.lblActualizacion.Size = new System.Drawing.Size(689, 19);
+            this.lblActualizacion.TabIndex = 25;
+            this.lblActualizacion.Text = "Última actualización: 09 de septiembre de 2021 22:22:22";
+            this.lblActualizacion.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblActualizacion.Visible = false;
+            // 
+            // timerContador
+            // 
+            this.timerContador.Interval = 1000;
+            this.timerContador.Tick += new System.EventHandler(this.timerContador_Tick);
+            // 
+            // btnLimpiar
+            // 
+            this.btnLimpiar.Image = global::Summanager.Properties.Resources.clear1;
+            this.btnLimpiar.Location = new System.Drawing.Point(801, 96);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(88, 28);
+            this.btnLimpiar.TabIndex = 29;
+            this.btnLimpiar.Text = "Limpiar";
+            this.btnLimpiar.Visible = false;
+            this.btnLimpiar.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnLimpiar_MouseClick);
             // 
             // cmbSuministro
             // 
@@ -401,40 +443,11 @@ namespace Summanager
             this.btnAbrir.Text = "Abrir";
             this.btnAbrir.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnAbrir_MouseClick);
             // 
-            // lblTotal
-            // 
-            this.lblTotal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
-            this.lblTotal.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotal.ForeColor = System.Drawing.Color.White;
-            this.lblTotal.Location = new System.Drawing.Point(948, 311);
-            this.lblTotal.Name = "lblTotal";
-            this.lblTotal.Size = new System.Drawing.Size(87, 23);
-            this.lblTotal.TabIndex = 28;
-            this.lblTotal.Text = "label1";
-            this.lblTotal.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblTotal.Visible = false;
-            // 
-            // lblActualizacion
-            // 
-            this.lblActualizacion.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblActualizacion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
-            this.lblActualizacion.Location = new System.Drawing.Point(346, 22);
-            this.lblActualizacion.Name = "lblActualizacion";
-            this.lblActualizacion.Size = new System.Drawing.Size(689, 19);
-            this.lblActualizacion.TabIndex = 25;
-            this.lblActualizacion.Text = "Última actualización: 09 de septiembre de 2021 22:22:22";
-            this.lblActualizacion.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblActualizacion.Visible = false;
-            // 
-            // timerContador
-            // 
-            this.timerContador.Interval = 1000;
-            this.timerContador.Tick += new System.EventHandler(this.timerContador_Tick);
-            // 
             // FrmEstados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(1050, 690);
+            this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.lblTotal);
             this.Controls.Add(this.cmbSuministro);
             this.Controls.Add(this.lblSuministro);
@@ -457,6 +470,7 @@ namespace Summanager
             this.Controls.SetChildIndex(this.lblSuministro, 0);
             this.Controls.SetChildIndex(this.cmbSuministro, 0);
             this.Controls.SetChildIndex(this.lblTotal, 0);
+            this.Controls.SetChildIndex(this.btnLimpiar, 0);
             this.panelTitulo.ResumeLayout(false);
             this.panelTitulo.PerformLayout();
             this.panelMenu.ResumeLayout(false);
@@ -506,5 +520,6 @@ namespace Summanager
         private System.Windows.Forms.Label lblTotal;
         private System.Windows.Forms.Label lblActualizacion;
         private System.Windows.Forms.Timer timerContador;
+        private CustomControls.MenuChildButtom btnLimpiar;
     }
 }

@@ -155,6 +155,12 @@ namespace CustomControls
             }
         }
 
+        public void Clear()
+        {
+            this.textBox1.Text = String.Empty;
+            this.textBox1_KeyUp(null, null);
+        }
+
         private void textBox1_KeyUp(object sender, KeyEventArgs e)
         {
             this.OnKeyUp(e);
@@ -172,8 +178,7 @@ namespace CustomControls
 
         private void btnBorrar_MouseClick(object sender, MouseEventArgs e)
         {
-            this.textBox1.Text = String.Empty;
-            this.textBox1_KeyUp(null, null);
+            Clear();
         }
     }
 }

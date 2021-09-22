@@ -12,10 +12,30 @@ namespace CustomControls
 {
 	public partial class MenuChildButtom : UserControl
 	{
+        private Color backColor;
+
 		public MenuChildButtom()
 		{
 			InitializeComponent();
+            this.backColor = Color.FromArgb(114, 159, 206);
+            this.button1.BackColor = this.backColor;
+
             this.button1.MouseClick += Button1_MouseClick;
+        }
+
+        [Browsable(true), EditorBrowsable(EditorBrowsableState.Always), Bindable(true)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public override Color BackColor
+        {
+            get
+            {
+                return this.button1.BackColor;
+            }
+            set
+            {
+                this.backColor = value;
+                this.button1.BackColor = this.backColor;
+            }
         }
 
         [Browsable(true), EditorBrowsable(EditorBrowsableState.Always), Bindable(true)]

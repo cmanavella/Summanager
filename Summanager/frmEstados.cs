@@ -417,6 +417,7 @@ namespace Summanager
             this.cmbEstados.Visible = true;
             this.lblSuministro.Visible = true;
             this.cmbSuministro.Visible = true;
+            this.btnLimpiar.Visible = true;
         }
 
         private void _getEstadisticas()
@@ -780,6 +781,7 @@ namespace Summanager
             this.cmbEstados.Visible = false;
             this.lblSuministro.Visible = false;
             this.cmbSuministro.Visible = false;
+            this.btnLimpiar.Visible = false;
             groupEstadisticas.Visible = false;
 
             //Llamo al Form Cargando para que analice la Lista de Impresoras pasadas por parámetros.
@@ -848,6 +850,15 @@ namespace Summanager
             {
                 btnActualizar_MouseClick(null, null);
             }
+        }
+
+        private void btnLimpiar_MouseClick(object sender, MouseEventArgs e)
+        {
+            this.txtFiltro.Clear();
+            this.txtFiltro.Focus();
+            this.cmbEstados.SelectItem(0, true);
+            this.cmbSuministro.SelectItem(0, true);
+            this.btnLimpiar.Focus();
         }
     }
 }
