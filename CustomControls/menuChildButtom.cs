@@ -17,14 +17,13 @@ namespace CustomControls
 		public MenuChildButtom()
 		{
 			InitializeComponent();
-            this.backColor = Color.FromArgb(114, 159, 206);
-            this.button1.BackColor = this.backColor;
 
             this.button1.MouseClick += Button1_MouseClick;
         }
 
-        [Browsable(true), EditorBrowsable(EditorBrowsableState.Always), Bindable(true)]
+        [Browsable(true), EditorBrowsable(EditorBrowsableState.Always)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        [Bindable(true)]
         public override Color BackColor
         {
             get
@@ -33,8 +32,7 @@ namespace CustomControls
             }
             set
             {
-                this.backColor = value;
-                this.button1.BackColor = this.backColor;
+                this.button1.BackColor = value;
             }
         }
 

@@ -417,6 +417,8 @@ namespace Summanager
             this.cmbEstados.Visible = true;
             this.lblSuministro.Visible = true;
             this.cmbSuministro.Visible = true;
+            this.btnAgregar.Visible = true;
+            //this.btnQuitar.Visible = true;
             this.btnLimpiar.Visible = true;
         }
 

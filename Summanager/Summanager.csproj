@@ -176,6 +176,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\clear.png" />
+    <None Include="Resources\add.png" />
+    <None Include="Resources\remove.png" />
     <Content Include="SumManager.exe.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

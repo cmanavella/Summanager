@@ -40,6 +40,7 @@ namespace Summanager
             this.lblTotal = new System.Windows.Forms.Label();
             this.lblActualizacion = new System.Windows.Forms.Label();
             this.timerContador = new System.Windows.Forms.Timer(this.components);
+            this.btnAgregar = new CustomControls.MenuChildButtom();
             this.btnLimpiar = new CustomControls.MenuChildButtom();
             this.cmbSuministro = new CustomControls.ComboBox();
             this.cmbEstados = new CustomControls.ComboBox();
@@ -131,7 +132,7 @@ namespace Summanager
             this.dgv.ShowCellToolTips = false;
             this.dgv.ShowEditingIcon = false;
             this.dgv.ShowRowErrors = false;
-            this.dgv.Size = new System.Drawing.Size(1023, 178);
+            this.dgv.Size = new System.Drawing.Size(1023, 158);
             this.dgv.TabIndex = 5;
             this.dgv.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgv_DataBindingComplete);
             this.dgv.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dgv_MouseDoubleClick);
@@ -165,9 +166,9 @@ namespace Summanager
             this.lblTotal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
             this.lblTotal.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotal.ForeColor = System.Drawing.Color.White;
-            this.lblTotal.Location = new System.Drawing.Point(948, 311);
+            this.lblTotal.Location = new System.Drawing.Point(948, 294);
             this.lblTotal.Name = "lblTotal";
-            this.lblTotal.Size = new System.Drawing.Size(87, 23);
+            this.lblTotal.Size = new System.Drawing.Size(87, 28);
             this.lblTotal.TabIndex = 28;
             this.lblTotal.Text = "label1";
             this.lblTotal.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -189,6 +190,15 @@ namespace Summanager
             // 
             this.timerContador.Interval = 1000;
             this.timerContador.Tick += new System.EventHandler(this.timerContador_Tick);
+            // 
+            // btnAgregar
+            // 
+            this.btnAgregar.Image = global::Summanager.Properties.Resources.add;
+            this.btnAgregar.Location = new System.Drawing.Point(895, 96);
+            this.btnAgregar.Name = "btnAgregar";
+            this.btnAgregar.Size = new System.Drawing.Size(91, 28);
+            this.btnAgregar.TabIndex = 30;
+            this.btnAgregar.Text = "Agregar";
             // 
             // btnLimpiar
             // 
@@ -396,7 +406,7 @@ namespace Summanager
             // btnActualizar
             // 
             this.btnActualizar.Image = ((System.Drawing.Image)(resources.GetObject("btnActualizar.Image")));
-            this.btnActualizar.Location = new System.Drawing.Point(934, 6);
+            this.btnActualizar.Location = new System.Drawing.Point(895, 6);
             this.btnActualizar.Name = "btnActualizar";
             this.btnActualizar.Size = new System.Drawing.Size(101, 28);
             this.btnActualizar.TabIndex = 6;
@@ -447,6 +457,7 @@ namespace Summanager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(1050, 690);
+            this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.lblTotal);
             this.Controls.Add(this.cmbSuministro);
@@ -471,6 +482,7 @@ namespace Summanager
             this.Controls.SetChildIndex(this.cmbSuministro, 0);
             this.Controls.SetChildIndex(this.lblTotal, 0);
             this.Controls.SetChildIndex(this.btnLimpiar, 0);
+            this.Controls.SetChildIndex(this.btnAgregar, 0);
             this.panelTitulo.ResumeLayout(false);
             this.panelTitulo.PerformLayout();
             this.panelMenu.ResumeLayout(false);
@@ -521,5 +533,6 @@ namespace Summanager
         private System.Windows.Forms.Label lblActualizacion;
         private System.Windows.Forms.Timer timerContador;
         private CustomControls.MenuChildButtom btnLimpiar;
+        private CustomControls.MenuChildButtom btnAgregar;
     }
 }
