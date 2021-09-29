@@ -29,11 +29,13 @@ namespace Summanager
         /// </summary>
         private void InitializeComponent()
         {
+            this.label1 = new System.Windows.Forms.Label();
+            this.chkAutomatico = new System.Windows.Forms.CheckBox();
+            this.botonHijoCeleste1 = new CustomControls.BotonHijoCeleste();
+            this.botonHijo1 = new CustomControls.BotonHijoVerde();
             this.btnCancelar = new CustomControls.MenuChildButtom();
             this.btnAceptar = new CustomControls.MenuChildButtom();
             this.cmbPeriodo = new CustomControls.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.chkAutomatico = new System.Windows.Forms.CheckBox();
             this.panelTitulo.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -41,6 +43,44 @@ namespace Summanager
             // 
             this.lblTitulo.Size = new System.Drawing.Size(200, 32);
             this.lblTitulo.Text = "Configuración";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(9, 134);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(62, 17);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "Período:";
+            // 
+            // chkAutomatico
+            // 
+            this.chkAutomatico.AutoSize = true;
+            this.chkAutomatico.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkAutomatico.Location = new System.Drawing.Point(12, 95);
+            this.chkAutomatico.Name = "chkAutomatico";
+            this.chkAutomatico.Size = new System.Drawing.Size(405, 21);
+            this.chkAutomatico.TabIndex = 11;
+            this.chkAutomatico.Text = "Actualizar automáticamente los estados de las impresoras";
+            this.chkAutomatico.UseVisualStyleBackColor = true;
+            this.chkAutomatico.CheckedChanged += new System.EventHandler(this.chkAutomatico_CheckedChanged);
+            // 
+            // botonHijoCeleste1
+            // 
+            this.botonHijoCeleste1.Location = new System.Drawing.Point(108, 195);
+            this.botonHijoCeleste1.Name = "botonHijoCeleste1";
+            this.botonHijoCeleste1.Size = new System.Drawing.Size(75, 23);
+            this.botonHijoCeleste1.TabIndex = 18;
+            this.botonHijoCeleste1.Click += new System.EventHandler(this.botonHijoCeleste1_Click);
+            // 
+            // botonHijo1
+            // 
+            this.botonHijo1.Location = new System.Drawing.Point(27, 195);
+            this.botonHijo1.Name = "botonHijo1";
+            this.botonHijo1.Size = new System.Drawing.Size(75, 23);
+            this.botonHijo1.TabIndex = 17;
+            this.botonHijo1.Click += new System.EventHandler(this.botonHijo1_Click);
             // 
             // btnCancelar
             // 
@@ -75,32 +115,12 @@ namespace Summanager
             this.cmbPeriodo.Size = new System.Drawing.Size(146, 27);
             this.cmbPeriodo.TabIndex = 13;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(9, 134);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(62, 17);
-            this.label1.TabIndex = 12;
-            this.label1.Text = "Período:";
-            // 
-            // chkAutomatico
-            // 
-            this.chkAutomatico.AutoSize = true;
-            this.chkAutomatico.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkAutomatico.Location = new System.Drawing.Point(12, 95);
-            this.chkAutomatico.Name = "chkAutomatico";
-            this.chkAutomatico.Size = new System.Drawing.Size(405, 21);
-            this.chkAutomatico.TabIndex = 11;
-            this.chkAutomatico.Text = "Actualizar automáticamente los estados de las impresoras";
-            this.chkAutomatico.UseVisualStyleBackColor = true;
-            this.chkAutomatico.CheckedChanged += new System.EventHandler(this.chkAutomatico_CheckedChanged);
-            // 
             // FrmConfiguracion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(1050, 690);
+            this.Controls.Add(this.botonHijoCeleste1);
+            this.Controls.Add(this.botonHijo1);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnAceptar);
             this.Controls.Add(this.cmbPeriodo);
@@ -114,6 +134,8 @@ namespace Summanager
             this.Controls.SetChildIndex(this.cmbPeriodo, 0);
             this.Controls.SetChildIndex(this.btnAceptar, 0);
             this.Controls.SetChildIndex(this.btnCancelar, 0);
+            this.Controls.SetChildIndex(this.botonHijo1, 0);
+            this.Controls.SetChildIndex(this.botonHijoCeleste1, 0);
             this.panelTitulo.ResumeLayout(false);
             this.panelTitulo.PerformLayout();
             this.ResumeLayout(false);
@@ -128,5 +150,7 @@ namespace Summanager
         private CustomControls.ComboBox cmbPeriodo;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox chkAutomatico;
+        private CustomControls.BotonHijoVerde botonHijo1;
+        private CustomControls.BotonHijoCeleste botonHijoCeleste1;
     }
 }

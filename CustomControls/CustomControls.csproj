@@ -48,6 +48,24 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BotonHijoCeleste.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BotonHijoCeleste.Designer.cs">
+      <DependentUpon>BotonHijoCeleste.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BotonHijoVerde.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BotonHijoVerde.Designer.cs">
+      <DependentUpon>BotonHijoVerde.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BotonPadre.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BotonPadre.Designer.cs">
+      <DependentUpon>BotonPadre.cs</DependentUpon>
+    </Compile>
     <Compile Include="ComboBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -100,6 +118,15 @@
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="BotonHijoCeleste.resx">
+      <DependentUpon>BotonHijoCeleste.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BotonHijoVerde.resx">
+      <DependentUpon>BotonHijoVerde.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BotonPadre.resx">
+      <DependentUpon>BotonPadre.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ComboBox.resx">
       <DependentUpon>ComboBox.cs</DependentUpon>
     </EmbeddedResource>

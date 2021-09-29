@@ -130,5 +130,15 @@ namespace Summanager
             }
             _guardar();  //Guardo los cambios.
         }
+
+        private void botonHijo1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Hijo Verde");
+        }
+
+        private void botonHijoCeleste1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Hijo Celeste");
+        }
     }
 }
