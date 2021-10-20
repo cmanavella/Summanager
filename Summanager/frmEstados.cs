@@ -784,6 +784,7 @@ namespace Summanager
             this.lblSuministro.Visible = false;
             this.cmbSuministro.Visible = false;
             this.btnLimpiar.Visible = false;
+            this.btnAgregar.Visible = false;
             groupEstadisticas.Visible = false;
 
             //Llamo al Form Cargando para que analice la Lista de Impresoras pasadas por parámetros.

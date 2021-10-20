@@ -199,6 +199,7 @@ namespace Summanager
             this.btnAgregar.Size = new System.Drawing.Size(91, 28);
             this.btnAgregar.TabIndex = 30;
             this.btnAgregar.Text = "Agregar";
+            this.btnAgregar.Visible = false;
             // 
             // btnLimpiar
             // 
