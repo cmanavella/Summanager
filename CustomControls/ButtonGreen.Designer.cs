@@ -35,6 +35,7 @@ namespace CustomControls
             // 
             this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
             this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // ButtonGreen
             // 
