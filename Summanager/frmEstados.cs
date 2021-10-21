@@ -355,7 +355,7 @@ namespace Summanager
 
                 //Modifico el tamaño de algunas Columnas.
                 dgv.Columns[1].Width = 150;
-                dgv.Columns[2].Width = 510;
+                dgv.Columns[2].Width = 525;
                 dgv.Columns[4].Width = 50;
                 dgv.Columns[5].Width = 50;
                 dgv.Columns[6].Width = 50;
@@ -513,7 +513,7 @@ namespace Summanager
                 _tituloForm(); //Actualizo el Título del Form Main.
                 //A ese título le concateno al final el caracter '*' que es mi bandera para saber si un archivo ha sido modificado.
                 frmMain.Text += "*";
-                btnActualizar_MouseClick(null, null); //Analizo la Lista de Impresoras.
+                btnActualizar_Click(null, null); //Analizo la Lista de Impresoras.
                 _acomodarBotones(); //Acomodo los botones.
             }
         }
@@ -610,23 +610,23 @@ namespace Summanager
             {
                 MessageBox.Show("No se puede acceder al archivo.", Application.ProductName + ": Archivo dañado",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
-                btnNuevo_MouseClick(null, null);
+                btnNuevo_Click(null, null);
             }
 
             _tituloForm();
             _acomodarBotones();
 
-            btnActualizar_MouseClick(sender, null); //Actualizo el DGV con el análisis de la Lista de Impresoras.
+            btnActualizar_Click(sender, null); //Actualizo el DGV con el análisis de la Lista de Impresoras.
         }
 
-        private void btnNuevo_MouseClick(object sender, MouseEventArgs e)
+        private void btnNuevo_Click(object sender, EventArgs e)
         {
             //Chequeo que el archivo esté guardado. Si lo está, puedo crear un nuevo archivo.
             if (this.frmMain.CheckUnsavedFile() == DialogResult.OK)
             {
-                
+
                 this.printers.Clear(); //Limpio la Lista de Impresoras.
-                                        //Limpio el DGV.
+                                       //Limpio el DGV.
                 this.dgv.Columns.Clear();
                 this.dgv.Refresh();
                 groupEstadisticas.Visible = false;
@@ -639,8 +639,8 @@ namespace Summanager
             }
         }
 
-        private void btnAbrir_MouseClick(object sender, MouseEventArgs e)
-		{
+        private void btnAbrir_Click(object sender, EventArgs e)
+        {
             //Seteo el OpenFileDialog.
             openFileDialog.InitialDirectory = _getOpenDirectory();
             openFileDialog.Filter = "SumManager File (*.smp)|*.smp";
@@ -660,7 +660,7 @@ namespace Summanager
                     printers.Clear(); //Limpio la Lista de Impresoras.
                     printers = IO.File.readCurrentFile(); //Leo el archivo y cargo la Lista de Impresoras con él.
                     _tituloForm(); //Actualizo el Título del Form Main.
-                    btnActualizar_MouseClick(sender, null); //Analizo la Lista de Impresoras.
+                    btnActualizar_Click(sender, null); //Analizo la Lista de Impresoras.
                 }
                 catch (Exception ex)
                 {
@@ -674,7 +674,7 @@ namespace Summanager
                     {
                         MessageBox.Show(ex.Message); //Si huibo un error, lo muestro.
                     }
-                btnNuevo_MouseClick(null, null);
+                    btnNuevo_Click(null, null);
                 }
             }
 
@@ -683,8 +683,8 @@ namespace Summanager
             _acomodarBotones(); //Acomodo los botones.
         }
 
-		private void btnGuardar_MouseClick(object sender, MouseEventArgs e)
-		{
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
             //Llamo al Método de Guardar.
             try
             {
@@ -697,7 +697,7 @@ namespace Summanager
             }
         }
 
-        private void btnGuardarComo_MouseClick(object sender, MouseEventArgs e)
+        private void btnGuardarComo_Click(object sender, EventArgs e)
         {
             //Lamo al Metodo Guardar Como...
             try
@@ -711,10 +711,10 @@ namespace Summanager
             }
         }
 
-        private void btnImportar_MouseClick(object sender, MouseEventArgs e)
-		{
+        private void btnImportar_Click(object sender, EventArgs e)
+        {
             //Primero pregunto que el nombre del archivo no sea 'sin título'. Esto quiere decir que no es nuevo.
-            if(_getFileTitle() != "sin título")
+            if (_getFileTitle() != "sin título")
             {
                 //Si no lo es, pregunto si con la importación de Excel se desea combinar los datos obtenidos con los 
                 //del archivo.
@@ -724,7 +724,7 @@ namespace Summanager
                     Application.ProductName, MessageBoxButtons.YesNoCancel);
 
                 //Si no se cancela el llamado, llamo al método Importar, pasándole como parámetro la decisión tomada.
-                if(result!=DialogResult.Cancel) _importar(result == DialogResult.Yes);
+                if (result != DialogResult.Cancel) _importar(result == DialogResult.Yes);
             }
             else
             {
@@ -733,8 +733,8 @@ namespace Summanager
             }
         }
 
-		private void btnExportar_MouseClick(object sender, MouseEventArgs e)
-		{
+        private void btnExportar_Click(object sender, EventArgs e)
+        {
             //Exporta una Lista de Impresoras a un archivo de Excel. 
 
             //Seteo el SaveFileDialog.
@@ -765,8 +765,8 @@ namespace Summanager
             _acomodarBotones(); //Acomodo botones.
         }
 
-		private void btnActualizar_MouseClick(object sender, MouseEventArgs e)
-		{
+        private void btnActualizar_Click(object sender, EventArgs e)
+        {
             //Si automatizo, apago el Timer Contador antes de actualizar. De esa manera trato de que no haya problemas
             if (automatizo) this.timerContador.Enabled = false;
             //Oculto la etiqueta la última actualización.
@@ -851,11 +851,11 @@ namespace Summanager
             this.contador++;
             if(contador == this.periodo)
             {
-                btnActualizar_MouseClick(null, null);
+                btnActualizar_Click(null, null);
             }
         }
 
-        private void btnLimpiar_MouseClick(object sender, MouseEventArgs e)
+        private void btnLimpiar_Click(object sender, EventArgs e)
         {
             this.txtFiltro.Clear();
             this.txtFiltro.Focus();

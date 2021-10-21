@@ -31,7 +31,6 @@ namespace Summanager
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmEstados));
             this.dgv = new System.Windows.Forms.DataGridView();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
@@ -40,8 +39,6 @@ namespace Summanager
             this.lblTotal = new System.Windows.Forms.Label();
             this.lblActualizacion = new System.Windows.Forms.Label();
             this.timerContador = new System.Windows.Forms.Timer(this.components);
-            this.btnAgregar = new CustomControls.MenuChildButtom();
-            this.btnLimpiar = new CustomControls.MenuChildButtom();
             this.cmbSuministro = new CustomControls.ComboBox();
             this.cmbEstados = new CustomControls.ComboBox();
             this.txtFiltro = new CustomControls.TextBox();
@@ -58,13 +55,15 @@ namespace Summanager
             this.estKitMantRiesgo = new CustomControls.Estadistica();
             this.estUnImgRiesgo = new CustomControls.Estadistica();
             this.estTonerRiesgo = new CustomControls.Estadistica();
-            this.btnNuevo = new CustomControls.MenuChildButtom();
-            this.btnGuardarComo = new CustomControls.MenuChildButtom();
-            this.btnActualizar = new CustomControls.MenuChildButtom();
-            this.btnExportar = new CustomControls.MenuChildButtom();
-            this.btnImportar = new CustomControls.MenuChildButtom();
-            this.btnGuardar = new CustomControls.MenuChildButtom();
-            this.btnAbrir = new CustomControls.MenuChildButtom();
+            this.btnLimpiar = new CustomControls.ButtonGreen();
+            this.btnAgregar = new CustomControls.ButtonGreen();
+            this.btnNuevo = new CustomControls.ButtonBlue();
+            this.btnAbrir = new CustomControls.ButtonBlue();
+            this.btnGuardar = new CustomControls.ButtonBlue();
+            this.btnGuardarComo = new CustomControls.ButtonBlue();
+            this.btnImportar = new CustomControls.ButtonBlue();
+            this.btnExportar = new CustomControls.ButtonBlue();
+            this.btnActualizar = new CustomControls.ButtonBlue();
             this.panelTitulo.SuspendLayout();
             this.panelMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
@@ -87,13 +86,13 @@ namespace Summanager
             // 
             // panelMenu
             // 
-            this.panelMenu.Controls.Add(this.btnNuevo);
-            this.panelMenu.Controls.Add(this.btnGuardarComo);
             this.panelMenu.Controls.Add(this.btnActualizar);
             this.panelMenu.Controls.Add(this.btnExportar);
             this.panelMenu.Controls.Add(this.btnImportar);
+            this.panelMenu.Controls.Add(this.btnGuardarComo);
             this.panelMenu.Controls.Add(this.btnGuardar);
             this.panelMenu.Controls.Add(this.btnAbrir);
+            this.panelMenu.Controls.Add(this.btnNuevo);
             // 
             // dgv
             // 
@@ -132,7 +131,7 @@ namespace Summanager
             this.dgv.ShowCellToolTips = false;
             this.dgv.ShowEditingIcon = false;
             this.dgv.ShowRowErrors = false;
-            this.dgv.Size = new System.Drawing.Size(1023, 158);
+            this.dgv.Size = new System.Drawing.Size(1038, 158);
             this.dgv.TabIndex = 5;
             this.dgv.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgv_DataBindingComplete);
             this.dgv.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dgv_MouseDoubleClick);
@@ -190,27 +189,6 @@ namespace Summanager
             // 
             this.timerContador.Interval = 1000;
             this.timerContador.Tick += new System.EventHandler(this.timerContador_Tick);
-            // 
-            // btnAgregar
-            // 
-            this.btnAgregar.Image = global::Summanager.Properties.Resources.add;
-            this.btnAgregar.Location = new System.Drawing.Point(895, 96);
-            this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(91, 28);
-            this.btnAgregar.TabIndex = 30;
-            this.btnAgregar.Text = "Agregar";
-            this.btnAgregar.Visible = false;
-            // 
-            // btnLimpiar
-            // 
-            this.btnLimpiar.Image = global::Summanager.Properties.Resources.clear1;
-            this.btnLimpiar.Location = new System.Drawing.Point(801, 96);
-            this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(88, 28);
-            this.btnLimpiar.TabIndex = 29;
-            this.btnLimpiar.Text = "Limpiar";
-            this.btnLimpiar.Visible = false;
-            this.btnLimpiar.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnLimpiar_MouseClick);
             // 
             // cmbSuministro
             // 
@@ -384,83 +362,102 @@ namespace Summanager
             this.estTonerRiesgo.Text = "Toner";
             this.estTonerRiesgo.Total = 0;
             // 
+            // btnLimpiar
+            // 
+            this.btnLimpiar.Image = global::Summanager.Properties.Resources.clear;
+            this.btnLimpiar.Location = new System.Drawing.Point(851, 97);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(90, 28);
+            this.btnLimpiar.TabIndex = 31;
+            this.btnLimpiar.Text = "Limpiar";
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
+            // 
+            // btnAgregar
+            // 
+            this.btnAgregar.Image = global::Summanager.Properties.Resources.add;
+            this.btnAgregar.Location = new System.Drawing.Point(947, 97);
+            this.btnAgregar.Name = "btnAgregar";
+            this.btnAgregar.Size = new System.Drawing.Size(88, 28);
+            this.btnAgregar.TabIndex = 32;
+            this.btnAgregar.Text = "Agregar";
+            // 
             // btnNuevo
             // 
             this.btnNuevo.Image = global::Summanager.Properties.Resources._new;
             this.btnNuevo.Location = new System.Drawing.Point(12, 6);
             this.btnNuevo.Name = "btnNuevo";
             this.btnNuevo.Size = new System.Drawing.Size(76, 28);
-            this.btnNuevo.TabIndex = 0;
+            this.btnNuevo.TabIndex = 7;
             this.btnNuevo.Text = "Nuevo";
-            this.btnNuevo.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnNuevo_MouseClick);
+            this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
             // 
-            // btnGuardarComo
+            // btnAbrir
             // 
-            this.btnGuardarComo.Image = global::Summanager.Properties.Resources.save_file;
-            this.btnGuardarComo.Location = new System.Drawing.Point(260, 6);
-            this.btnGuardarComo.Name = "btnGuardarComo";
-            this.btnGuardarComo.Size = new System.Drawing.Size(145, 28);
-            this.btnGuardarComo.TabIndex = 3;
-            this.btnGuardarComo.Text = "Guardar como...";
-            this.btnGuardarComo.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnGuardarComo_MouseClick);
-            // 
-            // btnActualizar
-            // 
-            this.btnActualizar.Image = ((System.Drawing.Image)(resources.GetObject("btnActualizar.Image")));
-            this.btnActualizar.Location = new System.Drawing.Point(895, 6);
-            this.btnActualizar.Name = "btnActualizar";
-            this.btnActualizar.Size = new System.Drawing.Size(101, 28);
-            this.btnActualizar.TabIndex = 6;
-            this.btnActualizar.Text = "Actualizar";
-            this.btnActualizar.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnActualizar_MouseClick);
-            // 
-            // btnExportar
-            // 
-            this.btnExportar.Image = ((System.Drawing.Image)(resources.GetObject("btnExportar.Image")));
-            this.btnExportar.Location = new System.Drawing.Point(509, 6);
-            this.btnExportar.Name = "btnExportar";
-            this.btnExportar.Size = new System.Drawing.Size(92, 28);
-            this.btnExportar.TabIndex = 5;
-            this.btnExportar.Text = "Exportar";
-            this.btnExportar.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnExportar_MouseClick);
-            // 
-            // btnImportar
-            // 
-            this.btnImportar.Image = ((System.Drawing.Image)(resources.GetObject("btnImportar.Image")));
-            this.btnImportar.Location = new System.Drawing.Point(411, 6);
-            this.btnImportar.Name = "btnImportar";
-            this.btnImportar.Size = new System.Drawing.Size(92, 28);
-            this.btnImportar.TabIndex = 4;
-            this.btnImportar.Text = "Importar";
-            this.btnImportar.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnImportar_MouseClick);
+            this.btnAbrir.Image = global::Summanager.Properties.Resources.open_folder;
+            this.btnAbrir.Location = new System.Drawing.Point(94, 6);
+            this.btnAbrir.Name = "btnAbrir";
+            this.btnAbrir.Size = new System.Drawing.Size(69, 28);
+            this.btnAbrir.TabIndex = 8;
+            this.btnAbrir.Text = "Abrir";
+            this.btnAbrir.Click += new System.EventHandler(this.btnAbrir_Click);
             // 
             // btnGuardar
             // 
             this.btnGuardar.Image = global::Summanager.Properties.Resources.save_file;
-            this.btnGuardar.Location = new System.Drawing.Point(162, 6);
+            this.btnGuardar.Location = new System.Drawing.Point(169, 6);
             this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(92, 28);
-            this.btnGuardar.TabIndex = 2;
+            this.btnGuardar.Size = new System.Drawing.Size(98, 28);
+            this.btnGuardar.TabIndex = 9;
             this.btnGuardar.Text = "Guardar";
-            this.btnGuardar.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnGuardar_MouseClick);
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
-            // btnAbrir
+            // btnGuardarComo
             // 
-            this.btnAbrir.Image = ((System.Drawing.Image)(resources.GetObject("btnAbrir.Image")));
-            this.btnAbrir.Location = new System.Drawing.Point(85, 6);
-            this.btnAbrir.Name = "btnAbrir";
-            this.btnAbrir.Size = new System.Drawing.Size(71, 28);
-            this.btnAbrir.TabIndex = 1;
-            this.btnAbrir.Text = "Abrir";
-            this.btnAbrir.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnAbrir_MouseClick);
+            this.btnGuardarComo.Image = global::Summanager.Properties.Resources.save_file;
+            this.btnGuardarComo.Location = new System.Drawing.Point(273, 6);
+            this.btnGuardarComo.Name = "btnGuardarComo";
+            this.btnGuardarComo.Size = new System.Drawing.Size(150, 28);
+            this.btnGuardarComo.TabIndex = 10;
+            this.btnGuardarComo.Text = "Guardar como...";
+            this.btnGuardarComo.Click += new System.EventHandler(this.btnGuardarComo_Click);
+            // 
+            // btnImportar
+            // 
+            this.btnImportar.Image = global::Summanager.Properties.Resources.excel;
+            this.btnImportar.Location = new System.Drawing.Point(429, 6);
+            this.btnImportar.Name = "btnImportar";
+            this.btnImportar.Size = new System.Drawing.Size(96, 28);
+            this.btnImportar.TabIndex = 11;
+            this.btnImportar.Text = "Importar";
+            this.btnImportar.Click += new System.EventHandler(this.btnImportar_Click);
+            // 
+            // btnExportar
+            // 
+            this.btnExportar.Image = global::Summanager.Properties.Resources.excel;
+            this.btnExportar.Location = new System.Drawing.Point(531, 6);
+            this.btnExportar.Name = "btnExportar";
+            this.btnExportar.Size = new System.Drawing.Size(92, 28);
+            this.btnExportar.TabIndex = 12;
+            this.btnExportar.Text = "Exportar";
+            this.btnExportar.Click += new System.EventHandler(this.btnExportar_Click);
+            // 
+            // btnActualizar
+            // 
+            this.btnActualizar.Image = global::Summanager.Properties.Resources.refresh_page_option;
+            this.btnActualizar.Location = new System.Drawing.Point(851, 6);
+            this.btnActualizar.Name = "btnActualizar";
+            this.btnActualizar.Size = new System.Drawing.Size(105, 28);
+            this.btnActualizar.TabIndex = 13;
+            this.btnActualizar.Text = "Actualizar";
+            this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
             // 
             // FrmEstados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(1050, 690);
+            this.Controls.Add(this.lblTotal);
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.btnLimpiar);
-            this.Controls.Add(this.lblTotal);
             this.Controls.Add(this.cmbSuministro);
             this.Controls.Add(this.lblSuministro);
             this.Controls.Add(this.cmbEstados);
@@ -481,9 +478,9 @@ namespace Summanager
             this.Controls.SetChildIndex(this.cmbEstados, 0);
             this.Controls.SetChildIndex(this.lblSuministro, 0);
             this.Controls.SetChildIndex(this.cmbSuministro, 0);
-            this.Controls.SetChildIndex(this.lblTotal, 0);
             this.Controls.SetChildIndex(this.btnLimpiar, 0);
             this.Controls.SetChildIndex(this.btnAgregar, 0);
+            this.Controls.SetChildIndex(this.lblTotal, 0);
             this.panelTitulo.ResumeLayout(false);
             this.panelTitulo.PerformLayout();
             this.panelMenu.ResumeLayout(false);
@@ -505,13 +502,6 @@ namespace Summanager
         private System.Windows.Forms.DataGridView dgv;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
-		private CustomControls.MenuChildButtom btnAbrir;
-		private CustomControls.MenuChildButtom btnGuardar;
-		private CustomControls.MenuChildButtom btnExportar;
-		private CustomControls.MenuChildButtom btnImportar;
-		private CustomControls.MenuChildButtom btnActualizar;
-        private CustomControls.MenuChildButtom btnNuevo;
-        private CustomControls.MenuChildButtom btnGuardarComo;
         private CustomControls.CustomGroupBox groupEstadisticas;
         private CustomControls.CustomGroupBox customGroupBox3;
         private CustomControls.Estadistica estKitMantCritico;
@@ -533,7 +523,14 @@ namespace Summanager
         private System.Windows.Forms.Label lblTotal;
         private System.Windows.Forms.Label lblActualizacion;
         private System.Windows.Forms.Timer timerContador;
-        private CustomControls.MenuChildButtom btnLimpiar;
-        private CustomControls.MenuChildButtom btnAgregar;
+        private CustomControls.ButtonGreen btnLimpiar;
+        private CustomControls.ButtonGreen btnAgregar;
+        private CustomControls.ButtonBlue btnNuevo;
+        private CustomControls.ButtonBlue btnGuardarComo;
+        private CustomControls.ButtonBlue btnGuardar;
+        private CustomControls.ButtonBlue btnAbrir;
+        private CustomControls.ButtonBlue btnExportar;
+        private CustomControls.ButtonBlue btnImportar;
+        private CustomControls.ButtonBlue btnActualizar;
     }
 }

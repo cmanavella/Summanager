@@ -1,7 +1,7 @@
 ﻿
 namespace CustomControls
 {
-    partial class BotonHijoCeleste
+    partial class ButtonBlue
     {
         /// <summary>
         /// Variable del diseñador necesaria.
@@ -34,14 +34,13 @@ namespace CustomControls
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(159)))), ((int)(((byte)(206)))));
-            this.button1.Text = "Hijo";
-            this.button1.UseVisualStyleBackColor = false;
+            this.button1.FlatAppearance.BorderSize = 0;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // BotonHijoCeleste
+            // ButtonBlue
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.Name = "BotonHijoCeleste";
+            this.Name = "ButtonBlue";
             this.ResumeLayout(false);
 
         }

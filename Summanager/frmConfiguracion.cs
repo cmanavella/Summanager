@@ -83,14 +83,14 @@ namespace Summanager
             }
         }
 
-        private void btnAceptar_MouseClick(object sender, MouseEventArgs e)
+        private void btnAceptar_Click(object sender, EventArgs e)
         {
             //Para guardar los cambios debo validar primero que el CheckBox Automatizo esté activado y que el Combo Período 
             //tenga un valor seleccionado.
-            if (this.chkAutomatico.Checked  && this.cmbPeriodo.SelectedItem().Value > 0)
+            if (this.chkAutomatico.Checked && this.cmbPeriodo.SelectedItem().Value > 0)
             {
                 _guardar();
-                    
+
             }
             //Si no se cumple cualquiera de las dos condiciones anteriores, verifico solo que el CheckBox no esté activado para guardar.
             else if (!this.chkAutomatico.Checked)
@@ -105,7 +105,7 @@ namespace Summanager
             }
         }
 
-        private void btnCancelar_MouseClick(object sender, MouseEventArgs e)
+        private void btnCancelar_Click(object sender, EventArgs e)
         {
             //Usando las variables locales las comparo con el CheckBox y el Combo para, en caso de que estos cambien, vuelvan al estado que tienen en 
             //Configuration Manager.
@@ -120,25 +120,17 @@ namespace Summanager
                 if (this.automatizo && (this.periodo != this.cmbPeriodo.SelectedItem().Value))
                 {
                     this.cmbPeriodo.SelectItem(this.periodo, true);
-                }else if (!this.automatizo) //Si el CheckBox no está activado, el Combo debe estar en estado "Seleccione".
+                }
+                else if (!this.automatizo) //Si el CheckBox no está activado, el Combo debe estar en estado "Seleccione".
                 {
                     this.cmbPeriodo.SelectItem(0, true);
                 }
-            }else if (this.periodo != this.cmbPeriodo.SelectedItem().Value) //Si el CheckBox no cambió, me fijo si el Combo lo ha hecho y lo cambio.
+            }
+            else if (this.periodo != this.cmbPeriodo.SelectedItem().Value) //Si el CheckBox no cambió, me fijo si el Combo lo ha hecho y lo cambio.
             {
                 this.cmbPeriodo.SelectItem(this.periodo, true);
             }
             _guardar();  //Guardo los cambios.
-        }
-
-        private void botonHijo1_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Hijo Verde");
-        }
-
-        private void botonHijoCeleste1_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Hijo Celeste");
         }
     }
 }

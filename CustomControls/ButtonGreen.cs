@@ -8,16 +8,11 @@ using System.Windows.Forms;
 
 namespace CustomControls
 {
-    public partial class BotonHijoVerde : CustomControls.BotonPadre
+    public partial class ButtonGreen : CustomControls.ButtonPadre
     {
-        public BotonHijoVerde()
+        public ButtonGreen()
         {
             InitializeComponent();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            this.OnClick(e);
         }
     }
 }

@@ -31,9 +31,9 @@ namespace Summanager
         {
             this.label1 = new System.Windows.Forms.Label();
             this.chkAutomatico = new System.Windows.Forms.CheckBox();
-            this.btnCancelar = new CustomControls.MenuChildButtom();
-            this.btnAceptar = new CustomControls.MenuChildButtom();
             this.cmbPeriodo = new CustomControls.ComboBox();
+            this.btnAceptar = new CustomControls.ButtonBlue();
+            this.btnCancelar = new CustomControls.ButtonBlue();
             this.panelTitulo.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -64,28 +64,6 @@ namespace Summanager
             this.chkAutomatico.UseVisualStyleBackColor = true;
             this.chkAutomatico.CheckedChanged += new System.EventHandler(this.chkAutomatico_CheckedChanged);
             // 
-            // btnCancelar
-            // 
-            this.btnCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancelar.Image = null;
-            this.btnCancelar.Location = new System.Drawing.Point(319, 124);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(80, 28);
-            this.btnCancelar.TabIndex = 15;
-            this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnCancelar_MouseClick);
-            // 
-            // btnAceptar
-            // 
-            this.btnAceptar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAceptar.Image = null;
-            this.btnAceptar.Location = new System.Drawing.Point(233, 124);
-            this.btnAceptar.Name = "btnAceptar";
-            this.btnAceptar.Size = new System.Drawing.Size(80, 28);
-            this.btnAceptar.TabIndex = 14;
-            this.btnAceptar.Text = "Aceptar ";
-            this.btnAceptar.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnAceptar_MouseClick);
-            // 
             // cmbPeriodo
             // 
             this.cmbPeriodo.BackColor = System.Drawing.Color.White;
@@ -96,6 +74,26 @@ namespace Summanager
             this.cmbPeriodo.Name = "cmbPeriodo";
             this.cmbPeriodo.Size = new System.Drawing.Size(146, 27);
             this.cmbPeriodo.TabIndex = 13;
+            // 
+            // btnAceptar
+            // 
+            this.btnAceptar.Image = null;
+            this.btnAceptar.Location = new System.Drawing.Point(252, 123);
+            this.btnAceptar.Name = "btnAceptar";
+            this.btnAceptar.Size = new System.Drawing.Size(70, 28);
+            this.btnAceptar.TabIndex = 14;
+            this.btnAceptar.Text = "Aceptar";
+            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
+            // 
+            // btnCancelar
+            // 
+            this.btnCancelar.Image = null;
+            this.btnCancelar.Location = new System.Drawing.Point(328, 123);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(80, 28);
+            this.btnCancelar.TabIndex = 15;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // FrmConfiguracion
             // 
@@ -122,11 +120,10 @@ namespace Summanager
         }
 
         #endregion
-
-        private CustomControls.MenuChildButtom btnCancelar;
-        private CustomControls.MenuChildButtom btnAceptar;
         private CustomControls.ComboBox cmbPeriodo;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox chkAutomatico;
+        private CustomControls.ButtonBlue btnAceptar;
+        private CustomControls.ButtonBlue btnCancelar;
     }
 }

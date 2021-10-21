@@ -8,9 +8,9 @@ using System.Windows.Forms;
 
 namespace CustomControls
 {
-    public partial class BotonHijoCeleste : CustomControls.BotonPadre
+    public partial class ButtonBlue : CustomControls.ButtonPadre
     {
-        public BotonHijoCeleste()
+        public ButtonBlue()
         {
             InitializeComponent();
         }

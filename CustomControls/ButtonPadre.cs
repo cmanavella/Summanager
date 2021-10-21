@@ -10,15 +10,15 @@ using System.Windows.Forms;
 
 namespace CustomControls
 {
-	public partial class MenuChildButtom : UserControl
+	public partial class ButtonPadre : UserControl
 	{
         private Color backColor;
 
-		public MenuChildButtom()
+		public ButtonPadre()
 		{
 			InitializeComponent();
 
-            this.button1.MouseClick += Button1_MouseClick;
+            //this.button1.MouseClick += Button1_MouseClick;
         }
 
         [Browsable(true), EditorBrowsable(EditorBrowsableState.Always)]
@@ -64,9 +64,9 @@ namespace CustomControls
             }
         }
 
-        private void Button1_MouseClick(object sender, MouseEventArgs e)
-        {
-            this.OnMouseClick(e);
-        }
+        //private void Button1_MouseClick(object sender, MouseEventArgs e)
+        //{
+        //    this.OnMouseClick(e);
+        //}
     }
 }
