@@ -15,7 +15,8 @@ namespace Summanager
     {
         private List<Printer> printers;
         private FrmMain frmMain;
-        private Estadistica estadistica;
+        private Estadistica estadisticaGral;
+        private Estadistica estadisticaPart;
         private bool automatizo;
         private Int64 periodo;
         private Int64 contador;
@@ -30,6 +31,9 @@ namespace Summanager
             this.automatizo = File.getActualizacionEstados();
             this.periodo = Periodo.GetPeriodo(File.getPeriodo());
             this.contador = 0;
+
+            this.estadisticaGral = new Estadistica();
+            this.estadisticaPart = new Estadistica();
 
             _cargarCombos();
         }
@@ -187,13 +191,12 @@ namespace Summanager
             if (filtro.Length > 0)
             {
                 (this.dgv.DataSource as DataTable).DefaultView.RowFilter = filtro.ToString();
+                _getEstadisticaParticular();
             }
             else if (this.dgv.DataSource as DataTable != null)
             {
                 (this.dgv.DataSource as DataTable).DefaultView.RowFilter = null;
             }
-
-            _getEstadisticaGral();
         }
 
         /// <summary>
@@ -244,8 +247,6 @@ namespace Summanager
         {
             //Ordeno la Lista de Impresoras por la Oficina.
             this.printers.Sort((x, y) => x.Oficina.CompareTo(y.Oficina));
-
-            estadistica = new Estadistica();
 
             //Compruebo que la Lista de Impresoras no esté vacía.
             if (printers.Count > 0)
@@ -403,28 +404,84 @@ namespace Summanager
             groupEstadisticas.Visible = true;
 
             //Estadistica Estados
-            this.estOnline.Count = this.estadistica.Online;
+            this.estOnline.Count = this.estadisticaGral.Online;
             this.estOnline.Total = total;
-            this.estOffline.Count = this.estadistica.Offline;
+            this.estOffline.Count = this.estadisticaGral.Offline;
             this.estOffline.Total = total;
-            this.estNoAna.Count = this.estadistica.NoAnalizadas;
+            this.estNoAna.Count = this.estadisticaGral.NoAnalizadas;
             this.estNoAna.Total = total;
 
             //Estadística Suministros Riesgo
-            this.estTonerRiesgo.Count = this.estadistica.TonerRiesgo;
-            this.estTonerRiesgo.Total = this.estadistica.Online;
-            this.estUnImgRiesgo.Count = this.estadistica.UnImgRiesgo;
-            this.estUnImgRiesgo.Total = this.estadistica.Online;
-            this.estKitMantRiesgo.Count = this.estadistica.KitMantRiesgo;
-            this.estKitMantRiesgo.Total = this.estadistica.Online;
+            this.estTonerRiesgo.Count = this.estadisticaGral.TonerRiesgo;
+            this.estTonerRiesgo.Total = this.estadisticaGral.Online;
+            this.estUnImgRiesgo.Count = this.estadisticaGral.UnImgRiesgo;
+            this.estUnImgRiesgo.Total = this.estadisticaGral.Online;
+            this.estKitMantRiesgo.Count = this.estadisticaGral.KitMantRiesgo;
+            this.estKitMantRiesgo.Total = this.estadisticaGral.Online;
 
             //Estadística Suministros Críticos
-            this.estTonerCritico.Count = this.estadistica.TonerCritico;
-            this.estTonerCritico.Total = this.estadistica.Online;
-            this.estUnImgCritico.Count = this.estadistica.UnImgCritico;
-            this.estUnImgCritico.Total = this.estadistica.Online;
-            this.estKitMantCritico.Count = this.estadistica.KitMantCritico;
-            this.estKitMantCritico.Total = this.estadistica.Online;
+            this.estTonerCritico.Count = this.estadisticaGral.TonerCritico;
+            this.estTonerCritico.Total = this.estadisticaGral.Online;
+            this.estUnImgCritico.Count = this.estadisticaGral.UnImgCritico;
+            this.estUnImgCritico.Total = this.estadisticaGral.Online;
+            this.estKitMantCritico.Count = this.estadisticaGral.KitMantCritico;
+            this.estKitMantCritico.Total = this.estadisticaGral.Online;
+        }
+
+        private void _getEstadisticaParticular()
+        {
+            //Limpio todas las Estadísticas.
+            this.estadisticaPart.NoAnalizadas = 0;
+            this.estadisticaPart.Online = 0;
+            this.estadisticaPart.Offline = 0;
+            this.estadisticaPart.TonerRiesgo = 0;
+            this.estadisticaPart.UnImgRiesgo = 0;
+            this.estadisticaPart.KitMantRiesgo = 0;
+            this.estadisticaPart.TonerCritico = 0;
+            this.estadisticaPart.UnImgCritico = 0;
+            this.estadisticaPart.KitMantCritico = 0;
+
+            if (this.dgv.Rows.Count > 0)
+            {
+                //Cargo el total y lo paso a las Impresoras No Analizadas.
+                int total = this.dgv.Rows.Count;
+                this.estadisticaPart.NoAnalizadas = total;
+
+                //Si analizo, acomodo los datos para la estadisticaPart.
+                foreach(DataGridViewRow fila in this.dgv.Rows)
+                {
+                    int toner = Int32.Parse(fila.Cells["FiltroToner"].Value.ToString());
+                    int UI = Int32.Parse(fila.Cells["FiltroUI"].Value.ToString());
+                    int KM = Int32.Parse(fila.Cells["FiltroKM"].Value.ToString());
+
+                    if (fila.Cells["Estado"].Value.ToString() != Printer.NO_ANALIZADA)
+                    {
+                        this.estadisticaPart.NoAnalizadas--; //Quito una del contador de No Analizadas.
+                        if (fila.Cells["Estado"].Value.ToString() == Printer.ONLINE)
+                        {
+                            this.estadisticaPart.Online++;
+                        }
+                        else
+                        {
+                            this.estadisticaPart.Offline++;
+                        }
+                    }
+
+                    //Hago la Estadística de los Suministros.
+                    //Primero con lo de riesgo.
+                    if (toner <= 10 && toner > 3) this.estadisticaPart.TonerRiesgo++;
+                    if (UI <= 10 && UI > 3) this.estadisticaPart.UnImgRiesgo++;
+                    if (KM <= 10 && KM > 3) this.estadisticaPart.KitMantRiesgo++;
+
+                    //Sigo con los críticos
+                    if (toner >= 0 && toner <= 3) this.estadisticaPart.TonerCritico++;
+                    if (UI >= 0 && UI <= 3) this.estadisticaPart.UnImgCritico++;
+                    if (KM >= 0 && KM <= 3) this.estadisticaPart.KitMantCritico++;
+                }
+
+                //Muestro las estadísticas.
+                _showEstadistica(total);
+            }
         }
 
         /// <summary>
@@ -432,58 +489,61 @@ namespace Summanager
         /// </summary>
         private void _getEstadisticaGral()
         {
-            DataTable tabla = (DataTable) this.dgv.DataSource;
-            if (this.printers.Count > 0)
+            if (this.dgv.DataSource != null)
             {
-                //Limpio todas las Estadísticas.
-                this.estadistica.NoAnalizadas = 0;
-                this.estadistica.Online = 0;
-                this.estadistica.Offline = 0;
-                this.estadistica.TonerRiesgo = 0;
-                this.estadistica.UnImgRiesgo = 0;
-                this.estadistica.KitMantRiesgo = 0;
-                this.estadistica.TonerCritico = 0;
-                this.estadistica.UnImgCritico = 0;
-                this.estadistica.KitMantCritico = 0;
-
-                //Cargo el total y lo paso a las Impresoras No Analizadas.
-                int total = tabla.Rows.Count;
-                this.estadistica.NoAnalizadas = total;
-
-                //Si analizo, acomodo los datos para la estadistica.
-                for(int i=0; i<tabla.Rows.Count; i++)
+                DataTable tabla = (DataTable)this.dgv.DataSource;
+                if (tabla.Rows.Count > 0)
                 {
-                    int toner = Int32.Parse(tabla.Rows[i]["FiltroToner"].ToString());
-                    int UI = Int32.Parse(tabla.Rows[i]["FiltroUI"].ToString());
-                    int KM = Int32.Parse(tabla.Rows[i]["FiltroKM"].ToString());
+                    //Limpio todas las Estadísticas.
+                    this.estadisticaGral.NoAnalizadas = 0;
+                    this.estadisticaGral.Online = 0;
+                    this.estadisticaGral.Offline = 0;
+                    this.estadisticaGral.TonerRiesgo = 0;
+                    this.estadisticaGral.UnImgRiesgo = 0;
+                    this.estadisticaGral.KitMantRiesgo = 0;
+                    this.estadisticaGral.TonerCritico = 0;
+                    this.estadisticaGral.UnImgCritico = 0;
+                    this.estadisticaGral.KitMantCritico = 0;
 
-                    if (tabla.Rows[i]["Estado"].ToString() != Printer.NO_ANALIZADA)
+                    //Cargo el total y lo paso a las Impresoras No Analizadas.
+                    int total = tabla.Rows.Count;
+                    this.estadisticaGral.NoAnalizadas = total;
+
+                    //Si analizo, acomodo los datos para la estadisticaGral.
+                    for (int i = 0; i < tabla.Rows.Count; i++)
                     {
-                        this.estadistica.NoAnalizadas--; //Quito una del contador de No Analizadas.
-                        if (tabla.Rows[i]["Estado"].ToString() == Printer.ONLINE)
+                        int toner = Int32.Parse(tabla.Rows[i]["FiltroToner"].ToString());
+                        int UI = Int32.Parse(tabla.Rows[i]["FiltroUI"].ToString());
+                        int KM = Int32.Parse(tabla.Rows[i]["FiltroKM"].ToString());
+
+                        if (tabla.Rows[i]["Estado"].ToString() != Printer.NO_ANALIZADA)
                         {
-                            this.estadistica.Online++;
+                            this.estadisticaGral.NoAnalizadas--; //Quito una del contador de No Analizadas.
+                            if (tabla.Rows[i]["Estado"].ToString() == Printer.ONLINE)
+                            {
+                                this.estadisticaGral.Online++;
+                            }
+                            else
+                            {
+                                this.estadisticaGral.Offline++;
+                            }
                         }
-                        else
-                        {
-                            this.estadistica.Offline++;
-                        }
+
+                        //Hago la Estadística de los Suministros.
+                        //Primero con lo de riesgo.
+                        if (toner <= 10 && toner > 3) this.estadisticaGral.TonerRiesgo++;
+                        if (UI <= 10 && UI > 3) this.estadisticaGral.UnImgRiesgo++;
+                        if (KM <= 10 && KM > 3) this.estadisticaGral.KitMantRiesgo++;
+
+                        //Sigo con los críticos
+                        if (toner >= 0 && toner <= 3) this.estadisticaGral.TonerCritico++;
+                        if (UI >= 0 && UI <= 3) this.estadisticaGral.UnImgCritico++;
+                        if (KM >= 0 && KM <= 3) this.estadisticaGral.KitMantCritico++;
                     }
 
-                    //Hago la Estadística de los Suministros.
-                    //Primero con lo de riesgo.
-                    if (toner <= 10 && toner > 3) this.estadistica.TonerRiesgo++;
-                    if (UI <= 10 && UI > 3) this.estadistica.UnImgRiesgo++;
-                    if (KM <= 10 && KM > 3) this.estadistica.KitMantRiesgo++;
-
-                    //Sigo con los críticos
-                    if (toner >= 0 && toner <= 3) this.estadistica.TonerCritico++;
-                    if (UI >= 0 && UI <= 3) this.estadistica.UnImgCritico++;
-                    if (KM >= 0 && KM <= 3) this.estadistica.KitMantCritico++;
+                    //Muestro las estadísticas.
+                    _showEstadistica(total);
                 }
-
-                //Muestro las estadísticas.
-                _showEstadistica(total);
             }
         }
 
@@ -784,7 +844,7 @@ namespace Summanager
                 try
                 {
                     //Exporto el archivo Excel.
-                    IO.File.exportExcelFile(filePath, this.printers, this.estadistica);
+                    IO.File.exportExcelFile(filePath, this.printers, this.estadisticaGral);
                     MessageBox.Show("Datos exportados con éxito."); //Muestro mensaje de éxito.
                 }
                 catch (Exception ex)
@@ -839,6 +899,8 @@ namespace Summanager
             this.lblActualizacion.Text = "Última actualización: " + Fecha.ParceFecha(DateTime.Now);
             //Muestro la etiqueta de la última actualización.
             this.lblActualizacion.Visible = true;
+            //Hago las Estadísticas Generales.
+            _getEstadisticaGral();
             //Filtro el DGV.
             _filtrar();
 
