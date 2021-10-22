@@ -394,6 +394,42 @@ namespace Summanager
             this.btnLimpiar.Visible = true;
         }
 
+        /// <summary>
+        /// Muestra la Estadísticas y las modifica.
+        /// </summary>
+        /// <param name="total"></param>
+        private void _showEstadistica(int total)
+        {
+            groupEstadisticas.Visible = true;
+
+            //Estadistica Estados
+            this.estOnline.Count = this.estadistica.Online;
+            this.estOnline.Total = total;
+            this.estOffline.Count = this.estadistica.Offline;
+            this.estOffline.Total = total;
+            this.estNoAna.Count = this.estadistica.NoAnalizadas;
+            this.estNoAna.Total = total;
+
+            //Estadística Suministros Riesgo
+            this.estTonerRiesgo.Count = this.estadistica.TonerRiesgo;
+            this.estTonerRiesgo.Total = this.estadistica.Online;
+            this.estUnImgRiesgo.Count = this.estadistica.UnImgRiesgo;
+            this.estUnImgRiesgo.Total = this.estadistica.Online;
+            this.estKitMantRiesgo.Count = this.estadistica.KitMantRiesgo;
+            this.estKitMantRiesgo.Total = this.estadistica.Online;
+
+            //Estadística Suministros Críticos
+            this.estTonerCritico.Count = this.estadistica.TonerCritico;
+            this.estTonerCritico.Total = this.estadistica.Online;
+            this.estUnImgCritico.Count = this.estadistica.UnImgCritico;
+            this.estUnImgCritico.Total = this.estadistica.Online;
+            this.estKitMantCritico.Count = this.estadistica.KitMantCritico;
+            this.estKitMantCritico.Total = this.estadistica.Online;
+        }
+
+        /// <summary>
+        /// Calcula la Estadística General. Es decir, del total de datos procesados.
+        /// </summary>
         private void _getEstadisticaGral()
         {
             DataTable tabla = (DataTable) this.dgv.DataSource;
@@ -410,8 +446,9 @@ namespace Summanager
                 this.estadistica.UnImgCritico = 0;
                 this.estadistica.KitMantCritico = 0;
 
-                //Cuento todas las impresoras como No Analizadas.
-                this.estadistica.NoAnalizadas = tabla.Rows.Count;
+                //Cargo el total y lo paso a las Impresoras No Analizadas.
+                int total = tabla.Rows.Count;
+                this.estadistica.NoAnalizadas = total;
 
                 //Si analizo, acomodo los datos para la estadistica.
                 for(int i=0; i<tabla.Rows.Count; i++)
@@ -445,31 +482,8 @@ namespace Summanager
                     if (KM >= 0 && KM <= 3) this.estadistica.KitMantCritico++;
                 }
 
-                groupEstadisticas.Visible = true;
-
-                //Estadistica Estados
-                this.estOnline.Count = this.estadistica.Online;
-                this.estOnline.Total = this.printers.Count;
-                this.estOffline.Count = this.estadistica.Offline;
-                this.estOffline.Total = this.printers.Count;
-                this.estNoAna.Count = this.estadistica.NoAnalizadas;
-                this.estNoAna.Total = this.printers.Count;
-
-                //Estadística Suministros Riesgo
-                this.estTonerRiesgo.Count = this.estadistica.TonerRiesgo;
-                this.estTonerRiesgo.Total = this.estadistica.Online;
-                this.estUnImgRiesgo.Count = this.estadistica.UnImgRiesgo;
-                this.estUnImgRiesgo.Total = this.estadistica.Online;
-                this.estKitMantRiesgo.Count = this.estadistica.KitMantRiesgo;
-                this.estKitMantRiesgo.Total = this.estadistica.Online;
-
-                //Estadística Suministros Críticos
-                this.estTonerCritico.Count = this.estadistica.TonerCritico;
-                this.estTonerCritico.Total = this.estadistica.Online;
-                this.estUnImgCritico.Count = this.estadistica.UnImgCritico;
-                this.estUnImgCritico.Total = this.estadistica.Online;
-                this.estKitMantCritico.Count = this.estadistica.KitMantCritico;
-                this.estKitMantCritico.Total = this.estadistica.Online;
+                //Muestro las estadísticas.
+                _showEstadistica(total);
             }
         }
 
