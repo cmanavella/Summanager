@@ -192,6 +192,8 @@ namespace Summanager
             {
                 (this.dgv.DataSource as DataTable).DefaultView.RowFilter = null;
             }
+
+            _getEstadisticaGral();
         }
 
         /// <summary>
@@ -250,9 +252,6 @@ namespace Summanager
             {
                 DataTable dataTable = new DataTable();
 
-                //Cuento todas las impresoras como No Analizadas.
-                this.estadistica.NoAnalizadas = this.printers.Count;
-
                 //Cargo los encabezados de las Columnas con sus respectivos nombres y textos a mostrar.
                 dataTable.Columns.Add("Ip", typeof(string));
                 dataTable.Columns.Add("Modelo", typeof(string));
@@ -301,31 +300,6 @@ namespace Summanager
                         filtroKM = (int)printer.KitMant;
                     }
 
-                    //Si analizo, acomodo los datos para la estadistica.
-                    if (printer.Estado != Printer.NO_ANALIZADA)
-                    {
-                        this.estadistica.NoAnalizadas--; //Quito una del contador de No Analizadas.
-                        if (printer.Estado == Printer.ONLINE)
-                        {
-                            this.estadistica.Online++;
-                        }
-                        else
-                        {
-                            this.estadistica.Offline++;
-                        }
-                    }
-
-                    //Hago la Estadística de los Suministros.
-                    //Primero con lo de riesgo.
-                    if (filtroToner <= 10 && filtroToner > 3) this.estadistica.TonerRiesgo++;
-                    if (filtroUI <= 10 && filtroUI > 3) this.estadistica.UnImgRiesgo++;
-                    if (filtroKM <= 10 && filtroKM > 3) this.estadistica.KitMantRiesgo++;
-
-                    //Sigo con los críticos
-                    if (filtroToner >= 0 && filtroToner <= 3) this.estadistica.TonerCritico++;
-                    if (filtroUI >= 0 && filtroUI <= 3) this.estadistica.UnImgCritico++;
-                    if (filtroKM >= 0 && filtroKM <= 3) this.estadistica.KitMantCritico++;
-
                     //Uso StringBuilder para armar la cadena de filtro para el TextBox.
                     StringBuilder filtroTextBox = new StringBuilder();
                     filtroTextBox.Append(printer.Ip);
@@ -359,8 +333,6 @@ namespace Summanager
                 dgv.Columns[4].Width = 50;
                 dgv.Columns[5].Width = 50;
                 dgv.Columns[6].Width = 50;
-
-                _getEstadisticas();
             }
         }
 
@@ -422,10 +394,57 @@ namespace Summanager
             this.btnLimpiar.Visible = true;
         }
 
-        private void _getEstadisticas()
+        private void _getEstadisticaGral()
         {
+            DataTable tabla = (DataTable) this.dgv.DataSource;
             if (this.printers.Count > 0)
             {
+                //Limpio todas las Estadísticas.
+                this.estadistica.NoAnalizadas = 0;
+                this.estadistica.Online = 0;
+                this.estadistica.Offline = 0;
+                this.estadistica.TonerRiesgo = 0;
+                this.estadistica.UnImgRiesgo = 0;
+                this.estadistica.KitMantRiesgo = 0;
+                this.estadistica.TonerCritico = 0;
+                this.estadistica.UnImgCritico = 0;
+                this.estadistica.KitMantCritico = 0;
+
+                //Cuento todas las impresoras como No Analizadas.
+                this.estadistica.NoAnalizadas = tabla.Rows.Count;
+
+                //Si analizo, acomodo los datos para la estadistica.
+                for(int i=0; i<tabla.Rows.Count; i++)
+                {
+                    int toner = Int32.Parse(tabla.Rows[i]["FiltroToner"].ToString());
+                    int UI = Int32.Parse(tabla.Rows[i]["FiltroUI"].ToString());
+                    int KM = Int32.Parse(tabla.Rows[i]["FiltroKM"].ToString());
+
+                    if (tabla.Rows[i]["Estado"].ToString() != Printer.NO_ANALIZADA)
+                    {
+                        this.estadistica.NoAnalizadas--; //Quito una del contador de No Analizadas.
+                        if (tabla.Rows[i]["Estado"].ToString() == Printer.ONLINE)
+                        {
+                            this.estadistica.Online++;
+                        }
+                        else
+                        {
+                            this.estadistica.Offline++;
+                        }
+                    }
+
+                    //Hago la Estadística de los Suministros.
+                    //Primero con lo de riesgo.
+                    if (toner <= 10 && toner > 3) this.estadistica.TonerRiesgo++;
+                    if (UI <= 10 && UI > 3) this.estadistica.UnImgRiesgo++;
+                    if (KM <= 10 && KM > 3) this.estadistica.KitMantRiesgo++;
+
+                    //Sigo con los críticos
+                    if (toner >= 0 && toner <= 3) this.estadistica.TonerCritico++;
+                    if (UI >= 0 && UI <= 3) this.estadistica.UnImgCritico++;
+                    if (KM >= 0 && KM <= 3) this.estadistica.KitMantCritico++;
+                }
+
                 groupEstadisticas.Visible = true;
 
                 //Estadistica Estados
