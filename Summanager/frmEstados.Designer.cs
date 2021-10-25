@@ -64,6 +64,7 @@ namespace Summanager
             this.btnImportar = new CustomControls.ButtonBlue();
             this.btnExportar = new CustomControls.ButtonBlue();
             this.btnActualizar = new CustomControls.ButtonBlue();
+            this.btnCambiarEst = new CustomControls.ButtonGreen();
             this.panelTitulo.SuspendLayout();
             this.panelMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
@@ -229,6 +230,7 @@ namespace Summanager
             // 
             // groupEstadisticas
             // 
+            this.groupEstadisticas.Controls.Add(this.btnCambiarEst);
             this.groupEstadisticas.Controls.Add(this.customGroupBox3);
             this.groupEstadisticas.Controls.Add(this.customGroupBox2);
             this.groupEstadisticas.Controls.Add(this.customGroupBox1);
@@ -236,7 +238,7 @@ namespace Summanager
             this.groupEstadisticas.Name = "groupEstadisticas";
             this.groupEstadisticas.Size = new System.Drawing.Size(1023, 347);
             this.groupEstadisticas.TabIndex = 23;
-            this.groupEstadisticas.Text = "Estadísticas";
+            this.groupEstadisticas.Text = "Estadísticas Generales";
             this.groupEstadisticas.Visible = false;
             // 
             // customGroupBox3
@@ -451,6 +453,15 @@ namespace Summanager
             this.btnActualizar.Text = "Actualizar";
             this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
             // 
+            // btnCambiarEst
+            // 
+            this.btnCambiarEst.Image = null;
+            this.btnCambiarEst.Location = new System.Drawing.Point(6, 30);
+            this.btnCambiarEst.Name = "btnCambiarEst";
+            this.btnCambiarEst.Size = new System.Drawing.Size(80, 28);
+            this.btnCambiarEst.TabIndex = 12;
+            this.btnCambiarEst.Text = "Cambiar";
+            // 
             // FrmEstados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -532,5 +543,6 @@ namespace Summanager
         private CustomControls.ButtonBlue btnExportar;
         private CustomControls.ButtonBlue btnImportar;
         private CustomControls.ButtonBlue btnActualizar;
+        private CustomControls.ButtonGreen btnCambiarEst;
     }
 }
