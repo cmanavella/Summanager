@@ -191,12 +191,16 @@ namespace Summanager
             if (filtro.Length > 0)
             {
                 (this.dgv.DataSource as DataTable).DefaultView.RowFilter = filtro.ToString();
-                _getEstadisticaParticular();
+                _getEstadisticaParticular(); //Calculo las Estadísticas Particulares al filtro.
             }
             else if (this.dgv.DataSource as DataTable != null)
             {
                 (this.dgv.DataSource as DataTable).DefaultView.RowFilter = null;
+                _showEstadistica(this.dgv.Rows.Count, true); //Como las Estadísticas Generales ya las calculé, las muestro.
             }
+
+            //Cambio el valor del LblTotal.
+            this.lblTotal.Text = "Total: " + this.dgv.Rows.Count;
         }
 
         /// <summary>
@@ -399,33 +403,41 @@ namespace Summanager
         /// Muestra la Estadísticas y las modifica.
         /// </summary>
         /// <param name="total"></param>
-        private void _showEstadistica(int total)
+        /// <param name="esGral"></param>
+        private void _showEstadistica(int total, bool esGral)
         {
             groupEstadisticas.Visible = true;
 
-            //Estadistica Estados
-            this.estOnline.Count = this.estadisticaGral.Online;
+            //Primero cargo las cantidades en base a si es la Estadística general o no.
+            Estadistica estadistica;
+            if (esGral)
+            {
+                estadistica = this.estadisticaGral;
+            }
+            else
+            {
+                estadistica = this.estadisticaPart;
+            }
+            this.estOnline.Count = estadistica.Online;
+            this.estOffline.Count = estadistica.Offline;
+            this.estNoAna.Count = estadistica.NoAnalizadas;
+            this.estTonerRiesgo.Count = estadistica.TonerRiesgo;
+            this.estUnImgRiesgo.Count = estadistica.UnImgRiesgo;
+            this.estKitMantRiesgo.Count = estadistica.KitMantRiesgo;
+            this.estTonerCritico.Count = estadistica.TonerCritico;
+            this.estUnImgCritico.Count = estadistica.UnImgCritico;
+            this.estKitMantCritico.Count = estadistica.KitMantCritico;
+
+            //Cargo los totales.
             this.estOnline.Total = total;
-            this.estOffline.Count = this.estadisticaGral.Offline;
             this.estOffline.Total = total;
-            this.estNoAna.Count = this.estadisticaGral.NoAnalizadas;
             this.estNoAna.Total = total;
-
-            //Estadística Suministros Riesgo
-            this.estTonerRiesgo.Count = this.estadisticaGral.TonerRiesgo;
-            this.estTonerRiesgo.Total = this.estadisticaGral.Online;
-            this.estUnImgRiesgo.Count = this.estadisticaGral.UnImgRiesgo;
-            this.estUnImgRiesgo.Total = this.estadisticaGral.Online;
-            this.estKitMantRiesgo.Count = this.estadisticaGral.KitMantRiesgo;
-            this.estKitMantRiesgo.Total = this.estadisticaGral.Online;
-
-            //Estadística Suministros Críticos
-            this.estTonerCritico.Count = this.estadisticaGral.TonerCritico;
-            this.estTonerCritico.Total = this.estadisticaGral.Online;
-            this.estUnImgCritico.Count = this.estadisticaGral.UnImgCritico;
-            this.estUnImgCritico.Total = this.estadisticaGral.Online;
-            this.estKitMantCritico.Count = this.estadisticaGral.KitMantCritico;
-            this.estKitMantCritico.Total = this.estadisticaGral.Online;
+            this.estTonerRiesgo.Total = estadistica.Online;
+            this.estUnImgRiesgo.Total = estadistica.Online;
+            this.estKitMantRiesgo.Total = estadistica.Online;
+            this.estTonerCritico.Total = estadistica.Online;
+            this.estUnImgCritico.Total = estadistica.Online;
+            this.estKitMantCritico.Total = estadistica.Online;
         }
 
         private void _getEstadisticaParticular()
@@ -441,10 +453,10 @@ namespace Summanager
             this.estadisticaPart.UnImgCritico = 0;
             this.estadisticaPart.KitMantCritico = 0;
 
-            if (this.dgv.Rows.Count > 0)
+            //Cargo el total y lo paso a las Impresoras No Analizadas.
+            int total = this.dgv.Rows.Count;
+            if (total > 0)
             {
-                //Cargo el total y lo paso a las Impresoras No Analizadas.
-                int total = this.dgv.Rows.Count;
                 this.estadisticaPart.NoAnalizadas = total;
 
                 //Si analizo, acomodo los datos para la estadisticaPart.
@@ -478,10 +490,9 @@ namespace Summanager
                     if (UI >= 0 && UI <= 3) this.estadisticaPart.UnImgCritico++;
                     if (KM >= 0 && KM <= 3) this.estadisticaPart.KitMantCritico++;
                 }
-
-                //Muestro las estadísticas.
-                _showEstadistica(total);
             }
+            //Muestro las estadísticas.
+            _showEstadistica(total, false);
         }
 
         /// <summary>
@@ -542,7 +553,7 @@ namespace Summanager
                     }
 
                     //Muestro las estadísticas.
-                    _showEstadistica(total);
+                    _showEstadistica(total, true);
                 }
             }
         }
