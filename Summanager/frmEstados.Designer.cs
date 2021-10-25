@@ -39,10 +39,13 @@ namespace Summanager
             this.lblTotal = new System.Windows.Forms.Label();
             this.lblActualizacion = new System.Windows.Forms.Label();
             this.timerContador = new System.Windows.Forms.Timer(this.components);
+            this.btnAgregar = new CustomControls.ButtonGreen();
+            this.btnLimpiar = new CustomControls.ButtonGreen();
             this.cmbSuministro = new CustomControls.ComboBox();
             this.cmbEstados = new CustomControls.ComboBox();
             this.txtFiltro = new CustomControls.TextBox();
             this.groupEstadisticas = new CustomControls.CustomGroupBox();
+            this.btnCambiarEst = new CustomControls.ButtonGreen();
             this.customGroupBox3 = new CustomControls.CustomGroupBox();
             this.estKitMantCritico = new CustomControls.Estadistica();
             this.estUnImgCritico = new CustomControls.Estadistica();
@@ -55,16 +58,13 @@ namespace Summanager
             this.estKitMantRiesgo = new CustomControls.Estadistica();
             this.estUnImgRiesgo = new CustomControls.Estadistica();
             this.estTonerRiesgo = new CustomControls.Estadistica();
-            this.btnLimpiar = new CustomControls.ButtonGreen();
-            this.btnAgregar = new CustomControls.ButtonGreen();
-            this.btnNuevo = new CustomControls.ButtonBlue();
-            this.btnAbrir = new CustomControls.ButtonBlue();
-            this.btnGuardar = new CustomControls.ButtonBlue();
-            this.btnGuardarComo = new CustomControls.ButtonBlue();
-            this.btnImportar = new CustomControls.ButtonBlue();
-            this.btnExportar = new CustomControls.ButtonBlue();
             this.btnActualizar = new CustomControls.ButtonBlue();
-            this.btnCambiarEst = new CustomControls.ButtonGreen();
+            this.btnExportar = new CustomControls.ButtonBlue();
+            this.btnImportar = new CustomControls.ButtonBlue();
+            this.btnGuardarComo = new CustomControls.ButtonBlue();
+            this.btnGuardar = new CustomControls.ButtonBlue();
+            this.btnAbrir = new CustomControls.ButtonBlue();
+            this.btnNuevo = new CustomControls.ButtonBlue();
             this.panelTitulo.SuspendLayout();
             this.panelMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
@@ -191,6 +191,25 @@ namespace Summanager
             this.timerContador.Interval = 1000;
             this.timerContador.Tick += new System.EventHandler(this.timerContador_Tick);
             // 
+            // btnAgregar
+            // 
+            this.btnAgregar.Image = global::Summanager.Properties.Resources.add;
+            this.btnAgregar.Location = new System.Drawing.Point(947, 97);
+            this.btnAgregar.Name = "btnAgregar";
+            this.btnAgregar.Size = new System.Drawing.Size(88, 28);
+            this.btnAgregar.TabIndex = 32;
+            this.btnAgregar.Text = "Agregar";
+            // 
+            // btnLimpiar
+            // 
+            this.btnLimpiar.Image = global::Summanager.Properties.Resources.clear;
+            this.btnLimpiar.Location = new System.Drawing.Point(851, 97);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(90, 28);
+            this.btnLimpiar.TabIndex = 31;
+            this.btnLimpiar.Text = "Limpiar";
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
+            // 
             // cmbSuministro
             // 
             this.cmbSuministro.BackColor = System.Drawing.Color.White;
@@ -240,6 +259,17 @@ namespace Summanager
             this.groupEstadisticas.TabIndex = 23;
             this.groupEstadisticas.Text = "Estadísticas Generales";
             this.groupEstadisticas.Visible = false;
+            // 
+            // btnCambiarEst
+            // 
+            this.btnCambiarEst.Image = null;
+            this.btnCambiarEst.Location = new System.Drawing.Point(6, 30);
+            this.btnCambiarEst.Name = "btnCambiarEst";
+            this.btnCambiarEst.Size = new System.Drawing.Size(80, 28);
+            this.btnCambiarEst.TabIndex = 12;
+            this.btnCambiarEst.Text = "Cambiar";
+            this.btnCambiarEst.Visible = false;
+            this.btnCambiarEst.Click += new System.EventHandler(this.btnCambiarEst_Click);
             // 
             // customGroupBox3
             // 
@@ -364,74 +394,15 @@ namespace Summanager
             this.estTonerRiesgo.Text = "Toner";
             this.estTonerRiesgo.Total = 0;
             // 
-            // btnLimpiar
+            // btnActualizar
             // 
-            this.btnLimpiar.Image = global::Summanager.Properties.Resources.clear;
-            this.btnLimpiar.Location = new System.Drawing.Point(851, 97);
-            this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(90, 28);
-            this.btnLimpiar.TabIndex = 31;
-            this.btnLimpiar.Text = "Limpiar";
-            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
-            // 
-            // btnAgregar
-            // 
-            this.btnAgregar.Image = global::Summanager.Properties.Resources.add;
-            this.btnAgregar.Location = new System.Drawing.Point(947, 97);
-            this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(88, 28);
-            this.btnAgregar.TabIndex = 32;
-            this.btnAgregar.Text = "Agregar";
-            // 
-            // btnNuevo
-            // 
-            this.btnNuevo.Image = global::Summanager.Properties.Resources._new;
-            this.btnNuevo.Location = new System.Drawing.Point(12, 6);
-            this.btnNuevo.Name = "btnNuevo";
-            this.btnNuevo.Size = new System.Drawing.Size(76, 28);
-            this.btnNuevo.TabIndex = 7;
-            this.btnNuevo.Text = "Nuevo";
-            this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
-            // 
-            // btnAbrir
-            // 
-            this.btnAbrir.Image = global::Summanager.Properties.Resources.open_folder;
-            this.btnAbrir.Location = new System.Drawing.Point(94, 6);
-            this.btnAbrir.Name = "btnAbrir";
-            this.btnAbrir.Size = new System.Drawing.Size(69, 28);
-            this.btnAbrir.TabIndex = 8;
-            this.btnAbrir.Text = "Abrir";
-            this.btnAbrir.Click += new System.EventHandler(this.btnAbrir_Click);
-            // 
-            // btnGuardar
-            // 
-            this.btnGuardar.Image = global::Summanager.Properties.Resources.save_file;
-            this.btnGuardar.Location = new System.Drawing.Point(169, 6);
-            this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(98, 28);
-            this.btnGuardar.TabIndex = 9;
-            this.btnGuardar.Text = "Guardar";
-            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
-            // 
-            // btnGuardarComo
-            // 
-            this.btnGuardarComo.Image = global::Summanager.Properties.Resources.save_file;
-            this.btnGuardarComo.Location = new System.Drawing.Point(273, 6);
-            this.btnGuardarComo.Name = "btnGuardarComo";
-            this.btnGuardarComo.Size = new System.Drawing.Size(150, 28);
-            this.btnGuardarComo.TabIndex = 10;
-            this.btnGuardarComo.Text = "Guardar como...";
-            this.btnGuardarComo.Click += new System.EventHandler(this.btnGuardarComo_Click);
-            // 
-            // btnImportar
-            // 
-            this.btnImportar.Image = global::Summanager.Properties.Resources.excel;
-            this.btnImportar.Location = new System.Drawing.Point(429, 6);
-            this.btnImportar.Name = "btnImportar";
-            this.btnImportar.Size = new System.Drawing.Size(96, 28);
-            this.btnImportar.TabIndex = 11;
-            this.btnImportar.Text = "Importar";
-            this.btnImportar.Click += new System.EventHandler(this.btnImportar_Click);
+            this.btnActualizar.Image = global::Summanager.Properties.Resources.refresh_page_option;
+            this.btnActualizar.Location = new System.Drawing.Point(851, 6);
+            this.btnActualizar.Name = "btnActualizar";
+            this.btnActualizar.Size = new System.Drawing.Size(105, 28);
+            this.btnActualizar.TabIndex = 13;
+            this.btnActualizar.Text = "Actualizar";
+            this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
             // 
             // btnExportar
             // 
@@ -443,24 +414,55 @@ namespace Summanager
             this.btnExportar.Text = "Exportar";
             this.btnExportar.Click += new System.EventHandler(this.btnExportar_Click);
             // 
-            // btnActualizar
+            // btnImportar
             // 
-            this.btnActualizar.Image = global::Summanager.Properties.Resources.refresh_page_option;
-            this.btnActualizar.Location = new System.Drawing.Point(851, 6);
-            this.btnActualizar.Name = "btnActualizar";
-            this.btnActualizar.Size = new System.Drawing.Size(105, 28);
-            this.btnActualizar.TabIndex = 13;
-            this.btnActualizar.Text = "Actualizar";
-            this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
+            this.btnImportar.Image = global::Summanager.Properties.Resources.excel;
+            this.btnImportar.Location = new System.Drawing.Point(429, 6);
+            this.btnImportar.Name = "btnImportar";
+            this.btnImportar.Size = new System.Drawing.Size(96, 28);
+            this.btnImportar.TabIndex = 11;
+            this.btnImportar.Text = "Importar";
+            this.btnImportar.Click += new System.EventHandler(this.btnImportar_Click);
             // 
-            // btnCambiarEst
+            // btnGuardarComo
             // 
-            this.btnCambiarEst.Image = null;
-            this.btnCambiarEst.Location = new System.Drawing.Point(6, 30);
-            this.btnCambiarEst.Name = "btnCambiarEst";
-            this.btnCambiarEst.Size = new System.Drawing.Size(80, 28);
-            this.btnCambiarEst.TabIndex = 12;
-            this.btnCambiarEst.Text = "Cambiar";
+            this.btnGuardarComo.Image = global::Summanager.Properties.Resources.save_file;
+            this.btnGuardarComo.Location = new System.Drawing.Point(273, 6);
+            this.btnGuardarComo.Name = "btnGuardarComo";
+            this.btnGuardarComo.Size = new System.Drawing.Size(150, 28);
+            this.btnGuardarComo.TabIndex = 10;
+            this.btnGuardarComo.Text = "Guardar como...";
+            this.btnGuardarComo.Click += new System.EventHandler(this.btnGuardarComo_Click);
+            // 
+            // btnGuardar
+            // 
+            this.btnGuardar.Image = global::Summanager.Properties.Resources.save_file;
+            this.btnGuardar.Location = new System.Drawing.Point(169, 6);
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(98, 28);
+            this.btnGuardar.TabIndex = 9;
+            this.btnGuardar.Text = "Guardar";
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
+            // 
+            // btnAbrir
+            // 
+            this.btnAbrir.Image = global::Summanager.Properties.Resources.open_folder;
+            this.btnAbrir.Location = new System.Drawing.Point(94, 6);
+            this.btnAbrir.Name = "btnAbrir";
+            this.btnAbrir.Size = new System.Drawing.Size(69, 28);
+            this.btnAbrir.TabIndex = 8;
+            this.btnAbrir.Text = "Abrir";
+            this.btnAbrir.Click += new System.EventHandler(this.btnAbrir_Click);
+            // 
+            // btnNuevo
+            // 
+            this.btnNuevo.Image = global::Summanager.Properties.Resources._new;
+            this.btnNuevo.Location = new System.Drawing.Point(12, 6);
+            this.btnNuevo.Name = "btnNuevo";
+            this.btnNuevo.Size = new System.Drawing.Size(76, 28);
+            this.btnNuevo.TabIndex = 7;
+            this.btnNuevo.Text = "Nuevo";
+            this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
             // 
             // FrmEstados
             // 

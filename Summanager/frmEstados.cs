@@ -20,6 +20,7 @@ namespace Summanager
         private bool automatizo;
         private Int64 periodo;
         private Int64 contador;
+        private bool estGrales;
 
 
         public FrmEstados(FrmMain frmMain)
@@ -34,6 +35,7 @@ namespace Summanager
 
             this.estadisticaGral = new Estadistica();
             this.estadisticaPart = new Estadistica();
+            this.estGrales = true;
 
             _cargarCombos();
         }
@@ -192,11 +194,25 @@ namespace Summanager
             {
                 (this.dgv.DataSource as DataTable).DefaultView.RowFilter = filtro.ToString();
                 _getEstadisticaParticular(); //Calculo las Estadísticas Particulares al filtro.
+
+                //Muestro el Botón de Cambiar Estadísticas.
+                this.btnCambiarEst.Visible = true;
+                //Cambio la variable bandera de EstGrales a False para marcar que efectivamente estoy mostrando las Estadísticas Particulares.
+                this.estGrales = false;
+                //Cambio el texto del Group Estadísticas.
+                this.groupEstadisticas.Text = "Estadísticas Particulares";
             }
             else if (this.dgv.DataSource as DataTable != null)
             {
                 (this.dgv.DataSource as DataTable).DefaultView.RowFilter = null;
                 _showEstadistica(this.dgv.Rows.Count, true); //Como las Estadísticas Generales ya las calculé, las muestro.
+                
+                //Oculto el botón de Cambiar Estadísticas.
+                this.btnCambiarEst.Visible = false;
+                //Cambio la variable bandera de EstGrales a True para marcar que efectivamente estoy mostrando las Estadísticas Generales.
+                this.estGrales = true;
+                //Cambio el texto del Group Estadísticas.
+                this.groupEstadisticas.Text = "Estadísticas Generales";
             }
 
             //Cambio el valor del LblTotal.
@@ -968,6 +984,23 @@ namespace Summanager
             this.cmbEstados.SelectItem(0, true);
             this.cmbSuministro.SelectItem(0, true);
             this.btnLimpiar.Focus();
+        }
+
+        private void btnCambiarEst_Click(object sender, EventArgs e)
+        {
+            if (this.estGrales)
+            {
+                this.estGrales = false;
+                this.groupEstadisticas.Text = "Estadísticas Particulares";
+                _showEstadistica(this.dgv.Rows.Count, false);
+            }
+            else
+            {
+                this.estGrales = true;
+                this.groupEstadisticas.Text = "Estadísticas Generales";
+                DataTable datos = (DataTable)this.dgv.DataSource;
+                _showEstadistica(datos.Rows.Count, true);
+            }
         }
     }
 }
