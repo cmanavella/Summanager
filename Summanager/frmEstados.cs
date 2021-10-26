@@ -914,6 +914,8 @@ namespace Summanager
         {
             //Exporta una Lista de Impresoras a un archivo de Excel. 
 
+            FrmExportando frmExportando;
+
             //Seteo el SaveFileDialog.
             saveFileDialog.InitialDirectory = _getSaveDirectory();
             saveFileDialog.Filter = "Libro de Excel (*.xlsx)|*.xlsx";
@@ -921,36 +923,31 @@ namespace Summanager
             saveFileDialog.RestoreDirectory = true;
 
             string filePath = String.Empty; 
-            //Uso try para asegurarme que no suceda nada durante el proceso.
-            try
+            //La visibilidad del Botón Cambiar (entre estadísticas Generales y Particulares) me indica si se ha aplicado un filtro o no.
+            //Si es visible se ha aplicado un filtro, sino no.
+            if (this.btnCambiarEst.Visible)
             {
-                //La visibilidad del Botón Cambiar (entre estadísticas Generales y Particulares) me indica si se ha aplicado un filtro o no.
-                //Si es visible se ha aplicado un filtro, sino no.
-                if (this.btnCambiarEst.Visible)
-                {
-                    var result = MessageBox.Show("¿Desea exportar solamente el resultado del Filtro Aplicado? \n\nSi elige la opción " +
-                        "\"Sí\" se exportarán solamente las Impresoras en pantalla. Si elige " +
-                        "la opción \"No\" se exportarán Todas las Impresoras Analizadas.",
-                        Application.ProductName, MessageBoxButtons.YesNo);
+                var result = MessageBox.Show("¿Desea exportar solamente el resultado del Filtro Aplicado? \n\nSi elige la opción " +
+                    "\"Sí\" se exportarán solamente las Impresoras en pantalla. Si elige " +
+                    "la opción \"No\" se exportarán Todas las Impresoras Analizadas.",
+                    Application.ProductName, MessageBoxButtons.YesNo);
 
-                    if (result == DialogResult.Yes) //Pregunto si decide exportar lo fitrado o no.
+                if (result == DialogResult.Yes) //Pregunto si decide exportar lo fitrado o no.
+                {
+                    //Pregunto si no ha cancelado.
+                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
                     {
-                        //Pregunto si no ha cancelado.
-                        if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                        filePath = saveFileDialog.FileName; //Almaceno la ruta y el nombre del archivo Excel a exportar.
+                        //Exporto el archivo Excel con los datos del Filtro.
+                        frmExportando = new FrmExportando(filePath, _getFilterData(), this.estadisticaPart);
+                        frmExportando.ShowDialog();
+                        if (frmExportando.Error)
                         {
-                            filePath = saveFileDialog.FileName; //Almaceno la ruta y el nombre del archivo Excel a exportar.
-                            //Exporto el archivo Excel con los datos del Filtro.
-                            IO.File.exportExcelFile(filePath, _getFilterData(), this.estadisticaPart);
+                            MessageBox.Show(frmExportando.Exception.Message);
                         }
-                    }
-                    else
-                    {
-                        //Pregunto si no ha cancelado.
-                        if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                        else
                         {
-                            filePath = saveFileDialog.FileName; //Almaceno la ruta y el nombre del archivo Excel a exportar.
-                            //Exporto el archivo Excel con los datos Generales.
-                            IO.File.exportExcelFile(filePath, (DataTable)this.dgv.DataSource, this.estadisticaGral);
+                            MessageBox.Show("Datos exportados con éxito."); //Muestro mensaje de éxito.
                         }
                     }
                 }
@@ -960,21 +957,43 @@ namespace Summanager
                     if (saveFileDialog.ShowDialog() == DialogResult.OK)
                     {
                         filePath = saveFileDialog.FileName; //Almaceno la ruta y el nombre del archivo Excel a exportar.
-                        //Exporto el archivo Excel.
-                        IO.File.exportExcelFile(filePath, (DataTable)this.dgv.DataSource, this.estadisticaGral);
+                        //Exporto el archivo Excel con los datos Generales.
+                        frmExportando = new FrmExportando(filePath, (DataTable)this.dgv.DataSource, this.estadisticaGral);
+                        frmExportando.ShowDialog();
+                        if (frmExportando.Error)
+                        {
+                            MessageBox.Show(frmExportando.Exception.Message);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Datos exportados con éxito."); //Muestro mensaje de éxito.
+                        }
                     }
                 }
-
-                MessageBox.Show("Datos exportados con éxito."); //Muestro mensaje de éxito.
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show(ex.Message); //Si huibo un error, lo muestro.
+                //Pregunto si no ha cancelado.
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    filePath = saveFileDialog.FileName; //Almaceno la ruta y el nombre del archivo Excel a exportar.
+                    //Exporto el archivo Excel.
+                    frmExportando = new FrmExportando(filePath, (DataTable)this.dgv.DataSource, this.estadisticaGral);
+                    frmExportando.ShowDialog();
+                    if (frmExportando.Error)
+                    {
+                        MessageBox.Show(frmExportando.Exception.Message);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Datos exportados con éxito."); //Muestro mensaje de éxito.
+                    }
+                }
             }
 
-        IO.File.SetSaveDirectory(this.saveFileDialog.FileName); //Guardo el último directorio.
-        saveFileDialog.FileName = ""; //Limpio el SFD.
-        _acomodarBotones(); //Acomodo botones.
+            IO.File.SetSaveDirectory(this.saveFileDialog.FileName); //Guardo el último directorio.
+            saveFileDialog.FileName = ""; //Limpio el SFD.
+            _acomodarBotones(); //Acomodo botones.
         }
 
         private void btnActualizar_Click(object sender, EventArgs e)

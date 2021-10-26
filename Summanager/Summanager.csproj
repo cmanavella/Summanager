@@ -115,11 +115,23 @@
     <Compile Include="FrmContenido.Designer.cs">
       <DependentUpon>FrmContenido.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmEmergente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmEmergente.Designer.cs">
+      <DependentUpon>FrmEmergente.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmEstados.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrmEstados.Designer.cs">
       <DependentUpon>FrmEstados.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmExportando.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmExportando.Designer.cs">
+      <DependentUpon>FrmExportando.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmMain.cs">
       <SubType>Form</SubType>
@@ -144,8 +156,14 @@
     <EmbeddedResource Include="FrmContenido.resx">
       <DependentUpon>FrmContenido.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmEmergente.resx">
+      <DependentUpon>FrmEmergente.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmEstados.resx">
       <DependentUpon>FrmEstados.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmExportando.resx">
+      <DependentUpon>FrmExportando.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
