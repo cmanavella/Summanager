@@ -261,6 +261,54 @@ namespace Summanager
         }
 
         /// <summary>
+        /// Crea un nuevo DataTable a partir de los valores mostrados en un DataGridView.
+        /// </summary>
+        /// <remarks>
+        /// A diferencia del DataSource del DataGridView este método usa los valores visibles en la misma. Sirve para cuando se ha
+        /// aplicado un Filtro.
+        /// </remarks>
+        /// <returns></returns>
+        private DataTable _getFilterData()
+        {
+            DataTable data = new DataTable();
+
+            //Cargo los encabezados de las Columnas con sus respectivos nombres y textos a mostrar.
+            data.Columns.Add("Ip", typeof(string));
+            data.Columns.Add("Modelo", typeof(string));
+            data.Columns.Add("Oficina", typeof(string));
+            data.Columns.Add("Estado", typeof(string));
+            data.Columns.Add("Toner", typeof(string));
+            data.Columns.Add("UI", typeof(string));
+            data.Columns.Add("KM", typeof(string));
+            data.Columns.Add("FiltroTextBox", typeof(string));
+            data.Columns.Add("FiltroToner", typeof(int));
+            data.Columns.Add("FiltroUI", typeof(int));
+            data.Columns.Add("FiltroKM", typeof(int));
+
+            //Recorro cada fila del DGV.
+            foreach (DataGridViewRow fila in this.dgv.Rows)
+            {
+                //Almaceno cada valor de cada celda en una variable.
+                string ip = fila.Cells["Ip"].Value.ToString();
+                string modelo = fila.Cells["Modelo"].Value.ToString();
+                string oficina = fila.Cells["Oficina"].Value.ToString();
+                string estado = fila.Cells["Estado"].Value.ToString();
+                string toner = fila.Cells["Toner"].Value.ToString();
+                string ui = fila.Cells["UI"].Value.ToString();
+                string km = fila.Cells["KM"].Value.ToString();
+                string filtroTextBox = fila.Cells["FiltroTextBox"].Value.ToString();
+                int filtroToner = Int32.Parse(fila.Cells["FiltroToner"].Value.ToString());
+                int filtroUI = Int32.Parse(fila.Cells["FiltroUI"].Value.ToString());
+                int filtroKM = Int32.Parse(fila.Cells["FiltroKM"].Value.ToString());
+
+                //Cargo las variables en el DataTable que devuelvo.
+                data.Rows.Add(ip, modelo, oficina, estado, toner, ui, km, filtroTextBox, filtroToner, filtroUI, filtroKM);
+            }
+
+            return data;
+        }
+
+        /// <summary>
         /// Carga el DataGridView con una Lista de Impresoras y colorea las filas de acuerdo al Estado de las mismas.
         /// </summary>
         private void _llenarDgv()
@@ -863,26 +911,61 @@ namespace Summanager
             saveFileDialog.FilterIndex = 1;
             saveFileDialog.RestoreDirectory = true;
 
-            //Pregunto si se ha decidido a exportar.
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            string filePath = String.Empty; 
+            //Uso try para asegurarme que no suceda nada durante el proceso.
+            try
             {
-                string filePath = saveFileDialog.FileName; //Almaceno la ruta y el nombre del archivo Excel a exportar.
-                //Uso try para asegurarme que no suceda nada durante el proceso.
-                try
+                //La visibilidad del Botón Cambiar (entre estadísticas Generales y Particulares) me indica si se ha aplicado un filtro o no.
+                //Si es visible se ha aplicado un filtro, sino no.
+                if (this.btnCambiarEst.Visible)
                 {
-                    //Exporto el archivo Excel.
-                    IO.File.exportExcelFile(filePath, this.printers, this.estadisticaGral);
-                    MessageBox.Show("Datos exportados con éxito."); //Muestro mensaje de éxito.
+                    var result = MessageBox.Show("¿Desea exportar solamente el resultado del Filtro Aplicado? \n\nSi elige la opción " +
+                        "\"Sí\" se exportarán solamente las Impresoras en pantalla. Si elige " +
+                        "la opción \"No\" se exportarán Todas las Impresoras Analizadas.",
+                        Application.ProductName, MessageBoxButtons.YesNo);
+
+                    if (result == DialogResult.Yes) //Pregunto si decide exportar lo fitrado o no.
+                    {
+                        //Pregunto si no ha cancelado.
+                        if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                        {
+                            filePath = saveFileDialog.FileName; //Almaceno la ruta y el nombre del archivo Excel a exportar.
+                            //Exporto el archivo Excel con los datos del Filtro.
+                            IO.File.exportExcelFile(filePath, _getFilterData(), this.estadisticaPart);
+                        }
+                    }
+                    else
+                    {
+                        //Pregunto si no ha cancelado.
+                        if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                        {
+                            filePath = saveFileDialog.FileName; //Almaceno la ruta y el nombre del archivo Excel a exportar.
+                            //Exporto el archivo Excel con los datos Generales.
+                            IO.File.exportExcelFile(filePath, (DataTable)this.dgv.DataSource, this.estadisticaGral);
+                        }
+                    }
                 }
-                catch (Exception ex)
+                else
                 {
-                    MessageBox.Show(ex.Message); //Si huibo un error, lo muestro.
+                    //Pregunto si no ha cancelado.
+                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        filePath = saveFileDialog.FileName; //Almaceno la ruta y el nombre del archivo Excel a exportar.
+                        //Exporto el archivo Excel.
+                        IO.File.exportExcelFile(filePath, (DataTable)this.dgv.DataSource, this.estadisticaGral);
+                    }
                 }
+
+                MessageBox.Show("Datos exportados con éxito."); //Muestro mensaje de éxito.
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message); //Si huibo un error, lo muestro.
             }
 
-            IO.File.SetSaveDirectory(this.saveFileDialog.FileName); //Guardo el último directorio.
-            saveFileDialog.FileName = ""; //Limpio el SFD.
-            _acomodarBotones(); //Acomodo botones.
+        IO.File.SetSaveDirectory(this.saveFileDialog.FileName); //Guardo el último directorio.
+        saveFileDialog.FileName = ""; //Limpio el SFD.
+        _acomodarBotones(); //Acomodo botones.
         }
 
         private void btnActualizar_Click(object sender, EventArgs e)

@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 using Microsoft.Office.Interop.Excel;
 using System.Drawing;
 using System.Configuration;
+using System.Data;
+using DataTable = System.Data.DataTable;
+using DataRow = System.Data.DataRow;
 
 namespace IO
 {
@@ -402,9 +405,11 @@ namespace IO
         /// Exporta una Lista de Impresoras a un archivo Excel.
         /// </summary>
         /// <param name="filePath"></param>
-        /// <param name="printers"></param>
-        public static void exportExcelFile(string filePath, List<Printer> printers, Estadistica estadistica)
+        /// <param name="data"></param>
+        public static void exportExcelFile(string filePath, DataTable data, Estadistica estadistica)
         {
+            List<Printer> printers = new List<Printer>();
+
             Application application = new Application();
             //Abro un libro.
             Workbook libros = application.Workbooks.Add();
@@ -412,6 +417,26 @@ namespace IO
             Worksheet hoja = (Worksheet) libros.Worksheets.Item[1];
             try
             {
+                //Recorro todas las filas del DataTable para cargarlas en el List de Printer.
+                foreach(DataRow dataRow in data.Rows)
+                {
+                    Printer printer = new Printer();
+                    printer.Modelo = null;
+                    printer.Toner = null;
+                    printer.UImagen = null;
+                    printer.KitMant = null;
+
+                    printer.Ip = dataRow[0].ToString();
+                    if(dataRow[1].ToString().Length > 0) printer.Modelo = dataRow[1].ToString();
+                    printer.Oficina = dataRow[2].ToString();
+                    printer.Estado = dataRow[3].ToString();
+                    if (Int32.Parse(dataRow[8].ToString()) >= 0) printer.Toner = Int32.Parse(dataRow[8].ToString());
+                    if (Int32.Parse(dataRow[9].ToString()) >= 0) printer.UImagen = Int32.Parse(dataRow[9].ToString());
+                    if (Int32.Parse(dataRow[10].ToString()) >= 0) printer.KitMant = Int32.Parse(dataRow[10].ToString());
+
+                    printers.Add(printer);
+                }
+
                 //Escribo las Cabeceras de Columnas.
                 hoja.Cells[2, 2] = "Ip";
                 hoja.Cells[2, 4] = "Modelo";
@@ -438,12 +463,6 @@ namespace IO
                 formatRange.Merge();
                 formatRange = hoja.Range["F2", "K2"];
                 formatRange.Merge();
-
-                //Cambio algunos anchos de Columna.
-                //hoja.Columns[2].ColumnWidth = 14;
-                //hoja.Columns[3].ColumnWidth = 17;
-                //hoja.Columns[4].ColumnWidth = 64;
-                //hoja.Columns[5].ColumnWidth = 7;
 
                 //Escribo cada una de las impresoras dentro de la Lista, comenzando en la Fila 3 ya que la 2 la uso para las Cabeceras.
                 int fila = 3;
