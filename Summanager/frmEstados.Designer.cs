@@ -199,6 +199,7 @@ namespace Summanager
             this.btnAgregar.Size = new System.Drawing.Size(88, 28);
             this.btnAgregar.TabIndex = 32;
             this.btnAgregar.Text = "Agregar";
+            this.btnAgregar.Visible = false;
             // 
             // btnLimpiar
             // 
@@ -208,6 +209,7 @@ namespace Summanager
             this.btnLimpiar.Size = new System.Drawing.Size(90, 28);
             this.btnLimpiar.TabIndex = 31;
             this.btnLimpiar.Text = "Limpiar";
+            this.btnLimpiar.Visible = false;
             this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
             // cmbSuministro

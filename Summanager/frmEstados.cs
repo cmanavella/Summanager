@@ -129,6 +129,15 @@ namespace Summanager
             return splitTitle[1];
         }
 
+        /// <summary>
+        /// Devuelve si el archivo abierto es nuevo.
+        /// </summary>
+        /// <returns></returns>
+        private bool _esNuevo()
+        {
+            return _getFileTitle() == "sin título";
+        }
+
         private void _cargarCombos()
         {
             //Cargo el Combo Estados
@@ -225,7 +234,7 @@ namespace Summanager
         /// </summary>
         private void _acomodarBotones()
         {
-            if(_getFileTitle() == "sin título")
+            if(_esNuevo())
             {
                 this.btnAbrir.Enabled = true;
 
@@ -784,7 +793,7 @@ namespace Summanager
             _tituloForm();
             _acomodarBotones();
 
-            btnActualizar_Click(sender, null); //Actualizo el DGV con el análisis de la Lista de Impresoras.
+            if(!_esNuevo()) btnActualizar_Click(sender, null); //Actualizo el DGV con el análisis de la Lista de Impresoras.
         }
 
         private void btnNuevo_Click(object sender, EventArgs e)
