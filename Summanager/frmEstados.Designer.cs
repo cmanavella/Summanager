@@ -44,20 +44,6 @@ namespace Summanager
             this.cmbSuministro = new CustomControls.ComboBox();
             this.cmbEstados = new CustomControls.ComboBox();
             this.txtFiltro = new CustomControls.TextBox();
-            this.groupEstadisticas = new CustomControls.CustomGroupBox();
-            this.btnCambiarEst = new CustomControls.ButtonGreen();
-            this.customGroupBox3 = new CustomControls.CustomGroupBox();
-            this.estKitMantCritico = new CustomControls.Estadistica();
-            this.estUnImgCritico = new CustomControls.Estadistica();
-            this.estTonerCritico = new CustomControls.Estadistica();
-            this.customGroupBox2 = new CustomControls.CustomGroupBox();
-            this.estNoAna = new CustomControls.Estadistica();
-            this.estOffline = new CustomControls.Estadistica();
-            this.estOnline = new CustomControls.Estadistica();
-            this.customGroupBox1 = new CustomControls.CustomGroupBox();
-            this.estKitMantRiesgo = new CustomControls.Estadistica();
-            this.estUnImgRiesgo = new CustomControls.Estadistica();
-            this.estTonerRiesgo = new CustomControls.Estadistica();
             this.btnActualizar = new CustomControls.ButtonBlue();
             this.btnExportar = new CustomControls.ButtonBlue();
             this.btnImportar = new CustomControls.ButtonBlue();
@@ -65,13 +51,32 @@ namespace Summanager
             this.btnGuardar = new CustomControls.ButtonBlue();
             this.btnAbrir = new CustomControls.ButtonBlue();
             this.btnNuevo = new CustomControls.ButtonBlue();
+            this.panelEstadisticas = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.lblEstTitle = new System.Windows.Forms.Label();
+            this.btnCambiarEst = new CustomControls.ButtonGreen();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.customGroupBox3 = new CustomControls.CustomGroupBox();
+            this.estKitMantCritico = new CustomControls.Estadistica();
+            this.estUnImgCritico = new CustomControls.Estadistica();
+            this.estTonerCritico = new CustomControls.Estadistica();
+            this.customGroupBox1 = new CustomControls.CustomGroupBox();
+            this.estKitMantRiesgo = new CustomControls.Estadistica();
+            this.estUnImgRiesgo = new CustomControls.Estadistica();
+            this.estTonerRiesgo = new CustomControls.Estadistica();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.estOnline = new CustomControls.Estadistica();
+            this.estOffline = new CustomControls.Estadistica();
+            this.estNoAna = new CustomControls.Estadistica();
             this.panelTitulo.SuspendLayout();
             this.panelMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
-            this.groupEstadisticas.SuspendLayout();
+            this.panelEstadisticas.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.customGroupBox3.SuspendLayout();
-            this.customGroupBox2.SuspendLayout();
             this.customGroupBox1.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelTitulo
@@ -101,6 +106,9 @@ namespace Summanager
             this.dgv.AllowUserToDeleteRows = false;
             this.dgv.AllowUserToResizeColumns = false;
             this.dgv.AllowUserToResizeRows = false;
+            this.dgv.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgv.BackgroundColor = System.Drawing.Color.White;
             this.dgv.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgv.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
@@ -132,10 +140,11 @@ namespace Summanager
             this.dgv.ShowCellToolTips = false;
             this.dgv.ShowEditingIcon = false;
             this.dgv.ShowRowErrors = false;
-            this.dgv.Size = new System.Drawing.Size(1038, 158);
+            this.dgv.Size = new System.Drawing.Size(1038, 228);
             this.dgv.TabIndex = 5;
             this.dgv.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgv_DataBindingComplete);
             this.dgv.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dgv_MouseDoubleClick);
+            this.dgv.Resize += new System.EventHandler(this.dgv_Resize);
             // 
             // lblSuministro
             // 
@@ -163,10 +172,11 @@ namespace Summanager
             // 
             // lblTotal
             // 
+            this.lblTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTotal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
             this.lblTotal.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotal.ForeColor = System.Drawing.Color.White;
-            this.lblTotal.Location = new System.Drawing.Point(948, 294);
+            this.lblTotal.Location = new System.Drawing.Point(951, 361);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(87, 28);
             this.lblTotal.TabIndex = 28;
@@ -176,6 +186,7 @@ namespace Summanager
             // 
             // lblActualizacion
             // 
+            this.lblActualizacion.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lblActualizacion.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblActualizacion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
             this.lblActualizacion.Location = new System.Drawing.Point(346, 22);
@@ -194,7 +205,7 @@ namespace Summanager
             // btnAgregar
             // 
             this.btnAgregar.Image = global::Summanager.Properties.Resources.add;
-            this.btnAgregar.Location = new System.Drawing.Point(947, 97);
+            this.btnAgregar.Location = new System.Drawing.Point(854, 96);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(88, 28);
             this.btnAgregar.TabIndex = 32;
@@ -203,8 +214,9 @@ namespace Summanager
             // 
             // btnLimpiar
             // 
+            this.btnLimpiar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnLimpiar.Image = global::Summanager.Properties.Resources.clear;
-            this.btnLimpiar.Location = new System.Drawing.Point(851, 97);
+            this.btnLimpiar.Location = new System.Drawing.Point(948, 96);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(90, 28);
             this.btnLimpiar.TabIndex = 31;
@@ -249,157 +261,11 @@ namespace Summanager
             this.txtFiltro.Visible = false;
             this.txtFiltro.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtFiltro_KeyUp);
             // 
-            // groupEstadisticas
-            // 
-            this.groupEstadisticas.Controls.Add(this.btnCambiarEst);
-            this.groupEstadisticas.Controls.Add(this.customGroupBox3);
-            this.groupEstadisticas.Controls.Add(this.customGroupBox2);
-            this.groupEstadisticas.Controls.Add(this.customGroupBox1);
-            this.groupEstadisticas.Location = new System.Drawing.Point(12, 328);
-            this.groupEstadisticas.Name = "groupEstadisticas";
-            this.groupEstadisticas.Size = new System.Drawing.Size(1023, 347);
-            this.groupEstadisticas.TabIndex = 23;
-            this.groupEstadisticas.Text = "Estadísticas Generales";
-            this.groupEstadisticas.Visible = false;
-            // 
-            // btnCambiarEst
-            // 
-            this.btnCambiarEst.Image = null;
-            this.btnCambiarEst.Location = new System.Drawing.Point(6, 30);
-            this.btnCambiarEst.Name = "btnCambiarEst";
-            this.btnCambiarEst.Size = new System.Drawing.Size(80, 28);
-            this.btnCambiarEst.TabIndex = 12;
-            this.btnCambiarEst.Text = "Cambiar";
-            this.btnCambiarEst.Visible = false;
-            this.btnCambiarEst.Click += new System.EventHandler(this.btnCambiarEst_Click);
-            // 
-            // customGroupBox3
-            // 
-            this.customGroupBox3.Controls.Add(this.estKitMantCritico);
-            this.customGroupBox3.Controls.Add(this.estUnImgCritico);
-            this.customGroupBox3.Controls.Add(this.estTonerCritico);
-            this.customGroupBox3.Location = new System.Drawing.Point(510, 182);
-            this.customGroupBox3.Name = "customGroupBox3";
-            this.customGroupBox3.Size = new System.Drawing.Size(498, 146);
-            this.customGroupBox3.TabIndex = 11;
-            this.customGroupBox3.Text = "Suministro Críticos";
-            // 
-            // estKitMantCritico
-            // 
-            this.estKitMantCritico.Count = 0;
-            this.estKitMantCritico.Location = new System.Drawing.Point(328, 25);
-            this.estKitMantCritico.Name = "estKitMantCritico";
-            this.estKitMantCritico.Size = new System.Drawing.Size(150, 100);
-            this.estKitMantCritico.TabIndex = 8;
-            this.estKitMantCritico.Text = "Kit de Mantenimiento";
-            this.estKitMantCritico.Total = 0;
-            // 
-            // estUnImgCritico
-            // 
-            this.estUnImgCritico.Count = 0;
-            this.estUnImgCritico.Location = new System.Drawing.Point(172, 25);
-            this.estUnImgCritico.Name = "estUnImgCritico";
-            this.estUnImgCritico.Size = new System.Drawing.Size(150, 100);
-            this.estUnImgCritico.TabIndex = 7;
-            this.estUnImgCritico.Text = "Unidad de Imagen";
-            this.estUnImgCritico.Total = 0;
-            // 
-            // estTonerCritico
-            // 
-            this.estTonerCritico.Count = 0;
-            this.estTonerCritico.Location = new System.Drawing.Point(16, 25);
-            this.estTonerCritico.Name = "estTonerCritico";
-            this.estTonerCritico.Size = new System.Drawing.Size(150, 100);
-            this.estTonerCritico.TabIndex = 6;
-            this.estTonerCritico.Text = "Toner";
-            this.estTonerCritico.Total = 0;
-            // 
-            // customGroupBox2
-            // 
-            this.customGroupBox2.Controls.Add(this.estNoAna);
-            this.customGroupBox2.Controls.Add(this.estOffline);
-            this.customGroupBox2.Controls.Add(this.estOnline);
-            this.customGroupBox2.Location = new System.Drawing.Point(257, 30);
-            this.customGroupBox2.Name = "customGroupBox2";
-            this.customGroupBox2.Size = new System.Drawing.Size(498, 146);
-            this.customGroupBox2.TabIndex = 10;
-            this.customGroupBox2.Text = "Estados de Conexión";
-            // 
-            // estNoAna
-            // 
-            this.estNoAna.Count = 0;
-            this.estNoAna.Location = new System.Drawing.Point(330, 23);
-            this.estNoAna.Name = "estNoAna";
-            this.estNoAna.Size = new System.Drawing.Size(150, 100);
-            this.estNoAna.TabIndex = 11;
-            this.estNoAna.Text = "No Analizadas";
-            this.estNoAna.Total = 0;
-            // 
-            // estOffline
-            // 
-            this.estOffline.Count = 0;
-            this.estOffline.Location = new System.Drawing.Point(174, 23);
-            this.estOffline.Name = "estOffline";
-            this.estOffline.Size = new System.Drawing.Size(150, 100);
-            this.estOffline.TabIndex = 10;
-            this.estOffline.Text = "Offline";
-            this.estOffline.Total = 0;
-            // 
-            // estOnline
-            // 
-            this.estOnline.Count = 0;
-            this.estOnline.Location = new System.Drawing.Point(18, 23);
-            this.estOnline.Name = "estOnline";
-            this.estOnline.Size = new System.Drawing.Size(150, 100);
-            this.estOnline.TabIndex = 9;
-            this.estOnline.Text = "Online";
-            this.estOnline.Total = 0;
-            // 
-            // customGroupBox1
-            // 
-            this.customGroupBox1.Controls.Add(this.estKitMantRiesgo);
-            this.customGroupBox1.Controls.Add(this.estUnImgRiesgo);
-            this.customGroupBox1.Controls.Add(this.estTonerRiesgo);
-            this.customGroupBox1.Location = new System.Drawing.Point(6, 182);
-            this.customGroupBox1.Name = "customGroupBox1";
-            this.customGroupBox1.Size = new System.Drawing.Size(498, 146);
-            this.customGroupBox1.TabIndex = 9;
-            this.customGroupBox1.Text = "Suministro en Riesgo";
-            // 
-            // estKitMantRiesgo
-            // 
-            this.estKitMantRiesgo.Count = 0;
-            this.estKitMantRiesgo.Location = new System.Drawing.Point(328, 25);
-            this.estKitMantRiesgo.Name = "estKitMantRiesgo";
-            this.estKitMantRiesgo.Size = new System.Drawing.Size(150, 100);
-            this.estKitMantRiesgo.TabIndex = 8;
-            this.estKitMantRiesgo.Text = "Kit de Mantenimiento";
-            this.estKitMantRiesgo.Total = 0;
-            // 
-            // estUnImgRiesgo
-            // 
-            this.estUnImgRiesgo.Count = 0;
-            this.estUnImgRiesgo.Location = new System.Drawing.Point(172, 25);
-            this.estUnImgRiesgo.Name = "estUnImgRiesgo";
-            this.estUnImgRiesgo.Size = new System.Drawing.Size(150, 100);
-            this.estUnImgRiesgo.TabIndex = 7;
-            this.estUnImgRiesgo.Text = "Unidad de Imagen";
-            this.estUnImgRiesgo.Total = 0;
-            // 
-            // estTonerRiesgo
-            // 
-            this.estTonerRiesgo.Count = 0;
-            this.estTonerRiesgo.Location = new System.Drawing.Point(16, 25);
-            this.estTonerRiesgo.Name = "estTonerRiesgo";
-            this.estTonerRiesgo.Size = new System.Drawing.Size(150, 100);
-            this.estTonerRiesgo.TabIndex = 6;
-            this.estTonerRiesgo.Text = "Toner";
-            this.estTonerRiesgo.Total = 0;
-            // 
             // btnActualizar
             // 
+            this.btnActualizar.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.btnActualizar.Image = global::Summanager.Properties.Resources.refresh_page_option;
-            this.btnActualizar.Location = new System.Drawing.Point(851, 6);
+            this.btnActualizar.Location = new System.Drawing.Point(942, 6);
             this.btnActualizar.Name = "btnActualizar";
             this.btnActualizar.Size = new System.Drawing.Size(105, 28);
             this.btnActualizar.TabIndex = 13;
@@ -466,10 +332,190 @@ namespace Summanager
             this.btnNuevo.Text = "Nuevo";
             this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
             // 
+            // panelEstadisticas
+            // 
+            this.panelEstadisticas.Controls.Add(this.panel3);
+            this.panelEstadisticas.Controls.Add(this.panel4);
+            this.panelEstadisticas.Controls.Add(this.panel2);
+            this.panelEstadisticas.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panelEstadisticas.Location = new System.Drawing.Point(0, 392);
+            this.panelEstadisticas.Name = "panelEstadisticas";
+            this.panelEstadisticas.Size = new System.Drawing.Size(1050, 298);
+            this.panelEstadisticas.TabIndex = 33;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.lblEstTitle);
+            this.panel2.Controls.Add(this.btnCambiarEst);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1050, 44);
+            this.panel2.TabIndex = 15;
+            // 
+            // lblEstTitle
+            // 
+            this.lblEstTitle.AutoSize = true;
+            this.lblEstTitle.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEstTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
+            this.lblEstTitle.Location = new System.Drawing.Point(3, 5);
+            this.lblEstTitle.Name = "lblEstTitle";
+            this.lblEstTitle.Size = new System.Drawing.Size(149, 17);
+            this.lblEstTitle.TabIndex = 25;
+            this.lblEstTitle.Text = "Estadísticas Generales";
+            // 
+            // btnCambiarEst
+            // 
+            this.btnCambiarEst.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCambiarEst.Image = null;
+            this.btnCambiarEst.Location = new System.Drawing.Point(967, 10);
+            this.btnCambiarEst.Name = "btnCambiarEst";
+            this.btnCambiarEst.Size = new System.Drawing.Size(80, 28);
+            this.btnCambiarEst.TabIndex = 12;
+            this.btnCambiarEst.Text = "Cambiar";
+            this.btnCambiarEst.Visible = false;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.customGroupBox3);
+            this.panel3.Controls.Add(this.customGroupBox1);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel3.Location = new System.Drawing.Point(0, 44);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(1050, 136);
+            this.panel3.TabIndex = 17;
+            // 
+            // customGroupBox3
+            // 
+            this.customGroupBox3.Controls.Add(this.estKitMantCritico);
+            this.customGroupBox3.Controls.Add(this.estUnImgCritico);
+            this.customGroupBox3.Controls.Add(this.estTonerCritico);
+            this.customGroupBox3.Dock = System.Windows.Forms.DockStyle.Left;
+            this.customGroupBox3.Location = new System.Drawing.Point(0, 0);
+            this.customGroupBox3.Name = "customGroupBox3";
+            this.customGroupBox3.Size = new System.Drawing.Size(522, 136);
+            this.customGroupBox3.TabIndex = 12;
+            this.customGroupBox3.Text = "Suministro Críticos";
+            // 
+            // estKitMantCritico
+            // 
+            this.estKitMantCritico.Count = 0;
+            this.estKitMantCritico.Location = new System.Drawing.Point(328, 25);
+            this.estKitMantCritico.Name = "estKitMantCritico";
+            this.estKitMantCritico.Size = new System.Drawing.Size(150, 100);
+            this.estKitMantCritico.TabIndex = 8;
+            this.estKitMantCritico.Text = "Kit de Mantenimiento";
+            this.estKitMantCritico.Total = 0;
+            // 
+            // estUnImgCritico
+            // 
+            this.estUnImgCritico.Count = 0;
+            this.estUnImgCritico.Location = new System.Drawing.Point(172, 25);
+            this.estUnImgCritico.Name = "estUnImgCritico";
+            this.estUnImgCritico.Size = new System.Drawing.Size(150, 100);
+            this.estUnImgCritico.TabIndex = 7;
+            this.estUnImgCritico.Text = "Unidad de Imagen";
+            this.estUnImgCritico.Total = 0;
+            // 
+            // estTonerCritico
+            // 
+            this.estTonerCritico.Count = 0;
+            this.estTonerCritico.Location = new System.Drawing.Point(16, 25);
+            this.estTonerCritico.Name = "estTonerCritico";
+            this.estTonerCritico.Size = new System.Drawing.Size(150, 100);
+            this.estTonerCritico.TabIndex = 6;
+            this.estTonerCritico.Text = "Toner";
+            this.estTonerCritico.Total = 0;
+            // 
+            // customGroupBox1
+            // 
+            this.customGroupBox1.Controls.Add(this.estKitMantRiesgo);
+            this.customGroupBox1.Controls.Add(this.estUnImgRiesgo);
+            this.customGroupBox1.Controls.Add(this.estTonerRiesgo);
+            this.customGroupBox1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.customGroupBox1.Location = new System.Drawing.Point(534, 0);
+            this.customGroupBox1.Name = "customGroupBox1";
+            this.customGroupBox1.Size = new System.Drawing.Size(516, 136);
+            this.customGroupBox1.TabIndex = 10;
+            this.customGroupBox1.Text = "Suministro en Riesgo";
+            // 
+            // estKitMantRiesgo
+            // 
+            this.estKitMantRiesgo.Count = 0;
+            this.estKitMantRiesgo.Location = new System.Drawing.Point(328, 25);
+            this.estKitMantRiesgo.Name = "estKitMantRiesgo";
+            this.estKitMantRiesgo.Size = new System.Drawing.Size(150, 100);
+            this.estKitMantRiesgo.TabIndex = 8;
+            this.estKitMantRiesgo.Text = "Kit de Mantenimiento";
+            this.estKitMantRiesgo.Total = 0;
+            // 
+            // estUnImgRiesgo
+            // 
+            this.estUnImgRiesgo.Count = 0;
+            this.estUnImgRiesgo.Location = new System.Drawing.Point(172, 25);
+            this.estUnImgRiesgo.Name = "estUnImgRiesgo";
+            this.estUnImgRiesgo.Size = new System.Drawing.Size(150, 100);
+            this.estUnImgRiesgo.TabIndex = 7;
+            this.estUnImgRiesgo.Text = "Unidad de Imagen";
+            this.estUnImgRiesgo.Total = 0;
+            // 
+            // estTonerRiesgo
+            // 
+            this.estTonerRiesgo.Count = 0;
+            this.estTonerRiesgo.Location = new System.Drawing.Point(16, 25);
+            this.estTonerRiesgo.Name = "estTonerRiesgo";
+            this.estTonerRiesgo.Size = new System.Drawing.Size(150, 100);
+            this.estTonerRiesgo.TabIndex = 6;
+            this.estTonerRiesgo.Text = "Toner";
+            this.estTonerRiesgo.Total = 0;
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.estNoAna);
+            this.panel4.Controls.Add(this.estOffline);
+            this.panel4.Controls.Add(this.estOnline);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel4.Location = new System.Drawing.Point(0, 186);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(1050, 112);
+            this.panel4.TabIndex = 18;
+            // 
+            // estOnline
+            // 
+            this.estOnline.Count = 0;
+            this.estOnline.Location = new System.Drawing.Point(16, 6);
+            this.estOnline.Name = "estOnline";
+            this.estOnline.Size = new System.Drawing.Size(150, 100);
+            this.estOnline.TabIndex = 10;
+            this.estOnline.Text = "Online";
+            this.estOnline.Total = 0;
+            // 
+            // estOffline
+            // 
+            this.estOffline.Count = 0;
+            this.estOffline.Location = new System.Drawing.Point(172, 6);
+            this.estOffline.Name = "estOffline";
+            this.estOffline.Size = new System.Drawing.Size(150, 100);
+            this.estOffline.TabIndex = 11;
+            this.estOffline.Text = "Offline";
+            this.estOffline.Total = 0;
+            // 
+            // estNoAna
+            // 
+            this.estNoAna.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.estNoAna.Count = 0;
+            this.estNoAna.Location = new System.Drawing.Point(862, 6);
+            this.estNoAna.Name = "estNoAna";
+            this.estNoAna.Size = new System.Drawing.Size(150, 100);
+            this.estNoAna.TabIndex = 12;
+            this.estNoAna.Text = "No Analizadas";
+            this.estNoAna.Total = 0;
+            // 
             // FrmEstados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(1050, 690);
+            this.Controls.Add(this.panelEstadisticas);
             this.Controls.Add(this.lblTotal);
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.btnLimpiar);
@@ -478,7 +524,6 @@ namespace Summanager
             this.Controls.Add(this.cmbEstados);
             this.Controls.Add(this.txtFiltro);
             this.Controls.Add(this.lblEstado);
-            this.Controls.Add(this.groupEstadisticas);
             this.Controls.Add(this.dgv);
             this.Name = "FrmEstados";
             this.Text = "";
@@ -487,7 +532,6 @@ namespace Summanager
             this.Controls.SetChildIndex(this.dgv, 0);
             this.Controls.SetChildIndex(this.panelTitulo, 0);
             this.Controls.SetChildIndex(this.panelMenu, 0);
-            this.Controls.SetChildIndex(this.groupEstadisticas, 0);
             this.Controls.SetChildIndex(this.lblEstado, 0);
             this.Controls.SetChildIndex(this.txtFiltro, 0);
             this.Controls.SetChildIndex(this.cmbEstados, 0);
@@ -496,18 +540,20 @@ namespace Summanager
             this.Controls.SetChildIndex(this.btnLimpiar, 0);
             this.Controls.SetChildIndex(this.btnAgregar, 0);
             this.Controls.SetChildIndex(this.lblTotal, 0);
+            this.Controls.SetChildIndex(this.panelEstadisticas, 0);
             this.panelTitulo.ResumeLayout(false);
             this.panelTitulo.PerformLayout();
             this.panelMenu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
-            this.groupEstadisticas.ResumeLayout(false);
-            this.groupEstadisticas.PerformLayout();
+            this.panelEstadisticas.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            this.panel3.ResumeLayout(false);
             this.customGroupBox3.ResumeLayout(false);
             this.customGroupBox3.PerformLayout();
-            this.customGroupBox2.ResumeLayout(false);
-            this.customGroupBox2.PerformLayout();
             this.customGroupBox1.ResumeLayout(false);
             this.customGroupBox1.PerformLayout();
+            this.panel4.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -517,19 +563,6 @@ namespace Summanager
         private System.Windows.Forms.DataGridView dgv;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
-        private CustomControls.CustomGroupBox groupEstadisticas;
-        private CustomControls.CustomGroupBox customGroupBox3;
-        private CustomControls.Estadistica estKitMantCritico;
-        private CustomControls.Estadistica estUnImgCritico;
-        private CustomControls.Estadistica estTonerCritico;
-        private CustomControls.CustomGroupBox customGroupBox2;
-        private CustomControls.Estadistica estNoAna;
-        private CustomControls.Estadistica estOffline;
-        private CustomControls.Estadistica estOnline;
-        private CustomControls.CustomGroupBox customGroupBox1;
-        private CustomControls.Estadistica estKitMantRiesgo;
-        private CustomControls.Estadistica estUnImgRiesgo;
-        private CustomControls.Estadistica estTonerRiesgo;
         private CustomControls.ComboBox cmbSuministro;
         private System.Windows.Forms.Label lblSuministro;
         private CustomControls.ComboBox cmbEstados;
@@ -547,6 +580,22 @@ namespace Summanager
         private CustomControls.ButtonBlue btnExportar;
         private CustomControls.ButtonBlue btnImportar;
         private CustomControls.ButtonBlue btnActualizar;
+        private System.Windows.Forms.Panel panelEstadisticas;
+        private System.Windows.Forms.Panel panel3;
+        private CustomControls.CustomGroupBox customGroupBox3;
+        private CustomControls.Estadistica estKitMantCritico;
+        private CustomControls.Estadistica estUnImgCritico;
+        private CustomControls.Estadistica estTonerCritico;
+        private CustomControls.CustomGroupBox customGroupBox1;
+        private CustomControls.Estadistica estKitMantRiesgo;
+        private CustomControls.Estadistica estUnImgRiesgo;
+        private CustomControls.Estadistica estTonerRiesgo;
         private CustomControls.ButtonGreen btnCambiarEst;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label lblEstTitle;
+        private System.Windows.Forms.Panel panel4;
+        private CustomControls.Estadistica estNoAna;
+        private CustomControls.Estadistica estOffline;
+        private CustomControls.Estadistica estOnline;
     }
 }

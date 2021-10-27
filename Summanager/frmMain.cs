@@ -22,25 +22,9 @@ namespace Summanager
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
         private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int lParam);
 
-        //DLL necesaria para redondear los bordes del Form.
-        [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
-        ///<summary>
-        ///Redondea los bordes del Form.
-        /// </summary>
-        private static extern IntPtr CreateRoundRectRgn
-        (
-            int nLeftRect,     // x-coordinate of upper-left corner
-            int nTopRect,      // y-coordinate of upper-left corner
-            int nRightRect,    // x-coordinate of lower-right corner
-            int nBottomRect,   // y-coordinate of lower-right corner
-            int nWidthEllipse, // height of ellipse
-            int nHeightEllipse // width of ellipse
-        );
-
         public FrmMain()
         {
             InitializeComponent();
-            Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 15, 15));
 
             this.Text = Application.ProductName + " v" + Application.ProductVersion;
         }
@@ -224,6 +208,30 @@ namespace Summanager
         private void btnConfiguracion_MouseClick(object sender, MouseEventArgs e)
         {
             _openChildForm(new FrmConfiguracion(), sender);
+        }
+
+        private void panelDerecho_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                this.Size = new Size(this.PointToClient(MousePosition).X, this.Height);
+            }
+        }
+
+        private void panelInferior_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                this.Size = new Size(this.Width, this.PointToClient(MousePosition).Y);
+            }
+        }
+
+        private void panelEsquina_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                this.Size = new Size(this.PointToClient(MousePosition).X, this.PointToClient(MousePosition).Y);
+            }
         }
     }
 }

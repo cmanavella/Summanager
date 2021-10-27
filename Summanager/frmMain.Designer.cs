@@ -36,9 +36,9 @@ namespace Summanager
             this.btnCerrar = new CustomControls.PanelButton();
             this.panelLateral = new System.Windows.Forms.Panel();
             this.panelMenu = new System.Windows.Forms.Panel();
+            this.btnStock = new CustomControls.MenuButton();
             this.btnConfiguracion = new CustomControls.MenuButton();
             this.btnEstados = new CustomControls.MenuButton();
-            this.btnStock = new CustomControls.MenuButton();
             this.panelLogo = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -47,11 +47,13 @@ namespace Summanager
             this.panelInferior = new System.Windows.Forms.Panel();
             this.panelDerecho = new System.Windows.Forms.Panel();
             this.panelContenido = new System.Windows.Forms.Panel();
+            this.panelEsquina = new System.Windows.Forms.Panel();
             this.panelSuperior.SuspendLayout();
             this.panelLateral.SuspendLayout();
             this.panelMenu.SuspendLayout();
             this.panelLogo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
+            this.panelDerecho.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelSuperior
@@ -112,15 +114,29 @@ namespace Summanager
             // 
             // panelMenu
             // 
+            this.panelMenu.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.panelMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
             this.panelMenu.Controls.Add(this.btnStock);
             this.panelMenu.Controls.Add(this.btnConfiguracion);
             this.panelMenu.Controls.Add(this.btnEstados);
-            this.panelMenu.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelMenu.Location = new System.Drawing.Point(0, 150);
             this.panelMenu.Name = "panelMenu";
             this.panelMenu.Size = new System.Drawing.Size(200, 540);
             this.panelMenu.TabIndex = 1;
+            // 
+            // btnStock
+            // 
+            this.btnStock.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnStock.Image = global::Summanager.Properties.Resources.box;
+            this.btnStock.Location = new System.Drawing.Point(0, 90);
+            this.btnStock.Name = "btnStock";
+            this.btnStock.Selected = false;
+            this.btnStock.Size = new System.Drawing.Size(200, 45);
+            this.btnStock.TabIndex = 1;
+            this.btnStock.Text = "Stock";
+            this.btnStock.Visible = false;
+            this.btnStock.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnStock_MouseClick);
             // 
             // btnConfiguracion
             // 
@@ -145,19 +161,6 @@ namespace Summanager
             this.btnEstados.TabIndex = 2;
             this.btnEstados.Text = "Estado Impresoras";
             this.btnEstados.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnEstados_MouseClick);
-            // 
-            // btnStock
-            // 
-            this.btnStock.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnStock.Image = global::Summanager.Properties.Resources.box;
-            this.btnStock.Location = new System.Drawing.Point(0, 90);
-            this.btnStock.Name = "btnStock";
-            this.btnStock.Selected = false;
-            this.btnStock.Size = new System.Drawing.Size(200, 45);
-            this.btnStock.TabIndex = 1;
-            this.btnStock.Text = "Stock";
-            this.btnStock.Visible = false;
-            this.btnStock.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnStock_MouseClick);
             // 
             // panelLogo
             // 
@@ -213,20 +216,25 @@ namespace Summanager
             // panelInferior
             // 
             this.panelInferior.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
+            this.panelInferior.Cursor = System.Windows.Forms.Cursors.SizeNS;
             this.panelInferior.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelInferior.Location = new System.Drawing.Point(0, 720);
             this.panelInferior.Name = "panelInferior";
             this.panelInferior.Size = new System.Drawing.Size(1250, 5);
             this.panelInferior.TabIndex = 11;
+            this.panelInferior.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelInferior_MouseMove);
             // 
             // panelDerecho
             // 
             this.panelDerecho.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
+            this.panelDerecho.Controls.Add(this.panelEsquina);
+            this.panelDerecho.Cursor = System.Windows.Forms.Cursors.SizeWE;
             this.panelDerecho.Dock = System.Windows.Forms.DockStyle.Right;
             this.panelDerecho.Location = new System.Drawing.Point(1250, 30);
             this.panelDerecho.Name = "panelDerecho";
             this.panelDerecho.Size = new System.Drawing.Size(5, 695);
             this.panelDerecho.TabIndex = 12;
+            this.panelDerecho.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelDerecho_MouseMove);
             // 
             // panelContenido
             // 
@@ -236,6 +244,17 @@ namespace Summanager
             this.panelContenido.Name = "panelContenido";
             this.panelContenido.Size = new System.Drawing.Size(1050, 690);
             this.panelContenido.TabIndex = 13;
+            // 
+            // panelEsquina
+            // 
+            this.panelEsquina.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.panelEsquina.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
+            this.panelEsquina.Cursor = System.Windows.Forms.Cursors.SizeNWSE;
+            this.panelEsquina.Location = new System.Drawing.Point(0, 690);
+            this.panelEsquina.Name = "panelEsquina";
+            this.panelEsquina.Size = new System.Drawing.Size(5, 5);
+            this.panelEsquina.TabIndex = 14;
+            this.panelEsquina.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelEsquina_MouseMove);
             // 
             // FrmMain
             // 
@@ -250,6 +269,7 @@ namespace Summanager
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(1255, 725);
             this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.panelSuperior.ResumeLayout(false);
@@ -259,6 +279,7 @@ namespace Summanager
             this.panelLogo.ResumeLayout(false);
             this.panelLogo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
+            this.panelDerecho.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -281,5 +302,6 @@ namespace Summanager
         private CustomControls.MenuButton btnStock;
         private CustomControls.MenuButton btnEstados;
         private CustomControls.MenuButton btnConfiguracion;
+        private System.Windows.Forms.Panel panelEsquina;
     }
 }

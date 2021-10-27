@@ -209,7 +209,7 @@ namespace Summanager
                 //Cambio la variable bandera de EstGrales a False para marcar que efectivamente estoy mostrando las Estadísticas Particulares.
                 this.estGrales = false;
                 //Cambio el texto del Group Estadísticas.
-                this.groupEstadisticas.Text = "Estadísticas Particulares";
+                this.lblEstTitle.Text = "Estadísticas Particulares";
             }
             else if (this.dgv.DataSource as DataTable != null)
             {
@@ -221,7 +221,7 @@ namespace Summanager
                 //Cambio la variable bandera de EstGrales a True para marcar que efectivamente estoy mostrando las Estadísticas Generales.
                 this.estGrales = true;
                 //Cambio el texto del Group Estadísticas.
-                this.groupEstadisticas.Text = "Estadísticas Generales";
+                this.lblEstTitle.Text = "Estadísticas Generales";
             }
 
             //Cambio el valor del LblTotal.
@@ -456,8 +456,10 @@ namespace Summanager
                     }
                 }
             }
-            
+
+            this.dgv_Resize(null, null); //Ejecuto el Resize del DGV para que se acomode la columna oficina.
             dgv.Refresh(); //Refresco el DGV para que se apliquen los cambios.
+            
 
             //Muestro los elementos del Filtro.
             this.lblTotal.Text = "Total: " + this.printers.Count;
@@ -479,7 +481,7 @@ namespace Summanager
         /// <param name="esGral"></param>
         private void _showEstadistica(int total, bool esGral)
         {
-            groupEstadisticas.Visible = true;
+            this.panelEstadisticas.Visible = true;
 
             //Primero cargo las cantidades en base a si es la Estadística general o no.
             Estadistica estadistica;
@@ -813,7 +815,7 @@ namespace Summanager
                                        //Limpio el DGV.
                 this.dgv.Columns.Clear();
                 this.dgv.Refresh();
-                groupEstadisticas.Visible = false;
+                this.panelEstadisticas.Visible = false;
 
                 //Limpio la variable de Application Config que almacena la ruta del archivo reciente.
                 IO.File.ClearCurrentFile();
@@ -1031,7 +1033,7 @@ namespace Summanager
             this.cmbSuministro.Visible = false;
             this.btnLimpiar.Visible = false;
             this.btnAgregar.Visible = false;
-            groupEstadisticas.Visible = false;
+            this.panelEstadisticas.Visible = false;
 
             //Llamo al Form Cargando para que analice la Lista de Impresoras pasadas por parámetros.
             FrmCargando cargando = new FrmCargando(printers);
@@ -1070,7 +1072,7 @@ namespace Summanager
             
             if (this.printers.Count <= 0)
             {
-                groupEstadisticas.Visible = false;
+                this.panelEstadisticas.Visible = false;
             }
         }
 
@@ -1117,16 +1119,21 @@ namespace Summanager
             if (this.estGrales)
             {
                 this.estGrales = false;
-                this.groupEstadisticas.Text = "Estadísticas Particulares";
+                this.lblEstTitle.Text = "Estadísticas Particulares";
                 _showEstadistica(this.dgv.Rows.Count, false);
             }
             else
             {
                 this.estGrales = true;
-                this.groupEstadisticas.Text = "Estadísticas Generales";
+                this.lblEstTitle.Text = "Estadísticas Generales";
                 DataTable datos = (DataTable)this.dgv.DataSource;
                 _showEstadistica(datos.Rows.Count, true);
             }
+        }
+
+        private void dgv_Resize(object sender, EventArgs e)
+        {
+            if(this.dgv.Columns.Count > 0) this.dgv.Columns[2].Width = this.dgv.Width - 513;
         }
     }
 }
