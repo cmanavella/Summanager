@@ -651,14 +651,21 @@ namespace Summanager
             {
                 string filePath = openFileDialog.FileName; //Cargo la ruta y el nombre del archivo con el OFD.
 
-                //Hago un try por las dudas que algo suceda en la importación.
-                try
+                //Instancio el Form Importando que es el que se encarga de importar el archivo Excel elegido, y lo
+                //muestro como Dialog.
+                FrmImportando frmImportando = new FrmImportando(filePath);
+                frmImportando.ShowDialog();
+
+                //Pregunto si no hubo error.
+                if (!frmImportando.Error)
                 {
+                    //Si no lo hubo continuo con el desarrollo del código.
+
                     //Pregunto si se desea combinar la Lista de Impresoras con lo Importado.
                     if (combinado)
                     {
                         //Creo una Lista de Impresoras nueva y la cargo con los datos del archivo Excel.
-                        List<Printer> nuevas = IO.File.importExcelFile(filePath);
+                        List<Printer> nuevas = frmImportando.Printers;
 
                         //Recorro la Lista nueva y cargo uno a uno sus elementos en la Lista de Impresoras usada hasta el 
                         //momento.
@@ -670,14 +677,14 @@ namespace Summanager
                     else
                     {
                         //Si no se desea combinar, limpio la Lista de Impresoras y la cargo con los datos importados.
-                        printers.Clear();
-                        printers = IO.File.importExcelFile(filePath);
+                        this.printers.Clear();
+                        this.printers = frmImportando.Printers;
                     }
                     MessageBox.Show("Datos importados con éxito."); //Muestro mensaje de éxito.
-                }
-                catch (Exception ex)
+                }else
                 {
-                    MessageBox.Show(ex.Message); //Si ocurrió algún error lo muestro.
+                    //Si hubo algún error muestro el mensaje.
+                    MessageBox.Show(frmImportando.Exception.Message);
                 }
             }
 
@@ -890,8 +897,8 @@ namespace Summanager
 
         private void btnImportar_Click(object sender, EventArgs e)
         {
-            //Primero pregunto que el nombre del archivo no sea 'sin título'. Esto quiere decir que no es nuevo.
-            if (_getFileTitle() != "sin título")
+            //Primero pregunto que el archivo es nuevo.
+            if (!_esNuevo())
             {
                 //Si no lo es, pregunto si con la importación de Excel se desea combinar los datos obtenidos con los 
                 //del archivo.
@@ -914,6 +921,7 @@ namespace Summanager
         {
             //Exporta una Lista de Impresoras a un archivo de Excel. 
 
+            //Creo el Form Exportando, el cual se va a encargar de hacer la exportación a Excel.
             FrmExportando frmExportando;
 
             //Seteo el SaveFileDialog.
@@ -922,6 +930,7 @@ namespace Summanager
             saveFileDialog.FilterIndex = 1;
             saveFileDialog.RestoreDirectory = true;
 
+            //Creo la variable que contiene el Path para almacenar el Excel, vacía
             string filePath = String.Empty; 
             //La visibilidad del Botón Cambiar (entre estadísticas Generales y Particulares) me indica si se ha aplicado un filtro o no.
             //Si es visible se ha aplicado un filtro, sino no.
@@ -939,8 +948,10 @@ namespace Summanager
                     {
                         filePath = saveFileDialog.FileName; //Almaceno la ruta y el nombre del archivo Excel a exportar.
                         //Exporto el archivo Excel con los datos del Filtro.
-                        frmExportando = new FrmExportando(filePath, _getFilterData(), this.estadisticaPart);
-                        frmExportando.ShowDialog();
+                        frmExportando = new FrmExportando(filePath, _getFilterData(), this.estadisticaPart); //Instancio el Form Exportando con los param requeridos.
+                        frmExportando.ShowDialog(); //Lo muestro como Dialog.
+
+                        //Pregunto si hubo error y muestro el mensaje según la situación.
                         if (frmExportando.Error)
                         {
                             MessageBox.Show(frmExportando.Exception.Message);
@@ -958,8 +969,10 @@ namespace Summanager
                     {
                         filePath = saveFileDialog.FileName; //Almaceno la ruta y el nombre del archivo Excel a exportar.
                         //Exporto el archivo Excel con los datos Generales.
-                        frmExportando = new FrmExportando(filePath, (DataTable)this.dgv.DataSource, this.estadisticaGral);
-                        frmExportando.ShowDialog();
+                        frmExportando = new FrmExportando(filePath, (DataTable)this.dgv.DataSource, this.estadisticaGral); //Instancio el Form Exportando con los param requeridos.
+                        frmExportando.ShowDialog();//Lo muestro como Dialog.
+
+                        //Pregunto si hubo error y muestro el mensaje según la situación.
                         if (frmExportando.Error)
                         {
                             MessageBox.Show(frmExportando.Exception.Message);
@@ -978,8 +991,10 @@ namespace Summanager
                 {
                     filePath = saveFileDialog.FileName; //Almaceno la ruta y el nombre del archivo Excel a exportar.
                     //Exporto el archivo Excel.
-                    frmExportando = new FrmExportando(filePath, (DataTable)this.dgv.DataSource, this.estadisticaGral);
-                    frmExportando.ShowDialog();
+                    frmExportando = new FrmExportando(filePath, (DataTable)this.dgv.DataSource, this.estadisticaGral); //Instancio el Form Exportando con los param requeridos.
+                    frmExportando.ShowDialog();//Lo muestro como Dialog.
+
+                    //Pregunto si hubo error y muestro el mensaje según la situación.
                     if (frmExportando.Error)
                     {
                         MessageBox.Show(frmExportando.Exception.Message);
