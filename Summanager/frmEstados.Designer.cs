@@ -30,7 +30,7 @@ namespace Summanager
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgv = new System.Windows.Forms.DataGridView();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
@@ -82,6 +82,7 @@ namespace Summanager
             // panelTitulo
             // 
             this.panelTitulo.Controls.Add(this.lblActualizacion);
+            this.panelTitulo.Size = new System.Drawing.Size(1055, 49);
             this.panelTitulo.Controls.SetChildIndex(this.lblTitulo, 0);
             this.panelTitulo.Controls.SetChildIndex(this.lblActualizacion, 0);
             // 
@@ -99,6 +100,7 @@ namespace Summanager
             this.panelMenu.Controls.Add(this.btnGuardar);
             this.panelMenu.Controls.Add(this.btnAbrir);
             this.panelMenu.Controls.Add(this.btnNuevo);
+            this.panelMenu.Size = new System.Drawing.Size(1055, 40);
             // 
             // dgv
             // 
@@ -113,14 +115,14 @@ namespace Summanager
             this.dgv.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgv.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgv.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(159)))), ((int)(((byte)(206)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(159)))), ((int)(((byte)(206)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(159)))), ((int)(((byte)(206)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(159)))), ((int)(((byte)(206)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgv.EnableHeadersVisualStyles = false;
             this.dgv.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(159)))), ((int)(((byte)(206)))));
@@ -140,7 +142,7 @@ namespace Summanager
             this.dgv.ShowCellToolTips = false;
             this.dgv.ShowEditingIcon = false;
             this.dgv.ShowRowErrors = false;
-            this.dgv.Size = new System.Drawing.Size(1038, 220);
+            this.dgv.Size = new System.Drawing.Size(1043, 220);
             this.dgv.TabIndex = 5;
             this.dgv.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgv_DataBindingComplete);
             this.dgv.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dgv_MouseDoubleClick);
@@ -176,7 +178,7 @@ namespace Summanager
             this.lblTotal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
             this.lblTotal.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotal.ForeColor = System.Drawing.Color.White;
-            this.lblTotal.Location = new System.Drawing.Point(951, 353);
+            this.lblTotal.Location = new System.Drawing.Point(956, 353);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(87, 27);
             this.lblTotal.TabIndex = 28;
@@ -189,7 +191,7 @@ namespace Summanager
             this.lblActualizacion.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lblActualizacion.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblActualizacion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
-            this.lblActualizacion.Location = new System.Drawing.Point(346, 22);
+            this.lblActualizacion.Location = new System.Drawing.Point(351, 22);
             this.lblActualizacion.Name = "lblActualizacion";
             this.lblActualizacion.Size = new System.Drawing.Size(689, 19);
             this.lblActualizacion.TabIndex = 25;
@@ -216,7 +218,7 @@ namespace Summanager
             // 
             this.btnLimpiar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnLimpiar.Image = global::Summanager.Properties.Resources.clear;
-            this.btnLimpiar.Location = new System.Drawing.Point(948, 96);
+            this.btnLimpiar.Location = new System.Drawing.Point(953, 96);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(90, 28);
             this.btnLimpiar.TabIndex = 31;
@@ -265,7 +267,7 @@ namespace Summanager
             // 
             this.btnActualizar.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.btnActualizar.Image = global::Summanager.Properties.Resources.refresh_page_option;
-            this.btnActualizar.Location = new System.Drawing.Point(942, 6);
+            this.btnActualizar.Location = new System.Drawing.Point(947, 6);
             this.btnActualizar.Name = "btnActualizar";
             this.btnActualizar.Size = new System.Drawing.Size(105, 28);
             this.btnActualizar.TabIndex = 13;
@@ -340,7 +342,7 @@ namespace Summanager
             this.panelEstadisticas.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelEstadisticas.Location = new System.Drawing.Point(0, 392);
             this.panelEstadisticas.Name = "panelEstadisticas";
-            this.panelEstadisticas.Size = new System.Drawing.Size(1050, 298);
+            this.panelEstadisticas.Size = new System.Drawing.Size(1055, 298);
             this.panelEstadisticas.TabIndex = 33;
             // 
             // panel2
@@ -350,7 +352,7 @@ namespace Summanager
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1050, 44);
+            this.panel2.Size = new System.Drawing.Size(1055, 44);
             this.panel2.TabIndex = 15;
             // 
             // lblEstTitle
@@ -368,7 +370,7 @@ namespace Summanager
             // 
             this.btnCambiarEst.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCambiarEst.Image = null;
-            this.btnCambiarEst.Location = new System.Drawing.Point(954, 10);
+            this.btnCambiarEst.Location = new System.Drawing.Point(959, 10);
             this.btnCambiarEst.Name = "btnCambiarEst";
             this.btnCambiarEst.Size = new System.Drawing.Size(84, 28);
             this.btnCambiarEst.TabIndex = 12;
@@ -382,7 +384,7 @@ namespace Summanager
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 44);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1050, 136);
+            this.panel3.Size = new System.Drawing.Size(1055, 136);
             this.panel3.TabIndex = 17;
             // 
             // customGroupBox3
@@ -433,7 +435,7 @@ namespace Summanager
             this.customGroupBox1.Controls.Add(this.estUnImgRiesgo);
             this.customGroupBox1.Controls.Add(this.estTonerRiesgo);
             this.customGroupBox1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.customGroupBox1.Location = new System.Drawing.Point(534, 0);
+            this.customGroupBox1.Location = new System.Drawing.Point(539, 0);
             this.customGroupBox1.Name = "customGroupBox1";
             this.customGroupBox1.Size = new System.Drawing.Size(516, 136);
             this.customGroupBox1.TabIndex = 10;
@@ -477,7 +479,7 @@ namespace Summanager
             this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel4.Location = new System.Drawing.Point(0, 186);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(1050, 112);
+            this.panel4.Size = new System.Drawing.Size(1055, 112);
             this.panel4.TabIndex = 18;
             // 
             // estOnline
@@ -504,7 +506,7 @@ namespace Summanager
             // 
             this.estNoAna.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.estNoAna.Count = 0;
-            this.estNoAna.Location = new System.Drawing.Point(862, 6);
+            this.estNoAna.Location = new System.Drawing.Point(867, 6);
             this.estNoAna.Name = "estNoAna";
             this.estNoAna.Size = new System.Drawing.Size(150, 100);
             this.estNoAna.TabIndex = 12;
@@ -514,7 +516,7 @@ namespace Summanager
             // FrmEstados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.ClientSize = new System.Drawing.Size(1050, 690);
+            this.ClientSize = new System.Drawing.Size(1055, 690);
             this.Controls.Add(this.panelEstadisticas);
             this.Controls.Add(this.lblTotal);
             this.Controls.Add(this.btnAgregar);

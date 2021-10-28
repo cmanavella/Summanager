@@ -15,6 +15,7 @@ namespace Summanager
     public partial class FrmMain : Form
     {
         private FrmEstados formEstados;
+        private int xPos;
 
         //DLLs necesarias para mover el Form.
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
@@ -27,6 +28,10 @@ namespace Summanager
             InitializeComponent();
 
             this.Text = Application.ProductName + " v" + Application.ProductVersion;
+
+            this.xPos = this.Location.X;
+
+            this.lblMousePos.Text = "X = " + this.Location.X + " Y = " + this.Location.Y;
         }
 
         [Browsable(true), EditorBrowsable(EditorBrowsableState.Always), Bindable(true)]
@@ -231,6 +236,31 @@ namespace Summanager
             if (e.Button == MouseButtons.Left)
             {
                 this.Size = new Size(this.PointToClient(MousePosition).X, this.PointToClient(MousePosition).Y);
+            }
+        }
+
+        private void panelIzquierdo_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                int mousePos = (int)this.PointToClient(MousePosition).X;
+                int x = mousePos * (-1);
+
+                //this.Location = new Point(xPos - mousePos, this.Location.Y);
+
+                this.lblMousePos.Text = "X = " + (xPos - mousePos) + ", Y = " + this.Location.Y;
+                //this.Size = new Size(x, this.Height);
+
+                //ReleaseCapture();
+                //SendMessage(this.Handle, 0, 0x112, 0);
+            }
+        }
+
+        private void panelIzquierdo_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                this.xPos = this.Location.X;
             }
         }
     }

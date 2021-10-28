@@ -48,6 +48,9 @@ namespace Summanager
             this.panelDerecho = new System.Windows.Forms.Panel();
             this.panelContenido = new System.Windows.Forms.Panel();
             this.panelEsquina = new System.Windows.Forms.Panel();
+            this.panelIzquierdo = new System.Windows.Forms.Panel();
+            this.lblMousePos = new System.Windows.Forms.Label();
+            this.lblXPos = new System.Windows.Forms.Label();
             this.panelSuperior.SuspendLayout();
             this.panelLateral.SuspendLayout();
             this.panelMenu.SuspendLayout();
@@ -65,7 +68,7 @@ namespace Summanager
             this.panelSuperior.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelSuperior.Location = new System.Drawing.Point(0, 0);
             this.panelSuperior.Name = "panelSuperior";
-            this.panelSuperior.Size = new System.Drawing.Size(1255, 30);
+            this.panelSuperior.Size = new System.Drawing.Size(1260, 30);
             this.panelSuperior.TabIndex = 9;
             this.panelSuperior.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelSuperior_MouseDown);
             // 
@@ -84,7 +87,7 @@ namespace Summanager
             // btnMinimizar
             // 
             this.btnMinimizar.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnMinimizar.Location = new System.Drawing.Point(1195, 0);
+            this.btnMinimizar.Location = new System.Drawing.Point(1200, 0);
             this.btnMinimizar.Name = "btnMinimizar";
             this.btnMinimizar.Size = new System.Drawing.Size(30, 30);
             this.btnMinimizar.TabIndex = 12;
@@ -94,7 +97,7 @@ namespace Summanager
             // btnCerrar
             // 
             this.btnCerrar.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnCerrar.Location = new System.Drawing.Point(1225, 0);
+            this.btnCerrar.Location = new System.Drawing.Point(1230, 0);
             this.btnCerrar.Name = "btnCerrar";
             this.btnCerrar.Size = new System.Drawing.Size(30, 30);
             this.btnCerrar.TabIndex = 11;
@@ -107,9 +110,9 @@ namespace Summanager
             this.panelLateral.Controls.Add(this.panelMenu);
             this.panelLateral.Controls.Add(this.panelLogo);
             this.panelLateral.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panelLateral.Location = new System.Drawing.Point(0, 30);
+            this.panelLateral.Location = new System.Drawing.Point(5, 30);
             this.panelLateral.Name = "panelLateral";
-            this.panelLateral.Size = new System.Drawing.Size(200, 690);
+            this.panelLateral.Size = new System.Drawing.Size(205, 690);
             this.panelLateral.TabIndex = 10;
             // 
             // panelMenu
@@ -117,12 +120,14 @@ namespace Summanager
             this.panelMenu.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.panelMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
+            this.panelMenu.Controls.Add(this.lblXPos);
+            this.panelMenu.Controls.Add(this.lblMousePos);
             this.panelMenu.Controls.Add(this.btnStock);
             this.panelMenu.Controls.Add(this.btnConfiguracion);
             this.panelMenu.Controls.Add(this.btnEstados);
             this.panelMenu.Location = new System.Drawing.Point(0, 150);
             this.panelMenu.Name = "panelMenu";
-            this.panelMenu.Size = new System.Drawing.Size(200, 540);
+            this.panelMenu.Size = new System.Drawing.Size(205, 540);
             this.panelMenu.TabIndex = 1;
             // 
             // btnStock
@@ -132,7 +137,7 @@ namespace Summanager
             this.btnStock.Location = new System.Drawing.Point(0, 90);
             this.btnStock.Name = "btnStock";
             this.btnStock.Selected = false;
-            this.btnStock.Size = new System.Drawing.Size(200, 45);
+            this.btnStock.Size = new System.Drawing.Size(205, 45);
             this.btnStock.TabIndex = 1;
             this.btnStock.Text = "Stock";
             this.btnStock.Visible = false;
@@ -145,7 +150,7 @@ namespace Summanager
             this.btnConfiguracion.Location = new System.Drawing.Point(0, 45);
             this.btnConfiguracion.Name = "btnConfiguracion";
             this.btnConfiguracion.Selected = false;
-            this.btnConfiguracion.Size = new System.Drawing.Size(200, 45);
+            this.btnConfiguracion.Size = new System.Drawing.Size(205, 45);
             this.btnConfiguracion.TabIndex = 3;
             this.btnConfiguracion.Text = "Configuración";
             this.btnConfiguracion.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnConfiguracion_MouseClick);
@@ -157,7 +162,7 @@ namespace Summanager
             this.btnEstados.Location = new System.Drawing.Point(0, 0);
             this.btnEstados.Name = "btnEstados";
             this.btnEstados.Selected = false;
-            this.btnEstados.Size = new System.Drawing.Size(200, 45);
+            this.btnEstados.Size = new System.Drawing.Size(205, 45);
             this.btnEstados.TabIndex = 2;
             this.btnEstados.Text = "Estado Impresoras";
             this.btnEstados.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnEstados_MouseClick);
@@ -171,14 +176,14 @@ namespace Summanager
             this.panelLogo.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelLogo.Location = new System.Drawing.Point(0, 0);
             this.panelLogo.Name = "panelLogo";
-            this.panelLogo.Size = new System.Drawing.Size(200, 150);
+            this.panelLogo.Size = new System.Drawing.Size(205, 150);
             this.panelLogo.TabIndex = 0;
             // 
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
             this.panel4.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel4.Location = new System.Drawing.Point(195, 0);
+            this.panel4.Location = new System.Drawing.Point(200, 0);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(5, 150);
             this.panel4.TabIndex = 3;
@@ -220,7 +225,7 @@ namespace Summanager
             this.panelInferior.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelInferior.Location = new System.Drawing.Point(0, 720);
             this.panelInferior.Name = "panelInferior";
-            this.panelInferior.Size = new System.Drawing.Size(1250, 5);
+            this.panelInferior.Size = new System.Drawing.Size(1255, 5);
             this.panelInferior.TabIndex = 11;
             this.panelInferior.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelInferior_MouseMove);
             // 
@@ -230,7 +235,7 @@ namespace Summanager
             this.panelDerecho.Controls.Add(this.panelEsquina);
             this.panelDerecho.Cursor = System.Windows.Forms.Cursors.SizeWE;
             this.panelDerecho.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panelDerecho.Location = new System.Drawing.Point(1250, 30);
+            this.panelDerecho.Location = new System.Drawing.Point(1255, 30);
             this.panelDerecho.Name = "panelDerecho";
             this.panelDerecho.Size = new System.Drawing.Size(5, 695);
             this.panelDerecho.TabIndex = 12;
@@ -240,9 +245,9 @@ namespace Summanager
             // 
             this.panelContenido.BackColor = System.Drawing.Color.White;
             this.panelContenido.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelContenido.Location = new System.Drawing.Point(200, 30);
+            this.panelContenido.Location = new System.Drawing.Point(210, 30);
             this.panelContenido.Name = "panelContenido";
-            this.panelContenido.Size = new System.Drawing.Size(1050, 690);
+            this.panelContenido.Size = new System.Drawing.Size(1045, 690);
             this.panelContenido.TabIndex = 13;
             // 
             // panelEsquina
@@ -256,13 +261,46 @@ namespace Summanager
             this.panelEsquina.TabIndex = 14;
             this.panelEsquina.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelEsquina_MouseMove);
             // 
+            // panelIzquierdo
+            // 
+            this.panelIzquierdo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
+            this.panelIzquierdo.Cursor = System.Windows.Forms.Cursors.SizeWE;
+            this.panelIzquierdo.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelIzquierdo.Location = new System.Drawing.Point(0, 30);
+            this.panelIzquierdo.Name = "panelIzquierdo";
+            this.panelIzquierdo.Size = new System.Drawing.Size(5, 690);
+            this.panelIzquierdo.TabIndex = 4;
+            this.panelIzquierdo.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelIzquierdo_MouseMove);
+            this.panelIzquierdo.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panelIzquierdo_MouseUp);
+            // 
+            // lblMousePos
+            // 
+            this.lblMousePos.AutoSize = true;
+            this.lblMousePos.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMousePos.ForeColor = System.Drawing.Color.White;
+            this.lblMousePos.Location = new System.Drawing.Point(55, 215);
+            this.lblMousePos.Name = "lblMousePos";
+            this.lblMousePos.Size = new System.Drawing.Size(0, 15);
+            this.lblMousePos.TabIndex = 4;
+            // 
+            // lblXPos
+            // 
+            this.lblXPos.AutoSize = true;
+            this.lblXPos.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblXPos.ForeColor = System.Drawing.Color.White;
+            this.lblXPos.Location = new System.Drawing.Point(55, 267);
+            this.lblXPos.Name = "lblXPos";
+            this.lblXPos.Size = new System.Drawing.Size(0, 15);
+            this.lblXPos.TabIndex = 5;
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1255, 725);
+            this.ClientSize = new System.Drawing.Size(1260, 725);
             this.Controls.Add(this.panelContenido);
             this.Controls.Add(this.panelLateral);
+            this.Controls.Add(this.panelIzquierdo);
             this.Controls.Add(this.panelInferior);
             this.Controls.Add(this.panelDerecho);
             this.Controls.Add(this.panelSuperior);
@@ -276,6 +314,7 @@ namespace Summanager
             this.panelSuperior.PerformLayout();
             this.panelLateral.ResumeLayout(false);
             this.panelMenu.ResumeLayout(false);
+            this.panelMenu.PerformLayout();
             this.panelLogo.ResumeLayout(false);
             this.panelLogo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
@@ -303,5 +342,8 @@ namespace Summanager
         private CustomControls.MenuButton btnEstados;
         private CustomControls.MenuButton btnConfiguracion;
         private System.Windows.Forms.Panel panelEsquina;
+        private System.Windows.Forms.Panel panelIzquierdo;
+        private System.Windows.Forms.Label lblMousePos;
+        private System.Windows.Forms.Label lblXPos;
     }
 }
