@@ -241,7 +241,7 @@ namespace Summanager
             }
         }
 
-        private void panelEsquina_MouseMove(object sender, MouseEventArgs e)
+        private void panelEsquinaDerecha_MouseMove(object sender, MouseEventArgs e)
         {
             //Hago que el Form se agrande en ancho y alto cuando mantengo apretado el botón izquierdo del mouse.
             if (e.Button == MouseButtons.Left)
@@ -269,6 +269,31 @@ namespace Summanager
         }
 
         private void panelIzquierdo_MouseUp(object sender, MouseEventArgs e)
+        {
+            //Si el botón del mouse que suelto es el izquierdo almaceno el ancho del Form en la variable.
+            if (e.Button == MouseButtons.Left)
+            {
+                this.formWidth = this.Width;
+            }
+        }
+
+        private void panelEsquinaIzquierda_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                int mousePos = (int)this.PointToClient(MousePosition).X; //Tomo la Posición del mouse.
+                int xPos = mousePos * (-1); //La invierto.
+                int xWidth = xPos + this.formWidth; //Sumo esa nueva posición con el width almacenado. Obtengo el nuevo width.
+
+                this.Size = new Size(xWidth, this.PointToClient(MousePosition).Y); //Cambio el tamaño del Form.
+                this.formWidth = this.Width; //Guardo enseguida el ancho del mismo.
+
+                //Si el ancho del Form es mayor al ancho mínimo permitido, muevo el form.
+                if (this.formWidth > this.MinimumSize.Width) this.Location = new Point(this.Location.X - xPos, this.Location.Y);
+            }
+        }
+
+        private void panelEsquinaIzquierda_MouseUp(object sender, MouseEventArgs e)
         {
             //Si el botón del mouse que suelto es el izquierdo almaceno el ancho del Form en la variable.
             if (e.Button == MouseButtons.Left)

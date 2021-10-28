@@ -46,14 +46,16 @@ namespace Summanager
             this.logo = new System.Windows.Forms.PictureBox();
             this.panelInferior = new System.Windows.Forms.Panel();
             this.panelDerecho = new System.Windows.Forms.Panel();
-            this.panelEsquina = new System.Windows.Forms.Panel();
+            this.panelEsquinaDerecha = new System.Windows.Forms.Panel();
             this.panelContenido = new System.Windows.Forms.Panel();
             this.panelIzquierdo = new System.Windows.Forms.Panel();
+            this.panelEsquinaIzquierda = new System.Windows.Forms.Panel();
             this.panelSuperior.SuspendLayout();
             this.panelLateral.SuspendLayout();
             this.panelMenu.SuspendLayout();
             this.panelLogo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
+            this.panelInferior.SuspendLayout();
             this.panelDerecho.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -217,6 +219,7 @@ namespace Summanager
             // panelInferior
             // 
             this.panelInferior.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
+            this.panelInferior.Controls.Add(this.panelEsquinaIzquierda);
             this.panelInferior.Cursor = System.Windows.Forms.Cursors.SizeNS;
             this.panelInferior.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelInferior.Location = new System.Drawing.Point(0, 720);
@@ -228,7 +231,7 @@ namespace Summanager
             // panelDerecho
             // 
             this.panelDerecho.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
-            this.panelDerecho.Controls.Add(this.panelEsquina);
+            this.panelDerecho.Controls.Add(this.panelEsquinaDerecha);
             this.panelDerecho.Cursor = System.Windows.Forms.Cursors.SizeWE;
             this.panelDerecho.Dock = System.Windows.Forms.DockStyle.Right;
             this.panelDerecho.Location = new System.Drawing.Point(1255, 30);
@@ -238,16 +241,16 @@ namespace Summanager
             this.panelDerecho.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelDerecho_MouseMove);
             this.panelDerecho.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panelDerecho_MouseUp);
             // 
-            // panelEsquina
+            // panelEsquinaDerecha
             // 
-            this.panelEsquina.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.panelEsquina.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
-            this.panelEsquina.Cursor = System.Windows.Forms.Cursors.SizeNWSE;
-            this.panelEsquina.Location = new System.Drawing.Point(0, 690);
-            this.panelEsquina.Name = "panelEsquina";
-            this.panelEsquina.Size = new System.Drawing.Size(5, 5);
-            this.panelEsquina.TabIndex = 14;
-            this.panelEsquina.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelEsquina_MouseMove);
+            this.panelEsquinaDerecha.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.panelEsquinaDerecha.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
+            this.panelEsquinaDerecha.Cursor = System.Windows.Forms.Cursors.SizeNWSE;
+            this.panelEsquinaDerecha.Location = new System.Drawing.Point(0, 690);
+            this.panelEsquinaDerecha.Name = "panelEsquinaDerecha";
+            this.panelEsquinaDerecha.Size = new System.Drawing.Size(5, 5);
+            this.panelEsquinaDerecha.TabIndex = 14;
+            this.panelEsquinaDerecha.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelEsquinaDerecha_MouseMove);
             // 
             // panelContenido
             // 
@@ -269,6 +272,18 @@ namespace Summanager
             this.panelIzquierdo.TabIndex = 4;
             this.panelIzquierdo.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelIzquierdo_MouseMove);
             this.panelIzquierdo.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panelIzquierdo_MouseUp);
+            // 
+            // panelEsquinaIzquierda
+            // 
+            this.panelEsquinaIzquierda.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
+            this.panelEsquinaIzquierda.Cursor = System.Windows.Forms.Cursors.SizeNESW;
+            this.panelEsquinaIzquierda.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelEsquinaIzquierda.Location = new System.Drawing.Point(0, 0);
+            this.panelEsquinaIzquierda.Name = "panelEsquinaIzquierda";
+            this.panelEsquinaIzquierda.Size = new System.Drawing.Size(5, 5);
+            this.panelEsquinaIzquierda.TabIndex = 15;
+            this.panelEsquinaIzquierda.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelEsquinaIzquierda_MouseMove);
+            this.panelEsquinaIzquierda.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panelEsquinaIzquierda_MouseUp);
             // 
             // FrmMain
             // 
@@ -294,6 +309,7 @@ namespace Summanager
             this.panelLogo.ResumeLayout(false);
             this.panelLogo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
+            this.panelInferior.ResumeLayout(false);
             this.panelDerecho.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -317,7 +333,8 @@ namespace Summanager
         private CustomControls.MenuButton btnStock;
         private CustomControls.MenuButton btnEstados;
         private CustomControls.MenuButton btnConfiguracion;
-        private System.Windows.Forms.Panel panelEsquina;
+        private System.Windows.Forms.Panel panelEsquinaDerecha;
         private System.Windows.Forms.Panel panelIzquierdo;
+        private System.Windows.Forms.Panel panelEsquinaIzquierda;
     }
 }
