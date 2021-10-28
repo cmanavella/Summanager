@@ -42,6 +42,11 @@ namespace Summanager
             this.lblTitulo.Size = new System.Drawing.Size(200, 32);
             this.lblTitulo.Text = "Configuración";
             // 
+            // panelMenu
+            // 
+            this.panelMenu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)));
+            this.panelMenu.Dock = System.Windows.Forms.DockStyle.Top;
+            // 
             // label1
             // 
             this.label1.AutoSize = true;

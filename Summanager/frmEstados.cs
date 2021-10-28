@@ -802,7 +802,15 @@ namespace Summanager
             _tituloForm();
             _acomodarBotones();
 
-            if(!_esNuevo()) btnActualizar_Click(sender, null); //Actualizo el DGV con el análisis de la Lista de Impresoras.
+            if (!_esNuevo())
+            {
+                //Resto al ancho y alto del FrmMain los valores de la diferencia que existe en la relación entre éste y el FrmEstados.
+                //En este caso son 205 y 35. Los resultados se los paso al ancho y alto del FrmEstados.
+                //Esto lo debo hacer para que se acomoden los elementos antes de actualizar.
+                this.Width = this.frmMain.Width - 205;
+                this.Height = this.frmMain.Height - 35;
+                btnActualizar_Click(sender, null); //Actualizo el DGV con el análisis de la Lista de Impresoras.
+            }
         }
 
         private void btnNuevo_Click(object sender, EventArgs e)
@@ -1069,7 +1077,6 @@ namespace Summanager
 
         private void FrmEstados_Shown(object sender, EventArgs e)
         {
-            
             if (this.printers.Count <= 0)
             {
                 this.panelEstadisticas.Visible = false;

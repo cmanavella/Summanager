@@ -52,9 +52,6 @@ namespace Summanager
             this.btnAbrir = new CustomControls.ButtonBlue();
             this.btnNuevo = new CustomControls.ButtonBlue();
             this.panelEstadisticas = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.lblEstTitle = new System.Windows.Forms.Label();
-            this.btnCambiarEst = new CustomControls.ButtonGreen();
             this.panel3 = new System.Windows.Forms.Panel();
             this.customGroupBox3 = new CustomControls.CustomGroupBox();
             this.estKitMantCritico = new CustomControls.Estadistica();
@@ -65,18 +62,21 @@ namespace Summanager
             this.estUnImgRiesgo = new CustomControls.Estadistica();
             this.estTonerRiesgo = new CustomControls.Estadistica();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.estOnline = new CustomControls.Estadistica();
-            this.estOffline = new CustomControls.Estadistica();
             this.estNoAna = new CustomControls.Estadistica();
+            this.estOffline = new CustomControls.Estadistica();
+            this.estOnline = new CustomControls.Estadistica();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.lblEstTitle = new System.Windows.Forms.Label();
+            this.btnCambiarEst = new CustomControls.ButtonGreen();
             this.panelTitulo.SuspendLayout();
             this.panelMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.panelEstadisticas.SuspendLayout();
-            this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.customGroupBox3.SuspendLayout();
             this.customGroupBox1.SuspendLayout();
             this.panel4.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelTitulo
@@ -142,7 +142,7 @@ namespace Summanager
             this.dgv.ShowCellToolTips = false;
             this.dgv.ShowEditingIcon = false;
             this.dgv.ShowRowErrors = false;
-            this.dgv.Size = new System.Drawing.Size(1043, 220);
+            this.dgv.Size = new System.Drawing.Size(1038, 220);
             this.dgv.TabIndex = 5;
             this.dgv.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgv_DataBindingComplete);
             this.dgv.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dgv_MouseDoubleClick);
@@ -178,7 +178,7 @@ namespace Summanager
             this.lblTotal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
             this.lblTotal.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotal.ForeColor = System.Drawing.Color.White;
-            this.lblTotal.Location = new System.Drawing.Point(956, 353);
+            this.lblTotal.Location = new System.Drawing.Point(951, 353);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(87, 27);
             this.lblTotal.TabIndex = 28;
@@ -191,7 +191,7 @@ namespace Summanager
             this.lblActualizacion.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lblActualizacion.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblActualizacion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
-            this.lblActualizacion.Location = new System.Drawing.Point(351, 22);
+            this.lblActualizacion.Location = new System.Drawing.Point(346, 22);
             this.lblActualizacion.Name = "lblActualizacion";
             this.lblActualizacion.Size = new System.Drawing.Size(689, 19);
             this.lblActualizacion.TabIndex = 25;
@@ -218,7 +218,7 @@ namespace Summanager
             // 
             this.btnLimpiar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnLimpiar.Image = global::Summanager.Properties.Resources.clear;
-            this.btnLimpiar.Location = new System.Drawing.Point(953, 96);
+            this.btnLimpiar.Location = new System.Drawing.Point(948, 96);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(90, 28);
             this.btnLimpiar.TabIndex = 31;
@@ -267,7 +267,7 @@ namespace Summanager
             // 
             this.btnActualizar.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.btnActualizar.Image = global::Summanager.Properties.Resources.refresh_page_option;
-            this.btnActualizar.Location = new System.Drawing.Point(947, 6);
+            this.btnActualizar.Location = new System.Drawing.Point(942, 6);
             this.btnActualizar.Name = "btnActualizar";
             this.btnActualizar.Size = new System.Drawing.Size(105, 28);
             this.btnActualizar.TabIndex = 13;
@@ -344,38 +344,6 @@ namespace Summanager
             this.panelEstadisticas.Name = "panelEstadisticas";
             this.panelEstadisticas.Size = new System.Drawing.Size(1055, 298);
             this.panelEstadisticas.TabIndex = 33;
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.lblEstTitle);
-            this.panel2.Controls.Add(this.btnCambiarEst);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1055, 44);
-            this.panel2.TabIndex = 15;
-            // 
-            // lblEstTitle
-            // 
-            this.lblEstTitle.AutoSize = true;
-            this.lblEstTitle.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEstTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
-            this.lblEstTitle.Location = new System.Drawing.Point(9, 10);
-            this.lblEstTitle.Name = "lblEstTitle";
-            this.lblEstTitle.Size = new System.Drawing.Size(154, 16);
-            this.lblEstTitle.TabIndex = 25;
-            this.lblEstTitle.Text = "Estadísticas Generales";
-            // 
-            // btnCambiarEst
-            // 
-            this.btnCambiarEst.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCambiarEst.Image = null;
-            this.btnCambiarEst.Location = new System.Drawing.Point(959, 10);
-            this.btnCambiarEst.Name = "btnCambiarEst";
-            this.btnCambiarEst.Size = new System.Drawing.Size(84, 28);
-            this.btnCambiarEst.TabIndex = 12;
-            this.btnCambiarEst.Text = "Cambiar";
-            this.btnCambiarEst.Visible = false;
             // 
             // panel3
             // 
@@ -482,15 +450,16 @@ namespace Summanager
             this.panel4.Size = new System.Drawing.Size(1055, 112);
             this.panel4.TabIndex = 18;
             // 
-            // estOnline
+            // estNoAna
             // 
-            this.estOnline.Count = 0;
-            this.estOnline.Location = new System.Drawing.Point(16, 6);
-            this.estOnline.Name = "estOnline";
-            this.estOnline.Size = new System.Drawing.Size(150, 100);
-            this.estOnline.TabIndex = 10;
-            this.estOnline.Text = "Online";
-            this.estOnline.Total = 0;
+            this.estNoAna.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.estNoAna.Count = 0;
+            this.estNoAna.Location = new System.Drawing.Point(862, 6);
+            this.estNoAna.Name = "estNoAna";
+            this.estNoAna.Size = new System.Drawing.Size(150, 100);
+            this.estNoAna.TabIndex = 12;
+            this.estNoAna.Text = "No Analizadas";
+            this.estNoAna.Total = 0;
             // 
             // estOffline
             // 
@@ -502,16 +471,47 @@ namespace Summanager
             this.estOffline.Text = "Offline";
             this.estOffline.Total = 0;
             // 
-            // estNoAna
+            // estOnline
             // 
-            this.estNoAna.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.estNoAna.Count = 0;
-            this.estNoAna.Location = new System.Drawing.Point(867, 6);
-            this.estNoAna.Name = "estNoAna";
-            this.estNoAna.Size = new System.Drawing.Size(150, 100);
-            this.estNoAna.TabIndex = 12;
-            this.estNoAna.Text = "No Analizadas";
-            this.estNoAna.Total = 0;
+            this.estOnline.Count = 0;
+            this.estOnline.Location = new System.Drawing.Point(16, 6);
+            this.estOnline.Name = "estOnline";
+            this.estOnline.Size = new System.Drawing.Size(150, 100);
+            this.estOnline.TabIndex = 10;
+            this.estOnline.Text = "Online";
+            this.estOnline.Total = 0;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.lblEstTitle);
+            this.panel2.Controls.Add(this.btnCambiarEst);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1055, 44);
+            this.panel2.TabIndex = 15;
+            // 
+            // lblEstTitle
+            // 
+            this.lblEstTitle.AutoSize = true;
+            this.lblEstTitle.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEstTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
+            this.lblEstTitle.Location = new System.Drawing.Point(9, 10);
+            this.lblEstTitle.Name = "lblEstTitle";
+            this.lblEstTitle.Size = new System.Drawing.Size(154, 16);
+            this.lblEstTitle.TabIndex = 25;
+            this.lblEstTitle.Text = "Estadísticas Generales";
+            // 
+            // btnCambiarEst
+            // 
+            this.btnCambiarEst.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCambiarEst.Image = null;
+            this.btnCambiarEst.Location = new System.Drawing.Point(954, 10);
+            this.btnCambiarEst.Name = "btnCambiarEst";
+            this.btnCambiarEst.Size = new System.Drawing.Size(84, 28);
+            this.btnCambiarEst.TabIndex = 12;
+            this.btnCambiarEst.Text = "Cambiar";
+            this.btnCambiarEst.Visible = false;
             // 
             // FrmEstados
             // 
@@ -548,14 +548,14 @@ namespace Summanager
             this.panelMenu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
             this.panelEstadisticas.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.customGroupBox3.ResumeLayout(false);
             this.customGroupBox3.PerformLayout();
             this.customGroupBox1.ResumeLayout(false);
             this.customGroupBox1.PerformLayout();
             this.panel4.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
