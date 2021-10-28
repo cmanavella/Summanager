@@ -46,11 +46,9 @@ namespace Summanager
             this.logo = new System.Windows.Forms.PictureBox();
             this.panelInferior = new System.Windows.Forms.Panel();
             this.panelDerecho = new System.Windows.Forms.Panel();
-            this.panelContenido = new System.Windows.Forms.Panel();
             this.panelEsquina = new System.Windows.Forms.Panel();
+            this.panelContenido = new System.Windows.Forms.Panel();
             this.panelIzquierdo = new System.Windows.Forms.Panel();
-            this.lblMousePos = new System.Windows.Forms.Label();
-            this.lblXPos = new System.Windows.Forms.Label();
             this.panelSuperior.SuspendLayout();
             this.panelLateral.SuspendLayout();
             this.panelMenu.SuspendLayout();
@@ -120,8 +118,6 @@ namespace Summanager
             this.panelMenu.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.panelMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
-            this.panelMenu.Controls.Add(this.lblXPos);
-            this.panelMenu.Controls.Add(this.lblMousePos);
             this.panelMenu.Controls.Add(this.btnStock);
             this.panelMenu.Controls.Add(this.btnConfiguracion);
             this.panelMenu.Controls.Add(this.btnEstados);
@@ -240,15 +236,7 @@ namespace Summanager
             this.panelDerecho.Size = new System.Drawing.Size(5, 695);
             this.panelDerecho.TabIndex = 12;
             this.panelDerecho.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelDerecho_MouseMove);
-            // 
-            // panelContenido
-            // 
-            this.panelContenido.BackColor = System.Drawing.Color.White;
-            this.panelContenido.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelContenido.Location = new System.Drawing.Point(210, 30);
-            this.panelContenido.Name = "panelContenido";
-            this.panelContenido.Size = new System.Drawing.Size(1045, 690);
-            this.panelContenido.TabIndex = 13;
+            this.panelDerecho.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panelDerecho_MouseUp);
             // 
             // panelEsquina
             // 
@@ -261,6 +249,15 @@ namespace Summanager
             this.panelEsquina.TabIndex = 14;
             this.panelEsquina.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelEsquina_MouseMove);
             // 
+            // panelContenido
+            // 
+            this.panelContenido.BackColor = System.Drawing.Color.White;
+            this.panelContenido.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelContenido.Location = new System.Drawing.Point(210, 30);
+            this.panelContenido.Name = "panelContenido";
+            this.panelContenido.Size = new System.Drawing.Size(1045, 690);
+            this.panelContenido.TabIndex = 13;
+            // 
             // panelIzquierdo
             // 
             this.panelIzquierdo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
@@ -272,26 +269,6 @@ namespace Summanager
             this.panelIzquierdo.TabIndex = 4;
             this.panelIzquierdo.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelIzquierdo_MouseMove);
             this.panelIzquierdo.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panelIzquierdo_MouseUp);
-            // 
-            // lblMousePos
-            // 
-            this.lblMousePos.AutoSize = true;
-            this.lblMousePos.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMousePos.ForeColor = System.Drawing.Color.White;
-            this.lblMousePos.Location = new System.Drawing.Point(55, 215);
-            this.lblMousePos.Name = "lblMousePos";
-            this.lblMousePos.Size = new System.Drawing.Size(0, 15);
-            this.lblMousePos.TabIndex = 4;
-            // 
-            // lblXPos
-            // 
-            this.lblXPos.AutoSize = true;
-            this.lblXPos.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblXPos.ForeColor = System.Drawing.Color.White;
-            this.lblXPos.Location = new System.Drawing.Point(55, 267);
-            this.lblXPos.Name = "lblXPos";
-            this.lblXPos.Size = new System.Drawing.Size(0, 15);
-            this.lblXPos.TabIndex = 5;
             // 
             // FrmMain
             // 
@@ -307,14 +284,13 @@ namespace Summanager
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(1255, 725);
+            this.MinimumSize = new System.Drawing.Size(1260, 725);
             this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.panelSuperior.ResumeLayout(false);
             this.panelSuperior.PerformLayout();
             this.panelLateral.ResumeLayout(false);
             this.panelMenu.ResumeLayout(false);
-            this.panelMenu.PerformLayout();
             this.panelLogo.ResumeLayout(false);
             this.panelLogo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
@@ -343,7 +319,5 @@ namespace Summanager
         private CustomControls.MenuButton btnConfiguracion;
         private System.Windows.Forms.Panel panelEsquina;
         private System.Windows.Forms.Panel panelIzquierdo;
-        private System.Windows.Forms.Label lblMousePos;
-        private System.Windows.Forms.Label lblXPos;
     }
 }
