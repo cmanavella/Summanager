@@ -120,6 +120,128 @@ namespace IO
         }
 
         /// <summary>
+        /// Devuelve la última ruta guardada que usó un OpenFileDialog.
+        /// </summary>
+        /// <returns></returns>
+        public static string GetOpenDirectory()
+        {
+            string path = ConfigurationManager.AppSettings.Get("openDirectory");
+            //Compruebo que el directorio exista. Si no, devuelvo C:
+            if (!Directory.Exists(path)) path = "c:\\";
+            return path;
+        }
+
+        /// <summary>
+        /// Devuelve la última ruta guardada que usó un SaveFileDialog.
+        /// </summary>
+        /// <returns></returns>
+        public static string GetSaveDirectory()
+        {
+            string path = ConfigurationManager.AppSettings.Get("saveDirectory");
+            //Compruebo que el directorio exista. Si no, devuelvo C:
+            if (!Directory.Exists(path)) path = "c:\\";
+            return path;
+        }
+
+        /// <summary>
+        /// Almacena una ruta para usarse en el OpenFileDialog
+        /// </summary>
+        /// <param name="filePath"></param>
+        public static void SetOpenDirectory(string filePath)
+        {
+            //Me fijo que el File Path no esté vacío. Si lo está, no hago nada.
+            if (filePath != String.Empty)
+            {
+                //Como recibo el path completo, debo quitar de él el nombre del archivo.
+                string[] split = filePath.Split('\\');
+                bool primero = true;
+
+                for (int i = 0; i < split.Length - 1; i++)
+                {
+                    if (primero)
+                    {
+                        filePath = split[i];
+                        primero = false;
+                    }
+                    else
+                    {
+                        filePath += "\\" + split[i];
+                    }
+                }
+
+                //Cambio la variable almacenada en el Archivo de Configuración.
+                var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                //En esta parte abro la sección settings para verificar que la variable existe.
+                AppSettingsSection section = (AppSettingsSection)configFile.GetSection("appSettings");
+                KeyValueConfigurationCollection app_settings = section.Settings;
+                KeyValueConfigurationElement key = app_settings["openDirectory"];
+
+                if (key == null) //Si la variable no existe, la creo.
+                {
+                    KeyValueConfigurationElement new_key = new KeyValueConfigurationElement("openDirectory", filePath);
+                    app_settings.Add(new_key);
+                }
+                else //Si existe la guardo.
+                {
+                    var settings = configFile.AppSettings.Settings;
+                    settings["openDirectory"].Value = filePath;
+                }
+
+                configFile.Save(ConfigurationSaveMode.Modified);
+                ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
+            }
+        }
+
+        /// <summary>
+        /// Almacena una ruta para usarse en el SaveFileDialog
+        /// </summary>
+        /// <param name="filePath"></param>
+        public static void SetSaveDirectory(string filePath)
+        {
+            //Me fijo que el File Path no esté vacío. Si lo está, no hago nada.
+            if (filePath != String.Empty)
+            {
+                //Como recibo el path completo, debo quitar de él el nombre del archivo.
+                string[] split = filePath.Split('\\');
+                bool primero = true;
+
+                for (int i = 0; i < split.Length - 1; i++)
+                {
+                    if (primero)
+                    {
+                        filePath = split[i];
+                        primero = false;
+                    }
+                    else
+                    {
+                        filePath += "\\" + split[i];
+                    }
+                }
+
+                //Cambio la variable almacenada en el Archivo de Configuración.
+                var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                //En esta parte abro la sección settings para verificar que la variable existe.
+                AppSettingsSection section = (AppSettingsSection)configFile.GetSection("appSettings");
+                KeyValueConfigurationCollection app_settings = section.Settings;
+                KeyValueConfigurationElement key = app_settings["saveDirectory"];
+
+                if (key == null) //Si la variable no existe, la creo.
+                {
+                    KeyValueConfigurationElement new_key = new KeyValueConfigurationElement("saveDirectory", filePath);
+                    app_settings.Add(new_key);
+                }
+                else //Si existe la guardo.
+                {
+                    var settings = configFile.AppSettings.Settings;
+                    settings["saveDirectory"].Value = filePath;
+                }
+
+                configFile.Save(ConfigurationSaveMode.Modified);
+                ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
+            }
+        }
+
+        /// <summary>
         /// Lee el archivo reciente con la extensión SMP cuya ruta está almacenda en el
         /// Application Config.
         /// </summary>
@@ -164,10 +286,23 @@ namespace IO
         /// </summary>
         public static void ClearCurrentFile()
         {
+            //Cambio la variable almacenada en el Archivo de Configuración.
             var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            var settings = configFile.AppSettings.Settings;
+            //En esta parte abro la sección settings para verificar que la variable existe.
+            AppSettingsSection section = (AppSettingsSection)configFile.GetSection("appSettings");
+            KeyValueConfigurationCollection app_settings = section.Settings;
+            KeyValueConfigurationElement key = app_settings["currentFile"];
 
-            settings["currentFile"].Value = "";
+            if (key == null) //Si la variable no existe, la creo.
+            {
+                KeyValueConfigurationElement new_key = new KeyValueConfigurationElement("currentFile", String.Empty);
+                app_settings.Add(new_key);
+            }
+            else //Si existe la guardo.
+            {
+                var settings = configFile.AppSettings.Settings;
+                settings["currentFile"].Value = String.Empty;
+            }
 
             configFile.Save(ConfigurationSaveMode.Modified);
             ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
@@ -587,102 +722,6 @@ namespace IO
                 //Finalmente cierro todo.
                 libros.Close(true);
                 application.Quit();
-            }
-        }
-
-        /// <summary>
-        /// Devuelve la última ruta guardada que usó un OpenFileDialog.
-        /// </summary>
-        /// <returns></returns>
-        public static string GetOpenDirectory()
-        {
-            string path = ConfigurationManager.AppSettings.Get("openDirectory");
-            //Compruebo que el directorio exista. Si no, devuelvo C:
-            if (!Directory.Exists(path)) path = "c:\\";
-            return path;
-        }
-
-        /// <summary>
-        /// Devuelve la última ruta guardada que usó un SaveFileDialog.
-        /// </summary>
-        /// <returns></returns>
-        public static string GetSaveDirectory()
-        {
-            string path = ConfigurationManager.AppSettings.Get("saveDirectory");
-            //Compruebo que el directorio exista. Si no, devuelvo C:
-            if (!Directory.Exists(path)) path = "c:\\";
-            return path;
-        }
-
-        /// <summary>
-        /// Almacena una ruta para usarse en el OpenFileDialog
-        /// </summary>
-        /// <param name="filePath"></param>
-        public static void SetOpenDirectory(string filePath)
-        {
-            //Me fijo que el File Path no esté vacío. Si lo está, no hago nada.
-            if (filePath != String.Empty)
-            {
-                //Como recibo el path completo, debo quitar de él el nombre del archivo.
-                string[] split = filePath.Split('\\');
-                bool primero = true;
-
-                for (int i = 0; i < split.Length - 1; i++)
-                {
-                    if (primero)
-                    {
-                        filePath = split[i];
-                        primero = false;
-                    }
-                    else
-                    {
-                        filePath += "\\" + split[i];
-                    }
-                }
-
-                var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-                var settings = configFile.AppSettings.Settings;
-
-                settings["openDirectory"].Value = filePath;
-
-                configFile.Save(ConfigurationSaveMode.Modified);
-                ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
-            }
-        }
-
-        /// <summary>
-        /// Almacena una ruta para usarse en el SaveFileDialog
-        /// </summary>
-        /// <param name="filePath"></param>
-        public static void SetSaveDirectory(string filePath)
-        {
-            //Me fijo que el File Path no esté vacío. Si lo está, no hago nada.
-            if (filePath != String.Empty)
-            {
-                //Como recibo el path completo, debo quitar de él el nombre del archivo.
-                string[] split = filePath.Split('\\');
-                bool primero = true;
-
-                for (int i = 0; i < split.Length - 1; i++)
-                {
-                    if (primero)
-                    {
-                        filePath = split[i];
-                        primero = false;
-                    }
-                    else
-                    {
-                        filePath += "\\" + split[i];
-                    }
-                }
-
-                var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-                var settings = configFile.AppSettings.Settings;
-
-                settings["saveDirectory"].Value = filePath;
-
-                configFile.Save(ConfigurationSaveMode.Modified);
-                ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
             }
         }
 
