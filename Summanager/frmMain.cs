@@ -8,7 +8,7 @@ using System.Windows.Forms;
 using Entities;
 using IO;
 using CustomControls;
-
+using Summanager.Properties;
 
 namespace Summanager
 {
@@ -176,16 +176,7 @@ namespace Summanager
         }
 
         /**EVENTS**/
-        private void btnCerrar_MouseClick(object sender, MouseEventArgs e)
-        {
-            if(CheckUnsavedFile() == DialogResult.OK) Application.Exit();
-        }
-
-        private void btnMinimizar_MouseClick(object sender, MouseEventArgs e)
-        {
-            this.WindowState = FormWindowState.Minimized;
-        }
-
+        
         private void panelSuperior_MouseDown(object sender, MouseEventArgs e)
         {
             ReleaseCapture();
@@ -250,6 +241,15 @@ namespace Summanager
             }
         }
 
+        private void panelEsquinaDerecha_MouseUp(object sender, MouseEventArgs e)
+        {
+            //Si el botón del mouse que suelto es el izquierdo almaceno el ancho del Form en la variable.
+            if (e.Button == MouseButtons.Left)
+            {
+                this.formWidth = this.Width;
+            }
+        }
+
         private void panelIzquierdo_MouseMove(object sender, MouseEventArgs e)
         {
             //Hago que el Form se agrande en ancho cuando mantengo apretado el botón izquierdo del mouse. Para hacer esto debo agrandar
@@ -300,6 +300,47 @@ namespace Summanager
             {
                 this.formWidth = this.Width;
             }
+        }
+
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            if (CheckUnsavedFile() == DialogResult.OK) Application.Exit();
+        }
+
+        private void btnMaximizar_Click(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Normal)
+            {
+                this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea; //Esto se hace para que no se cubra el TaskBar.
+                this.WindowState = FormWindowState.Maximized;
+
+                //Quito los cursores de los bordes.
+                this.panelIzquierdo.Cursor = Cursors.Default;
+                this.panelEsquinaIzquierda.Cursor = Cursors.Default;
+                this.panelInferior.Cursor = Cursors.Default;
+                this.panelEsquinaDerecha.Cursor = Cursors.Default;
+                this.panelDerecho.Cursor = Cursors.Default;
+
+                this.btnMaximizar.Image = Resources.resume_windows; //Cambio el icono del Botón.
+            }
+            else
+            {
+                this.WindowState = FormWindowState.Normal;
+
+                //Asigno el cursor correspondiente a cada borde.
+                this.panelIzquierdo.Cursor = Cursors.SizeWE;
+                this.panelEsquinaIzquierda.Cursor = Cursors.SizeNESW;
+                this.panelInferior.Cursor = Cursors.SizeNS;
+                this.panelEsquinaDerecha.Cursor = Cursors.SizeNWSE;
+                this.panelDerecho.Cursor = Cursors.SizeWE;
+
+                this.btnMaximizar.Image = Resources.maximize_windows; //Cambio el icono del Botón.
+            }
+        }
+
+        private void btnMinimizar_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
         }
     }
 }

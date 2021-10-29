@@ -153,6 +153,16 @@ namespace Summanager.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap maximize_windows {
+            get {
+                object obj = ResourceManager.GetObject("maximize-windows", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap open_folder {
             get {
                 object obj = ResourceManager.GetObject("open-folder", resourceCulture);
@@ -186,6 +196,16 @@ namespace Summanager.Properties {
         internal static System.Drawing.Bitmap remove {
             get {
                 object obj = ResourceManager.GetObject("remove", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap resume_windows {
+            get {
+                object obj = ResourceManager.GetObject("resume_windows", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

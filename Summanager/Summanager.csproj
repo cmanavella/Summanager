@@ -206,6 +206,8 @@
     <None Include="Resources\clear.png" />
     <None Include="Resources\add.png" />
     <None Include="Resources\remove.png" />
+    <None Include="Resources\maximize-windows.png" />
+    <None Include="Resources\resume-windows.png" />
     <Content Include="SumManager.exe.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

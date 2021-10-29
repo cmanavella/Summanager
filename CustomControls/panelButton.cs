@@ -15,8 +15,6 @@ namespace CustomControls
         public PanelButton()
         {
             InitializeComponent();
-
-            this.button1.MouseClick += Button1_MouseClick;
         }
 
         [Browsable(true), EditorBrowsable(EditorBrowsableState.Always), Bindable(true)]
@@ -33,9 +31,23 @@ namespace CustomControls
             }
         }
 
-        private void Button1_MouseClick(object sender, MouseEventArgs e)
+        [Browsable(true), EditorBrowsable(EditorBrowsableState.Always), Bindable(true)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Image Image
         {
-            this.OnMouseClick(e);
+            get
+            {
+                return button1.Image;
+            }
+            set
+            {
+                button1.Image = value;
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.OnClick(e);
         }
     }
 }
