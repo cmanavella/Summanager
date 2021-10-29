@@ -31,7 +31,6 @@ namespace CustomControls
         {
             this.button1 = new System.Windows.Forms.Button();
             this.panelSuperior = new System.Windows.Forms.Panel();
-            this.panelIzquierdo = new System.Windows.Forms.Panel();
             this.panelDerecho = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
@@ -45,9 +44,9 @@ namespace CustomControls
             this.button1.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
             this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(5, 5);
+            this.button1.Location = new System.Drawing.Point(0, 5);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(190, 40);
+            this.button1.Size = new System.Drawing.Size(200, 40);
             this.button1.TabIndex = 2;
             this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button1.UseVisualStyleBackColor = false;
@@ -57,37 +56,27 @@ namespace CustomControls
             this.panelSuperior.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelSuperior.Location = new System.Drawing.Point(0, 0);
             this.panelSuperior.Name = "panelSuperior";
-            this.panelSuperior.Size = new System.Drawing.Size(200, 5);
+            this.panelSuperior.Size = new System.Drawing.Size(205, 5);
             this.panelSuperior.TabIndex = 3;
-            // 
-            // panelIzquierdo
-            // 
-            this.panelIzquierdo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
-            this.panelIzquierdo.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panelIzquierdo.Location = new System.Drawing.Point(0, 5);
-            this.panelIzquierdo.Name = "panelIzquierdo";
-            this.panelIzquierdo.Size = new System.Drawing.Size(5, 40);
-            this.panelIzquierdo.TabIndex = 4;
             // 
             // panelDerecho
             // 
             this.panelDerecho.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
             this.panelDerecho.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panelDerecho.Location = new System.Drawing.Point(195, 5);
+            this.panelDerecho.Location = new System.Drawing.Point(200, 5);
             this.panelDerecho.Name = "panelDerecho";
             this.panelDerecho.Size = new System.Drawing.Size(5, 40);
             this.panelDerecho.TabIndex = 5;
             // 
-            // menuButton
+            // MenuButton
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.panelDerecho);
-            this.Controls.Add(this.panelIzquierdo);
             this.Controls.Add(this.panelSuperior);
             this.Controls.Add(this.button1);
-            this.Name = "menuButton";
-            this.Size = new System.Drawing.Size(200, 45);
+            this.Name = "MenuButton";
+            this.Size = new System.Drawing.Size(205, 45);
             this.ResumeLayout(false);
 
         }
@@ -96,7 +85,6 @@ namespace CustomControls
 
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel panelSuperior;
-        private System.Windows.Forms.Panel panelIzquierdo;
         private System.Windows.Forms.Panel panelDerecho;
     }
 }

@@ -40,12 +40,10 @@ namespace CustomControls
                 {
                     button1.BackColor = buttonSelected;
                     panelDerecho.BackColor = panelWhite;
-                    panelIzquierdo.BackColor = panelSelected;
                 }
                 else
                 {
                     button1.BackColor = buttonNoSelected;
-                    panelIzquierdo.BackColor = panelNoSelected;
                     panelDerecho.BackColor = panelNoSelected;
                 }
             }
