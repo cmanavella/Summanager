@@ -133,6 +133,16 @@ namespace Summanager.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icon_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("icon 16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap loading_6 {
             get {
                 object obj = ResourceManager.GetObject("loading-6", resourceCulture);
