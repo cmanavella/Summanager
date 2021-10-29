@@ -38,6 +38,7 @@ namespace Summanager
             //Al iniciar el Form, almaceno su ancho, ya que lo voy a necesitar cambiar varias veces y necesito una referencia.
             this.formWidth = this.Width;
 
+            this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea; //Esto se hace para que no se cubra el TaskBar.
             //Busco en el Archivo de Configuración el estado con el que debe iniciar el Form.
             try
             {
@@ -327,7 +328,6 @@ namespace Summanager
         {
             if (this.WindowState == FormWindowState.Normal)
             {
-                this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea; //Esto se hace para que no se cubra el TaskBar.
                 this.WindowState = FormWindowState.Maximized;
 
                 //Quito los cursores de los bordes.
