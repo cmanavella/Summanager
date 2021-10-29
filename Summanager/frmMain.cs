@@ -9,6 +9,7 @@ using Entities;
 using IO;
 using CustomControls;
 using Summanager.Properties;
+using System.Reflection;
 
 namespace Summanager
 {
@@ -27,7 +28,12 @@ namespace Summanager
         {
             InitializeComponent();
 
-            this.Text = Application.ProductName + " v" + Application.ProductVersion;
+            this.Text = Application.ProductName;
+
+            //Armo el Footer.
+            var assm = Assembly.GetExecutingAssembly();
+            var copyrigth = (AssemblyCopyrightAttribute)assm.GetCustomAttribute(typeof(AssemblyCopyrightAttribute));
+            this.lblFooter.Text = Application.ProductName + " v" + Application.ProductVersion + " " + copyrigth.Copyright;
 
             //Al iniciar el Form, almaceno su ancho, ya que lo voy a necesitar cambiar varias veces y necesito una referencia.
             this.formWidth = this.Width;

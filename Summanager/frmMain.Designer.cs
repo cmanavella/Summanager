@@ -50,6 +50,11 @@ namespace Summanager
             this.btnEstados = new CustomControls.MenuButton();
             this.logo = new System.Windows.Forms.PictureBox();
             this.btnMaximizar = new CustomControls.PanelButton();
+            this.panelFooter = new System.Windows.Forms.Panel();
+            this.lblFooter = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.panelSuperior.SuspendLayout();
             this.panelLateral.SuspendLayout();
             this.panelMenu.SuspendLayout();
@@ -57,6 +62,7 @@ namespace Summanager
             this.panelInferior.SuspendLayout();
             this.panelDerecho.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
+            this.panelFooter.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelSuperior
@@ -289,11 +295,61 @@ namespace Summanager
             this.btnMaximizar.TabIndex = 14;
             this.btnMaximizar.Click += new System.EventHandler(this.btnMaximizar_Click);
             // 
+            // panelFooter
+            // 
+            this.panelFooter.Controls.Add(this.lblFooter);
+            this.panelFooter.Controls.Add(this.panel1);
+            this.panelFooter.Controls.Add(this.panel2);
+            this.panelFooter.Controls.Add(this.panel3);
+            this.panelFooter.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panelFooter.Location = new System.Drawing.Point(210, 695);
+            this.panelFooter.Name = "panelFooter";
+            this.panelFooter.Size = new System.Drawing.Size(1045, 25);
+            this.panelFooter.TabIndex = 0;
+            // 
+            // lblFooter
+            // 
+            this.lblFooter.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblFooter.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFooter.ForeColor = System.Drawing.Color.Gray;
+            this.lblFooter.Location = new System.Drawing.Point(70, 1);
+            this.lblFooter.Name = "lblFooter";
+            this.lblFooter.Size = new System.Drawing.Size(905, 24);
+            this.lblFooter.TabIndex = 14;
+            this.lblFooter.Text = "label2";
+            this.lblFooter.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.DarkGray;
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(70, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(905, 1);
+            this.panel1.TabIndex = 15;
+            // 
+            // panel2
+            // 
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(70, 25);
+            this.panel2.TabIndex = 16;
+            // 
+            // panel3
+            // 
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel3.Location = new System.Drawing.Point(975, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(70, 25);
+            this.panel3.TabIndex = 17;
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1260, 725);
+            this.Controls.Add(this.panelFooter);
             this.Controls.Add(this.panelContenido);
             this.Controls.Add(this.panelLateral);
             this.Controls.Add(this.panelIzquierdo);
@@ -315,6 +371,7 @@ namespace Summanager
             this.panelInferior.ResumeLayout(false);
             this.panelDerecho.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
+            this.panelFooter.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -340,5 +397,10 @@ namespace Summanager
         private System.Windows.Forms.Panel panelIzquierdo;
         private System.Windows.Forms.Panel panelEsquinaIzquierda;
         private CustomControls.PanelButton btnMaximizar;
+        private System.Windows.Forms.Panel panelFooter;
+        private System.Windows.Forms.Label lblFooter;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel3;
     }
 }

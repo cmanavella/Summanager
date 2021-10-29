@@ -42,11 +42,6 @@ namespace Summanager
             this.lblTitulo.Size = new System.Drawing.Size(200, 32);
             this.lblTitulo.Text = "Configuración";
             // 
-            // panelMenu
-            // 
-            this.panelMenu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)));
-            this.panelMenu.Dock = System.Windows.Forms.DockStyle.Top;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -103,7 +98,7 @@ namespace Summanager
             // FrmConfiguracion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.ClientSize = new System.Drawing.Size(1050, 690);
+            this.ClientSize = new System.Drawing.Size(1050, 665);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnAceptar);
             this.Controls.Add(this.cmbPeriodo);

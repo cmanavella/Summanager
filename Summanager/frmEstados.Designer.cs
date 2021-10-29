@@ -142,7 +142,7 @@ namespace Summanager
             this.dgv.ShowCellToolTips = false;
             this.dgv.ShowEditingIcon = false;
             this.dgv.ShowRowErrors = false;
-            this.dgv.Size = new System.Drawing.Size(1038, 220);
+            this.dgv.Size = new System.Drawing.Size(1038, 182);
             this.dgv.TabIndex = 5;
             this.dgv.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgv_DataBindingComplete);
             this.dgv.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dgv_MouseDoubleClick);
@@ -178,7 +178,7 @@ namespace Summanager
             this.lblTotal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
             this.lblTotal.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotal.ForeColor = System.Drawing.Color.White;
-            this.lblTotal.Location = new System.Drawing.Point(951, 353);
+            this.lblTotal.Location = new System.Drawing.Point(951, 315);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(87, 27);
             this.lblTotal.TabIndex = 28;
@@ -336,13 +336,13 @@ namespace Summanager
             // 
             // panelEstadisticas
             // 
-            this.panelEstadisticas.Controls.Add(this.panel3);
             this.panelEstadisticas.Controls.Add(this.panel4);
+            this.panelEstadisticas.Controls.Add(this.panel3);
             this.panelEstadisticas.Controls.Add(this.panel2);
             this.panelEstadisticas.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelEstadisticas.Location = new System.Drawing.Point(0, 392);
+            this.panelEstadisticas.Location = new System.Drawing.Point(0, 342);
             this.panelEstadisticas.Name = "panelEstadisticas";
-            this.panelEstadisticas.Size = new System.Drawing.Size(1055, 298);
+            this.panelEstadisticas.Size = new System.Drawing.Size(1055, 323);
             this.panelEstadisticas.TabIndex = 33;
             // 
             // panel3
@@ -444,8 +444,8 @@ namespace Summanager
             this.panel4.Controls.Add(this.estNoAna);
             this.panel4.Controls.Add(this.estOffline);
             this.panel4.Controls.Add(this.estOnline);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel4.Location = new System.Drawing.Point(0, 186);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel4.Location = new System.Drawing.Point(0, 180);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(1055, 112);
             this.panel4.TabIndex = 18;
@@ -517,7 +517,7 @@ namespace Summanager
             // FrmEstados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.ClientSize = new System.Drawing.Size(1055, 690);
+            this.ClientSize = new System.Drawing.Size(1055, 665);
             this.Controls.Add(this.panelEstadisticas);
             this.Controls.Add(this.lblTotal);
             this.Controls.Add(this.btnAgregar);
