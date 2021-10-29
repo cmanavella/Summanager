@@ -11,11 +11,74 @@ using System.Configuration;
 using System.Data;
 using DataTable = System.Data.DataTable;
 using DataRow = System.Data.DataRow;
+using System.Windows.Forms;
 
 namespace IO
 {
     public class File
     {
+        /// <summary>
+        /// Busca en el Archivo de Configuración el estado con el que debe iniciarse el Form.
+        /// </summary>
+        /// <returns></returns>
+        public static FormWindowState getWindowsState()
+        {
+            FormWindowState retorno = FormWindowState.Normal;
+
+            //Traigo el string de la variable almacenada en el Archivo de Configuración.
+            string cmstr = ConfigurationManager.AppSettings.Get("windowsState");
+
+            //Si no está vacío lo asigno.
+            if (cmstr != null)
+            {
+                switch (cmstr){
+                    case "Normal":
+                        retorno = FormWindowState.Normal;
+                        break;
+                    case "Maximized":
+                        retorno = FormWindowState.Maximized;
+                        break;
+                    case "Minimized":
+                        retorno = FormWindowState.Minimized;
+                        break;
+                    default:
+                        retorno = FormWindowState.Normal;
+                        break;
+                }
+            }
+
+            return retorno;
+        }
+
+        /// <summary>
+        /// Almacena en el Archivo de Configuración el estado con el que debe iniciarse el Form.
+        /// </summary>
+        /// <returns></returns>
+        public static void setWindowsState(FormWindowState windowsState)
+        {
+            //Cambio la variable almacenada en el Archivo de Configuración.
+            var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            //En esta parte abro la sección settings para verificar que la variable existe.
+            AppSettingsSection section = (AppSettingsSection)configFile.GetSection("appSettings");
+            KeyValueConfigurationCollection app_settings = section.Settings;
+            KeyValueConfigurationElement key = app_settings["windowsState"];
+
+            if (key == null) //Si la variable no existe, la creo.
+            {
+                KeyValueConfigurationElement new_key = new KeyValueConfigurationElement("windowsState", windowsState.ToString());
+                app_settings.Add(new_key);
+            }
+            else //Si existe la guardo.
+            {
+                var settings = configFile.AppSettings.Settings;
+                settings["windowsState"].Value = windowsState.ToString();
+            }
+
+            configFile.Save(ConfigurationSaveMode.Modified);
+            ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
+        }
+
         /// <summary>
         /// Busca en el Archivo de Configuración si está activada la opción de Actualización Automática de Estados de Impresoras.
         /// </summary>
@@ -405,7 +468,7 @@ namespace IO
         {
             List<Printer> retorno = new List<Printer>();
 
-            Application application = new Application();
+            Microsoft.Office.Interop.Excel.Application application = new Microsoft.Office.Interop.Excel.Application();
             //Abro un libro
             Workbook libros = application.Workbooks.Open(filePath);
             //Abro una hoja
@@ -545,7 +608,7 @@ namespace IO
         {
             List<Printer> printers = new List<Printer>();
 
-            Application application = new Application();
+            Microsoft.Office.Interop.Excel.Application application = new Microsoft.Office.Interop.Excel.Application();
             //Abro un libro.
             Workbook libros = application.Workbooks.Add();
             //Abro una hoja.

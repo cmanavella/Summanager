@@ -43,13 +43,13 @@ namespace Summanager
             this.panelEsquinaDerecha = new System.Windows.Forms.Panel();
             this.panelContenido = new System.Windows.Forms.Panel();
             this.panelIzquierdo = new System.Windows.Forms.Panel();
-            this.logo = new System.Windows.Forms.PictureBox();
+            this.btnMinimizar = new CustomControls.PanelButton();
+            this.btnCerrar = new CustomControls.PanelButton();
             this.btnStock = new CustomControls.MenuButton();
             this.btnConfiguracion = new CustomControls.MenuButton();
             this.btnEstados = new CustomControls.MenuButton();
-            this.btnMinimizar = new CustomControls.PanelButton();
+            this.logo = new System.Windows.Forms.PictureBox();
             this.btnMaximizar = new CustomControls.PanelButton();
-            this.btnCerrar = new CustomControls.PanelButton();
             this.panelSuperior.SuspendLayout();
             this.panelLateral.SuspendLayout();
             this.panelMenu.SuspendLayout();
@@ -210,15 +210,27 @@ namespace Summanager
             this.panelIzquierdo.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelIzquierdo_MouseMove);
             this.panelIzquierdo.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panelIzquierdo_MouseUp);
             // 
-            // logo
+            // btnMinimizar
             // 
-            this.logo.Image = global::Summanager.Properties.Resources.Logo;
-            this.logo.Location = new System.Drawing.Point(58, 6);
-            this.logo.Name = "logo";
-            this.logo.Size = new System.Drawing.Size(84, 84);
-            this.logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.logo.TabIndex = 0;
-            this.logo.TabStop = false;
+            this.btnMinimizar.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnMinimizar.Image = null;
+            this.btnMinimizar.Location = new System.Drawing.Point(1170, 0);
+            this.btnMinimizar.Name = "btnMinimizar";
+            this.btnMinimizar.Size = new System.Drawing.Size(30, 30);
+            this.btnMinimizar.TabIndex = 12;
+            this.btnMinimizar.Text = "_";
+            this.btnMinimizar.Click += new System.EventHandler(this.btnMinimizar_Click);
+            // 
+            // btnCerrar
+            // 
+            this.btnCerrar.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnCerrar.Image = null;
+            this.btnCerrar.Location = new System.Drawing.Point(1230, 0);
+            this.btnCerrar.Name = "btnCerrar";
+            this.btnCerrar.Size = new System.Drawing.Size(30, 30);
+            this.btnCerrar.TabIndex = 11;
+            this.btnCerrar.Text = "X";
+            this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
             // 
             // btnStock
             // 
@@ -257,16 +269,15 @@ namespace Summanager
             this.btnEstados.Text = "Estado Impresoras";
             this.btnEstados.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnEstados_MouseClick);
             // 
-            // btnMinimizar
+            // logo
             // 
-            this.btnMinimizar.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnMinimizar.Image = null;
-            this.btnMinimizar.Location = new System.Drawing.Point(1170, 0);
-            this.btnMinimizar.Name = "btnMinimizar";
-            this.btnMinimizar.Size = new System.Drawing.Size(30, 30);
-            this.btnMinimizar.TabIndex = 12;
-            this.btnMinimizar.Text = "_";
-            this.btnMinimizar.Click += new System.EventHandler(this.btnMinimizar_Click);
+            this.logo.Image = global::Summanager.Properties.Resources.Logo;
+            this.logo.Location = new System.Drawing.Point(58, 6);
+            this.logo.Name = "logo";
+            this.logo.Size = new System.Drawing.Size(84, 84);
+            this.logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.logo.TabIndex = 0;
+            this.logo.TabStop = false;
             // 
             // btnMaximizar
             // 
@@ -277,17 +288,6 @@ namespace Summanager
             this.btnMaximizar.Size = new System.Drawing.Size(30, 30);
             this.btnMaximizar.TabIndex = 14;
             this.btnMaximizar.Click += new System.EventHandler(this.btnMaximizar_Click);
-            // 
-            // btnCerrar
-            // 
-            this.btnCerrar.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnCerrar.Image = null;
-            this.btnCerrar.Location = new System.Drawing.Point(1230, 0);
-            this.btnCerrar.Name = "btnCerrar";
-            this.btnCerrar.Size = new System.Drawing.Size(30, 30);
-            this.btnCerrar.TabIndex = 11;
-            this.btnCerrar.Text = "X";
-            this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
             // 
             // FrmMain
             // 

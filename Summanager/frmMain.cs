@@ -31,6 +31,16 @@ namespace Summanager
 
             //Al iniciar el Form, almaceno su ancho, ya que lo voy a necesitar cambiar varias veces y necesito una referencia.
             this.formWidth = this.Width;
+
+            //Busco en el Archivo de Configuración el estado con el que debe iniciar el Form.
+            try
+            {
+                this.WindowState = File.getWindowsState();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         [Browsable(true), EditorBrowsable(EditorBrowsableState.Always), Bindable(true)]
@@ -322,6 +332,15 @@ namespace Summanager
                 this.panelDerecho.Cursor = Cursors.Default;
 
                 this.btnMaximizar.Image = Resources.resume_windows; //Cambio el icono del Botón.
+
+                //Guardo el Estado el Form en el Archivo de Configuración.
+                try
+                {
+                    File.setWindowsState(FormWindowState.Maximized);
+                }catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
             else
             {
@@ -335,6 +354,16 @@ namespace Summanager
                 this.panelDerecho.Cursor = Cursors.SizeWE;
 
                 this.btnMaximizar.Image = Resources.maximize_windows; //Cambio el icono del Botón.
+
+                //Guardo el Estado el Form en el Archivo de Configuración.
+                try
+                {
+                    File.setWindowsState(FormWindowState.Normal);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
 
