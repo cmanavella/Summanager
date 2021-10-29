@@ -512,6 +512,7 @@ namespace Summanager
             this.btnCambiarEst.TabIndex = 12;
             this.btnCambiarEst.Text = "Cambiar";
             this.btnCambiarEst.Visible = false;
+            this.btnCambiarEst.Click += new System.EventHandler(this.btnCambiarEst_Click);
             // 
             // FrmEstados
             // 

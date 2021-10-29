@@ -1121,6 +1121,11 @@ namespace Summanager
             this.btnLimpiar.Focus();
         }
 
+        private void dgv_Resize(object sender, EventArgs e)
+        {
+            if(this.dgv.Columns.Count > 0) this.dgv.Columns[2].Width = this.dgv.Width - 513;
+        }
+
         private void btnCambiarEst_Click(object sender, EventArgs e)
         {
             if (this.estGrales)
@@ -1136,11 +1141,6 @@ namespace Summanager
                 DataTable datos = (DataTable)this.dgv.DataSource;
                 _showEstadistica(datos.Rows.Count, true);
             }
-        }
-
-        private void dgv_Resize(object sender, EventArgs e)
-        {
-            if(this.dgv.Columns.Count > 0) this.dgv.Columns[2].Width = this.dgv.Width - 513;
         }
     }
 }
