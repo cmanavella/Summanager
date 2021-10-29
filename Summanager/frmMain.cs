@@ -222,7 +222,7 @@ namespace Summanager
             _openChildForm(new FrmConfiguracion(), sender);
         }
 
-        private void panelDerecho_MouseMove(object sender, MouseEventArgs e)
+        private void bordeDerecho_MouseMove(object sender, MouseEventArgs e)
         {
             //Hago que el Form se agrande en ancho cuando mantengo apretado el botón izquierdo del mouse.
             if (e.Button == MouseButtons.Left)
@@ -231,7 +231,7 @@ namespace Summanager
             }
         }
 
-        private void panelDerecho_MouseUp(object sender, MouseEventArgs e)
+        private void bordeDerecho_MouseUp(object sender, MouseEventArgs e)
         {
             //Si el botón del mouse que suelto es el izquierdo almaceno el ancho del Form en la variable.
             if (e.Button == MouseButtons.Left)
@@ -240,7 +240,7 @@ namespace Summanager
             }
         }
 
-        private void panelInferior_MouseMove(object sender, MouseEventArgs e)
+        private void bordeInferiorIzquierdo_MouseMove(object sender, MouseEventArgs e)
         {
             //Hago que el Form se agrande en alto cuando mantengo apretado el botón izquierdo del mouse.
             if (e.Button == MouseButtons.Left)
@@ -249,7 +249,16 @@ namespace Summanager
             }
         }
 
-        private void panelEsquinaDerecha_MouseMove(object sender, MouseEventArgs e)
+        private void bordeInferiorDerecho_MouseMove(object sender, MouseEventArgs e)
+        {
+            //Hago que el Form se agrande en alto cuando mantengo apretado el botón izquierdo del mouse.
+            if (e.Button == MouseButtons.Left)
+            {
+                this.Size = new Size(this.Width, this.PointToClient(MousePosition).Y);
+            }
+        }
+
+        private void bordeEsquinaDerecha_MouseMove(object sender, MouseEventArgs e)
         {
             //Hago que el Form se agrande en ancho y alto cuando mantengo apretado el botón izquierdo del mouse.
             if (e.Button == MouseButtons.Left)
@@ -258,7 +267,7 @@ namespace Summanager
             }
         }
 
-        private void panelEsquinaDerecha_MouseUp(object sender, MouseEventArgs e)
+        private void bordeEsquinaDerecha_MouseUp(object sender, MouseEventArgs e)
         {
             //Si el botón del mouse que suelto es el izquierdo almaceno el ancho del Form en la variable.
             if (e.Button == MouseButtons.Left)
@@ -267,7 +276,7 @@ namespace Summanager
             }
         }
 
-        private void panelIzquierdo_MouseMove(object sender, MouseEventArgs e)
+        private void bordeIzquierdo_MouseMove(object sender, MouseEventArgs e)
         {
             //Hago que el Form se agrande en ancho cuando mantengo apretado el botón izquierdo del mouse. Para hacer esto debo agrandar
             //el Form a medida que lo muevo a la izquierda.
@@ -281,11 +290,11 @@ namespace Summanager
                 this.formWidth = this.Width; //Guardo enseguida el ancho del mismo.
 
                 //Si el ancho del Form es mayor al ancho mínimo permitido, muevo el form.
-                if(this.formWidth > this.MinimumSize.Width) this.Location = new Point(this.Location.X - xPos, this.Location.Y);
+                if (this.formWidth > this.MinimumSize.Width) this.Location = new Point(this.Location.X - xPos, this.Location.Y);
             }
         }
 
-        private void panelIzquierdo_MouseUp(object sender, MouseEventArgs e)
+        private void bordeIzquierdo_MouseUp(object sender, MouseEventArgs e)
         {
             //Si el botón del mouse que suelto es el izquierdo almaceno el ancho del Form en la variable.
             if (e.Button == MouseButtons.Left)
@@ -294,7 +303,7 @@ namespace Summanager
             }
         }
 
-        private void panelEsquinaIzquierda_MouseMove(object sender, MouseEventArgs e)
+        private void bordeEsquinaIzquierda_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
@@ -310,7 +319,7 @@ namespace Summanager
             }
         }
 
-        private void panelEsquinaIzquierda_MouseUp(object sender, MouseEventArgs e)
+        private void bordeEsquinaIzquierda_MouseUp(object sender, MouseEventArgs e)
         {
             //Si el botón del mouse que suelto es el izquierdo almaceno el ancho del Form en la variable.
             if (e.Button == MouseButtons.Left)
@@ -331,11 +340,12 @@ namespace Summanager
                 this.WindowState = FormWindowState.Maximized;
 
                 //Quito los cursores de los bordes.
-                this.panelIzquierdo.Cursor = Cursors.Default;
-                this.panelEsquinaIzquierda.Cursor = Cursors.Default;
-                this.panelInferior.Cursor = Cursors.Default;
-                this.panelEsquinaDerecha.Cursor = Cursors.Default;
-                this.panelDerecho.Cursor = Cursors.Default;
+                this.bordeIzquierdo.Cursor = Cursors.Default;
+                this.bordeEsquinaIzquierda.Cursor = Cursors.Default;
+                this.bordeInferiorIzquierdo.Cursor = Cursors.Default;
+                this.bordeInferiorDerecho.Cursor = Cursors.Default;
+                this.bordeEsquinaDerecha.Cursor = Cursors.Default;
+                this.bordeDerecho.Cursor = Cursors.Default;
 
                 this.btnMaximizar.Image = Resources.resume_windows; //Cambio el icono del Botón.
 
@@ -353,11 +363,12 @@ namespace Summanager
                 this.WindowState = FormWindowState.Normal;
 
                 //Asigno el cursor correspondiente a cada borde.
-                this.panelIzquierdo.Cursor = Cursors.SizeWE;
-                this.panelEsquinaIzquierda.Cursor = Cursors.SizeNESW;
-                this.panelInferior.Cursor = Cursors.SizeNS;
-                this.panelEsquinaDerecha.Cursor = Cursors.SizeNWSE;
-                this.panelDerecho.Cursor = Cursors.SizeWE;
+                this.bordeIzquierdo.Cursor = Cursors.SizeWE;
+                this.bordeEsquinaIzquierda.Cursor = Cursors.SizeNESW;
+                this.bordeInferiorIzquierdo.Cursor = Cursors.SizeNS;
+                this.bordeInferiorDerecho.Cursor = Cursors.SizeNS;
+                this.bordeEsquinaDerecha.Cursor = Cursors.SizeNWSE;
+                this.bordeDerecho.Cursor = Cursors.SizeWE;
 
                 this.btnMaximizar.Image = Resources.maximize_windows; //Cambio el icono del Botón.
 

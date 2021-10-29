@@ -52,6 +52,10 @@ namespace Summanager
             this.btnAbrir = new CustomControls.ButtonBlue();
             this.btnNuevo = new CustomControls.ButtonBlue();
             this.panelEstadisticas = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.estNoAna = new CustomControls.Estadistica();
+            this.estOffline = new CustomControls.Estadistica();
+            this.estOnline = new CustomControls.Estadistica();
             this.panel3 = new System.Windows.Forms.Panel();
             this.customGroupBox3 = new CustomControls.CustomGroupBox();
             this.estKitMantCritico = new CustomControls.Estadistica();
@@ -61,10 +65,6 @@ namespace Summanager
             this.estKitMantRiesgo = new CustomControls.Estadistica();
             this.estUnImgRiesgo = new CustomControls.Estadistica();
             this.estTonerRiesgo = new CustomControls.Estadistica();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.estNoAna = new CustomControls.Estadistica();
-            this.estOffline = new CustomControls.Estadistica();
-            this.estOnline = new CustomControls.Estadistica();
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblEstTitle = new System.Windows.Forms.Label();
             this.btnCambiarEst = new CustomControls.ButtonGreen();
@@ -72,10 +72,10 @@ namespace Summanager
             this.panelMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.panelEstadisticas.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
             this.customGroupBox3.SuspendLayout();
             this.customGroupBox1.SuspendLayout();
-            this.panel4.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -125,7 +125,7 @@ namespace Summanager
             this.dgv.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgv.EnableHeadersVisualStyles = false;
-            this.dgv.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(159)))), ((int)(((byte)(206)))));
+            this.dgv.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
             this.dgv.Location = new System.Drawing.Point(12, 130);
             this.dgv.MultiSelect = false;
             this.dgv.Name = "dgv";
@@ -345,6 +345,48 @@ namespace Summanager
             this.panelEstadisticas.Size = new System.Drawing.Size(1055, 323);
             this.panelEstadisticas.TabIndex = 33;
             // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.estNoAna);
+            this.panel4.Controls.Add(this.estOffline);
+            this.panel4.Controls.Add(this.estOnline);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel4.Location = new System.Drawing.Point(0, 180);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(1055, 112);
+            this.panel4.TabIndex = 18;
+            // 
+            // estNoAna
+            // 
+            this.estNoAna.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.estNoAna.Count = 0;
+            this.estNoAna.Location = new System.Drawing.Point(862, 6);
+            this.estNoAna.Name = "estNoAna";
+            this.estNoAna.Size = new System.Drawing.Size(150, 100);
+            this.estNoAna.TabIndex = 12;
+            this.estNoAna.Text = "No Analizadas";
+            this.estNoAna.Total = 0;
+            // 
+            // estOffline
+            // 
+            this.estOffline.Count = 0;
+            this.estOffline.Location = new System.Drawing.Point(172, 6);
+            this.estOffline.Name = "estOffline";
+            this.estOffline.Size = new System.Drawing.Size(150, 100);
+            this.estOffline.TabIndex = 11;
+            this.estOffline.Text = "Offline";
+            this.estOffline.Total = 0;
+            // 
+            // estOnline
+            // 
+            this.estOnline.Count = 0;
+            this.estOnline.Location = new System.Drawing.Point(16, 6);
+            this.estOnline.Name = "estOnline";
+            this.estOnline.Size = new System.Drawing.Size(150, 100);
+            this.estOnline.TabIndex = 10;
+            this.estOnline.Text = "Online";
+            this.estOnline.Total = 0;
+            // 
             // panel3
             // 
             this.panel3.Controls.Add(this.customGroupBox3);
@@ -439,48 +481,6 @@ namespace Summanager
             this.estTonerRiesgo.Text = "Toner";
             this.estTonerRiesgo.Total = 0;
             // 
-            // panel4
-            // 
-            this.panel4.Controls.Add(this.estNoAna);
-            this.panel4.Controls.Add(this.estOffline);
-            this.panel4.Controls.Add(this.estOnline);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel4.Location = new System.Drawing.Point(0, 180);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(1055, 112);
-            this.panel4.TabIndex = 18;
-            // 
-            // estNoAna
-            // 
-            this.estNoAna.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.estNoAna.Count = 0;
-            this.estNoAna.Location = new System.Drawing.Point(862, 6);
-            this.estNoAna.Name = "estNoAna";
-            this.estNoAna.Size = new System.Drawing.Size(150, 100);
-            this.estNoAna.TabIndex = 12;
-            this.estNoAna.Text = "No Analizadas";
-            this.estNoAna.Total = 0;
-            // 
-            // estOffline
-            // 
-            this.estOffline.Count = 0;
-            this.estOffline.Location = new System.Drawing.Point(172, 6);
-            this.estOffline.Name = "estOffline";
-            this.estOffline.Size = new System.Drawing.Size(150, 100);
-            this.estOffline.TabIndex = 11;
-            this.estOffline.Text = "Offline";
-            this.estOffline.Total = 0;
-            // 
-            // estOnline
-            // 
-            this.estOnline.Count = 0;
-            this.estOnline.Location = new System.Drawing.Point(16, 6);
-            this.estOnline.Name = "estOnline";
-            this.estOnline.Size = new System.Drawing.Size(150, 100);
-            this.estOnline.TabIndex = 10;
-            this.estOnline.Text = "Online";
-            this.estOnline.Total = 0;
-            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.lblEstTitle);
@@ -549,12 +549,12 @@ namespace Summanager
             this.panelMenu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
             this.panelEstadisticas.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.customGroupBox3.ResumeLayout(false);
             this.customGroupBox3.PerformLayout();
             this.customGroupBox1.ResumeLayout(false);
             this.customGroupBox1.PerformLayout();
-            this.panel4.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.ResumeLayout(false);
