@@ -459,6 +459,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_6C718F032C0343E5B2C7A1C183684D5B"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_6EA23FA91EA2BF1232F992D7DCD40056"
         "OwnerKey" = "8:_28FDD1225CC94181A987B36731F818E0"
         "MsmSig" = "8:_UNDEFINED"
@@ -689,12 +695,6 @@
         {
         "MsmKey" = "8:_B0779C859A0E1268969ABF07415EA9B4"
         "OwnerKey" = "8:_E8DF0B49E105EEEA7C19F853F8C37BA1"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_B0D096EC418C44328C7D2C872BC08A0C"
-        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1915,7 +1915,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:HtmlAgilityPack, Version=1.11.34.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:HtmlAgilityPack, Version=1.11.38.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_076A1D80D298E42C30AB58F9F3325539"
@@ -2321,11 +2321,6 @@
             "AssemblyAsmDisplayName" = "8:WebDriver, Version=3.141.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_1F6E6CA6A4E812CA2936CA064F94C283"
-                    {
-                    "Name" = "8:WebDriver.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:WebDriver.dll"
             "TargetName" = "8:"
@@ -2476,11 +2471,6 @@
             "AssemblyAsmDisplayName" = "8:FSharp.Core, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_2B5DD60941146AA455E3BDEB3457926C"
-                    {
-                    "Name" = "8:FSharp.Core.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:FSharp.Core.dll"
             "TargetName" = "8:"
@@ -3516,7 +3506,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:WebDriver, Version=3.141.0.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:WebDriver, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_63803D3882A40D992A4F8983B25599F7"
@@ -3603,6 +3593,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6C718F032C0343E5B2C7A1C183684D5B"
+            {
+            "SourcePath" = "8:..\\Summanager\\bin\\Debug\\chromedriver.exe"
+            "TargetName" = "8:chromedriver.exe"
+            "Tag" = "8:"
+            "Folder" = "8:_76B3208CD8924424A259567993D59686"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_6EA23FA91EA2BF1232F992D7DCD40056"
@@ -4524,26 +4534,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B0D096EC418C44328C7D2C872BC08A0C"
-            {
-            "SourcePath" = "8:..\\Summanager\\bin\\Debug\\chromedriver.exe"
-            "TargetName" = "8:chromedriver.exe"
-            "Tag" = "8:"
-            "Folder" = "8:_76B3208CD8924424A259567993D59686"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_B1D3A656A89989BDAA2A59E25B1071B2"
             {
             "AssemblyRegister" = "3:1"
@@ -4954,11 +4944,6 @@
             "AssemblyAsmDisplayName" = "8:WebDriver, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_C7C3D794F57D77CDF55B9762F17614E9"
-                    {
-                    "Name" = "8:WebDriver.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:WebDriver.dll"
             "TargetName" = "8:"
@@ -5747,15 +5732,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:SumManager"
-        "ProductCode" = "8:{33C0496B-D175-47C7-9AA8-03B202C78709}"
-        "PackageCode" = "8:{D2651B08-D078-424A-970B-DC1203ADADAD}"
+        "ProductCode" = "8:{DE0BB97D-C1B2-4B0A-99B0-847F81077B5E}"
+        "PackageCode" = "8:{1AC902E0-07AB-493D-9729-6435FD4C5392}"
         "UpgradeCode" = "8:{498DCFC0-9962-4A38-A402-DE61F7672373}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:3.0.0"
+        "ProductVersion" = "8:3.0.1"
         "Manufacturer" = "8:Poder Judicial Córdoba"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
