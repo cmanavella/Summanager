@@ -864,6 +864,11 @@ namespace Summanager
                         MessageBox.Show("No se puede acceder al archivo.", Application.ProductName + ": Archivo dañado",
                             MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
+                    else if (ex.Source == "WebDriver") //Busco el error producido por el WebDriver y lo muestro.
+                    {
+                        MessageBox.Show("Ha ocurrido un error con el 'WebDriver'. Comuníquese con su Administrador para solucionarlo.", 
+                            Application.ProductName + " " + Application.ProductVersion, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                     else
                     {
                         MessageBox.Show(ex.Message); //Si huibo un error, lo muestro.
