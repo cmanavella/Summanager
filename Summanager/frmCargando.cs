@@ -64,8 +64,14 @@ namespace Summanager
             {
                 if (ex.Source == "WebDriver") //Busco el error producido por el WebDriver y lo muestro.
                 {
-                    MessageBox.Show("Ha ocurrido un error con el 'WebDriver'. Comuníquese con su Administrador para solucionarlo.",
-                        Application.ProductName + " " + Application.ProductVersion, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    //Pregunto si se desea actualizar el Driver.
+                    var result = MessageBox.Show("La versión de 'ChromeDriver' ha quedado desactualizada. ¿Desea actualizarla?",
+                        Application.ProductName + " " + Application.ProductVersion, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
+                    if(result == DialogResult.Yes)
+                    {
+                        MessageBox.Show("Actualizo.");
+                    }
                 }
                 else
                 {
