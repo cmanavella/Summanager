@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomControls", "CustomCon
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{70B4BDE2-B9D0-4D5B-815C-849747BA87D7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomExceptions", "CustomExceptions\CustomExceptions.csproj", "{88068AB6-4248-4E30-AEEF-56BF0FD8093B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,10 @@ Global
 		{C7D82790-2BB2-4D8C-9135-BB2DE44764C3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{70B4BDE2-B9D0-4D5B-815C-849747BA87D7}.Debug|Any CPU.ActiveCfg = Debug
 		{70B4BDE2-B9D0-4D5B-815C-849747BA87D7}.Release|Any CPU.ActiveCfg = Release
+		{88068AB6-4248-4E30-AEEF-56BF0FD8093B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88068AB6-4248-4E30-AEEF-56BF0FD8093B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88068AB6-4248-4E30-AEEF-56BF0FD8093B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88068AB6-4248-4E30-AEEF-56BF0FD8093B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

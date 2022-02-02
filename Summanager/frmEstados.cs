@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using IO;
+using CustomExceptions;
 
 namespace Summanager
 {
@@ -1048,36 +1049,54 @@ namespace Summanager
             this.btnAgregar.Visible = false;
             this.panelEstadisticas.Visible = false;
 
-            //Llamo al Form Cargando para que analice la Lista de Impresoras pasadas por parámetros.
-            //Este Form ya viene catcheado.
-            FrmCargando cargando = new FrmCargando(printers);
-            cargando.ShowDialog(); //Lo muestro como un dialog para que mientras analiza no se pueda hacer nada.
-
-            List<Printer> printersReturned = cargando.PrintersPassed; //Cargo una nueva Lista de Impresoras con lo devuelto.
-
-            //Actualizo la Lista de Impresoras actual con la devuelta por el Form Cargando.
-            foreach (Printer printer in printersReturned)
+            try
             {
-                int i = this.printers.FindIndex(o => o.Ip == printer.Ip);
-                this.printers[i] = printer;
+                //Llamo al Form Cargando para que analice la Lista de Impresoras pasadas por parámetros.
+                //Este Form ya viene catcheado.
+                FrmCargando cargando = new FrmCargando(printers);
+                cargando.ShowDialog(); //Lo muestro como un dialog para que mientras analiza no se pueda hacer nada.
+
+                List<Printer> printersReturned = cargando.PrintersPassed; //Cargo una nueva Lista de Impresoras con lo devuelto.
+
+                //Actualizo la Lista de Impresoras actual con la devuelta por el Form Cargando.
+                foreach (Printer printer in printersReturned)
+                {
+                    int i = this.printers.FindIndex(o => o.Ip == printer.Ip);
+                    this.printers[i] = printer;
+                }
+
+                _llenarDgv(); //Cargo el DGV con lo analizado.
+
+                //Cargo la fecha y hora de la última actualización.
+                this.lblActualizacion.Text = "Última actualización: " + Fecha.ParceFecha(DateTime.Now);
+                //Muestro la etiqueta de la última actualización.
+                this.lblActualizacion.Visible = true;
+                //Hago las Estadísticas Generales.
+                _getEstadisticaGral();
+                //Filtro el DGV.
+                _filtrar();
+
+                //Si automatizo la actualización pongo el contador en 0 y enciendo el Timer.
+                if (this.automatizo)
+                {
+                    this.contador = 0;
+                    this.timerContador.Enabled = true;
+                }
             }
-
-            _llenarDgv(); //Cargo el DGV con lo analizado.
-
-            //Cargo la fecha y hora de la última actualización.
-            this.lblActualizacion.Text = "Última actualización: " + Fecha.ParceFecha(DateTime.Now);
-            //Muestro la etiqueta de la última actualización.
-            this.lblActualizacion.Visible = true;
-            //Hago las Estadísticas Generales.
-            _getEstadisticaGral();
-            //Filtro el DGV.
-            _filtrar();
-
-            //Si automatizo la actualización pongo el contador en 0 y enciendo el Timer.
-            if (this.automatizo)
+            catch(ChromeDriverException ex)
             {
-                this.contador = 0;
-                this.timerContador.Enabled = true;
+                //Pregunto si se desea actualizar el Driver.
+                var result = MessageBox.Show(ex.Message + " ¿Desea actualizarla?",
+                    Application.ProductName + " " + Application.ProductVersion, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
+                if (result == DialogResult.Yes)
+                {
+                    MessageBox.Show("Actualizo.");
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName + " " + Application.ProductVersion, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
