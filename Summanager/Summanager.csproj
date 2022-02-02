@@ -97,6 +97,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FrmActualizarChromeDriver.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmActualizarChromeDriver.Designer.cs">
+      <DependentUpon>FrmActualizarChromeDriver.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmCargando.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -153,6 +159,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FrmActualizarChromeDriver.resx">
+      <DependentUpon>FrmActualizarChromeDriver.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmCargando.resx">
       <DependentUpon>FrmCargando.cs</DependentUpon>
     </EmbeddedResource>
