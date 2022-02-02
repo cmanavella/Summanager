@@ -45,17 +45,38 @@ namespace Summanager
             //En esta parte cargo el driver de Chrome de Selenium con sus opciones de ejecución para luego pasarlo a la 
             //clase WebScrapping que los usa para analizar, de momento, a las impresoras Lexmark MS622.
 
-            //Primero configuro el Chrome Browser, que se usa para revisar las impresoras, para que no se vea.
-            ChromeOptions options = new ChromeOptions();
-            options.AddArgument("--headless");
-            //Luego configuro el CMD del Selenium para que tampoco se vea.
-            var chromeDriverService = ChromeDriverService.CreateDefaultService();
-            chromeDriverService.HideCommandPromptWindow = true;
-            //Abro el driver y el browser y los dejo listos para ser usados.
-            this.webDriver = new ChromeDriver(chromeDriverService, options);
+            //Hago el Try en este lugar, para que al instalar la App el error sea Catcheado.
+            try
+            {
+                //Primero configuro el Chrome Browser, que se usa para revisar las impresoras, para que no se vea.
+                ChromeOptions options = new ChromeOptions();
+                options.AddArgument("--headless");
+                //Luego configuro el CMD del Selenium para que tampoco se vea.
+                var chromeDriverService = ChromeDriverService.CreateDefaultService();
+                chromeDriverService.HideCommandPromptWindow = true;
+                //Abro el driver y el browser y los dejo listos para ser usados.
+                this.webDriver = new ChromeDriver(chromeDriverService, options);
 
-            //Si el BackGround Worker no está ocupado lo pongo a funcionar.
-            if (!worker.IsBusy) worker.RunWorkerAsync();
+                //Si el BackGround Worker no está ocupado lo pongo a funcionar.
+                if (!worker.IsBusy) worker.RunWorkerAsync();
+            }
+            catch (Exception ex)
+            {
+                if (ex.Source == "WebDriver") //Busco el error producido por el WebDriver y lo muestro.
+                {
+                    MessageBox.Show("Ha ocurrido un error con el 'WebDriver'. Comuníquese con su Administrador para solucionarlo.",
+                        Application.ProductName + " " + Application.ProductVersion, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    MessageBox.Show("Ha ocurrido un error. Comuníquese con su Administrador para solucionarlo.",
+                        Application.ProductName + " " + Application.ProductVersion, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            finally
+            {
+                this.Close();
+            }
         }
 
         private void worker_DoWork(object sender, DoWorkEventArgs e)

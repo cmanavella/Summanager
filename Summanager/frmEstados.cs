@@ -866,7 +866,7 @@ namespace Summanager
                     }
                     else if (ex.Source == "WebDriver") //Busco el error producido por el WebDriver y lo muestro.
                     {
-                        MessageBox.Show("Ha ocurrido un error con el 'WebDriver'. Comuníquese con su Administrador para solucionarlo.", 
+                        MessageBox.Show("Ha ocurrido un error con el 'WebDriver'. Comuníquese con su Administrador para solucionarlo.",
                             Application.ProductName + " " + Application.ProductVersion, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     else
@@ -1049,6 +1049,7 @@ namespace Summanager
             this.panelEstadisticas.Visible = false;
 
             //Llamo al Form Cargando para que analice la Lista de Impresoras pasadas por parámetros.
+            //Este Form ya viene catcheado.
             FrmCargando cargando = new FrmCargando(printers);
             cargando.ShowDialog(); //Lo muestro como un dialog para que mientras analiza no se pueda hacer nada.
 
