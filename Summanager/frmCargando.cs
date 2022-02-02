@@ -1,5 +1,4 @@
-﻿using CustomExceptions;
-using Entities;
+﻿using Entities;
 using IO;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -65,11 +64,18 @@ namespace Summanager
             {
                 if (ex.Source == "WebDriver") //Busco el error producido por el WebDriver y lo muestro.
                 {
-                    throw new ChromeDriverException();
+                    //Pregunto si se desea actualizar el Driver.
+                    var result = MessageBox.Show("La versión de 'ChromeDriver' ha quedado obsoleta. ¿Desea actualizarla?",
+                        Application.ProductName + " " + Application.ProductVersion, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
+                    if (result == DialogResult.Yes)
+                    {
+                        MessageBox.Show("Actualizo.");
+                    }
                 }
                 else
                 {
-                    throw new Exception(ex.Message);
+                    MessageBox.Show(ex.Message, Application.ProductName + " " + Application.ProductVersion, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             finally

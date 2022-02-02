@@ -239,10 +239,6 @@
       <Project>{C7D82790-2BB2-4D8C-9135-BB2DE44764C3}</Project>
       <Name>CustomControls</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CustomExceptions\CustomExceptions.csproj">
-      <Project>{88068AB6-4248-4E30-AEEF-56BF0FD8093B}</Project>
-      <Name>CustomExceptions</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Entities\Entities.csproj">
       <Project>{64d1032d-7f82-4a14-9895-e661ebd40719}</Project>
       <Name>Entities</Name>
