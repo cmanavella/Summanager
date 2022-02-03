@@ -26,6 +26,8 @@ namespace Summanager
         private IWebDriver webDriver;
 
         public List<Printer> PrintersPassed { get; set; }
+        public bool Error { get; set; }
+        public bool ActualizoChromeDriver { get; set; }
 
         public FrmCargando() : this(null) { }
 
@@ -38,6 +40,8 @@ namespace Summanager
             this.tiempo = 1;
             this.segEst = 0;
             this.minEst = 0;
+            this.Error = false;
+            this.ActualizoChromeDriver = false;
         }
 
         private void FrmCargando_Shown(object sender, EventArgs e)
@@ -62,6 +66,7 @@ namespace Summanager
             }
             catch (Exception ex)
             {
+                this.Error = true;
                 if (ex.Source == "WebDriver") //Busco el error producido por el WebDriver y lo muestro.
                 {
                     //Pregunto si se desea actualizar el Driver.
@@ -70,7 +75,7 @@ namespace Summanager
 
                     if (result == DialogResult.Yes)
                     {
-                        MessageBox.Show("Actualizo.");
+                        this.ActualizoChromeDriver = true;
                     }
                 }
                 else

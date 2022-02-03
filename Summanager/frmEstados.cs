@@ -1053,6 +1053,11 @@ namespace Summanager
             FrmCargando cargando = new FrmCargando(printers);
             cargando.ShowDialog(); //Lo muestro como un dialog para que mientras analiza no se pueda hacer nada.
 
+            if (cargando.Error && cargando.ActualizoChromeDriver) {
+                FrmActualizarChromeDriver actualizar = new FrmActualizarChromeDriver();
+                actualizar.ShowDialog();
+            }
+
             List<Printer> printersReturned = cargando.PrintersPassed; //Cargo una nueva Lista de Impresoras con lo devuelto.
 
             //Actualizo la Lista de Impresoras actual con la devuelta por el Form Cargando.

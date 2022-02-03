@@ -34,6 +34,12 @@ namespace Summanager
             // btnDetener
             // 
             this.btnDetener.FlatAppearance.BorderSize = 0;
+            this.btnDetener.Location = new System.Drawing.Point(287, 1);
+            // 
+            // lblMsge
+            // 
+            this.lblMsge.Size = new System.Drawing.Size(238, 19);
+            this.lblMsge.Text = "Descargando ChromeDriver...";
             // 
             // worker
             // 
@@ -43,7 +49,7 @@ namespace Summanager
             // FrmActualizarChromeDriver
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.ClientSize = new System.Drawing.Size(233, 81);
+            this.ClientSize = new System.Drawing.Size(313, 81);
             this.Name = "FrmActualizarChromeDriver";
             this.Shown += new System.EventHandler(this.FrmActualizarChromeDriver_Shown);
             this.ResumeLayout(false);
