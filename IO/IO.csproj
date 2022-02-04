@@ -93,6 +93,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CustomExceptions\CustomExceptions.csproj">
+      <Project>{9484CA4F-1450-4E7A-8BAD-A7679AC6218D}</Project>
+      <Name>CustomExceptions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Entities\Entities.csproj">
       <Project>{64d1032d-7f82-4a14-9895-e661ebd40719}</Project>
       <Name>Entities</Name>

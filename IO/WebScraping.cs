@@ -1,4 +1,5 @@
-﻿using Entities;
+﻿using CustomExceptions;
+using Entities;
 using HtmlAgilityPack;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -85,56 +86,74 @@ namespace IO
             this.doc = this.web.Load(this.url);
 
             int contTablas = 0;
-            foreach (var tabla in doc.DocumentNode.SelectNodes(Printer.L410_TABLE))
+            try
             {
-                contTablas++;
-
-                if (contTablas == (int)Printer.L410_NUM_TABLA.TONER)
+                foreach (var tabla in doc.DocumentNode.SelectNodes(Printer.L410_TABLE))
                 {
-                    int contTr = 0;
-                    foreach (var nodo in tabla.ChildNodes)
+                    contTablas++;
+
+                    if (contTablas == (int)Printer.L410_NUM_TABLA.TONER)
                     {
-                        if (nodo.Name == "tr") contTr++;
-                        if (contTr == (int)Printer.L410_NUM_TR.TONER)
+                        int contTr = 0;
+                        foreach (var nodo in tabla.ChildNodes)
                         {
-                            string[] valor = nodo.InnerText.Split('~');
-                            if (valor.Length > 1)
+                            if (nodo.Name == "tr") contTr++;
+                            if (contTr == (int)Printer.L410_NUM_TR.TONER)
                             {
-                                valor[1] = valor[1].Remove(valor[1].Length - 1);
-                                this.printer.Toner = Int32.Parse(valor[1]);
-                            }
-                            else
-                            {
-                                valor = nodo.InnerText.Split(' ');
+                                string[] valor = nodo.InnerText.Split('~');
                                 if (valor.Length > 1)
                                 {
-                                    valor[4] = valor[4].Remove(valor[4].Length - 1);
-                                    this.printer.Toner = Int32.Parse(valor[4]);
+                                    valor[1] = valor[1].Remove(valor[1].Length - 1);
+                                    this.printer.Toner = Int32.Parse(valor[1]);
                                 }
                                 else
                                 {
-                                    this.printer.Toner = 0;
+                                    valor = nodo.InnerText.Split(' ');
+                                    if (valor.Length > 1)
+                                    {
+                                        valor[4] = valor[4].Remove(valor[4].Length - 1);
+                                        this.printer.Toner = Int32.Parse(valor[4]);
+                                    }
+                                    else
+                                    {
+                                        this.printer.Toner = 0;
+                                    }
                                 }
                             }
                         }
                     }
-                }
-                if (contTablas == (int)Printer.L410_NUM_TABLA.UNIDAD_IMAGEN)
-                {
-                    int contTr = 0;
-                    foreach (var nodo in tabla.ChildNodes)
+                    if (contTablas == (int)Printer.L410_NUM_TABLA.UNIDAD_IMAGEN)
                     {
-                        if (nodo.Name == "tr") contTr++;
-                        if (contTr == (int)Printer.L410_NUM_TR.UNIDAD_IMAGEN && nodo.Name == "tr")
+                        int contTr = 0;
+                        foreach (var nodo in tabla.ChildNodes)
                         {
-                            string[] valor = nodo.InnerText.Split(':');
-                            valor[1] = valor[1].Remove(valor[1].Length - 3);
+                            if (nodo.Name == "tr") contTr++;
+                            if (contTr == (int)Printer.L410_NUM_TR.UNIDAD_IMAGEN && nodo.Name == "tr")
+                            {
+                                string[] valor = nodo.InnerText.Split(':');
+                                valor[1] = valor[1].Remove(valor[1].Length - 3);
 
-                            this.printer.UImagen = Int32.Parse(valor[1]);
+                                this.printer.UImagen = Int32.Parse(valor[1]);
+                            }
+                            this.printer.KitMant = null;
                         }
-                        this.printer.KitMant = null;
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                //Pregunto si el mensaje que devuelve es de Índice fuera de matriz. Si lo es, significa que uno de los suministros no se pudo leer 
+                //porque no se muestra en la página de la impresora.
+                if(ex.Message== "Índice fuera de los límites de la matriz.")
+                {
+                    throw new SuministroException();
+                }
+                else
+                {
+                    //Si hubo otro error, lo paso para que me lo muestre.
+                    throw ex;
+                }
+                
             }
         }
 

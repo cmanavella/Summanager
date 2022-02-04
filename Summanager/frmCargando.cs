@@ -1,4 +1,5 @@
-﻿using Entities;
+﻿using CustomExceptions;
+using Entities;
 using IO;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -90,12 +91,10 @@ namespace Summanager
 
         private void worker_DoWork(object sender, DoWorkEventArgs e)
         {
-            string ip = String.Empty;
-            string oficina = String.Empty;
-            try
+            //Dentro del BGW proceso cada uno de los ips de las impresoras pasadas al llamar al formulario.
+            foreach (Printer printer in this.PrintersPassed)
             {
-                //Dentro del BGW proceso cada uno de los ips de las impresoras pasadas al llamar al formulario.
-                foreach (Printer printer in this.PrintersPassed)
+                try
                 {
                     //Pregunto en cada iteración si se ha llamado a la cancelación del BGW.
                     if (worker.CancellationPending)
@@ -103,10 +102,6 @@ namespace Summanager
                         e.Cancel = true;
                         break;
                     }
-                    
-                    //Cargo en variables el Ip y la Oficina para poder usarlos fuera del Freach.
-                    ip = printer.Ip;
-                    oficina = printer.Oficina;
 
                     //Variable que uso para contar la cantidad de impresoras que ya llevo procesadas.
                     //De esta manera puedo visualizarlas con el Timer y calcular tiempo estimado. Acá la aumento.
@@ -115,7 +110,6 @@ namespace Summanager
 
                     //Paso a la instancia del Objeto WebScrapping el driver de Selenium que necesita para analizar.
                     WebScraping webScrap = new WebScraping(this.webDriver);
-
 
                     //Intento leer el Ip de la impresora. Si puedo, guardo esa Impresora para almacenarla
                     //posteriormente en una Lista.
@@ -131,36 +125,49 @@ namespace Summanager
                     //De esta manera no altero la Lista original.
                     this.PrintersScrapped.Add(printerScrapped);
                 }
+                catch (WebException)
+                {
+                    //Si no puede leer la Ip la Impresora está Offline. Asique seteo los valores manualmente.
+                    Printer printerScrapped = new Printer();
+                    printerScrapped.Ip = printer.Ip;
+                    printerScrapped.Estado = "Offline";
+                    printerScrapped.Modelo = null;
+                    printerScrapped.Oficina = printer.Oficina;
+                    printerScrapped.Toner = null;
+                    printerScrapped.UImagen = null;
+                    printerScrapped.KitMant = null;
+                    this.PrintersScrapped.Add(printerScrapped);
+                }
+                catch (SuministroException)
+                {
+                    //Si no se pudo leer el suministro de una impresora, pero sí se pudo acceder a ella, debo marcarla como 'No analizada'
+                    Printer printerScrapped = new Printer();
+                    printerScrapped.Ip = printer.Ip;
+                    printerScrapped.Estado = "No analizada";
+                    printerScrapped.Modelo = null;
+                    printerScrapped.Oficina = printer.Oficina;
+                    printerScrapped.Toner = null;
+                    printerScrapped.UImagen = null;
+                    printerScrapped.KitMant = null;
+                    this.PrintersScrapped.Add(printerScrapped);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    //Le digo al BGW que reporte el progreso, pasándole el porcentaje de lo procesado con cada Impresora
+                    //analizada.
+                    this.worker.ReportProgress(this.procesado * 100 / this.PrintersPassed.Count);
+                }
             }
-            catch (WebException)
-            {
-                //Si no puede leer la Ip la Impresora está Offline. Asique seteo los valores manualmente.
-                Printer printerScrapped = new Printer();
-                printerScrapped.Ip = ip;
-                printerScrapped.Estado = "Offline";
-                printerScrapped.Modelo = null;
-                printerScrapped.Oficina = oficina;
-                printerScrapped.Toner = null;
-                printerScrapped.UImagen = null;
-                printerScrapped.KitMant = null;
-                this.PrintersScrapped.Add(printerScrapped);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                //Le digo al BGW que reporte el progreso, pasándole el porcentaje de lo procesado con cada Impresora
-                //analizada.
-                this.worker.ReportProgress(this.procesado * 100 / this.PrintersPassed.Count);
-                this.webDriver.Close();
-                this.webDriver.Quit();
+            this.webDriver.Close();
+            this.webDriver.Quit();
 
-                //Cargo a la Lista de Impresoras pasadas la Lista de Impresoras analizadas.
-                this.PrintersPassed.Clear();
-                this.PrintersPassed = this.PrintersScrapped;
-            }
+            //Cargo a la Lista de Impresoras pasadas la Lista de Impresoras analizadas.
+            this.PrintersPassed.Clear();
+            this.PrintersPassed = this.PrintersScrapped;
         }
 
         private void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
