@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -10,7 +11,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("SumManager")]
-[assembly: AssemblyCopyright("Copyright © 2021 - Todos los derechos reservados.")]
+[assembly: AssemblyCopyright("Copyright © 2021 - 2022 | Todos los derechos reservados.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
