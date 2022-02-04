@@ -174,12 +174,6 @@ namespace Summanager
 
             using (var client = new WebClient())
             {
-                //Me aseguro de que no haya otra descarga realizada en el directorio de la App. Si la hay, la elimino.
-                if (File.Exists(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\chromedriver.zip"))
-                {
-                    File.Delete(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\chromedriver.zip");
-                }
-
                 //Descargo el archivo ZIP con el nuevo ChromeDriver.
                 client.DownloadFile(urlToDownload, "chromedriver.zip");
 
@@ -194,6 +188,9 @@ namespace Summanager
                 {
                     ZipFile.ExtractToDirectory(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\chromedriver.zip", Path.GetDirectoryName(Assembly.GetEntryAssembly().Location));
                 }
+
+                //Elimino el ZIP de la carpeta raiz.
+                File.Delete(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\chromedriver.zip");
             }
         }
 

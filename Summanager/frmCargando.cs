@@ -104,6 +104,7 @@ namespace Summanager
                         break;
                     }
                     
+                    //Cargo en variables el Ip y la Oficina para poder usarlos fuera del Freach.
                     ip = printer.Ip;
                     oficina = printer.Oficina;
 

@@ -1052,6 +1052,8 @@ namespace Summanager
             //Llamo al Form Cargando para que analice la Lista de Impresoras pasadas por parámetros.
             //Este Form ya viene catcheado.
             FrmCargando cargando = new FrmCargando(printers);
+
+            //Repito el proceso si el chromedriver está desactualizado y se desea actualizarlo.
             do
             {
                 if (repitoActualizar)
@@ -1061,6 +1063,7 @@ namespace Summanager
                 }
                 cargando.ShowDialog(); //Lo muestro como un dialog para que mientras analiza no se pueda hacer nada.
 
+                //Si hubo un error de desactualización con el chromedriver y se desea actualizar, lo hago.
                 if (cargando.Error && cargando.ActualizoChromeDriver)
                 {
                     repitoActualizar = true;
