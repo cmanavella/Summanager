@@ -143,7 +143,7 @@ namespace Summanager
                     //Si no se pudo leer el suministro de una impresora, pero sí se pudo acceder a ella, debo marcarla como 'No analizada'
                     Printer printerScrapped = new Printer();
                     printerScrapped.Ip = printer.Ip;
-                    printerScrapped.Estado = "No analizada";
+                    printerScrapped.Estado = "No Analizada";
                     printerScrapped.Modelo = null;
                     printerScrapped.Oficina = printer.Oficina;
                     printerScrapped.Toner = null;
