@@ -39,6 +39,7 @@ namespace Summanager
             }catch(Exception ex)
             {
                 MessageBox.Show(ex.Message, Application.ProductName + " " + Application.ProductVersion, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
             }
             
         }
@@ -48,7 +49,8 @@ namespace Summanager
         /// </summary>
         /// <returns></returns>
         private string GetChromeVersion()
-        {     
+        {
+            this.worker.ReportProgress(16);
             //Ingreso a la Variable de Registro donde se encuentra almacenada la versión de Google Chrome.
             using (RegistryKey key = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\chrome.exe"))
             {
@@ -99,6 +101,7 @@ namespace Summanager
         /// <returns></returns>
         private string GetURLToDownload(string version)
         {
+            this.worker.ReportProgress(32);
             //Me aseguro que el número de versión de Google Chrome no se encuentre vacía.
             if (String.IsNullOrEmpty(version))
             {
@@ -114,6 +117,7 @@ namespace Summanager
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(urlToPathLocation);
             request.AutomaticDecompression = DecompressionMethods.GZip;
 
+            this.worker.ReportProgress(48);
             //Leo la versión de ChromeDriver.
             using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
             using (Stream stream = response.GetResponseStream())
@@ -137,6 +141,7 @@ namespace Summanager
         /// </summary>
         private void KillAllChromeDriverProcesses()
         {
+            this.worker.ReportProgress(64);
             //Obtengo los procesos.
             var processes = Process.GetProcessesByName("chromedriver");
             //Los recorro uno a uno y los detengo si se puede, sino muestro una exepxión.
@@ -159,6 +164,7 @@ namespace Summanager
         /// <param name="urlToDownload"></param>
         private void DownloadChromeDriver(string urlToDownload)
         {
+            this.worker.ReportProgress(80);
             //Me aseguro que la URL de descarga no sea nula o no esté vacía.
             if (String.IsNullOrEmpty(urlToDownload))
             {
@@ -177,6 +183,7 @@ namespace Summanager
                 //Descargo el archivo ZIP con el nuevo ChromeDriver.
                 client.DownloadFile(urlToDownload, "chromedriver.zip");
 
+                this.worker.ReportProgress(100);
                 //Me aseguro de que el archivo ZIP se haya descargado y que si a la vez hay un chromedriver instalado en el directorio se lo elimine.
                 if (File.Exists(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\chromedriver.zip") && File.Exists(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\chromedriver.exe"))
                 {
@@ -194,6 +201,35 @@ namespace Summanager
         {
             //Cuando el BGW termina, cierro el Form.
             this.Close();
+        }
+
+        private void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            this.progressBar1.Value = e.ProgressPercentage;
+            switch (e.ProgressPercentage)
+            {
+                case 16:
+                    this.lblEstado.Text = "Obteniendo versión de Google Chrome...";
+                    break;
+                case 32:
+                    this.lblEstado.Text = "Obteniendo versión de Chromedriver...";
+                    break;
+                case 48:
+                    this.lblEstado.Text = "Obteniendo URL de descarga de Chromedriver...";
+                    break;
+                case 64:
+                    this.lblEstado.Text = "Cerrando procesos de Chromedriver abiertos...";
+                    break;
+                case 80:
+                    this.lblEstado.Text = "Descargando Chromedriver...";
+                    break;
+                case 100:
+                    this.lblEstado.Text = "Instalando Chromedriver...";
+                    break;
+                default:
+                    this.lblEstado.Text = "Iniciando...";
+                    break;
+            }
         }
     }
 }

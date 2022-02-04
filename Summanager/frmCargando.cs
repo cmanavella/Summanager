@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Windows.Forms;
 
@@ -40,12 +41,12 @@ namespace Summanager
             this.tiempo = 1;
             this.segEst = 0;
             this.minEst = 0;
-            this.Error = false;
-            this.ActualizoChromeDriver = false;
         }
 
         private void FrmCargando_Shown(object sender, EventArgs e)
         {
+            this.Error = false;
+            this.ActualizoChromeDriver = false;
             //En esta parte cargo el driver de Chrome de Selenium con sus opciones de ejecución para luego pasarlo a la 
             //clase WebScrapping que los usa para analizar, de momento, a las impresoras Lexmark MS622.
 
@@ -82,35 +83,39 @@ namespace Summanager
                 {
                     MessageBox.Show(ex.Message, Application.ProductName + " " + Application.ProductVersion, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-            }
-            finally
-            {
+
                 this.Close();
             }
         }
 
         private void worker_DoWork(object sender, DoWorkEventArgs e)
         {
-            //Dentro del BGW proceso cada uno de los ips de las impresoras pasadas al llamar al formulario.
-            foreach (Printer printer in this.PrintersPassed)
+            string ip = String.Empty;
+            string oficina = String.Empty;
+            try
             {
-                //Pregunto en cada iteración si se ha llamado a la cancelación del BGW.
-                if (worker.CancellationPending)
+                //Dentro del BGW proceso cada uno de los ips de las impresoras pasadas al llamar al formulario.
+                foreach (Printer printer in this.PrintersPassed)
                 {
-                    e.Cancel = true;
-                    break;
-                }
+                    //Pregunto en cada iteración si se ha llamado a la cancelación del BGW.
+                    if (worker.CancellationPending)
+                    {
+                        e.Cancel = true;
+                        break;
+                    }
+                    
+                    ip = printer.Ip;
+                    oficina = printer.Oficina;
 
-                //Variable que uso para contar la cantidad de impresoras que ya llevo procesadas.
-                //De esta manera puedo visualizarlas con el Timer y calcular tiempo estimado. Acá la aumento.
-                this.procesado++;
-                this.currentIp = printer.Ip; //Almaceno la Ip que se está procesando para usarla también con el Timer.
+                    //Variable que uso para contar la cantidad de impresoras que ya llevo procesadas.
+                    //De esta manera puedo visualizarlas con el Timer y calcular tiempo estimado. Acá la aumento.
+                    this.procesado++;
+                    this.currentIp = printer.Ip; //Almaceno la Ip que se está procesando para usarla también con el Timer.
 
-                //Paso a la instancia del Objeto WebScrapping el driver de Selenium que necesita para analizar.
-                WebScraping webScrap = new WebScraping(this.webDriver);
+                    //Paso a la instancia del Objeto WebScrapping el driver de Selenium que necesita para analizar.
+                    WebScraping webScrap = new WebScraping(this.webDriver);
 
-                try
-                {
+
                     //Intento leer el Ip de la impresora. Si puedo, guardo esa Impresora para almacenarla
                     //posteriormente en una Lista.
                     Printer printerScrapped = webScrap.readIp(printer.Ip);
@@ -125,30 +130,36 @@ namespace Summanager
                     //De esta manera no altero la Lista original.
                     this.PrintersScrapped.Add(printerScrapped);
                 }
-                catch (Exception)
-                {
-                    //Si no puede leer la Ip la Impresora está Offline. Asique seteo los valores manualmente.
-                    Printer printerScrapped = new Printer();
-                    printerScrapped.Ip = printer.Ip;
-                    printerScrapped.Estado = "Offline";
-                    printerScrapped.Modelo = null;
-                    printerScrapped.Oficina = printer.Oficina;
-                    printerScrapped.Toner = null;
-                    printerScrapped.UImagen = null;
-                    printerScrapped.KitMant = null;
-                    this.PrintersScrapped.Add(printerScrapped);
-                }
-
+            }
+            catch (WebException)
+            {
+                //Si no puede leer la Ip la Impresora está Offline. Asique seteo los valores manualmente.
+                Printer printerScrapped = new Printer();
+                printerScrapped.Ip = ip;
+                printerScrapped.Estado = "Offline";
+                printerScrapped.Modelo = null;
+                printerScrapped.Oficina = oficina;
+                printerScrapped.Toner = null;
+                printerScrapped.UImagen = null;
+                printerScrapped.KitMant = null;
+                this.PrintersScrapped.Add(printerScrapped);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
                 //Le digo al BGW que reporte el progreso, pasándole el porcentaje de lo procesado con cada Impresora
                 //analizada.
                 this.worker.ReportProgress(this.procesado * 100 / this.PrintersPassed.Count);
-            }
-            this.webDriver.Close();
-            this.webDriver.Quit();
+                this.webDriver.Close();
+                this.webDriver.Quit();
 
-            //Cargo a la Lista de Impresoras pasadas la Lista de Impresoras analizadas.
-            PrintersPassed.Clear();
-            PrintersPassed = PrintersScrapped;
+                //Cargo a la Lista de Impresoras pasadas la Lista de Impresoras analizadas.
+                this.PrintersPassed.Clear();
+                this.PrintersPassed = this.PrintersScrapped;
+            }
         }
 
         private void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)

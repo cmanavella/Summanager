@@ -44,7 +44,7 @@ namespace IO
             //Pongo un TimeOut de 4 segundos para que no se demore tanto cuando la impresora es inaccesible.
             this.web.PreRequest = delegate (HttpWebRequest webRequest)
             {
-                webRequest.Timeout = 4000;
+                webRequest.Timeout = 5000;
                 return true;
             };
 

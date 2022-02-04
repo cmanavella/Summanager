@@ -1048,15 +1048,31 @@ namespace Summanager
             this.btnAgregar.Visible = false;
             this.panelEstadisticas.Visible = false;
 
+            bool repitoActualizar = false;
             //Llamo al Form Cargando para que analice la Lista de Impresoras pasadas por parámetros.
             //Este Form ya viene catcheado.
             FrmCargando cargando = new FrmCargando(printers);
-            cargando.ShowDialog(); //Lo muestro como un dialog para que mientras analiza no se pueda hacer nada.
+            do
+            {
+                if (repitoActualizar)
+                {
+                    cargando = null;
+                    cargando = new FrmCargando(this.printers);
+                }
+                cargando.ShowDialog(); //Lo muestro como un dialog para que mientras analiza no se pueda hacer nada.
 
-            if (cargando.Error && cargando.ActualizoChromeDriver) {
-                FrmActualizarChromeDriver actualizar = new FrmActualizarChromeDriver();
-                actualizar.ShowDialog();
-            }
+                if (cargando.Error && cargando.ActualizoChromeDriver)
+                {
+                    repitoActualizar = true;
+                    FrmActualizarChromeDriver actualizar = new FrmActualizarChromeDriver();
+                    actualizar.ShowDialog();
+                }
+                else
+                {
+                    repitoActualizar = false;
+                }
+            } while (repitoActualizar);
+            
 
             List<Printer> printersReturned = cargando.PrintersPassed; //Cargo una nueva Lista de Impresoras con lo devuelto.
 
