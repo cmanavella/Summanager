@@ -243,6 +243,18 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_3D2B2ACB3ED7042C113AA956BD6457BA"
+        "OwnerKey" = "8:_2A21B79BB43342438C91111C3D89D29E"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_3D2B2ACB3ED7042C113AA956BD6457BA"
+        "OwnerKey" = "8:_B86B1BFAD4A56A63025648A361C1B43D"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_3D4F7DEEC7EA441BBB54FB3BBD3C85CC"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -995,6 +1007,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_B0779C859A0E1268969ABF07415EA9B4"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_3D2B2ACB3ED7042C113AA956BD6457BA"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -2705,6 +2723,37 @@
                     }
                 }
             "SourcePath" = "8:System.IO.FileSystem.Watcher.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_76B3208CD8924424A259567993D59686"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_3D2B2ACB3ED7042C113AA956BD6457BA"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:CustomExceptions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_3D2B2ACB3ED7042C113AA956BD6457BA"
+                    {
+                    "Name" = "8:CustomExceptions.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:CustomExceptions.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_76B3208CD8924424A259567993D59686"
@@ -5845,15 +5894,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:SumManager"
-        "ProductCode" = "8:{12043663-7216-4D7E-AEFB-14E0CA0FCBD3}"
-        "PackageCode" = "8:{6FFAE9FF-9BC2-48AC-8C80-EFD693C84E0B}"
+        "ProductCode" = "8:{186F4CC5-4A5E-443D-A4E9-B26F3E12368F}"
+        "PackageCode" = "8:{25C43B5C-6BD9-4062-85DD-A443A14B6674}"
         "UpgradeCode" = "8:{498DCFC0-9962-4A38-A402-DE61F7672373}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:3.0.3"
+        "ProductVersion" = "8:3.0.4"
         "Manufacturer" = "8:Poder Judicial Córdoba"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
