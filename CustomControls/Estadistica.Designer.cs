@@ -71,6 +71,9 @@ namespace CustomControls
             this.progress.TabIndex = 29;
             this.progress.Text = "0%";
             this.progress.TextMargin = new System.Windows.Forms.Padding(2, 2, 0, 0);
+            this.progress.Value = 68;
+            this.progress.MouseLeave += new System.EventHandler(this.progress_MouseLeave);
+            this.progress.MouseHover += new System.EventHandler(this.progress_MouseHover);
             // 
             // lblCount
             // 
@@ -82,17 +85,21 @@ namespace CustomControls
             this.lblCount.TabIndex = 30;
             this.lblCount.Text = "0";
             this.lblCount.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblCount.Click += new System.EventHandler(this.lblCount_Click);
+            this.lblCount.MouseHover += new System.EventHandler(this.lblCount_MouseHover);
             // 
             // lblTotal
             // 
             this.lblTotal.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotal.ForeColor = System.Drawing.Color.Gray;
-            this.lblTotal.Location = new System.Drawing.Point(92, 62);
+            this.lblTotal.Location = new System.Drawing.Point(65, 62);
             this.lblTotal.Name = "lblTotal";
-            this.lblTotal.Size = new System.Drawing.Size(53, 33);
+            this.lblTotal.Size = new System.Drawing.Size(80, 33);
             this.lblTotal.TabIndex = 31;
             this.lblTotal.Text = "0";
             this.lblTotal.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblTotal.Click += new System.EventHandler(this.lblTotal_Click);
+            this.lblTotal.MouseHover += new System.EventHandler(this.lblTotal_MouseHover);
             // 
             // lblText
             // 
@@ -162,6 +169,7 @@ namespace CustomControls
             this.Controls.Add(this.progress);
             this.Controls.Add(this.lblCount);
             this.Controls.Add(this.lblTotal);
+            this.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Name = "Estadistica";
             this.Size = new System.Drawing.Size(150, 100);
             this.ResumeLayout(false);

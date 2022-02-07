@@ -515,6 +515,348 @@ namespace Summanager
             this.estKitMantCritico.Total = estadistica.Online;
         }
 
+        /// <summary>
+        /// Devuelve la cantidad de Impresoras, diferenciadas por los distintos modelos, que tienen toner en estado crítico.
+        /// </summary>
+        private void _getImpresorasTonerCritico()
+        {
+            //Variables de conteo.
+            int lex410 = 0;
+            int lex610 = 0;
+            int lex622 = 0;
+            int lex812 = 0;
+
+            //Recorro el DGV.
+            foreach (DataGridViewRow fila in this.dgv.Rows)
+            {
+                //Me aseguro que el estado de la impresora analizada sea Online.
+                if(fila.Cells["Estado"].Value.ToString() == Printer.ONLINE)
+                {
+                    //Tomo el valor del Toner.
+                    int toner = Int32.Parse(fila.Cells["FiltroToner"].Value.ToString());
+
+                    //Si ese valor se encuentra entre 0 y 3, es conciderado como Crítico.
+                    if (toner >= 0 && toner <= 3)
+                    {
+                        //Según el modelo de la impresora, lo cargo en su respectivo contador.
+                        switch (fila.Cells["Modelo"].Value.ToString())
+                        {
+                            case "Lexmark MS410dn":
+                                lex410++;
+                                break;
+                            case "Lexmark MS610dn":
+                                lex610++;
+                                break;
+                            case "Lexmark MS622de":
+                                lex622++;
+                                break;
+                            case "Lexmark MS812":
+                                lex812++;
+                                break;
+                        }
+                    }
+                }
+            }
+
+            //Paso los valores calculados al detalle de estadística
+            this.detalleEstadistica.Lex410 = lex410;
+            this.detalleEstadistica.Lex610 = lex610;
+            this.detalleEstadistica.Lex622 = lex622;
+            this.detalleEstadistica.Lex812 = lex812;
+
+            //Obtengo la posición del mouse dentro del FrmEstados.
+            Point location = this.PointToClient(Cursor.Position);
+            //Le resto el alto del detalle estadística a la posición vertical que tiene. De esa manera me aseguro que se muestre arriba del mouse.
+            location.Y = location.Y - this.detalleEstadistica.Height;
+            this.detalleEstadistica.Location = location;
+            this.detalleEstadistica.Visible = true; //Muestro el detalle estadística.
+        }
+
+        /// <summary>
+        /// Devuelve la cantidad de Impresoras, diferenciadas por los distintos modelos, que tienen unidad de imagen en estado crítico.
+        /// </summary>
+        private void _getImpresorasUICritico()
+        {
+            //Variables de conteo.
+            int lex410 = 0;
+            int lex610 = 0;
+            int lex622 = 0;
+            int lex812 = 0;
+
+            //Recorro el DGV.
+            foreach (DataGridViewRow fila in this.dgv.Rows)
+            {
+                //Me aseguro que el estado de la impresora analizada sea Online.
+                if (fila.Cells["Estado"].Value.ToString() == Printer.ONLINE)
+                {
+                    //Tomo el valor de la Unidad de Imagen.
+                    int ui = Int32.Parse(fila.Cells["FiltroUI"].Value.ToString());
+
+                    //Si ese valor se encuentra entre 0 y 3, es conciderado como Crítico.
+                    if (ui >= 0 && ui <= 3)
+                    {
+                        //Según el modelo de la impresora, lo cargo en su respectivo contador.
+                        switch (fila.Cells["Modelo"].Value.ToString())
+                        {
+                            case "Lexmark MS410dn":
+                                lex410++;
+                                break;
+                            case "Lexmark MS610dn":
+                                lex610++;
+                                break;
+                            case "Lexmark MS622de":
+                                lex622++;
+                                break;
+                            case "Lexmark MS812":
+                                lex812++;
+                                break;
+                        }
+                    }
+                }
+            }
+
+            //Paso los valores calculados al detalle de estadística
+            this.detalleEstadistica.Lex410 = lex410;
+            this.detalleEstadistica.Lex610 = lex610;
+            this.detalleEstadistica.Lex622 = lex622;
+            this.detalleEstadistica.Lex812 = lex812;
+
+            //Obtengo la posición del mouse dentro del FrmEstados.
+            Point location = this.PointToClient(Cursor.Position);
+            //Le resto el alto del detalle estadística a la posición vertical que tiene. De esa manera me aseguro que se muestre arriba del mouse.
+            location.Y = location.Y - this.detalleEstadistica.Height;
+            this.detalleEstadistica.Location = location;
+            this.detalleEstadistica.Visible = true; //Muestro el detalle estadística.
+        }
+
+        /// <summary>
+        /// Devuelve la cantidad de Impresoras, diferenciadas por los distintos modelos, que tienen kit de mantenimiento en estado crítico.
+        /// </summary>
+        private void _getImpresorasKMCritico()
+        {
+            //Variables de conteo.
+            int lex410 = 0;
+            int lex610 = 0;
+            int lex622 = 0;
+            int lex812 = 0;
+
+            //Recorro el DGV.
+            foreach (DataGridViewRow fila in this.dgv.Rows)
+            {
+                //Me aseguro que el estado de la impresora analizada sea Online.
+                if (fila.Cells["Estado"].Value.ToString() == Printer.ONLINE)
+                {
+                    //Tomo el valor deL Kit de Mantenimiento.
+                    int km = Int32.Parse(fila.Cells["FiltroKM"].Value.ToString());
+
+                    //Si ese valor se encuentra entre 0 y 3, es conciderado como Crítico.
+                    if (km >= 0 && km <= 3)
+                    {
+                        //Según el modelo de la impresora, lo cargo en su respectivo contador.
+                        switch (fila.Cells["Modelo"].Value.ToString())
+                        {
+                            case "Lexmark MS410dn":
+                                lex410++;
+                                break;
+                            case "Lexmark MS610dn":
+                                lex610++;
+                                break;
+                            case "Lexmark MS622de":
+                                lex622++;
+                                break;
+                            case "Lexmark MS812":
+                                lex812++;
+                                break;
+                        }
+                    }
+                }
+            }
+
+            //Paso los valores calculados al detalle de estadística
+            this.detalleEstadistica.Lex410 = lex410;
+            this.detalleEstadistica.Lex610 = lex610;
+            this.detalleEstadistica.Lex622 = lex622;
+            this.detalleEstadistica.Lex812 = lex812;
+
+            //Obtengo la posición del mouse dentro del FrmEstados.
+            Point location = this.PointToClient(Cursor.Position);
+            //Le resto el alto del detalle estadística a la posición vertical que tiene. De esa manera me aseguro que se muestre arriba del mouse.
+            location.Y = location.Y - this.detalleEstadistica.Height;
+            this.detalleEstadistica.Location = location;
+            this.detalleEstadistica.Visible = true; //Muestro el detalle estadística.
+        }
+
+        /// <summary>
+        /// Devuelve la cantidad de Impresoras, diferenciadas por los distintos modelos, que tienen toner en estado de riesgo.
+        /// </summary>
+        private void _getImpresorasTonerRiesgo()
+        {
+            //Variables de conteo.
+            int lex410 = 0;
+            int lex610 = 0;
+            int lex622 = 0;
+            int lex812 = 0;
+
+            //Recorro el DGV.
+            foreach (DataGridViewRow fila in this.dgv.Rows)
+            {
+                //Me aseguro que el estado de la impresora analizada sea Online.
+                if (fila.Cells["Estado"].Value.ToString() == Printer.ONLINE)
+                {
+                    //Tomo el valor del Toner.
+                    int toner = Int32.Parse(fila.Cells["FiltroToner"].Value.ToString());
+
+                    //Si ese valor se encuentra entre 0 y 3, es conciderado como Crítico.
+                    if (toner <= 10 && toner > 3)
+                    {
+                        //Según el modelo de la impresora, lo cargo en su respectivo contador.
+                        switch (fila.Cells["Modelo"].Value.ToString())
+                        {
+                            case "Lexmark MS410dn":
+                                lex410++;
+                                break;
+                            case "Lexmark MS610dn":
+                                lex610++;
+                                break;
+                            case "Lexmark MS622de":
+                                lex622++;
+                                break;
+                            case "Lexmark MS812":
+                                lex812++;
+                                break;
+                        }
+                    }
+                }
+            }
+
+            //Paso los valores calculados al detalle de estadística
+            this.detalleEstadistica.Lex410 = lex410;
+            this.detalleEstadistica.Lex610 = lex610;
+            this.detalleEstadistica.Lex622 = lex622;
+            this.detalleEstadistica.Lex812 = lex812;
+
+            //Obtengo la posición del mouse dentro del FrmEstados.
+            Point location = this.PointToClient(Cursor.Position);
+            //Le resto el alto del detalle estadística a la posición vertical que tiene. De esa manera me aseguro que se muestre arriba del mouse.
+            location.Y = location.Y - this.detalleEstadistica.Height;
+            this.detalleEstadistica.Location = location;
+            this.detalleEstadistica.Visible = true; //Muestro el detalle estadística.
+        }
+
+        /// <summary>
+        /// Devuelve la cantidad de Impresoras, diferenciadas por los distintos modelos, que tienen unidad de imagen en estado de riesgo.
+        /// </summary>
+        private void _getImpresorasUIRiesgo()
+        {
+            //Variables de conteo.
+            int lex410 = 0;
+            int lex610 = 0;
+            int lex622 = 0;
+            int lex812 = 0;
+
+            //Recorro el DGV.
+            foreach (DataGridViewRow fila in this.dgv.Rows)
+            {
+                //Me aseguro que el estado de la impresora analizada sea Online.
+                if (fila.Cells["Estado"].Value.ToString() == Printer.ONLINE)
+                {
+                    //Tomo el valor del Toner.
+                    int ui = Int32.Parse(fila.Cells["FiltroUI"].Value.ToString());
+
+                    //Si ese valor se encuentra entre 0 y 3, es conciderado como Crítico.
+                    if (ui <= 10 && ui > 3)
+                    {
+                        //Según el modelo de la impresora, lo cargo en su respectivo contador.
+                        switch (fila.Cells["Modelo"].Value.ToString())
+                        {
+                            case "Lexmark MS410dn":
+                                lex410++;
+                                break;
+                            case "Lexmark MS610dn":
+                                lex610++;
+                                break;
+                            case "Lexmark MS622de":
+                                lex622++;
+                                break;
+                            case "Lexmark MS812":
+                                lex812++;
+                                break;
+                        }
+                    }
+                }
+            }
+
+            //Paso los valores calculados al detalle de estadística
+            this.detalleEstadistica.Lex410 = lex410;
+            this.detalleEstadistica.Lex610 = lex610;
+            this.detalleEstadistica.Lex622 = lex622;
+            this.detalleEstadistica.Lex812 = lex812;
+
+            //Obtengo la posición del mouse dentro del FrmEstados.
+            Point location = this.PointToClient(Cursor.Position);
+            //Le resto el alto del detalle estadística a la posición vertical que tiene. De esa manera me aseguro que se muestre arriba del mouse.
+            location.Y = location.Y - this.detalleEstadistica.Height;
+            this.detalleEstadistica.Location = location;
+            this.detalleEstadistica.Visible = true; //Muestro el detalle estadística.
+        }
+
+        /// <summary>
+        /// Devuelve la cantidad de Impresoras, diferenciadas por los distintos modelos, que tienen unidad de imagen en estado de riesgo.
+        /// </summary>
+        private void _getImpresorasKMRiesgo()
+        {
+            //Variables de conteo.
+            int lex410 = 0;
+            int lex610 = 0;
+            int lex622 = 0;
+            int lex812 = 0;
+
+            //Recorro el DGV.
+            foreach (DataGridViewRow fila in this.dgv.Rows)
+            {
+                //Me aseguro que el estado de la impresora analizada sea Online.
+                if (fila.Cells["Estado"].Value.ToString() == Printer.ONLINE)
+                {
+                    //Tomo el valor del Toner.
+                    int km = Int32.Parse(fila.Cells["FiltroKM"].Value.ToString());
+
+                    //Si ese valor se encuentra entre 0 y 3, es conciderado como Crítico.
+                    if (km <= 10 && km > 3)
+                    {
+                        //Según el modelo de la impresora, lo cargo en su respectivo contador.
+                        switch (fila.Cells["Modelo"].Value.ToString())
+                        {
+                            case "Lexmark MS410dn":
+                                lex410++;
+                                break;
+                            case "Lexmark MS610dn":
+                                lex610++;
+                                break;
+                            case "Lexmark MS622de":
+                                lex622++;
+                                break;
+                            case "Lexmark MS812":
+                                lex812++;
+                                break;
+                        }
+                    }
+                }
+            }
+
+            //Paso los valores calculados al detalle de estadística
+            this.detalleEstadistica.Lex410 = lex410;
+            this.detalleEstadistica.Lex610 = lex610;
+            this.detalleEstadistica.Lex622 = lex622;
+            this.detalleEstadistica.Lex812 = lex812;
+
+            //Obtengo la posición del mouse dentro del FrmEstados.
+            Point location = this.PointToClient(Cursor.Position);
+            //Le resto el alto del detalle estadística a la posición vertical que tiene. De esa manera me aseguro que se muestre arriba del mouse.
+            location.Y = location.Y - this.detalleEstadistica.Height;
+            this.detalleEstadistica.Location = location;
+            this.detalleEstadistica.Visible = true; //Muestro el detalle estadística.
+        }
+
         private void _getEstadisticaParticular()
         {
             //Limpio todas las Estadísticas.
@@ -1171,6 +1513,84 @@ namespace Summanager
                 DataTable datos = (DataTable)this.dgv.DataSource;
                 _showEstadistica(datos.Rows.Count, true);
             }
+        }
+
+        private void estTonerCritico_MouseHover(object sender, EventArgs e)
+        {
+            if (this.estTonerCritico.Count > 0)
+            {
+                _getImpresorasTonerCritico();
+            }
+        }
+
+        private void estUnImgCritico_MouseHover(object sender, EventArgs e)
+        {
+            if(this.estUnImgCritico.Count > 0)
+            {
+                _getImpresorasUICritico();
+            }
+        }
+
+        private void estKitMantCritico_MouseHover(object sender, EventArgs e)
+        {
+            if (this.estKitMantCritico.Count > 0)
+            {
+                _getImpresorasKMCritico();
+            }
+        }
+
+        private void estTonerCritico_MouseLeave(object sender, EventArgs e)
+        {
+            this.detalleEstadistica.Visible = false;
+        }
+
+        private void estUnImgCritico_MouseLeave(object sender, EventArgs e)
+        {
+            this.detalleEstadistica.Visible = false;
+        }
+
+        private void estKitMantCritico_MouseLeave(object sender, EventArgs e)
+        {
+            this.detalleEstadistica.Visible = false;
+        }
+
+        private void estTonerRiesgo_MouseHover(object sender, EventArgs e)
+        {
+            if (this.estTonerRiesgo.Count > 0)
+            {
+                _getImpresorasTonerRiesgo();
+            }
+        }
+
+        private void estUnImgRiesgo_MouseHover(object sender, EventArgs e)
+        {
+            if (this.estUnImgRiesgo.Count > 0)
+            {
+                _getImpresorasUIRiesgo();
+            }
+        }
+
+        private void estKitMantRiesgo_MouseHover(object sender, EventArgs e)
+        {
+            if (this.estKitMantRiesgo.Count > 0)
+            {
+                _getImpresorasKMRiesgo();
+            }
+        }
+
+        private void estTonerRiesgo_MouseLeave(object sender, EventArgs e)
+        {
+            this.detalleEstadistica.Visible = false;
+        }
+
+        private void estUnImgRiesgo_MouseLeave(object sender, EventArgs e)
+        {
+            this.detalleEstadistica.Visible = false;
+        }
+
+        private void estKitMantRiesgo_MouseLeave(object sender, EventArgs e)
+        {
+            this.detalleEstadistica.Visible = false;
         }
     }
 }

@@ -72,6 +72,12 @@
     <Compile Include="CustomGroupBox.Designer.cs">
       <DependentUpon>CustomGroupBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="DetalleEstadistica.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DetalleEstadistica.Designer.cs">
+      <DependentUpon>DetalleEstadistica.cs</DependentUpon>
+    </Compile>
     <Compile Include="Estadistica.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -123,6 +129,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CustomGroupBox.resx">
       <DependentUpon>CustomGroupBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DetalleEstadistica.resx">
+      <DependentUpon>DetalleEstadistica.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Estadistica.resx">
       <DependentUpon>Estadistica.cs</DependentUpon>

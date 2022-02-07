@@ -103,5 +103,35 @@ namespace CustomControls
                 progress.Refresh();
             }
         }
+
+        private void progress_MouseHover(object sender, EventArgs e)
+        {
+            this.OnMouseHover(e);
+        }
+
+        private void lblCount_MouseHover(object sender, EventArgs e)
+        {
+            this.OnMouseHover(e);
+        }
+
+        private void lblTotal_MouseHover(object sender, EventArgs e)
+        {
+            this.OnMouseHover(e);
+        }
+
+        private void progress_MouseLeave(object sender, EventArgs e)
+        {
+            this.OnMouseLeave(e);
+        }
+
+        private void lblCount_Click(object sender, EventArgs e)
+        {
+            this.OnMouseLeave(e);
+        }
+
+        private void lblTotal_Click(object sender, EventArgs e)
+        {
+            this.OnMouseLeave(e);
+        }
     }
 }
