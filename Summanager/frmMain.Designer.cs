@@ -31,41 +31,41 @@ namespace Summanager
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.panelSuperior = new System.Windows.Forms.Panel();
+            this.appIcon = new System.Windows.Forms.PictureBox();
             this.lblTitulo = new System.Windows.Forms.Label();
+            this.btnMinimizar = new CustomControls.PanelButton();
+            this.btnMaximizar = new CustomControls.PanelButton();
+            this.btnCerrar = new CustomControls.PanelButton();
             this.panelLateral = new System.Windows.Forms.Panel();
             this.panelMenu = new System.Windows.Forms.Panel();
+            this.bordeInferiorIzquierdo = new System.Windows.Forms.Panel();
+            this.btnStock = new CustomControls.MenuButton();
+            this.btnConfiguracion = new CustomControls.MenuButton();
+            this.btnEstados = new CustomControls.MenuButton();
             this.panelLogo = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.bordeInferiorIzquierdo = new System.Windows.Forms.Panel();
+            this.logo = new System.Windows.Forms.PictureBox();
             this.bordeEsquinaIzquierda = new System.Windows.Forms.Panel();
             this.bordeDerecho = new System.Windows.Forms.Panel();
             this.bordeEsquinaDerecha = new System.Windows.Forms.Panel();
             this.panelContenido = new System.Windows.Forms.Panel();
             this.bordeIzquierdo = new System.Windows.Forms.Panel();
-            this.btnMinimizar = new CustomControls.PanelButton();
-            this.btnCerrar = new CustomControls.PanelButton();
             this.panelFooter = new System.Windows.Forms.Panel();
             this.lblFooter = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.bordeInferiorDerecho = new System.Windows.Forms.Panel();
-            this.btnStock = new CustomControls.MenuButton();
-            this.btnConfiguracion = new CustomControls.MenuButton();
-            this.btnEstados = new CustomControls.MenuButton();
-            this.logo = new System.Windows.Forms.PictureBox();
-            this.appIcon = new System.Windows.Forms.PictureBox();
-            this.btnMaximizar = new CustomControls.PanelButton();
             this.panelSuperior.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.appIcon)).BeginInit();
             this.panelLateral.SuspendLayout();
             this.panelMenu.SuspendLayout();
             this.panelLogo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             this.bordeDerecho.SuspendLayout();
             this.bordeIzquierdo.SuspendLayout();
             this.panelFooter.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.appIcon)).BeginInit();
             this.SuspendLayout();
             // 
             // panelSuperior
@@ -83,6 +83,16 @@ namespace Summanager
             this.panelSuperior.TabIndex = 9;
             this.panelSuperior.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelSuperior_MouseDown);
             // 
+            // appIcon
+            // 
+            this.appIcon.Image = global::Summanager.Properties.Resources.icon_16x16;
+            this.appIcon.Location = new System.Drawing.Point(8, 7);
+            this.appIcon.Name = "appIcon";
+            this.appIcon.Size = new System.Drawing.Size(16, 16);
+            this.appIcon.TabIndex = 15;
+            this.appIcon.TabStop = false;
+            this.appIcon.MouseDown += new System.Windows.Forms.MouseEventHandler(this.appIcon_MouseDown);
+            // 
             // lblTitulo
             // 
             this.lblTitulo.AutoSize = true;
@@ -94,6 +104,38 @@ namespace Summanager
             this.lblTitulo.TabIndex = 13;
             this.lblTitulo.Text = "label2";
             this.lblTitulo.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lblTitulo_MouseDown);
+            // 
+            // btnMinimizar
+            // 
+            this.btnMinimizar.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnMinimizar.Image = null;
+            this.btnMinimizar.Location = new System.Drawing.Point(1170, 0);
+            this.btnMinimizar.Name = "btnMinimizar";
+            this.btnMinimizar.Size = new System.Drawing.Size(30, 30);
+            this.btnMinimizar.TabIndex = 12;
+            this.btnMinimizar.Text = "_";
+            this.btnMinimizar.Click += new System.EventHandler(this.btnMinimizar_Click);
+            // 
+            // btnMaximizar
+            // 
+            this.btnMaximizar.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnMaximizar.Image = ((System.Drawing.Image)(resources.GetObject("btnMaximizar.Image")));
+            this.btnMaximizar.Location = new System.Drawing.Point(1200, 0);
+            this.btnMaximizar.Name = "btnMaximizar";
+            this.btnMaximizar.Size = new System.Drawing.Size(30, 30);
+            this.btnMaximizar.TabIndex = 14;
+            this.btnMaximizar.Click += new System.EventHandler(this.btnMaximizar_Click);
+            // 
+            // btnCerrar
+            // 
+            this.btnCerrar.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnCerrar.Image = null;
+            this.btnCerrar.Location = new System.Drawing.Point(1230, 0);
+            this.btnCerrar.Name = "btnCerrar";
+            this.btnCerrar.Size = new System.Drawing.Size(30, 30);
+            this.btnCerrar.TabIndex = 11;
+            this.btnCerrar.Text = "X";
+            this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
             // 
             // panelLateral
             // 
@@ -112,13 +154,60 @@ namespace Summanager
             | System.Windows.Forms.AnchorStyles.Left)));
             this.panelMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
             this.panelMenu.Controls.Add(this.bordeInferiorIzquierdo);
-            this.panelMenu.Controls.Add(this.btnStock);
             this.panelMenu.Controls.Add(this.btnConfiguracion);
+            this.panelMenu.Controls.Add(this.btnStock);
             this.panelMenu.Controls.Add(this.btnEstados);
             this.panelMenu.Location = new System.Drawing.Point(0, 150);
             this.panelMenu.Name = "panelMenu";
             this.panelMenu.Size = new System.Drawing.Size(205, 545);
             this.panelMenu.TabIndex = 1;
+            // 
+            // bordeInferiorIzquierdo
+            // 
+            this.bordeInferiorIzquierdo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
+            this.bordeInferiorIzquierdo.Cursor = System.Windows.Forms.Cursors.SizeNS;
+            this.bordeInferiorIzquierdo.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.bordeInferiorIzquierdo.Location = new System.Drawing.Point(0, 540);
+            this.bordeInferiorIzquierdo.Name = "bordeInferiorIzquierdo";
+            this.bordeInferiorIzquierdo.Size = new System.Drawing.Size(205, 5);
+            this.bordeInferiorIzquierdo.TabIndex = 11;
+            this.bordeInferiorIzquierdo.MouseMove += new System.Windows.Forms.MouseEventHandler(this.bordeInferiorIzquierdo_MouseMove);
+            // 
+            // btnStock
+            // 
+            this.btnStock.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnStock.Image = global::Summanager.Properties.Resources.box;
+            this.btnStock.Location = new System.Drawing.Point(0, 45);
+            this.btnStock.Name = "btnStock";
+            this.btnStock.Selected = false;
+            this.btnStock.Size = new System.Drawing.Size(205, 45);
+            this.btnStock.TabIndex = 1;
+            this.btnStock.Text = "Stock";
+            this.btnStock.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnStock_MouseClick);
+            // 
+            // btnConfiguracion
+            // 
+            this.btnConfiguracion.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnConfiguracion.Image = global::Summanager.Properties.Resources.gear;
+            this.btnConfiguracion.Location = new System.Drawing.Point(0, 90);
+            this.btnConfiguracion.Name = "btnConfiguracion";
+            this.btnConfiguracion.Selected = false;
+            this.btnConfiguracion.Size = new System.Drawing.Size(205, 45);
+            this.btnConfiguracion.TabIndex = 3;
+            this.btnConfiguracion.Text = "Configuración";
+            this.btnConfiguracion.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnConfiguracion_MouseClick);
+            // 
+            // btnEstados
+            // 
+            this.btnEstados.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnEstados.Image = global::Summanager.Properties.Resources.printing;
+            this.btnEstados.Location = new System.Drawing.Point(0, 0);
+            this.btnEstados.Name = "btnEstados";
+            this.btnEstados.Selected = false;
+            this.btnEstados.Size = new System.Drawing.Size(205, 45);
+            this.btnEstados.TabIndex = 2;
+            this.btnEstados.Text = "Estado Impresoras";
+            this.btnEstados.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnEstados_MouseClick);
             // 
             // panelLogo
             // 
@@ -151,16 +240,15 @@ namespace Summanager
             this.label1.TabIndex = 1;
             this.label1.Text = "SumManager";
             // 
-            // bordeInferiorIzquierdo
+            // logo
             // 
-            this.bordeInferiorIzquierdo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
-            this.bordeInferiorIzquierdo.Cursor = System.Windows.Forms.Cursors.SizeNS;
-            this.bordeInferiorIzquierdo.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bordeInferiorIzquierdo.Location = new System.Drawing.Point(0, 540);
-            this.bordeInferiorIzquierdo.Name = "bordeInferiorIzquierdo";
-            this.bordeInferiorIzquierdo.Size = new System.Drawing.Size(205, 5);
-            this.bordeInferiorIzquierdo.TabIndex = 11;
-            this.bordeInferiorIzquierdo.MouseMove += new System.Windows.Forms.MouseEventHandler(this.bordeInferiorIzquierdo_MouseMove);
+            this.logo.Image = global::Summanager.Properties.Resources.Logo;
+            this.logo.Location = new System.Drawing.Point(58, 6);
+            this.logo.Name = "logo";
+            this.logo.Size = new System.Drawing.Size(84, 84);
+            this.logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.logo.TabIndex = 0;
+            this.logo.TabStop = false;
             // 
             // bordeEsquinaIzquierda
             // 
@@ -220,28 +308,6 @@ namespace Summanager
             this.bordeIzquierdo.TabIndex = 4;
             this.bordeIzquierdo.MouseMove += new System.Windows.Forms.MouseEventHandler(this.bordeIzquierdo_MouseMove);
             this.bordeIzquierdo.MouseUp += new System.Windows.Forms.MouseEventHandler(this.bordeIzquierdo_MouseUp);
-            // 
-            // btnMinimizar
-            // 
-            this.btnMinimizar.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnMinimizar.Image = null;
-            this.btnMinimizar.Location = new System.Drawing.Point(1170, 0);
-            this.btnMinimizar.Name = "btnMinimizar";
-            this.btnMinimizar.Size = new System.Drawing.Size(30, 30);
-            this.btnMinimizar.TabIndex = 12;
-            this.btnMinimizar.Text = "_";
-            this.btnMinimizar.Click += new System.EventHandler(this.btnMinimizar_Click);
-            // 
-            // btnCerrar
-            // 
-            this.btnCerrar.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnCerrar.Image = null;
-            this.btnCerrar.Location = new System.Drawing.Point(1230, 0);
-            this.btnCerrar.Name = "btnCerrar";
-            this.btnCerrar.Size = new System.Drawing.Size(30, 30);
-            this.btnCerrar.TabIndex = 11;
-            this.btnCerrar.Text = "X";
-            this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
             // 
             // panelFooter
             // 
@@ -303,73 +369,6 @@ namespace Summanager
             this.bordeInferiorDerecho.TabIndex = 12;
             this.bordeInferiorDerecho.MouseMove += new System.Windows.Forms.MouseEventHandler(this.bordeInferiorDerecho_MouseMove);
             // 
-            // btnStock
-            // 
-            this.btnStock.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnStock.Image = global::Summanager.Properties.Resources.box;
-            this.btnStock.Location = new System.Drawing.Point(0, 90);
-            this.btnStock.Name = "btnStock";
-            this.btnStock.Selected = false;
-            this.btnStock.Size = new System.Drawing.Size(205, 45);
-            this.btnStock.TabIndex = 1;
-            this.btnStock.Text = "Stock";
-            this.btnStock.Visible = false;
-            this.btnStock.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnStock_MouseClick);
-            // 
-            // btnConfiguracion
-            // 
-            this.btnConfiguracion.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnConfiguracion.Image = global::Summanager.Properties.Resources.gear;
-            this.btnConfiguracion.Location = new System.Drawing.Point(0, 45);
-            this.btnConfiguracion.Name = "btnConfiguracion";
-            this.btnConfiguracion.Selected = false;
-            this.btnConfiguracion.Size = new System.Drawing.Size(205, 45);
-            this.btnConfiguracion.TabIndex = 3;
-            this.btnConfiguracion.Text = "Configuración";
-            this.btnConfiguracion.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnConfiguracion_MouseClick);
-            // 
-            // btnEstados
-            // 
-            this.btnEstados.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnEstados.Image = global::Summanager.Properties.Resources.printing;
-            this.btnEstados.Location = new System.Drawing.Point(0, 0);
-            this.btnEstados.Name = "btnEstados";
-            this.btnEstados.Selected = false;
-            this.btnEstados.Size = new System.Drawing.Size(205, 45);
-            this.btnEstados.TabIndex = 2;
-            this.btnEstados.Text = "Estado Impresoras";
-            this.btnEstados.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnEstados_MouseClick);
-            // 
-            // logo
-            // 
-            this.logo.Image = global::Summanager.Properties.Resources.Logo;
-            this.logo.Location = new System.Drawing.Point(58, 6);
-            this.logo.Name = "logo";
-            this.logo.Size = new System.Drawing.Size(84, 84);
-            this.logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.logo.TabIndex = 0;
-            this.logo.TabStop = false;
-            // 
-            // appIcon
-            // 
-            this.appIcon.Image = global::Summanager.Properties.Resources.icon_16x16;
-            this.appIcon.Location = new System.Drawing.Point(8, 7);
-            this.appIcon.Name = "appIcon";
-            this.appIcon.Size = new System.Drawing.Size(16, 16);
-            this.appIcon.TabIndex = 15;
-            this.appIcon.TabStop = false;
-            this.appIcon.MouseDown += new System.Windows.Forms.MouseEventHandler(this.appIcon_MouseDown);
-            // 
-            // btnMaximizar
-            // 
-            this.btnMaximizar.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnMaximizar.Image = ((System.Drawing.Image)(resources.GetObject("btnMaximizar.Image")));
-            this.btnMaximizar.Location = new System.Drawing.Point(1200, 0);
-            this.btnMaximizar.Name = "btnMaximizar";
-            this.btnMaximizar.Size = new System.Drawing.Size(30, 30);
-            this.btnMaximizar.TabIndex = 14;
-            this.btnMaximizar.Click += new System.EventHandler(this.btnMaximizar_Click);
-            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -390,15 +389,15 @@ namespace Summanager
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.panelSuperior.ResumeLayout(false);
             this.panelSuperior.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.appIcon)).EndInit();
             this.panelLateral.ResumeLayout(false);
             this.panelMenu.ResumeLayout(false);
             this.panelLogo.ResumeLayout(false);
             this.panelLogo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
             this.bordeDerecho.ResumeLayout(false);
             this.bordeIzquierdo.ResumeLayout(false);
             this.panelFooter.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.appIcon)).EndInit();
             this.ResumeLayout(false);
 
         }
