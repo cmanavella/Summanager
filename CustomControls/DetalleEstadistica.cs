@@ -26,7 +26,7 @@ namespace CustomControls
             this.l610 = 0;
             this.l622 = 0;
             this.l812 = 0;
-            this.tamaño = new Size(177, 127);
+            this.tamaño = new Size(160, 100);
         }
 
         [Browsable(true), EditorBrowsable(EditorBrowsableState.Always), Bindable(true)]
@@ -92,6 +92,11 @@ namespace CustomControls
         private void DetalleEstadistica_VisibleChanged(object sender, EventArgs e)
         {
             this.Size = this.tamaño;
+        }
+
+        private void btnBorrar_Click(object sender, EventArgs e)
+        {
+            this.Visible = false;
         }
     }
 }
