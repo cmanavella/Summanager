@@ -29,12 +29,9 @@ namespace Summanager
         /// </summary>
         private void InitializeComponent()
         {
+            this.label1 = new System.Windows.Forms.Label();
             this.panelTitulo.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // panelTitulo
-            // 
-            this.panelTitulo.Size = new System.Drawing.Size(1050, 49);
             // 
             // lblTitulo
             // 
@@ -43,20 +40,35 @@ namespace Summanager
             // 
             // panelMenu
             // 
-            this.panelMenu.Size = new System.Drawing.Size(1050, 40);
             this.panelMenu.Visible = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(51, 143);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(0, 13);
+            this.label1.TabIndex = 2;
             // 
             // FrmStock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(1050, 690);
+            this.Controls.Add(this.label1);
             this.Name = "FrmStock";
+            this.Shown += new System.EventHandler(this.FrmStock_Shown);
+            this.Controls.SetChildIndex(this.panelTitulo, 0);
+            this.Controls.SetChildIndex(this.panelMenu, 0);
+            this.Controls.SetChildIndex(this.label1, 0);
             this.panelTitulo.ResumeLayout(false);
             this.panelTitulo.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
+
+        private System.Windows.Forms.Label label1;
     }
 }

@@ -244,6 +244,10 @@
       <Project>{9484CA4F-1450-4E7A-8BAD-A7679AC6218D}</Project>
       <Name>CustomExceptions</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Data\Data.csproj">
+      <Project>{54e700f6-6b2a-4663-bfdb-1d5cdc80b29f}</Project>
+      <Name>Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Entities\Entities.csproj">
       <Project>{64d1032d-7f82-4a14-9895-e661ebd40719}</Project>
       <Name>Entities</Name>
