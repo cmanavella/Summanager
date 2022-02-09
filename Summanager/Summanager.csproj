@@ -237,6 +237,7 @@
     <None Include="Resources\maximize-windows.png" />
     <None Include="Resources\resume-windows.png" />
     <None Include="Resources\icon 16x16.png" />
+    <Content Include="SQLite.Interop.dll" />
     <Content Include="SumManager.exe.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
