@@ -39,5 +39,32 @@ namespace Data
 
             return retorno;
         }
+
+        public static Suministro GetSuministro(Int64 codigo)
+        {
+            Suministro retorno = null;
+
+            using (var con = DBContext.GetInstance())
+            {
+                var query = "SELECT * FROM Suministros WHERE Codigo=" + codigo;
+
+                using (var command = new SQLiteCommand(query, con))
+                {
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            retorno = new Suministro();
+                            retorno.Codigo = Convert.ToInt64(reader["Codigo"].ToString());
+                            retorno.Nombre = reader["Nombre"].ToString();
+                            retorno.Tipo = DBTiposSuministros.GetTipos(Convert.ToInt32(reader["IdTipoSuministro"].ToString()));
+                            retorno.Modelos = DBModelosImpresoras.GetModelos(Convert.ToInt64(reader["Codigo"].ToString()));
+                        }
+                    }
+                }
+            }
+
+            return retorno;
+        }
     }
 }

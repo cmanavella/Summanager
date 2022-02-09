@@ -12,6 +12,7 @@ namespace Summanager
 {
     public partial class FrmNuevoSuministro : Summanager.FrmAbm
     {
+        private string msjeValidacion;
         public FrmNuevoSuministro(string titulo) : base(titulo)
         {
             InitializeComponent();
@@ -60,6 +61,37 @@ namespace Summanager
             return retorno;
         }
 
+        private bool _valido()
+        {
+            bool retorno = true;
+            this.msjeValidacion = String.Empty;
+
+            if (this.txtCodigo.IsMaskared) {
+                if(retorno) retorno = false;
+                this.msjeValidacion += "- El campo 'Código' es obligatorio.";
+            }
+            if (this.txtNombre.IsMaskared)
+            {
+                if (retorno) retorno = false;
+                if (this.msjeValidacion.Length > 0) this.msjeValidacion += "\n";
+                this.msjeValidacion += "- El campo 'Nombre' es obligatorio.";
+            }
+            if (this.cmbTipo.SelectedItem().Value == 0)
+            {
+                if (retorno) retorno = false;
+                if (this.msjeValidacion.Length > 0) this.msjeValidacion += "\n";
+                this.msjeValidacion += "- El campo 'Tipo' es obligatorio.";
+            }
+            if (this.dgv.Rows.Count == 0)
+            {
+                if (retorno) retorno = false;
+                if (this.msjeValidacion.Length > 0) this.msjeValidacion += "\n";
+                this.msjeValidacion += "- El campo 'Compatible con' es obligatorio. Debe agregar al menos un 'Modelo'.";
+            }
+
+            return retorno;
+        }
+
         /**EVENTOS**/
 
         private void btnAgregar_Click(object sender, EventArgs e)
@@ -82,6 +114,48 @@ namespace Summanager
             {
                 MessageBox.Show("Debe seleccionar un Modelo de Impresora para poder agregarla.", Application.ProductName + " " + Application.ProductVersion, 
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void txtCodigo_Leave(object sender, EventArgs e)
+        {
+            //Debo comprobar que al salir del control el suministro no exista, siempre que el Textbox tenga contenido.
+            if (!this.txtCodigo.IsMaskared && this.txtCodigo.Text.Length > 0)
+            {
+                Suministro suministro = DBSuministros.GetSuministro(Convert.ToInt64(this.txtCodigo.Text));
+
+                if (suministro != null)
+                {
+                    this.txtCodigo.Focus();
+                    MessageBox.Show("El suministro ya existe.", Application.ProductName + " " + Application.ProductVersion,
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
+
+        private void txtCodigo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+            if ((int)e.KeyChar == (int)Keys.Enter)
+            {
+                this.txtNombre.Focus();
+            }
+        }
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            if (_valido())
+            {
+                MessageBox.Show("Guardo");
+            }
+            else
+            {
+                MessageBox.Show(this.msjeValidacion, Application.ProductName + " " + Application.ProductVersion,
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.txtCodigo.Focus();
             }
         }
     }

@@ -19,6 +19,7 @@ namespace CustomControls
         private bool isMaskared;
         private string maskText;
         private string normalText;
+        private CharacterCasing character;
 
         public TextBox()
         {
@@ -42,6 +43,8 @@ namespace CustomControls
             //Conecto los eventos del TextBox verdadero con los del Control.
             this.textBox1.Enter += this.TextBox_Enter;
             this.textBox1.Leave += this.TextBox_Leave;
+
+            this.character = CharacterCasing.Normal;
         }
 
         /// <summary>
@@ -62,11 +65,13 @@ namespace CustomControls
                 {
                     this.textBox1.Text = this.maskText;
                     this.textBox1.ForeColor = this.colorUnfocused;
+                    this.textBox1.CharacterCasing = CharacterCasing.Normal;
                 }
                 else
                 {
                     this.textBox1.Text = this.normalText;
                     this.textBox1.ForeColor = this.colorFocused;
+                    this.textBox1.CharacterCasing = this.character;
                 }
             }
         }
@@ -107,7 +112,24 @@ namespace CustomControls
                 if (this.isMaskared) this.textBox1.Text = this.maskText;
             }
         }
-        
+
+        /// <summary>
+        /// Indica si todos los caracteres deberían escribirse de forma libre o ser convertidos en mayúsculas o minúsculas.
+        /// </summary>
+        [Browsable(true), EditorBrowsable(EditorBrowsableState.Always), Bindable(true)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public CharacterCasing CharacterCasing
+        {
+            get
+            {
+                return this.character;
+            }
+            set
+            {
+                this.character = value;
+            }
+        }
+
         /*
          * EVENTOS
          * */
@@ -120,10 +142,11 @@ namespace CustomControls
             //Hago visible el botón para borrar.
             this.btnBorrar.Visible = true;
 
-            //Si está mascarado, borro el texto.
+            //Si está mascarado, borro el texto y seteo los caracteres como los he seleccionado..
             if (this.isMaskared)
             {
                 this.textBox1.Text = String.Empty;
+                this.textBox1.CharacterCasing = this.character;
             }
         }
 
@@ -135,9 +158,9 @@ namespace CustomControls
             //Oculto el botón borrar.
             this.btnBorrar.Visible = false;
 
-            //Si está mascarado, vuelvo a colocar el MaskText y cambio el color del Text.
+            //Si está mascarado, vuelvo a colocar el MaskText, cambio el color del Text.
             if (this.isMaskared) 
-            { 
+            {
                 this.textBox1.Text = this.maskText;
                 this.textBox1.ForeColor = this.colorUnfocused;
             }
@@ -152,6 +175,7 @@ namespace CustomControls
             else
             {
                 this.isMaskared = true;
+                this.textBox1.CharacterCasing = CharacterCasing.Normal; //Pongo los caracteres en Normal
             }
         }
 
@@ -159,6 +183,7 @@ namespace CustomControls
         {
             this.textBox1.Text = String.Empty;
             this.textBox1_KeyUp(null, null);
+            this.textBox1.CharacterCasing = CharacterCasing.Normal; //Pongo los caracteres en Normal
         }
 
         private void textBox1_KeyUp(object sender, KeyEventArgs e)
@@ -179,6 +204,11 @@ namespace CustomControls
         private void btnBorrar_MouseClick(object sender, MouseEventArgs e)
         {
             Clear();
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            this.OnKeyPress(e);
         }
     }
 }
