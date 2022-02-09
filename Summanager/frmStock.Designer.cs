@@ -30,7 +30,9 @@ namespace Summanager
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
+            this.btnNuevo = new CustomControls.ButtonBlue();
             this.panelTitulo.SuspendLayout();
+            this.panelMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblTitulo
@@ -40,7 +42,7 @@ namespace Summanager
             // 
             // panelMenu
             // 
-            this.panelMenu.Visible = false;
+            this.panelMenu.Controls.Add(this.btnNuevo);
             // 
             // label1
             // 
@@ -49,6 +51,16 @@ namespace Summanager
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(0, 13);
             this.label1.TabIndex = 2;
+            // 
+            // btnNuevo
+            // 
+            this.btnNuevo.Image = global::Summanager.Properties.Resources._new;
+            this.btnNuevo.Location = new System.Drawing.Point(12, 6);
+            this.btnNuevo.Name = "btnNuevo";
+            this.btnNuevo.Size = new System.Drawing.Size(76, 28);
+            this.btnNuevo.TabIndex = 8;
+            this.btnNuevo.Text = "Nuevo";
+            this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
             // 
             // FrmStock
             // 
@@ -62,6 +74,7 @@ namespace Summanager
             this.Controls.SetChildIndex(this.label1, 0);
             this.panelTitulo.ResumeLayout(false);
             this.panelTitulo.PerformLayout();
+            this.panelMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -70,5 +83,6 @@ namespace Summanager
         #endregion
 
         private System.Windows.Forms.Label label1;
+        private CustomControls.ButtonBlue btnNuevo;
     }
 }

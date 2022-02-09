@@ -10,7 +10,7 @@ namespace Data
 {
     public class DBSuministros
     {
-        public static List<Suministro> GetSuministros()
+        public static List<Suministro> GetSuministro()
         {
             var retorno = new List<Suministro>();
 
@@ -24,7 +24,14 @@ namespace Data
                     {
                         while (reader.Read())
                         {
-                            retorno.Add(new Suministro(Convert.ToInt64(reader["Codigo"].ToString()), reader["Nombre"].ToString()));
+                            var suministro = new Suministro();
+
+                            suministro.Codigo = Convert.ToInt64(reader["Codigo"].ToString());
+                            suministro.Nombre = reader["Nombre"].ToString();
+                            suministro.Tipo = DBTiposSuministros.GetTipos(Convert.ToInt32(reader["IdTipoSuministro"].ToString()));
+                            suministro.Modelos = DBModelosImpresoras.GetModelos(Convert.ToInt64(reader["Codigo"].ToString()));
+
+                            retorno.Add(suministro);
                         }
                     }
                 }

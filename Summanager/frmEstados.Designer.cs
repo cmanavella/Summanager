@@ -30,7 +30,7 @@ namespace Summanager
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgv = new System.Windows.Forms.DataGridView();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
@@ -41,13 +41,10 @@ namespace Summanager
             this.timerContador = new System.Windows.Forms.Timer(this.components);
             this.panelEstadisticas = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.lblEstTitle = new System.Windows.Forms.Label();
-            this.detalleEstadistica = new CustomControls.DetalleEstadistica();
             this.estNoAna = new CustomControls.Estadistica();
             this.estOffline = new CustomControls.Estadistica();
             this.estOnline = new CustomControls.Estadistica();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.customGroupBox3 = new CustomControls.CustomGroupBox();
             this.estKitMantCritico = new CustomControls.Estadistica();
             this.estUnImgCritico = new CustomControls.Estadistica();
@@ -56,7 +53,10 @@ namespace Summanager
             this.estKitMantRiesgo = new CustomControls.Estadistica();
             this.estUnImgRiesgo = new CustomControls.Estadistica();
             this.estTonerRiesgo = new CustomControls.Estadistica();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.lblEstTitle = new System.Windows.Forms.Label();
             this.btnCambiarEst = new CustomControls.ButtonGreen();
+            this.detalleEstadistica = new CustomControls.DetalleEstadistica();
             this.btnAgregar = new CustomControls.ButtonGreen();
             this.btnLimpiar = new CustomControls.ButtonGreen();
             this.cmbSuministro = new CustomControls.ComboBox();
@@ -75,9 +75,9 @@ namespace Summanager
             this.panelEstadisticas.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
-            this.panel2.SuspendLayout();
             this.customGroupBox3.SuspendLayout();
             this.customGroupBox1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelTitulo
@@ -116,14 +116,14 @@ namespace Summanager
             this.dgv.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgv.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgv.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(159)))), ((int)(((byte)(206)))));
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(159)))), ((int)(((byte)(206)))));
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(159)))), ((int)(((byte)(206)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(159)))), ((int)(((byte)(206)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgv.EnableHeadersVisualStyles = false;
             this.dgv.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
@@ -227,50 +227,6 @@ namespace Summanager
             this.panel4.Size = new System.Drawing.Size(1055, 112);
             this.panel4.TabIndex = 18;
             // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.customGroupBox3);
-            this.panel3.Controls.Add(this.customGroupBox1);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(0, 44);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1055, 136);
-            this.panel3.TabIndex = 17;
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.lblEstTitle);
-            this.panel2.Controls.Add(this.btnCambiarEst);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1055, 44);
-            this.panel2.TabIndex = 15;
-            // 
-            // lblEstTitle
-            // 
-            this.lblEstTitle.AutoSize = true;
-            this.lblEstTitle.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEstTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
-            this.lblEstTitle.Location = new System.Drawing.Point(9, 10);
-            this.lblEstTitle.Name = "lblEstTitle";
-            this.lblEstTitle.Size = new System.Drawing.Size(154, 16);
-            this.lblEstTitle.TabIndex = 25;
-            this.lblEstTitle.Text = "Estadísticas Generales";
-            // 
-            // detalleEstadistica
-            // 
-            this.detalleEstadistica.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.detalleEstadistica.Lex410 = 5;
-            this.detalleEstadistica.Lex610 = 3;
-            this.detalleEstadistica.Lex622 = 8;
-            this.detalleEstadistica.Lex812 = 20;
-            this.detalleEstadistica.Location = new System.Drawing.Point(94, 450);
-            this.detalleEstadistica.Name = "detalleEstadistica";
-            this.detalleEstadistica.Size = new System.Drawing.Size(18, 20);
-            this.detalleEstadistica.TabIndex = 13;
-            this.detalleEstadistica.Visible = false;
-            // 
             // estNoAna
             // 
             this.estNoAna.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -304,6 +260,16 @@ namespace Summanager
             this.estOnline.TabIndex = 10;
             this.estOnline.Text = "Online";
             this.estOnline.Total = 0;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.customGroupBox3);
+            this.panel3.Controls.Add(this.customGroupBox1);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel3.Location = new System.Drawing.Point(0, 44);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(1055, 136);
+            this.panel3.TabIndex = 17;
             // 
             // customGroupBox3
             // 
@@ -407,6 +373,27 @@ namespace Summanager
             this.estTonerRiesgo.MouseLeave += new System.EventHandler(this.estTonerRiesgo_MouseLeave);
             this.estTonerRiesgo.MouseHover += new System.EventHandler(this.estTonerRiesgo_MouseHover);
             // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.lblEstTitle);
+            this.panel2.Controls.Add(this.btnCambiarEst);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1055, 44);
+            this.panel2.TabIndex = 15;
+            // 
+            // lblEstTitle
+            // 
+            this.lblEstTitle.AutoSize = true;
+            this.lblEstTitle.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEstTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
+            this.lblEstTitle.Location = new System.Drawing.Point(9, 10);
+            this.lblEstTitle.Name = "lblEstTitle";
+            this.lblEstTitle.Size = new System.Drawing.Size(154, 16);
+            this.lblEstTitle.TabIndex = 25;
+            this.lblEstTitle.Text = "Estadísticas Generales";
+            // 
             // btnCambiarEst
             // 
             this.btnCambiarEst.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -418,6 +405,19 @@ namespace Summanager
             this.btnCambiarEst.Text = "Cambiar";
             this.btnCambiarEst.Visible = false;
             this.btnCambiarEst.Click += new System.EventHandler(this.btnCambiarEst_Click);
+            // 
+            // detalleEstadistica
+            // 
+            this.detalleEstadistica.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.detalleEstadistica.Lex410 = 5;
+            this.detalleEstadistica.Lex610 = 3;
+            this.detalleEstadistica.Lex622 = 8;
+            this.detalleEstadistica.Lex812 = 20;
+            this.detalleEstadistica.Location = new System.Drawing.Point(94, 450);
+            this.detalleEstadistica.Name = "detalleEstadistica";
+            this.detalleEstadistica.Size = new System.Drawing.Size(160, 100);
+            this.detalleEstadistica.TabIndex = 13;
+            this.detalleEstadistica.Visible = false;
             // 
             // btnAgregar
             // 
@@ -588,12 +588,12 @@ namespace Summanager
             this.panelEstadisticas.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
             this.customGroupBox3.ResumeLayout(false);
             this.customGroupBox3.PerformLayout();
             this.customGroupBox1.ResumeLayout(false);
             this.customGroupBox1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
