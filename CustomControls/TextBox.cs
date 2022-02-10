@@ -173,8 +173,14 @@ namespace CustomControls
                 this.isMaskared = false;
             }
             else
-            {
+            {   
                 this.isMaskared = true;
+            }
+
+            //Acomodo los caracteres solo si la tecla precionada es cualquiera de las dos para borrar y a la vez el campo está vacío.
+            if((e.KeyCode==Keys.Back || e.KeyCode==Keys.Delete) && this.textBox1.Text.Length == 0)
+            {
+                MessageBox.Show(this.isMaskared.ToString());
                 this.textBox1.CharacterCasing = CharacterCasing.Normal; //Pongo los caracteres en Normal
             }
         }
