@@ -21,6 +21,8 @@ namespace CustomControls
         private string normalText;
         private CharacterCasing character;
 
+        private bool firstTab;
+
         public TextBox()
         {
             InitializeComponent();
@@ -45,6 +47,8 @@ namespace CustomControls
             this.textBox1.Leave += this.TextBox_Leave;
 
             this.character = CharacterCasing.Normal;
+
+            this.firstTab = true;
         }
 
         /// <summary>
@@ -177,12 +181,12 @@ namespace CustomControls
                 this.isMaskared = true;
             }
 
-            //Acomodo los caracteres solo si la tecla precionada es cualquiera de las dos para borrar y a la vez el campo está vacío.
-            if((e.KeyCode==Keys.Back || e.KeyCode==Keys.Delete) && this.textBox1.Text.Length == 0)
+            if ((e.KeyCode == Keys.Tab || e.KeyCode == Keys.Back || e.KeyCode == Keys.Delete) && this.textBox1.Text.Length == 0)
             {
-                MessageBox.Show(this.isMaskared.ToString());
-                this.textBox1.CharacterCasing = CharacterCasing.Normal; //Pongo los caracteres en Normal
+                this.textBox1.CharacterCasing = CharacterCasing.Normal;
             }
+
+            //if (e.KeyCode == Keys.Tab) textBox1_PreviewKeyDown(null, e);
         }
 
         public void Clear()
@@ -215,6 +219,21 @@ namespace CustomControls
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
             this.OnKeyPress(e);
+        }
+
+        private void textBox1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyData == Keys.Tab)
+            {
+                if (firstTab)
+                {
+                    e.IsInputKey = true;
+                }
+                else
+                {
+                    e.IsInputKey = false;
+                }
+            }
         }
     }
 }
