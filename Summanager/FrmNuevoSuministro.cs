@@ -26,8 +26,8 @@ namespace Summanager
             this.cmbModelos.Add(0, "-- Seleccione --");
             try
             {
-                List<TipoSuministro> tipos = DBTiposSuministros.GetTipos();
-                List<Modelo> modelos = DBModelosImpresoras.GetModelos();
+                List<TipoSuministro> tipos = DBTiposSuministros.GetTipo();
+                List<Modelo> modelos = DBModelosImpresoras.GetModelo();
 
                 foreach(var tipo in tipos)
                 {

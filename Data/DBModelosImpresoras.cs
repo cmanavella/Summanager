@@ -10,7 +10,11 @@ namespace Data
 {
     public class DBModelosImpresoras
     {
-        public static List<Modelo> GetModelos()
+        /// <summary>
+        /// Obtiene una Lista de todos los Modelos de Impresoras desde la Base de Datos.
+        /// </summary>
+        /// <returns></returns>
+        public static List<Modelo> GetModelo()
         {
             var retorno = new List<Modelo>();
 
@@ -37,8 +41,13 @@ namespace Data
 
             return retorno;
         }
-        
-        public static List<Modelo> GetModelos(Int64 codigoSuministro)
+
+        /// <summary>
+        /// Obtiene una Lista de los Modelos de Impresoras relacionados con un Suministro en particular desde la Base de Datos .
+        /// </summary>
+        /// <param name="codigoSuministro"></param>
+        /// <returns></returns>
+        public static List<Modelo> GetModelo(Int64 codigoSuministro)
         {
             var retorno = new List<Modelo>();
 

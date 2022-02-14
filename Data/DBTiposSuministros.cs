@@ -10,7 +10,11 @@ namespace Data
 {
     public class DBTiposSuministros
     {
-        public static List<TipoSuministro> GetTipos()
+        /// <summary>
+        /// Obtiene una Lista de todos los Tipos de Suministro desde la Base de Datos.
+        /// </summary>
+        /// <returns></returns>
+        public static List<TipoSuministro> GetTipo()
         {
             var retorno = new List<TipoSuministro>();
 
@@ -37,7 +41,12 @@ namespace Data
             return retorno;
         }
 
-        public static TipoSuministro GetTipos(int id)
+        /// <summary>
+        /// Obtiene un Tipo de Suministro desde la Base de Datos a partir de su Id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static TipoSuministro GetTipo(int id)
         {
             var retorno = new TipoSuministro();
 
