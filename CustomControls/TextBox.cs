@@ -21,8 +21,6 @@ namespace CustomControls
         private string normalText;
         private CharacterCasing character;
 
-        private bool firstTab;
-
         public TextBox()
         {
             InitializeComponent();
@@ -47,8 +45,6 @@ namespace CustomControls
             this.textBox1.Leave += this.TextBox_Leave;
 
             this.character = CharacterCasing.Normal;
-
-            this.firstTab = true;
         }
 
         /// <summary>
@@ -146,11 +142,10 @@ namespace CustomControls
             //Hago visible el botón para borrar.
             this.btnBorrar.Visible = true;
 
-            //Si está mascarado, borro el texto y seteo los caracteres como los he seleccionado..
+            //Si está mascarado, borro el texto y seteo los caracteres como los he seleccionado.
             if (this.isMaskared)
             {
                 this.textBox1.Text = String.Empty;
-                this.textBox1.CharacterCasing = this.character;
             }
         }
 
@@ -181,12 +176,33 @@ namespace CustomControls
                 this.isMaskared = true;
             }
 
-            if ((e.KeyCode == Keys.Tab || e.KeyCode == Keys.Back || e.KeyCode == Keys.Delete) && this.textBox1.Text.Length == 0)
+            //Pregunto si la tecla presionada ha sido la de borrar o suprimir y si el texto está vacío. Si esto es así, seteo los 
+            //los caracteres a normal.
+            //Antes pregunto si el KeyEventArg no es nulo, ya que cuando aprieto el botón Borrar del UserControl llamo a este evento pasándole
+            //KeyEventArg como nulo.
+            if (e != null)
+            {
+                if ((e.KeyCode == Keys.Back || e.KeyCode == Keys.Delete) && this.textBox1.Text.Length == 0)
+                {
+                    this.textBox1.CharacterCasing = CharacterCasing.Normal;
+                }
+                //Si no se dan esas condiciones, pregunto si el texto tiene valor. Si lo tiene, seteo los cartacteres como los he configurado en la 
+                //propiedad del UserControl.
+                else if (this.textBox1.Text.Length > 0)
+                {
+                    this.textBox1.CharacterCasing = this.character;
+                }
+            }
+        }
+
+        private void textBox1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            //En este paso capturo el presionar de la tecla Tab antes de que el UserControl pierda el foco.
+            //En este caso pregunto si la tecla es Tab y a la vex el texto está vacío. En tal caso seteo los caracteres a Normal.
+            if (e.KeyCode == Keys.Tab && this.textBox1.Text.Length == 0)
             {
                 this.textBox1.CharacterCasing = CharacterCasing.Normal;
             }
-
-            //if (e.KeyCode == Keys.Tab) textBox1_PreviewKeyDown(null, e);
         }
 
         public void Clear()
@@ -219,21 +235,6 @@ namespace CustomControls
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
             this.OnKeyPress(e);
-        }
-
-        private void textBox1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
-        {
-            if (e.KeyData == Keys.Tab)
-            {
-                if (firstTab)
-                {
-                    e.IsInputKey = true;
-                }
-                else
-                {
-                    e.IsInputKey = false;
-                }
-            }
         }
     }
 }
