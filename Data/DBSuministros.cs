@@ -11,6 +11,45 @@ namespace Data
     public class DBSuministros
     {
         /// <summary>
+        /// Agrega un Suministro a la Base de Datos.
+        /// </summary>
+        /// <param name="suministro"></param>
+        public static void Add(Suministro suministro)
+        {
+            using(var con = DBContext.GetInstance())
+            {
+                using(var transaction = con.BeginTransaction())
+                {
+                    string query = "INSERT INTO Suministros (Codigo, Nombre, IdTipoSuministro) VALUES (" +
+                        suministro.Codigo.ToString() + ", '" + suministro.Nombre + "', " + suministro.Tipo.Id.ToString() + ")";
+
+                    try
+                    {
+                        using (var command = new SQLiteCommand(query, con))
+                        {
+                            command.ExecuteNonQuery();
+
+                            foreach(Modelo modelo in suministro.Modelos)
+                            {
+                                query = "INSERT INTO Suministros_X_Modelos (CodigoSuministro, IdModelo) VALUES (" +
+                                    suministro.Codigo.ToString() + ", " + modelo.Id + ")";
+
+                                command.CommandText = query;
+                                command.ExecuteNonQuery();
+                            }
+
+                            transaction.Commit();
+                        }
+                    }catch(Exception ex)
+                    {
+                        transaction.Rollback();
+                        throw ex;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
         /// Obtiene una Lista de todos los Suministros desde la Base de Datos.
         /// </summary>
         /// <returns></returns>

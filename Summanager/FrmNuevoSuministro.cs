@@ -113,6 +113,20 @@ namespace Summanager
             return retorno;
         }
 
+        /// <summary>
+        /// Limpia todo el Formulario y pone el foco en el Textbox Código.
+        /// </summary>
+        private void _clear()
+        {
+            this.txtCodigo.Clear();
+            this.txtNombre.Clear();
+            this.cmbTipo.SelectItem(0, true);
+            this.cmbModelos.SelectItem(0, true);
+            this.dgv.Rows.Clear();
+            this.dgv.Refresh();
+            this.txtCodigo.Focus();
+        }
+
         /**EVENTOS**/
 
         private void btnAgregar_Click(object sender, EventArgs e)
@@ -198,7 +212,50 @@ namespace Summanager
             //Debo validar que los campos sean correctos.
             if (_valido())
             {
-                MessageBox.Show("Guardo");
+                //Hago un Try en caso de error.
+                try
+                {
+                    //Cargo los modelos almacenados en el DataGridView en una Lista de Modelos.
+                    List<Modelo> modelos = new List<Modelo>();
+                    foreach (DataGridViewRow row in this.dgv.Rows)
+                    {
+                        modelos.Add(new Modelo(
+                                Convert.ToInt32(row.Cells["Id"].Value.ToString()),
+                                row.Cells["Nombre"].Value.ToString()
+                            ));
+                    }
+
+                    //Cargo un objeto Suministro con los valores del Formulario, incluyendo los Modelos generados anteriormente.
+                    Suministro suministro = new Suministro(
+                            Convert.ToInt64(this.txtCodigo.Text),
+                            this.txtNombre.Text,
+                            new TipoSuministro(this.cmbTipo.SelectedItem().Value, this.cmbTipo.SelectedItem().Text),
+                            modelos
+                        );
+
+                    //Agrego el Suministro a la Base de Datos.
+                    DBSuministros.Add(suministro);
+
+                    //Muestro mensaje de éxito y pregunto si se desea agregar otro suministro.
+                    var result = MessageBox.Show("Suministro agregado con éxito ¿Desea agregar más?", Application.ProductName + " " + Application.ProductVersion,
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
+                    //Si decido agregar otro suministro, llamo al método Clear que limpia todo el Formulario. Caso contrario, cierro el Formulario.
+                    if(result == DialogResult.Yes)
+                    {
+                        _clear();
+                    }
+                    else
+                    {
+                        this.Close();
+                    }
+                }
+                catch(Exception ex)
+                {
+                    //Si se produjo algún error lo muestro.
+                    MessageBox.Show(ex.Message, Application.ProductName + " " + Application.ProductVersion,
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             else
             {

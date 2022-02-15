@@ -244,6 +244,7 @@ namespace CustomControls
             this.textBox1.Text = String.Empty;
             this.textBox1_KeyUp(null, null);
             this.textBox1.CharacterCasing = CharacterCasing.Normal; //Pongo los caracteres en Normal
+            if (!this.textBox1.Focused) this.TextBox_Leave(null, null);
         }
 
         private void textBox1_KeyUp(object sender, KeyEventArgs e)
