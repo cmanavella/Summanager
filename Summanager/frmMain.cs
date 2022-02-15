@@ -87,7 +87,7 @@ namespace Summanager
         private void _openChildForm(object child, object sender)
         {
             //Convierto el Objeto que llamó a este método en su respectivo tipo para usarlo luego.
-            MenuButton boton = sender as MenuButton;
+            LateralMenuButton boton = sender as LateralMenuButton;
              
             //Cargo todos los Forms abiertos en el Panel Contenido.
             List<Form> forms = panelContenido.Controls.OfType<Form>().ToList<Form>();
@@ -147,9 +147,9 @@ namespace Summanager
         {
             foreach (Control control in this.panelMenu.Controls)
             {
-                if(control is MenuButton)
+                if(control is LateralMenuButton)
                 {
-                    MenuButton button = control as MenuButton;
+                    LateralMenuButton button = control as LateralMenuButton;
                     button.Selected = false;
                 }
             }

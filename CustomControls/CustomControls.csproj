@@ -84,17 +84,23 @@
     <Compile Include="Estadistica.Designer.cs">
       <DependentUpon>Estadistica.cs</DependentUpon>
     </Compile>
-    <Compile Include="MenuButton.cs">
+    <Compile Include="LateralMenuButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="MenuButton.Designer.cs">
-      <DependentUpon>MenuButton.cs</DependentUpon>
+    <Compile Include="LateralMenuButton.Designer.cs">
+      <DependentUpon>LateralMenuButton.cs</DependentUpon>
     </Compile>
     <Compile Include="ButtonPadre.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ButtonPadre.Designer.cs">
       <DependentUpon>ButtonPadre.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MenuButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MenuButton.Designer.cs">
+      <DependentUpon>MenuButton.cs</DependentUpon>
     </Compile>
     <Compile Include="PanelButton.cs">
       <SubType>UserControl</SubType>
@@ -136,11 +142,14 @@
     <EmbeddedResource Include="Estadistica.resx">
       <DependentUpon>Estadistica.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MenuButton.resx">
-      <DependentUpon>MenuButton.cs</DependentUpon>
+    <EmbeddedResource Include="LateralMenuButton.resx">
+      <DependentUpon>LateralMenuButton.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ButtonPadre.resx">
       <DependentUpon>ButtonPadre.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuButton.resx">
+      <DependentUpon>MenuButton.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PanelButton.resx">
       <DependentUpon>PanelButton.cs</DependentUpon>

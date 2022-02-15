@@ -39,9 +39,9 @@ namespace Summanager
             this.panelLateral = new System.Windows.Forms.Panel();
             this.panelMenu = new System.Windows.Forms.Panel();
             this.bordeInferiorIzquierdo = new System.Windows.Forms.Panel();
-            this.btnStock = new CustomControls.MenuButton();
-            this.btnConfiguracion = new CustomControls.MenuButton();
-            this.btnEstados = new CustomControls.MenuButton();
+            this.btnStock = new CustomControls.LateralMenuButton();
+            this.btnConfiguracion = new CustomControls.LateralMenuButton();
+            this.btnEstados = new CustomControls.LateralMenuButton();
             this.panelLogo = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
@@ -416,9 +416,9 @@ namespace Summanager
         private System.Windows.Forms.Panel bordeDerecho;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panelContenido;
-        private CustomControls.MenuButton btnStock;
-        private CustomControls.MenuButton btnEstados;
-        private CustomControls.MenuButton btnConfiguracion;
+        private CustomControls.LateralMenuButton btnStock;
+        private CustomControls.LateralMenuButton btnEstados;
+        private CustomControls.LateralMenuButton btnConfiguracion;
         private System.Windows.Forms.Panel bordeEsquinaDerecha;
         private System.Windows.Forms.Panel bordeIzquierdo;
         private System.Windows.Forms.Panel bordeEsquinaIzquierda;

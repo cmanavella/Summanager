@@ -12,41 +12,9 @@ namespace CustomControls
 {
     public partial class MenuButton : UserControl
     {
-        private bool selected;
-        private readonly Color panelNoSelected = Color.FromArgb(0, 137, 132);
-        private readonly Color panelWhite = Color.White;
-        private readonly Color panelSelected = Color.FromArgb(165, 217, 216);
-        private readonly Color buttonSelected = Color.White;
-        private readonly Color buttonNoSelected = Color.FromArgb(165, 217, 216);
-
         public MenuButton()
         {
             InitializeComponent();
-            this.button1.MouseClick += Button1_MouseClick;
-        }
-
-        [Browsable(true), EditorBrowsable(EditorBrowsableState.Always), Bindable(true)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
-        public bool Selected
-        {
-            get
-            {
-                return this.selected;
-            }
-            set
-            {
-                this.selected = value;
-                if (value)
-                {
-                    button1.BackColor = buttonSelected;
-                    panelDerecho.BackColor = panelWhite;
-                }
-                else
-                {
-                    button1.BackColor = buttonNoSelected;
-                    panelDerecho.BackColor = panelNoSelected;
-                }
-            }
         }
 
         [Browsable(true), EditorBrowsable(EditorBrowsableState.Always), Bindable(true)]
@@ -75,11 +43,6 @@ namespace CustomControls
             {
                 button1.Image = value;
             }
-        }
-
-        private void Button1_MouseClick(object sender, MouseEventArgs e)
-        {
-            this.OnMouseClick(e);
         }
     }
 }
