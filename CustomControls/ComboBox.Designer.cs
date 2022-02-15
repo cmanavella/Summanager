@@ -166,8 +166,10 @@ namespace CustomControls
             this.Name = "ComboBox";
             this.Size = new System.Drawing.Size(136, 27);
             this.Enter += new System.EventHandler(this.ComboBox_Enter);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ComboBox_KeyUp);
             this.Leave += new System.EventHandler(this.ComboBox_Leave);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ComboBox_MouseClick);
+            this.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.ComboBox_PreviewKeyDown);
             this.contenedorCombo.ResumeLayout(false);
             this.lista.ResumeLayout(false);
             this.ResumeLayout(false);

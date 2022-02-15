@@ -268,6 +268,29 @@ namespace CustomControls
             //Llamo al método desplegar. Le indico por parámetro que se llama desde un evento clic.
             _desplegar(true);
         }
+
+        private void ComboBox_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            //Cancelo las teclas de flechas para que no se ejecute el Leave al presionarlas, tomándolas como input.
+            if (e.KeyCode == Keys.Down || e.KeyCode == Keys.Left || e.KeyCode == Keys.Up || e.KeyCode == Keys.Right)
+            {
+                e.IsInputKey = true;
+            }
+        }
+
+        private void ComboBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            //Si la tecla presionada es la Flecha Abajo, selecciono el siguiente Item.
+            if (e.KeyCode == Keys.Down)
+            {
+                _nextItem();
+            }
+            //Si la tecla presionada es la Flecha Arriba, selecciono el Item anterior.
+            if (e.KeyCode == Keys.Up)
+            {
+                _beforeItem();
+            }
+        }
     }
 
     public class Item
