@@ -13,9 +13,12 @@ namespace Summanager
     public partial class FrmNuevoSuministro : Summanager.FrmAbm
     {
         private string msjeValidacion;
+        private bool avisoValidacion;
         public FrmNuevoSuministro(string titulo) : base(titulo)
         {
             InitializeComponent();
+
+            this.avisoValidacion = true; //Seteo esta variable para que no me muestre dos veces el mensaje de que el Suministro ya existe.
 
             _cargarCombos(); //Cargo los Combos.
         }
@@ -153,9 +156,25 @@ namespace Summanager
 
                 if (suministro != null)
                 {
+                    //Vielvo el foco al Textbox Código.
                     this.txtCodigo.Focus();
-                    MessageBox.Show("El suministro ya existe.", Application.ProductName + " " + Application.ProductVersion,
+
+                    //Selecciono el texto dentro del Textbox Código.
+                    this.txtCodigo.SelectionStart = 0;
+                    this.txtCodigo.SelectionLength = this.txtCodigo.Text.Length;
+                    //Como el evento Leave se ejecuta dos veces uso una bandera. Si está en True muestro el mensaje y seteo la bandera en False.
+                    if (avisoValidacion)
+                    {
+                        MessageBox.Show("El suministro ya existe.", Application.ProductName + " " + Application.ProductVersion,
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        avisoValidacion = false;
+                    }
+                    else
+                    {
+                        //Si la bandera está en false, la seteo en True.
+                        avisoValidacion = true;
+                    }
+                    
                 }
             }
         }

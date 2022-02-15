@@ -130,6 +130,40 @@ namespace CustomControls
             }
         }
 
+        /// <summary>
+        /// Obtiene o establece el punto inicial del texto seleccionado en el cuadro de texto.
+        /// </summary>
+        /// <returns>La posición inicial del texto seleccionado en el cuadro de texto.</returns>
+        /// <exception cref="ArgumentOutOfRangeException"/>
+        public int SelectionStart
+        {
+            get
+            {
+                return this.textBox1.SelectionStart;
+            }
+            set
+            {
+                this.textBox1.SelectionStart = value;
+            }
+        }
+
+        /// <summary>
+        /// Obtiene o establece el número de caracteres seleccionados en el cuadro de texto.
+        /// </summary>
+        /// <returns>El número de caracteres seleccionados en el cuadro de texto.</returns>
+        /// <exception cref="ArgumentOutOfRangeException"/>
+        public int SelectionLength
+        {
+            get
+            {
+                return this.textBox1.SelectionLength;
+            }
+            set
+            {
+                this.textBox1.SelectionLength = value;
+            }
+        }
+
         /*
          * EVENTOS
          * */
