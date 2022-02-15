@@ -30,19 +30,13 @@ namespace Summanager
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.btnNuevo = new CustomControls.ButtonBlue();
             this.menuButton1 = new CustomControls.MenuButton();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.holaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mundoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnNuevo = new CustomControls.ButtonBlue();
+            this.btnHola = new CustomControls.ItemMenuButton();
+            this.btnMundo = new CustomControls.ItemMenuButton();
             this.panelTitulo.SuspendLayout();
             this.panelMenu.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // panelTitulo
-            // 
-            this.panelTitulo.Location = new System.Drawing.Point(0, 24);
             // 
             // lblTitulo
             // 
@@ -53,7 +47,6 @@ namespace Summanager
             // 
             this.panelMenu.Controls.Add(this.menuButton1);
             this.panelMenu.Controls.Add(this.btnNuevo);
-            this.panelMenu.Location = new System.Drawing.Point(0, 73);
             // 
             // label1
             // 
@@ -62,6 +55,17 @@ namespace Summanager
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(0, 13);
             this.label1.TabIndex = 2;
+            // 
+            // menuButton1
+            // 
+            this.menuButton1.Image = null;
+            this.menuButton1.Items.Add(this.btnHola);
+            this.menuButton1.Items.Add(this.btnMundo);
+            this.menuButton1.Location = new System.Drawing.Point(106, 6);
+            this.menuButton1.Name = "menuButton1";
+            this.menuButton1.Size = new System.Drawing.Size(80, 28);
+            this.menuButton1.TabIndex = 9;
+            this.menuButton1.Text = "menuButton1";
             // 
             // btnNuevo
             // 
@@ -73,57 +77,56 @@ namespace Summanager
             this.btnNuevo.Text = "Nuevo";
             this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
             // 
-            // menuButton1
+            // btnHola
             // 
-            this.menuButton1.Image = null;
-            this.menuButton1.Location = new System.Drawing.Point(106, 6);
-            this.menuButton1.Name = "menuButton1";
-            this.menuButton1.Size = new System.Drawing.Size(80, 28);
-            this.menuButton1.TabIndex = 9;
-            this.menuButton1.Text = "menuButton1";
+            this.btnHola.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(159)))), ((int)(((byte)(206)))));
+            this.btnHola.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnHola.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnHola.FlatAppearance.BorderSize = 0;
+            this.btnHola.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnHola.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHola.ForeColor = System.Drawing.Color.White;
+            this.btnHola.Location = new System.Drawing.Point(0, 0);
+            this.btnHola.Name = "btnHola";
+            this.btnHola.Size = new System.Drawing.Size(75, 23);
+            this.btnHola.TabIndex = 0;
+            this.btnHola.TabStop = false;
+            this.btnHola.Text = "Hola";
+            this.btnHola.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnHola.UseVisualStyleBackColor = false;
+            this.btnHola.Click += new System.EventHandler(this.btnHola_Click);
             // 
-            // menuStrip1
+            // btnMundo
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.holaToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1050, 24);
-            this.menuStrip1.TabIndex = 3;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // holaToolStripMenuItem
-            // 
-            this.holaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mundoToolStripMenuItem});
-            this.holaToolStripMenuItem.Name = "holaToolStripMenuItem";
-            this.holaToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.holaToolStripMenuItem.Text = "Hola";
-            // 
-            // mundoToolStripMenuItem
-            // 
-            this.mundoToolStripMenuItem.Name = "mundoToolStripMenuItem";
-            this.mundoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.mundoToolStripMenuItem.Text = "Mundo";
+            this.btnMundo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(159)))), ((int)(((byte)(206)))));
+            this.btnMundo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnMundo.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnMundo.FlatAppearance.BorderSize = 0;
+            this.btnMundo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMundo.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMundo.ForeColor = System.Drawing.Color.White;
+            this.btnMundo.Location = new System.Drawing.Point(0, 0);
+            this.btnMundo.Name = "btnMundo";
+            this.btnMundo.Size = new System.Drawing.Size(75, 23);
+            this.btnMundo.TabIndex = 0;
+            this.btnMundo.TabStop = false;
+            this.btnMundo.Text = "Mundo";
+            this.btnMundo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnMundo.UseVisualStyleBackColor = false;
             // 
             // FrmStock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(1050, 690);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
             this.Name = "FrmStock";
             this.Shown += new System.EventHandler(this.FrmStock_Shown);
-            this.Controls.SetChildIndex(this.menuStrip1, 0);
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.panelTitulo, 0);
             this.Controls.SetChildIndex(this.panelMenu, 0);
             this.panelTitulo.ResumeLayout(false);
             this.panelTitulo.PerformLayout();
             this.panelMenu.ResumeLayout(false);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -134,8 +137,7 @@ namespace Summanager
         private System.Windows.Forms.Label label1;
         private CustomControls.ButtonBlue btnNuevo;
         private CustomControls.MenuButton menuButton1;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem holaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem mundoToolStripMenuItem;
+        private CustomControls.ItemMenuButton btnHola;
+        private CustomControls.ItemMenuButton btnMundo;
     }
 }

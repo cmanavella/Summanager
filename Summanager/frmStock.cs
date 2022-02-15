@@ -48,5 +48,10 @@ namespace Summanager
             FrmNuevoSuministro nuevoSuministro = new FrmNuevoSuministro("Nuevo Suministro");
             nuevoSuministro.ShowDialog();
         }
+
+        private void btnHola_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Hola");
+        }
     }
 }
