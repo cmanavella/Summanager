@@ -12,9 +12,67 @@ namespace CustomControls
 {
     public partial class PanelButton : UserControl
     {
+        private Color buttonBackColor;
+        private Color buttonForeColor;
+
         public PanelButton()
         {
             InitializeComponent();
+            this.buttonBackColor = Color.FromArgb(0, 137, 132);
+            this.buttonForeColor = Color.White;
+        }
+
+        [Browsable(true), EditorBrowsable(EditorBrowsableState.Always), Bindable(true)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public new bool Enabled
+        {
+            get
+            {
+                return this.button1.Enabled;
+            }
+            set
+            {
+                this.button1.Enabled = value;
+
+                if (value)
+                {
+                    this.button1.BackColor = this.buttonBackColor;
+                }
+                else
+                {
+                    this.button1.BackColor = Color.Silver;
+                }
+            }
+        }
+
+        [Browsable(true), EditorBrowsable(EditorBrowsableState.Always), Bindable(true)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Color ButtonForeColor
+        {
+            get
+            {
+                return this.buttonForeColor;
+            }
+            set
+            {
+                this.buttonForeColor = value;
+                this.button1.ForeColor = value;
+            }
+        }
+
+        [Browsable(true), EditorBrowsable(EditorBrowsableState.Always), Bindable(true)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Color ButtonBackColor
+        {
+            get
+            {
+                return this.buttonBackColor;
+            }
+            set
+            {
+                this.buttonBackColor = value;
+                this.button1.BackColor = value;
+            }
         }
 
         [Browsable(true), EditorBrowsable(EditorBrowsableState.Always), Bindable(true)]

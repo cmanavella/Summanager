@@ -29,7 +29,7 @@ namespace Summanager
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.txtCodigo = new CustomControls.TextBox();
             this.cmbTipo = new CustomControls.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -40,6 +40,7 @@ namespace Summanager
             this.dgv = new System.Windows.Forms.DataGridView();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Modelo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnQuitar = new CustomControls.PanelButton();
             this.groupCompatible.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.SuspendLayout();
@@ -47,12 +48,12 @@ namespace Summanager
             // btnCancelar
             // 
             this.btnCancelar.Location = new System.Drawing.Point(8, 307);
-            this.btnCancelar.TabIndex = 20;
+            this.btnCancelar.TabIndex = 21;
             // 
             // btnGuardar
             // 
             this.btnGuardar.Location = new System.Drawing.Point(222, 307);
-            this.btnGuardar.TabIndex = 21;
+            this.btnGuardar.TabIndex = 22;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // txtNombre
@@ -119,6 +120,8 @@ namespace Summanager
             // 
             // btnAgregar
             // 
+            this.btnAgregar.ButtonBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
+            this.btnAgregar.ButtonForeColor = System.Drawing.Color.White;
             this.btnAgregar.Image = null;
             this.btnAgregar.Location = new System.Drawing.Point(271, 121);
             this.btnAgregar.Name = "btnAgregar";
@@ -132,7 +135,7 @@ namespace Summanager
             this.groupCompatible.Controls.Add(this.dgv);
             this.groupCompatible.Location = new System.Drawing.Point(8, 157);
             this.groupCompatible.Name = "groupCompatible";
-            this.groupCompatible.Size = new System.Drawing.Size(293, 128);
+            this.groupCompatible.Size = new System.Drawing.Size(293, 109);
             this.groupCompatible.TabIndex = 19;
             this.groupCompatible.Text = "Compatible con";
             // 
@@ -146,14 +149,14 @@ namespace Summanager
             this.dgv.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgv.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgv.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(159)))), ((int)(((byte)(206)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(159)))), ((int)(((byte)(206)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(159)))), ((int)(((byte)(206)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(159)))), ((int)(((byte)(206)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Id,
@@ -176,7 +179,7 @@ namespace Summanager
             this.dgv.ShowCellToolTips = false;
             this.dgv.ShowEditingIcon = false;
             this.dgv.ShowRowErrors = false;
-            this.dgv.Size = new System.Drawing.Size(286, 101);
+            this.dgv.Size = new System.Drawing.Size(286, 82);
             this.dgv.TabIndex = 6;
             // 
             // Id
@@ -193,10 +196,25 @@ namespace Summanager
             this.Modelo.ReadOnly = true;
             this.Modelo.Width = 286;
             // 
+            // btnQuitar
+            // 
+            this.btnQuitar.ButtonBackColor = System.Drawing.Color.DarkRed;
+            this.btnQuitar.ButtonForeColor = System.Drawing.Color.White;
+            this.btnQuitar.Enabled = false;
+            this.btnQuitar.ForeColor = System.Drawing.Color.White;
+            this.btnQuitar.Image = null;
+            this.btnQuitar.Location = new System.Drawing.Point(271, 272);
+            this.btnQuitar.Name = "btnQuitar";
+            this.btnQuitar.Size = new System.Drawing.Size(30, 30);
+            this.btnQuitar.TabIndex = 20;
+            this.btnQuitar.Text = "-";
+            this.btnQuitar.Click += new System.EventHandler(this.btnQuitar_Click);
+            // 
             // FrmNuevoSuministro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(314, 347);
+            this.Controls.Add(this.btnQuitar);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtCodigo);
             this.Controls.Add(this.cmbTipo);
@@ -215,6 +233,7 @@ namespace Summanager
             this.Controls.SetChildIndex(this.txtNombre, 0);
             this.Controls.SetChildIndex(this.txtCodigo, 0);
             this.Controls.SetChildIndex(this.label1, 0);
+            this.Controls.SetChildIndex(this.btnQuitar, 0);
             this.groupCompatible.ResumeLayout(false);
             this.groupCompatible.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
@@ -235,5 +254,6 @@ namespace Summanager
         private System.Windows.Forms.DataGridView dgv;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Modelo;
+        private CustomControls.PanelButton btnQuitar;
     }
 }
