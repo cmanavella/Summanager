@@ -59,6 +59,7 @@ namespace CustomControls
             this.Controls.Add(this.button1);
             this.Name = "MenuButton";
             this.Size = new System.Drawing.Size(80, 28);
+            this.Click += new System.EventHandler(this.MenuButton_Click);
             this.ResumeLayout(false);
 
         }

@@ -17,6 +17,10 @@ namespace CustomControls
         private List<ItemMenuButton> items;
         private Container container;
         private bool containerDesplegado;
+        private Point containerLocation;
+        private bool clickOutBound;
+        private bool clickOnMenu;
+        private bool ejecutoClick;
 
         public MenuButton()
         {
@@ -24,6 +28,9 @@ namespace CustomControls
             this.items = new List<ItemMenuButton>();
             this.container = new Container(this);
             this.containerDesplegado = false;
+            this.clickOutBound = false;
+            this.clickOnMenu = false;
+            this.ejecutoClick = true;
         }
 
         [EditorAttribute(typeof(CollectionEditor), typeof(UITypeEditor))]
@@ -68,55 +75,115 @@ namespace CustomControls
             }
         }
 
-        public void Desplegar()
+        public bool ContainerDesplegado
         {
-            if (!containerDesplegado)
+            get
             {
-                this.container.Controls.Clear();
-
-                foreach(ItemMenuButton button in this.items)
-                {
-                    this.container.Controls.Add(button);
-                }
-
-                this.container.Show();
-                containerDesplegado = true;
+                return this.containerDesplegado;
+            }
+            set
+            {
+                this.containerDesplegado = value;
             }
         }
 
-        public void Plegar()
+        public bool ClickOutBound
         {
-            if (containerDesplegado)
+            get
             {
-                this.container.Hide();
-                this.containerDesplegado = false;
+                return this.clickOutBound;
             }
+            set
+            {
+                this.clickOutBound = value;
+            }
+        }
+
+        public void Desplegar()
+        {
+            this.container.Controls.Clear();
+
+            foreach (ItemMenuButton button in this.items)
+            {
+                this.container.Controls.Add(button);
+                button.BringToFront();
+            }
+
+            this.container.BringToFront();
+            this.container.Show();
+            this.container.Location = this.containerLocation;
+            containerDesplegado = true;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            Control control = (Control)sender;
+            this.containerLocation = control.PointToScreen(control.Location);
+            //this.containerLocation.Y += control.Height;
+
             Desplegar();
+        }
+
+        private void MenuButton_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 
     public class Container : Form
     {
         private MenuButton menu;
+        private Panel panelSuperior;
+        private Panel panelHand;
+
         public Container(MenuButton menu)
         {
-            this.Size = new Size(200, 200);
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.BackColor = Color.FromArgb(114, 159, 206);
-            this.ShowInTaskbar = false;
-
             this.menu = menu;
 
+            this.panelSuperior = new Panel();
+            this.panelHand = new Panel();
+
+            this.Size = new Size(200, 200);
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.TransparencyKey = Color.Red;
+            this.BackColor = Color.Red;
+            this.ShowInTaskbar = false;
+
             this.Deactivate += Container_Deactivate;
+            this.Shown += Container_Shown;
+
+            this.panelHand.Click += Panel_Hand_Click;
+            this.panelSuperior.Click += Panel_Superior_Click;
+
+        }
+
+        private void Panel_Superior_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
+
+        private void Panel_Hand_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
+
+        private void Container_Shown(object sender, EventArgs e)
+        {
+            this.panelSuperior.Height = this.menu.Height;
+            this.panelSuperior.Dock = DockStyle.Top;
+            this.Controls.Add(panelSuperior);
+
+
+            this.panelHand.Width = this.menu.Width;
+            this.panelHand.Dock = DockStyle.Left;
+            this.panelHand.Cursor = Cursors.Hand;
+
+            this.panelSuperior.Controls.Add(panelHand);
         }
 
         private void Container_Deactivate(object sender, EventArgs e)
         {
-            this.menu.Plegar();
+            this.Hide();
         }
     }
 

@@ -30,10 +30,11 @@ namespace Summanager
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.menuButton1 = new CustomControls.MenuButton();
-            this.btnNuevo = new CustomControls.ButtonBlue();
+            this.menuButton2 = new CustomControls.MenuButton();
             this.btnHola = new CustomControls.ItemMenuButton();
             this.btnMundo = new CustomControls.ItemMenuButton();
+            this.menuButton1 = new CustomControls.MenuButton();
+            this.btnNuevo = new CustomControls.ButtonBlue();
             this.panelTitulo.SuspendLayout();
             this.panelMenu.SuspendLayout();
             this.SuspendLayout();
@@ -45,6 +46,7 @@ namespace Summanager
             // 
             // panelMenu
             // 
+            this.panelMenu.Controls.Add(this.menuButton2);
             this.panelMenu.Controls.Add(this.menuButton1);
             this.panelMenu.Controls.Add(this.btnNuevo);
             // 
@@ -56,26 +58,18 @@ namespace Summanager
             this.label1.Size = new System.Drawing.Size(0, 13);
             this.label1.TabIndex = 2;
             // 
-            // menuButton1
+            // menuButton2
             // 
-            this.menuButton1.Image = null;
-            this.menuButton1.Items.Add(this.btnHola);
-            this.menuButton1.Items.Add(this.btnMundo);
-            this.menuButton1.Location = new System.Drawing.Point(106, 6);
-            this.menuButton1.Name = "menuButton1";
-            this.menuButton1.Size = new System.Drawing.Size(80, 28);
-            this.menuButton1.TabIndex = 9;
-            this.menuButton1.Text = "menuButton1";
-            // 
-            // btnNuevo
-            // 
-            this.btnNuevo.Image = global::Summanager.Properties.Resources._new;
-            this.btnNuevo.Location = new System.Drawing.Point(12, 6);
-            this.btnNuevo.Name = "btnNuevo";
-            this.btnNuevo.Size = new System.Drawing.Size(76, 28);
-            this.btnNuevo.TabIndex = 8;
-            this.btnNuevo.Text = "Nuevo";
-            this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
+            this.menuButton2.ClickOutBound = false;
+            this.menuButton2.ContainerDesplegado = false;
+            this.menuButton2.Image = null;
+            this.menuButton2.Items.Add(this.btnHola);
+            this.menuButton2.Items.Add(this.btnMundo);
+            this.menuButton2.Location = new System.Drawing.Point(485, 6);
+            this.menuButton2.Name = "menuButton2";
+            this.menuButton2.Size = new System.Drawing.Size(80, 28);
+            this.menuButton2.TabIndex = 10;
+            this.menuButton2.Text = "menuButton2";
             // 
             // btnHola
             // 
@@ -114,6 +108,29 @@ namespace Summanager
             this.btnMundo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnMundo.UseVisualStyleBackColor = false;
             // 
+            // menuButton1
+            // 
+            this.menuButton1.ClickOutBound = false;
+            this.menuButton1.ContainerDesplegado = false;
+            this.menuButton1.Image = null;
+            this.menuButton1.Items.Add(this.btnHola);
+            this.menuButton1.Items.Add(this.btnMundo);
+            this.menuButton1.Location = new System.Drawing.Point(106, 6);
+            this.menuButton1.Name = "menuButton1";
+            this.menuButton1.Size = new System.Drawing.Size(80, 28);
+            this.menuButton1.TabIndex = 9;
+            this.menuButton1.Text = "menuButton1";
+            // 
+            // btnNuevo
+            // 
+            this.btnNuevo.Image = global::Summanager.Properties.Resources._new;
+            this.btnNuevo.Location = new System.Drawing.Point(12, 6);
+            this.btnNuevo.Name = "btnNuevo";
+            this.btnNuevo.Size = new System.Drawing.Size(76, 28);
+            this.btnNuevo.TabIndex = 8;
+            this.btnNuevo.Text = "Nuevo";
+            this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
+            // 
             // FrmStock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -139,5 +156,6 @@ namespace Summanager
         private CustomControls.MenuButton menuButton1;
         private CustomControls.ItemMenuButton btnHola;
         private CustomControls.ItemMenuButton btnMundo;
+        private CustomControls.MenuButton menuButton2;
     }
 }
