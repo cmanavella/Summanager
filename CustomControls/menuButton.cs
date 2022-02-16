@@ -18,9 +18,6 @@ namespace CustomControls
         private Container container;
         private bool containerDesplegado;
         private Point containerLocation;
-        private bool clickOutBound;
-        private bool clickOnMenu;
-        private bool ejecutoClick;
 
         public MenuButton()
         {
@@ -28,9 +25,6 @@ namespace CustomControls
             this.items = new List<ItemMenuButton>();
             this.container = new Container(this);
             this.containerDesplegado = false;
-            this.clickOutBound = false;
-            this.clickOnMenu = false;
-            this.ejecutoClick = true;
         }
 
         [EditorAttribute(typeof(CollectionEditor), typeof(UITypeEditor))]
@@ -87,21 +81,10 @@ namespace CustomControls
             }
         }
 
-        public bool ClickOutBound
-        {
-            get
-            {
-                return this.clickOutBound;
-            }
-            set
-            {
-                this.clickOutBound = value;
-            }
-        }
-
         public void Desplegar()
         {
             this.container.Controls.Clear();
+            this.container.AgregarPanelSuperior();
 
             foreach (ItemMenuButton button in this.items)
             {
@@ -109,6 +92,7 @@ namespace CustomControls
                 button.BringToFront();
             }
 
+            this.container.SetHeight();
             this.container.BringToFront();
             this.container.Show();
             this.container.Location = this.containerLocation;
@@ -119,7 +103,6 @@ namespace CustomControls
         {
             Control control = (Control)sender;
             this.containerLocation = control.PointToScreen(control.Location);
-            //this.containerLocation.Y += control.Height;
 
             Desplegar();
         }
@@ -143,18 +126,44 @@ namespace CustomControls
             this.panelSuperior = new Panel();
             this.panelHand = new Panel();
 
-            this.Size = new Size(200, 200);
+            this.Width = 150;
             this.FormBorderStyle = FormBorderStyle.None;
             this.TransparencyKey = Color.Red;
             this.BackColor = Color.Red;
             this.ShowInTaskbar = false;
 
             this.Deactivate += Container_Deactivate;
-            this.Shown += Container_Shown;
 
             this.panelHand.Click += Panel_Hand_Click;
             this.panelSuperior.Click += Panel_Superior_Click;
 
+        }
+
+        public void SetHeight()
+        {
+            int height = 0;
+
+            foreach(Control control in this.Controls)
+            {
+                height += control.Height;
+            }
+
+            this.Height = height;
+        }
+
+        public void AgregarPanelSuperior()
+        {
+            this.panelSuperior.Height = this.menu.Height;
+            this.panelSuperior.Dock = DockStyle.Top;
+            this.Controls.Add(panelSuperior);
+            this.panelSuperior.BringToFront();
+
+            this.panelHand.Width = this.menu.Width;
+            this.panelHand.Dock = DockStyle.Left;
+            this.panelHand.Cursor = Cursors.Hand;
+            this.panelHand.BringToFront();
+
+            this.panelSuperior.Controls.Add(panelHand);
         }
 
         private void Panel_Superior_Click(object sender, EventArgs e)
@@ -165,20 +174,6 @@ namespace CustomControls
         private void Panel_Hand_Click(object sender, EventArgs e)
         {
             this.Hide();
-        }
-
-        private void Container_Shown(object sender, EventArgs e)
-        {
-            this.panelSuperior.Height = this.menu.Height;
-            this.panelSuperior.Dock = DockStyle.Top;
-            this.Controls.Add(panelSuperior);
-
-
-            this.panelHand.Width = this.menu.Width;
-            this.panelHand.Dock = DockStyle.Left;
-            this.panelHand.Cursor = Cursors.Hand;
-
-            this.panelSuperior.Controls.Add(panelHand);
         }
 
         private void Container_Deactivate(object sender, EventArgs e)
@@ -206,14 +201,6 @@ namespace CustomControls
             this.ForeColor = Color.White;
             this.BackColor = Color.FromArgb(114, 159, 206);
             this.TextAlign = ContentAlignment.MiddleLeft;
-
-            //Le asigno el evento Mouse Click.
-            //this.Click += ItemMenuButton_Click;
         }
-
-        //private void ItemMenuButton_Click(object sender, EventArgs e)
-        //{
-        //    this.OnClick(e);
-        //}
     }
 }
