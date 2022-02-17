@@ -200,6 +200,7 @@ namespace Summanager
             this.Controls.Add(this.dgv);
             this.Controls.Add(this.label1);
             this.Name = "FrmStock";
+            this.Shown += new System.EventHandler(this.FrmStock_Shown);
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.panelTitulo, 0);
             this.Controls.SetChildIndex(this.panelMenu, 0);

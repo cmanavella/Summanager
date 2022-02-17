@@ -12,17 +12,47 @@ namespace Summanager
 {
     public partial class FrmStock : Summanager.FrmContenido
     {
-        private List<Suministro> suministros;
+        private List<Stock> stock;
 
         public FrmStock()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Busca en la Base de Datos el Stock de todos los Suministros y lo muestra en el DataGridView.
+        /// </summary>
+        private void ActualizarStock()
+        {
+            try
+            {
+                this.stock = DBStock.GetStock();
+
+                if (this.stock != null)
+                {
+                    this.lblMsjeStock.Visible = false;
+                }
+                else
+                {
+                    this.lblMsjeStock.Visible = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName + " " + Application.ProductVersion,
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private void btnNuevoSuministro_Click(object sender, EventArgs e)
         {
             FrmNuevoSuministro nuevoSuministro = new FrmNuevoSuministro("Nuevo Suministro");
             nuevoSuministro.ShowDialog();
+        }
+
+        private void FrmStock_Shown(object sender, EventArgs e)
+        {
+            ActualizarStock();
         }
     }
 }

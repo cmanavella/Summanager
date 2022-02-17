@@ -75,6 +75,7 @@
   <ItemGroup>
     <Compile Include="DBContext.cs" />
     <Compile Include="DBModelosImpresoras.cs" />
+    <Compile Include="DBStock.cs" />
     <Compile Include="DBTiposSuministros.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DBSuministros.cs" />
