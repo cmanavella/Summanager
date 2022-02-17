@@ -22,11 +22,18 @@ namespace CustomControls
         public MenuButton()
         {
             InitializeComponent();
+
+            //Esta es la Lista donde se cargan los botones embebidos en el Menú.
             this.items = new List<ItemMenuButton>();
+            //Este es contenedor de los botones. Sería lo que se despliega.
             this.container = new Container(this);
+            //Esta bandera la uso para saber si el Menú está desplegado o no.
             this.containerDesplegado = false;
         }
 
+        /// <summary>
+        /// Representa la colección de botones dentro del elemento.
+        /// </summary>
         [EditorAttribute(typeof(CollectionEditor), typeof(UITypeEditor))]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public List<ItemMenuButton> Items
@@ -41,6 +48,9 @@ namespace CustomControls
             }
         }
 
+        /// <summary>
+        /// Texto que mostrará el control.
+        /// </summary>
         [Browsable(true), EditorBrowsable(EditorBrowsableState.Always), Bindable(true)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public override string Text
@@ -55,6 +65,9 @@ namespace CustomControls
             }
         }
 
+        /// <summary>
+        /// Imagen que mostrará el control.
+        /// </summary>
         [Browsable(true), EditorBrowsable(EditorBrowsableState.Always), Bindable(true)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public Image Image
@@ -69,6 +82,9 @@ namespace CustomControls
             }
         }
 
+        /// <summary>
+        /// Bandera que identifica si el contenedor de los botones dentro del control se encuentra desplegado o no.
+        /// </summary>
         public bool ContainerDesplegado
         {
             get
@@ -81,86 +97,137 @@ namespace CustomControls
             }
         }
 
+        /// <summary>
+        /// Despliega el contenedor de los botones del control.
+        /// </summary>
         public void Desplegar()
         {
-            this.container.Controls.Clear();
-            this.container.AgregarPanelSuperior();
-
-            foreach (ItemMenuButton button in this.items)
+            //Primero me aseguro que haya Ítems (Botones) cargados en el Menú para desplegar su contenedor.
+            if (this.items.Count > 0)
             {
-                this.container.Controls.Add(button);
-                button.BringToFront();
-            }
+                //Limpio todos los controles que ya tenga el contenedor.
+                this.container.Controls.Clear();
+                //Agrego el panel superior del contenedor, que tiene la funcionalidad de replegarlo. Lo agrego sí o sí ya que al quitar todos 
+                //controles, también quito el panel superior y es menester para el correcto funcionamiento del contenedor.
+                this.container.AgregarPanelSuperior();
 
-            this.container.SetHeight();
-            this.container.BringToFront();
-            this.container.Show();
-            this.container.Location = this.containerLocation;
-            containerDesplegado = true;
+                //Recorro todos los Ítems cargados en el Menú y los agrego al contenedor. Como por defecto tienen la propiedad Dock seteada en Top, debo
+                //ponerlos al frente de todo a medida que los agrego.
+                foreach (ItemMenuButton button in this.items)
+                {
+                    this.container.Controls.Add(button);
+                    button.BringToFront();
+                }
+
+                //Seteo la altura del contenedor que la calcula el método de él mismo.
+                this.container.SetHeight();
+                //Lo pongo al frente para que no se oculte detrás de otro elemento.
+                this.container.BringToFront();
+                //Como el contenedor básicamente es un Form modificado, lo muestro.
+                this.container.Show();
+                //Seteo la posición del contenedor en la pantalla para que quede exactamente debajo del Menú.
+                this.container.Location = this.containerLocation;
+                //Pongo la bandera que me indica si el contenedor está desplegado en True.
+                containerDesplegado = true;
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //Al hacer clic en el Menú necesito que se despliegue el contenedor. Pero antes debo calcular la pocisión exacta para ubicarlo.
+            //Para ello, transformo el Objeto Sender en un Control.
             Control control = (Control)sender;
+            //Luego calculo la posición del Contenedor en base a la posición relativa que ocupa el Menú en la pantalla.
             this.containerLocation = control.PointToScreen(control.Location);
 
+            //Despliego el Contenedor.
             Desplegar();
         }
     }
 
+    /// <summary>
+    /// Control que contiene los botones de un control Menú. Por defecto está oculto pero se despliega y pliega al hacer clic en el Menú.
+    /// </summary>
     public class Container : Form
     {
         private MenuButton menu;
         private Panel panelSuperior;
         private Panel panelHand;
 
+        /// <summary>
+        /// Constructor de la clase Container.
+        /// </summary>
+        /// <param name="menu">Control Menú que lo contiene.</param>
         public Container(MenuButton menu)
         {
+            //Paso el Menú del parámetro a la variable del contenedor.
             this.menu = menu;
 
+            //Creo un panel superior.
             this.panelSuperior = new Panel();
+            //Creo el panel Hand que se va a encontrar dentro del Panel Superior a su izquierda.
+            //Tiene la función de simplemente modificar el cursor del mouse a hand.
             this.panelHand = new Panel();
 
+            //Al ser un Form necesito setearlo.
+            //Le doy un ancho de 150px.
             this.Width = 150;
+            //Le quito los bordes.
             this.FormBorderStyle = FormBorderStyle.None;
+            //El TransparencyKey y el BackColor seteados con el mismo color me permiten que el Form sea transparente.
             this.TransparencyKey = Color.Red;
             this.BackColor = Color.Red;
+            //Hago que no se muestre en la Barra de Tareas.
             this.ShowInTaskbar = false;
 
+            //Asigno los Eventos con los que voy a trabajar.
+            //Evento que tiene lugar cuando el Form se desactiva.
             this.Deactivate += Container_Deactivate;
-
             this.panelHand.Click += Panel_Hand_Click;
             this.panelSuperior.Click += Panel_Superior_Click;
 
         }
 
+        /// <summary>
+        /// Devuelve la altura del contenedor en base a la cantidad de elementos que contenga.
+        /// </summary>
         public void SetHeight()
         {
             int height = 0;
 
+            //Recorro todos los controles cargados en el contenedor y voy sumando su altura.
             foreach(Control control in this.Controls)
             {
                 height += control.Height;
             }
 
+            //Seteo la altura del contenedor en base a lo calculado.
             this.Height = height;
         }
 
+        /// <summary>
+        /// Agrega el panel superior dentro del contenedor.
+        /// </summary>
         public void AgregarPanelSuperior()
         {
+            //Seteo el panel superior
             this.panelSuperior.Height = this.menu.Height;
             this.panelSuperior.Dock = DockStyle.Top;
             this.Controls.Add(panelSuperior);
             this.panelSuperior.BringToFront();
 
+            //Seteo el panel hand. Es importante que el ancho de este panel sea del ancho del Menú que lo contiene para simular, al pasar el mouse por
+            //encima o al hacer clic, que uno está actuando sobre el Menú.
             this.panelHand.Width = this.menu.Width;
             this.panelHand.Dock = DockStyle.Left;
             this.panelHand.Cursor = Cursors.Hand;
             this.panelHand.BringToFront();
 
+            //Agrego el Panel Hand al Panel Superior.
             this.panelSuperior.Controls.Add(panelHand);
         }
 
+        //En los eventos clic de los dos paneles y en el evento deactive del contenedor, simplemente oculto el mismo (lo pliego).
         private void Panel_Superior_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -177,6 +244,7 @@ namespace CustomControls
         }
     }
 
+    //Debo serializar la clase, para que al agregar un Item desde la vista de diseño no haya problemas con el constructor.
     [Serializable]
     public class ItemMenuButton : Button
     {
