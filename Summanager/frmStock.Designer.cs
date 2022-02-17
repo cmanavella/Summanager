@@ -56,12 +56,12 @@ namespace Summanager
             // menuNuevo
             // 
             this.menuNuevo.ContainerDesplegado = false;
-            this.menuNuevo.Image = null;
+            this.menuNuevo.Image = global::Summanager.Properties.Resources._new;
             this.menuNuevo.Items.Add(this.btnNuevoSuministro);
             this.menuNuevo.Location = new System.Drawing.Point(12, 6);
             this.menuNuevo.Name = "menuNuevo";
             this.menuNuevo.Size = new System.Drawing.Size(80, 28);
-            this.menuNuevo.TabIndex = 9;
+            this.menuNuevo.TabIndex = 0;
             this.menuNuevo.Text = "Nuevo";
             // 
             // btnNuevoSuministro

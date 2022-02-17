@@ -47,11 +47,11 @@ namespace CustomControls
         {
             get
             {
-                return button1.Text;
+                return this.button1.Text;
             }
             set
             {
-                button1.Text = value;
+                this.button1.Text = value;
             }
         }
 
@@ -61,11 +61,11 @@ namespace CustomControls
         {
             get
             {
-                return button1.Image;
+                return this.button1.Image;
             }
             set
             {
-                button1.Image = value;
+                this.button1.Image = value;
             }
         }
 
@@ -105,11 +105,6 @@ namespace CustomControls
             this.containerLocation = control.PointToScreen(control.Location);
 
             Desplegar();
-        }
-
-        private void MenuButton_Click(object sender, EventArgs e)
-        {
-            
         }
     }
 
