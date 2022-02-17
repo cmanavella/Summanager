@@ -203,7 +203,6 @@ namespace Summanager
             this.btnQuitar.ButtonBackColor = System.Drawing.Color.DarkRed;
             this.btnQuitar.ButtonForeColor = System.Drawing.Color.White;
             this.btnQuitar.Enabled = false;
-            this.btnQuitar.ForeColor = System.Drawing.Color.White;
             this.btnQuitar.Image = null;
             this.btnQuitar.Location = new System.Drawing.Point(271, 272);
             this.btnQuitar.Name = "btnQuitar";

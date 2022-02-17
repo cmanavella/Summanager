@@ -103,6 +103,14 @@ namespace CustomControls
             }
         }
 
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        [Obsolete("just cast me to avoid all this hiding...", true)]
+        public new Color BackColor { get; set; }
+
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        [Obsolete("just cast me to avoid all this hiding...", true)]
+        public new Color ForeColor { get; set; }
+
         private void button1_Click(object sender, EventArgs e)
         {
             this.OnClick(e);
