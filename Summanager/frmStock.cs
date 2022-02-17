@@ -17,40 +17,6 @@ namespace Summanager
         public FrmStock()
         {
             InitializeComponent();
-
-            try
-            {
-                this.suministros = DBSuministros.GetSuministro();
-            }catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message, Application.ProductName + " " + Application.ProductVersion, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void FrmStock_Shown(object sender, EventArgs e)
-        {
-            foreach(var suministro in this.suministros)
-            {
-                this.label1.Text += "'Código' = " + suministro.Codigo + "; 'Nombre' = " + suministro.Nombre + "; 'Tipo' = " + suministro.Tipo.Nombre + 
-                    "; 'Compatible con' = ";
-
-                foreach(var modelo in suministro.Modelos)
-                {
-                    this.label1.Text += modelo.Nombre + ", ";
-                }
-
-                this.label1.Text += "\n";
-            }
-        }
-
-        private void btnHola_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Hola");
-        }
-
-        private void btnMundo_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Mundo");
         }
 
         private void btnNuevoSuministro_Click(object sender, EventArgs e)

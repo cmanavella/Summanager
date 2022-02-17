@@ -29,11 +29,21 @@ namespace Summanager
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.menuNuevo = new CustomControls.MenuButton();
             this.btnNuevoSuministro = new CustomControls.ItemMenuButton();
+            this.dgv = new System.Windows.Forms.DataGridView();
+            this.Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Alta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Baja = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Fallado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Compatible = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lblMsjeStock = new System.Windows.Forms.Label();
             this.panelTitulo.SuspendLayout();
             this.panelMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.SuspendLayout();
             // 
             // lblTitulo
@@ -83,19 +93,122 @@ namespace Summanager
             this.btnNuevoSuministro.UseVisualStyleBackColor = false;
             this.btnNuevoSuministro.Click += new System.EventHandler(this.btnNuevoSuministro_Click);
             // 
+            // dgv
+            // 
+            this.dgv.AllowUserToAddRows = false;
+            this.dgv.AllowUserToDeleteRows = false;
+            this.dgv.AllowUserToResizeColumns = false;
+            this.dgv.AllowUserToResizeRows = false;
+            this.dgv.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dgv.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgv.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.dgv.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(159)))), ((int)(((byte)(206)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(159)))), ((int)(((byte)(206)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dgv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Codigo,
+            this.Nombre,
+            this.Alta,
+            this.Baja,
+            this.Fallado,
+            this.Compatible});
+            this.dgv.EnableHeadersVisualStyles = false;
+            this.dgv.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
+            this.dgv.Location = new System.Drawing.Point(12, 106);
+            this.dgv.MultiSelect = false;
+            this.dgv.Name = "dgv";
+            this.dgv.ReadOnly = true;
+            this.dgv.RowHeadersVisible = false;
+            this.dgv.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.White;
+            this.dgv.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Century Gothic", 9.75F);
+            this.dgv.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
+            this.dgv.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
+            this.dgv.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.White;
+            this.dgv.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.dgv.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgv.ShowCellErrors = false;
+            this.dgv.ShowCellToolTips = false;
+            this.dgv.ShowEditingIcon = false;
+            this.dgv.ShowRowErrors = false;
+            this.dgv.Size = new System.Drawing.Size(1026, 184);
+            this.dgv.TabIndex = 7;
+            // 
+            // Codigo
+            // 
+            this.Codigo.HeaderText = "Codigo";
+            this.Codigo.Name = "Codigo";
+            this.Codigo.ReadOnly = true;
+            this.Codigo.Width = 150;
+            // 
+            // Nombre
+            // 
+            this.Nombre.HeaderText = "Descripción";
+            this.Nombre.Name = "Nombre";
+            this.Nombre.ReadOnly = true;
+            this.Nombre.Width = 200;
+            // 
+            // Alta
+            // 
+            this.Alta.HeaderText = "En Stock";
+            this.Alta.Name = "Alta";
+            this.Alta.ReadOnly = true;
+            this.Alta.Width = 80;
+            // 
+            // Baja
+            // 
+            this.Baja.HeaderText = "De Baja";
+            this.Baja.Name = "Baja";
+            this.Baja.ReadOnly = true;
+            this.Baja.Width = 80;
+            // 
+            // Fallado
+            // 
+            this.Fallado.HeaderText = "Fallados";
+            this.Fallado.Name = "Fallado";
+            this.Fallado.ReadOnly = true;
+            this.Fallado.Width = 80;
+            // 
+            // Compatible
+            // 
+            this.Compatible.HeaderText = "Compatible con...";
+            this.Compatible.Name = "Compatible";
+            this.Compatible.ReadOnly = true;
+            this.Compatible.Width = 436;
+            // 
+            // lblMsjeStock
+            // 
+            this.lblMsjeStock.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMsjeStock.Location = new System.Drawing.Point(9, 156);
+            this.lblMsjeStock.Name = "lblMsjeStock";
+            this.lblMsjeStock.Size = new System.Drawing.Size(1029, 19);
+            this.lblMsjeStock.TabIndex = 8;
+            this.lblMsjeStock.Text = "No hay stock cargado en la Base de Datos.";
+            this.lblMsjeStock.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // FrmStock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(1050, 690);
+            this.Controls.Add(this.lblMsjeStock);
+            this.Controls.Add(this.dgv);
             this.Controls.Add(this.label1);
             this.Name = "FrmStock";
-            this.Shown += new System.EventHandler(this.FrmStock_Shown);
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.panelTitulo, 0);
             this.Controls.SetChildIndex(this.panelMenu, 0);
+            this.Controls.SetChildIndex(this.dgv, 0);
+            this.Controls.SetChildIndex(this.lblMsjeStock, 0);
             this.panelTitulo.ResumeLayout(false);
             this.panelTitulo.PerformLayout();
             this.panelMenu.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -106,5 +219,13 @@ namespace Summanager
         private System.Windows.Forms.Label label1;
         private CustomControls.MenuButton menuNuevo;
         private CustomControls.ItemMenuButton btnNuevoSuministro;
+        private System.Windows.Forms.DataGridView dgv;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Codigo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Alta;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Baja;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Fallado;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Compatible;
+        private System.Windows.Forms.Label lblMsjeStock;
     }
 }
