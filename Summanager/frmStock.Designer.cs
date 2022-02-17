@@ -31,8 +31,6 @@ namespace Summanager
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
-            this.menuNuevo = new CustomControls.MenuButton();
-            this.btnNuevoSuministro = new CustomControls.ItemMenuButton();
             this.dgv = new System.Windows.Forms.DataGridView();
             this.Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -41,6 +39,8 @@ namespace Summanager
             this.Fallado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Compatible = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblMsjeStock = new System.Windows.Forms.Label();
+            this.menuNuevo = new CustomControls.MenuButton();
+            this.btnNuevoSuministro = new CustomControls.ItemMenuButton();
             this.panelTitulo.SuspendLayout();
             this.panelMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
@@ -62,36 +62,6 @@ namespace Summanager
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(0, 13);
             this.label1.TabIndex = 2;
-            // 
-            // menuNuevo
-            // 
-            this.menuNuevo.ContainerDesplegado = false;
-            this.menuNuevo.Image = global::Summanager.Properties.Resources._new;
-            this.menuNuevo.Items.Add(this.btnNuevoSuministro);
-            this.menuNuevo.Location = new System.Drawing.Point(12, 6);
-            this.menuNuevo.Name = "menuNuevo";
-            this.menuNuevo.Size = new System.Drawing.Size(80, 28);
-            this.menuNuevo.TabIndex = 0;
-            this.menuNuevo.Text = "Nuevo";
-            // 
-            // btnNuevoSuministro
-            // 
-            this.btnNuevoSuministro.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(159)))), ((int)(((byte)(206)))));
-            this.btnNuevoSuministro.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnNuevoSuministro.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnNuevoSuministro.FlatAppearance.BorderSize = 0;
-            this.btnNuevoSuministro.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNuevoSuministro.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNuevoSuministro.ForeColor = System.Drawing.Color.White;
-            this.btnNuevoSuministro.Location = new System.Drawing.Point(0, 0);
-            this.btnNuevoSuministro.Name = "btnNuevoSuministro";
-            this.btnNuevoSuministro.Size = new System.Drawing.Size(75, 23);
-            this.btnNuevoSuministro.TabIndex = 0;
-            this.btnNuevoSuministro.TabStop = false;
-            this.btnNuevoSuministro.Text = "Suministro";
-            this.btnNuevoSuministro.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnNuevoSuministro.UseVisualStyleBackColor = false;
-            this.btnNuevoSuministro.Click += new System.EventHandler(this.btnNuevoSuministro_Click);
             // 
             // dgv
             // 
@@ -191,6 +161,36 @@ namespace Summanager
             this.lblMsjeStock.TabIndex = 8;
             this.lblMsjeStock.Text = "No hay stock cargado en la Base de Datos.";
             this.lblMsjeStock.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // menuNuevo
+            // 
+            this.menuNuevo.ContainerDesplegado = false;
+            this.menuNuevo.Image = global::Summanager.Properties.Resources._new;
+            this.menuNuevo.Items.Add(this.btnNuevoSuministro);
+            this.menuNuevo.Location = new System.Drawing.Point(12, 6);
+            this.menuNuevo.Name = "menuNuevo";
+            this.menuNuevo.Size = new System.Drawing.Size(80, 28);
+            this.menuNuevo.TabIndex = 0;
+            this.menuNuevo.Text = "Nuevo";
+            // 
+            // btnNuevoSuministro
+            // 
+            this.btnNuevoSuministro.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(159)))), ((int)(((byte)(206)))));
+            this.btnNuevoSuministro.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnNuevoSuministro.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnNuevoSuministro.FlatAppearance.BorderSize = 0;
+            this.btnNuevoSuministro.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNuevoSuministro.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNuevoSuministro.ForeColor = System.Drawing.Color.White;
+            this.btnNuevoSuministro.Location = new System.Drawing.Point(0, 0);
+            this.btnNuevoSuministro.Name = "btnNuevoSuministro";
+            this.btnNuevoSuministro.Size = new System.Drawing.Size(75, 23);
+            this.btnNuevoSuministro.TabIndex = 0;
+            this.btnNuevoSuministro.TabStop = false;
+            this.btnNuevoSuministro.Text = "Suministro";
+            this.btnNuevoSuministro.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnNuevoSuministro.UseVisualStyleBackColor = false;
+            this.btnNuevoSuministro.Click += new System.EventHandler(this.btnNuevoSuministro_Click);
             // 
             // FrmStock
             // 

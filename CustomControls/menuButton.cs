@@ -110,6 +110,8 @@ namespace CustomControls
                 //Agrego el panel superior del contenedor, que tiene la funcionalidad de replegarlo. Lo agrego sí o sí ya que al quitar todos 
                 //controles, también quito el panel superior y es menester para el correcto funcionamiento del contenedor.
                 this.container.AgregarPanelSuperior();
+                //Agrego los bordes.
+                this.container.AgregarBordes();
 
                 //Recorro todos los Ítems cargados en el Menú y los agrego al contenedor. Como por defecto tienen la propiedad Dock seteada en Top, debo
                 //ponerlos al frente de todo a medida que los agrego.
@@ -153,6 +155,8 @@ namespace CustomControls
         private MenuButton menu;
         private Panel panelSuperior;
         private Panel panelHand;
+        private Panel bordeDerecho;
+        private Panel bordeInferior;
 
         /// <summary>
         /// Constructor de la clase Container.
@@ -168,6 +172,10 @@ namespace CustomControls
             //Creo el panel Hand que se va a encontrar dentro del Panel Superior a su izquierda.
             //Tiene la función de simplemente modificar el cursor del mouse a hand.
             this.panelHand = new Panel();
+
+            //Creo los Paneles Bordes.
+            this.bordeDerecho = new Panel();
+            this.bordeInferior = new Panel();
 
             //Al ser un Form necesito setearlo.
             //Le doy un ancho de 150px.
@@ -193,16 +201,20 @@ namespace CustomControls
         /// </summary>
         public void SetHeight()
         {
-            int height = 0;
+            //Ingreso la altura del Panel Superior.
+            int height = this.panelSuperior.Height;
 
-            //Recorro todos los controles cargados en el contenedor y voy sumando su altura.
+            //Recorro todos los controles cargados en el contenedor, que no sean del tipo Panel, y voy sumando su altura.
             foreach(Control control in this.Controls)
             {
-                height += control.Height;
+                if (control.GetType().Name != "Panel")
+                {
+                    height += control.Height;
+                }
             }
 
-            //Seteo la altura del contenedor en base a lo calculado.
-            this.Height = height;
+            //Seteo la altura del contenedor en base a lo calculado sumándole 2px del Borde Inferior.
+            this.Height = height + 2;
         }
 
         /// <summary>
@@ -213,7 +225,7 @@ namespace CustomControls
             //Seteo el panel superior
             this.panelSuperior.Height = this.menu.Height;
             this.panelSuperior.Dock = DockStyle.Top;
-            this.Controls.Add(panelSuperior);
+            this.Controls.Add(this.panelSuperior);
             this.panelSuperior.BringToFront();
 
             //Seteo el panel hand. Es importante que el ancho de este panel sea del ancho del Menú que lo contiene para simular, al pasar el mouse por
@@ -224,7 +236,25 @@ namespace CustomControls
             this.panelHand.BringToFront();
 
             //Agrego el Panel Hand al Panel Superior.
-            this.panelSuperior.Controls.Add(panelHand);
+            this.panelSuperior.Controls.Add(this.panelHand);
+        }
+
+        /// <summary>
+        /// Agrega los bordes al contenedor.
+        /// </summary>
+        public void AgregarBordes()
+        {
+            this.bordeDerecho.Width = 2;
+            this.bordeDerecho.BackColor = Color.FromArgb(60, 113, 170);
+            this.bordeDerecho.Dock = DockStyle.Right;
+            this.Controls.Add(this.bordeDerecho);
+            this.bordeDerecho.BringToFront();
+
+            this.bordeInferior.Height = 2;
+            this.bordeInferior.BackColor = Color.FromArgb(60, 113, 170);
+            this.bordeInferior.Dock = DockStyle.Bottom;
+            this.Controls.Add(this.bordeInferior);
+            this.bordeInferior.BringToFront();
         }
 
         //En los eventos clic de los dos paneles y en el evento deactive del contenedor, simplemente oculto el mismo (lo pliego).
