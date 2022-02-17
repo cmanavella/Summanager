@@ -36,8 +36,8 @@ namespace Summanager
             this.panelIzquierdo = new System.Windows.Forms.Panel();
             this.panelInferior = new System.Windows.Forms.Panel();
             this.txtNombre = new CustomControls.TextBox();
-            this.btnCancelar = new CustomControls.ButtonGreen();
-            this.btnGuardar = new CustomControls.ButtonGreen();
+            this.btnCancelar = new CustomControls.Button();
+            this.btnGuardar = new CustomControls.Button();
             this.panelSuperior.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -67,6 +67,8 @@ namespace Summanager
             // 
             // btnCerrar
             // 
+            this.btnCerrar.ButtonBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
+            this.btnCerrar.ButtonForeColor = System.Drawing.Color.White;
             this.btnCerrar.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnCerrar.Image = null;
             this.btnCerrar.Location = new System.Drawing.Point(279, 0);
@@ -106,10 +108,13 @@ namespace Summanager
             // txtNombre
             // 
             this.txtNombre.BackColor = System.Drawing.Color.White;
+            this.txtNombre.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtNombre.IsMaskared = true;
             this.txtNombre.Location = new System.Drawing.Point(8, 36);
             this.txtNombre.MaskText = "Nombre";
             this.txtNombre.Name = "txtNombre";
+            this.txtNombre.SelectionLength = 0;
+            this.txtNombre.SelectionStart = 0;
             this.txtNombre.Size = new System.Drawing.Size(289, 20);
             this.txtNombre.TabIndex = 14;
             this.txtNombre.Text = "Nombre";
@@ -117,6 +122,8 @@ namespace Summanager
             // btnCancelar
             // 
             this.btnCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnCancelar.ButtonBackColor = System.Drawing.Color.Gray;
+            this.btnCancelar.ButtonForeColor = System.Drawing.Color.White;
             this.btnCancelar.Image = null;
             this.btnCancelar.Location = new System.Drawing.Point(8, 67);
             this.btnCancelar.Name = "btnCancelar";
@@ -128,6 +135,8 @@ namespace Summanager
             // btnGuardar
             // 
             this.btnGuardar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnGuardar.ButtonBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
+            this.btnGuardar.ButtonForeColor = System.Drawing.Color.White;
             this.btnGuardar.Image = null;
             this.btnGuardar.Location = new System.Drawing.Point(217, 67);
             this.btnGuardar.Name = "btnGuardar";
@@ -165,8 +174,8 @@ namespace Summanager
         private System.Windows.Forms.Panel panelDerecho;
         private System.Windows.Forms.Panel panelIzquierdo;
         private System.Windows.Forms.Panel panelInferior;
-        protected CustomControls.ButtonGreen btnCancelar;
-        protected CustomControls.ButtonGreen btnGuardar;
+        protected CustomControls.Button btnCancelar;
+        protected CustomControls.Button btnGuardar;
         protected System.Windows.Forms.Label lblTitulo;
         protected CustomControls.TextBox txtNombre;
     }

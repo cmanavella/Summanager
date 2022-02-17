@@ -55,20 +55,20 @@ namespace Summanager
             this.estTonerRiesgo = new CustomControls.Estadistica();
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblEstTitle = new System.Windows.Forms.Label();
-            this.btnCambiarEst = new CustomControls.ButtonGreen();
+            this.btnCambiarEst = new CustomControls.Button();
             this.detalleEstadistica = new CustomControls.DetalleEstadistica();
-            this.btnAgregar = new CustomControls.ButtonGreen();
-            this.btnLimpiar = new CustomControls.ButtonGreen();
+            this.btnAgregar = new CustomControls.Button();
+            this.btnLimpiar = new CustomControls.Button();
             this.cmbSuministro = new CustomControls.ComboBox();
             this.cmbEstados = new CustomControls.ComboBox();
             this.txtFiltro = new CustomControls.TextBox();
-            this.btnActualizar = new CustomControls.ButtonBlue();
-            this.btnExportar = new CustomControls.ButtonBlue();
-            this.btnImportar = new CustomControls.ButtonBlue();
-            this.btnGuardarComo = new CustomControls.ButtonBlue();
-            this.btnGuardar = new CustomControls.ButtonBlue();
-            this.btnAbrir = new CustomControls.ButtonBlue();
-            this.btnNuevo = new CustomControls.ButtonBlue();
+            this.btnActualizar = new CustomControls.Button();
+            this.btnExportar = new CustomControls.Button();
+            this.btnImportar = new CustomControls.Button();
+            this.btnGuardarComo = new CustomControls.Button();
+            this.btnGuardar = new CustomControls.Button();
+            this.btnAbrir = new CustomControls.Button();
+            this.btnNuevo = new CustomControls.Button();
             this.panelTitulo.SuspendLayout();
             this.panelMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
@@ -397,6 +397,8 @@ namespace Summanager
             // btnCambiarEst
             // 
             this.btnCambiarEst.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCambiarEst.ButtonBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
+            this.btnCambiarEst.ButtonForeColor = System.Drawing.Color.White;
             this.btnCambiarEst.Image = null;
             this.btnCambiarEst.Location = new System.Drawing.Point(954, 10);
             this.btnCambiarEst.Name = "btnCambiarEst";
@@ -421,6 +423,8 @@ namespace Summanager
             // 
             // btnAgregar
             // 
+            this.btnAgregar.ButtonBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
+            this.btnAgregar.ButtonForeColor = System.Drawing.Color.White;
             this.btnAgregar.Image = global::Summanager.Properties.Resources.add;
             this.btnAgregar.Location = new System.Drawing.Point(854, 96);
             this.btnAgregar.Name = "btnAgregar";
@@ -432,6 +436,8 @@ namespace Summanager
             // btnLimpiar
             // 
             this.btnLimpiar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLimpiar.ButtonBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
+            this.btnLimpiar.ButtonForeColor = System.Drawing.Color.White;
             this.btnLimpiar.Image = global::Summanager.Properties.Resources.clear;
             this.btnLimpiar.Location = new System.Drawing.Point(948, 96);
             this.btnLimpiar.Name = "btnLimpiar";
@@ -468,10 +474,13 @@ namespace Summanager
             // txtFiltro
             // 
             this.txtFiltro.BackColor = System.Drawing.Color.White;
+            this.txtFiltro.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtFiltro.IsMaskared = true;
             this.txtFiltro.Location = new System.Drawing.Point(12, 104);
             this.txtFiltro.MaskText = "Filtrar por Ip, Modelo u Oficina";
             this.txtFiltro.Name = "txtFiltro";
+            this.txtFiltro.SelectionLength = 0;
+            this.txtFiltro.SelectionStart = 0;
             this.txtFiltro.Size = new System.Drawing.Size(270, 20);
             this.txtFiltro.TabIndex = 2;
             this.txtFiltro.Text = "Filtrar por Ip, Modelo u Oficina";
@@ -481,6 +490,8 @@ namespace Summanager
             // btnActualizar
             // 
             this.btnActualizar.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnActualizar.ButtonBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(159)))), ((int)(((byte)(206)))));
+            this.btnActualizar.ButtonForeColor = System.Drawing.Color.White;
             this.btnActualizar.Image = global::Summanager.Properties.Resources.refresh_page_option;
             this.btnActualizar.Location = new System.Drawing.Point(942, 6);
             this.btnActualizar.Name = "btnActualizar";
@@ -491,6 +502,8 @@ namespace Summanager
             // 
             // btnExportar
             // 
+            this.btnExportar.ButtonBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(159)))), ((int)(((byte)(206)))));
+            this.btnExportar.ButtonForeColor = System.Drawing.Color.White;
             this.btnExportar.Image = global::Summanager.Properties.Resources.excel;
             this.btnExportar.Location = new System.Drawing.Point(531, 6);
             this.btnExportar.Name = "btnExportar";
@@ -501,6 +514,8 @@ namespace Summanager
             // 
             // btnImportar
             // 
+            this.btnImportar.ButtonBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(159)))), ((int)(((byte)(206)))));
+            this.btnImportar.ButtonForeColor = System.Drawing.Color.White;
             this.btnImportar.Image = global::Summanager.Properties.Resources.excel;
             this.btnImportar.Location = new System.Drawing.Point(429, 6);
             this.btnImportar.Name = "btnImportar";
@@ -511,6 +526,8 @@ namespace Summanager
             // 
             // btnGuardarComo
             // 
+            this.btnGuardarComo.ButtonBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(159)))), ((int)(((byte)(206)))));
+            this.btnGuardarComo.ButtonForeColor = System.Drawing.Color.White;
             this.btnGuardarComo.Image = global::Summanager.Properties.Resources.save_file;
             this.btnGuardarComo.Location = new System.Drawing.Point(273, 6);
             this.btnGuardarComo.Name = "btnGuardarComo";
@@ -521,6 +538,8 @@ namespace Summanager
             // 
             // btnGuardar
             // 
+            this.btnGuardar.ButtonBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(159)))), ((int)(((byte)(206)))));
+            this.btnGuardar.ButtonForeColor = System.Drawing.Color.White;
             this.btnGuardar.Image = global::Summanager.Properties.Resources.save_file;
             this.btnGuardar.Location = new System.Drawing.Point(169, 6);
             this.btnGuardar.Name = "btnGuardar";
@@ -531,6 +550,8 @@ namespace Summanager
             // 
             // btnAbrir
             // 
+            this.btnAbrir.ButtonBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(159)))), ((int)(((byte)(206)))));
+            this.btnAbrir.ButtonForeColor = System.Drawing.Color.White;
             this.btnAbrir.Image = global::Summanager.Properties.Resources.open_folder;
             this.btnAbrir.Location = new System.Drawing.Point(94, 6);
             this.btnAbrir.Name = "btnAbrir";
@@ -541,6 +562,8 @@ namespace Summanager
             // 
             // btnNuevo
             // 
+            this.btnNuevo.ButtonBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(159)))), ((int)(((byte)(206)))));
+            this.btnNuevo.ButtonForeColor = System.Drawing.Color.White;
             this.btnNuevo.Image = global::Summanager.Properties.Resources._new;
             this.btnNuevo.Location = new System.Drawing.Point(12, 6);
             this.btnNuevo.Name = "btnNuevo";
@@ -611,15 +634,15 @@ namespace Summanager
         private System.Windows.Forms.Label lblTotal;
         private System.Windows.Forms.Label lblActualizacion;
         private System.Windows.Forms.Timer timerContador;
-        private CustomControls.ButtonGreen btnLimpiar;
-        private CustomControls.ButtonGreen btnAgregar;
-        private CustomControls.ButtonBlue btnNuevo;
-        private CustomControls.ButtonBlue btnGuardarComo;
-        private CustomControls.ButtonBlue btnGuardar;
-        private CustomControls.ButtonBlue btnAbrir;
-        private CustomControls.ButtonBlue btnExportar;
-        private CustomControls.ButtonBlue btnImportar;
-        private CustomControls.ButtonBlue btnActualizar;
+        private CustomControls.Button btnLimpiar;
+        private CustomControls.Button btnAgregar;
+        private CustomControls.Button btnNuevo;
+        private CustomControls.Button btnGuardarComo;
+        private CustomControls.Button btnGuardar;
+        private CustomControls.Button btnAbrir;
+        private CustomControls.Button btnExportar;
+        private CustomControls.Button btnImportar;
+        private CustomControls.Button btnActualizar;
         private System.Windows.Forms.Panel panelEstadisticas;
         private System.Windows.Forms.Panel panel3;
         private CustomControls.CustomGroupBox customGroupBox3;
@@ -630,7 +653,7 @@ namespace Summanager
         private CustomControls.Estadistica estKitMantRiesgo;
         private CustomControls.Estadistica estUnImgRiesgo;
         private CustomControls.Estadistica estTonerRiesgo;
-        private CustomControls.ButtonGreen btnCambiarEst;
+        private CustomControls.Button btnCambiarEst;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label lblEstTitle;
         private System.Windows.Forms.Panel panel4;

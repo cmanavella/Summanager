@@ -276,7 +276,7 @@ namespace CustomControls
 
     //Debo serializar la clase, para que al agregar un Item desde la vista de diseño no haya problemas con el constructor.
     [Serializable]
-    public class ItemMenuButton : Button
+    public class ItemMenuButton : System.Windows.Forms.Button
     {
         public ItemMenuButton()
         {

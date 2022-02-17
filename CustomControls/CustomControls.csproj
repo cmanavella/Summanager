@@ -49,17 +49,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ButtonBlue.cs">
+    <Compile Include="Button.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ButtonBlue.Designer.cs">
-      <DependentUpon>ButtonBlue.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ButtonGreen.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ButtonGreen.Designer.cs">
-      <DependentUpon>ButtonGreen.cs</DependentUpon>
+    <Compile Include="Button.Designer.cs">
+      <DependentUpon>Button.cs</DependentUpon>
     </Compile>
     <Compile Include="ComboBox.cs">
       <SubType>UserControl</SubType>
@@ -90,12 +84,6 @@
     </Compile>
     <Compile Include="LateralMenuButton.Designer.cs">
       <DependentUpon>LateralMenuButton.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ButtonPadre.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ButtonPadre.Designer.cs">
-      <DependentUpon>ButtonPadre.cs</DependentUpon>
     </Compile>
     <Compile Include="MenuButton.cs">
       <SubType>UserControl</SubType>
@@ -130,11 +118,8 @@
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ButtonBlue.resx">
-      <DependentUpon>ButtonBlue.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ButtonGreen.resx">
-      <DependentUpon>ButtonGreen.cs</DependentUpon>
+    <EmbeddedResource Include="Button.resx">
+      <DependentUpon>Button.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ComboBox.resx">
       <DependentUpon>ComboBox.cs</DependentUpon>
@@ -150,9 +135,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="LateralMenuButton.resx">
       <DependentUpon>LateralMenuButton.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ButtonPadre.resx">
-      <DependentUpon>ButtonPadre.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MenuButton.resx">
       <DependentUpon>MenuButton.cs</DependentUpon>

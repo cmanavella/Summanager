@@ -322,7 +322,7 @@ namespace CustomControls
         }
     }
 
-    public class ItemButton : Button
+    public class ItemButton : System.Windows.Forms.Button
     {
         private ComboBox combo;
         /// <summary>

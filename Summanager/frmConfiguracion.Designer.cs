@@ -32,8 +32,8 @@ namespace Summanager
             this.label1 = new System.Windows.Forms.Label();
             this.chkAutomatico = new System.Windows.Forms.CheckBox();
             this.cmbPeriodo = new CustomControls.ComboBox();
-            this.btnAceptar = new CustomControls.ButtonBlue();
-            this.btnCancelar = new CustomControls.ButtonBlue();
+            this.btnAceptar = new CustomControls.Button();
+            this.btnCancelar = new CustomControls.Button();
             this.panelTitulo.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -77,6 +77,8 @@ namespace Summanager
             // 
             // btnAceptar
             // 
+            this.btnAceptar.ButtonBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
+            this.btnAceptar.ButtonForeColor = System.Drawing.Color.White;
             this.btnAceptar.Image = null;
             this.btnAceptar.Location = new System.Drawing.Point(252, 123);
             this.btnAceptar.Name = "btnAceptar";
@@ -87,6 +89,8 @@ namespace Summanager
             // 
             // btnCancelar
             // 
+            this.btnCancelar.ButtonBackColor = System.Drawing.Color.Gray;
+            this.btnCancelar.ButtonForeColor = System.Drawing.Color.White;
             this.btnCancelar.Image = null;
             this.btnCancelar.Location = new System.Drawing.Point(328, 123);
             this.btnCancelar.Name = "btnCancelar";
@@ -123,7 +127,7 @@ namespace Summanager
         private CustomControls.ComboBox cmbPeriodo;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox chkAutomatico;
-        private CustomControls.ButtonBlue btnAceptar;
-        private CustomControls.ButtonBlue btnCancelar;
+        private CustomControls.Button btnAceptar;
+        private CustomControls.Button btnCancelar;
     }
 }
