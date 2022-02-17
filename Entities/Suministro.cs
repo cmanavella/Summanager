@@ -46,5 +46,25 @@ namespace Entities
         }
 
         public Suministro() : this(0, null, null, null) { }
+
+        public override string ToString()
+        {
+            string modelos = String.Empty;
+            if (this.Modelos.Count > 0)
+            {
+                modelos += "COMPATIBLE CON: ";
+
+                bool primera = true;
+                foreach(Modelo modelo in this.Modelos)
+                {
+                    if (!primera) modelos += ", ";
+                    modelos += modelo.Nombre;
+                    primera = false;
+                }
+            }
+
+            return "CÓDIGO = " + this.Codigo.ToString() + " - NOMBRE = " + this.Nombre + " - TIPO = " + this.Tipo.ToString() + "\n" +
+                modelos;
+        }
     }
 }

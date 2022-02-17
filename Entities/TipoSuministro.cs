@@ -14,5 +14,10 @@ namespace Entities
         public TipoSuministro(int id, string nombre) : base(id, nombre){}
 
         public TipoSuministro() : base() { }
+
+        public override string ToString()
+        {
+            return "TIPO = " + this.Nombre;
+        }
     }
 }

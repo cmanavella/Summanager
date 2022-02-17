@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace Summanager
 {
-    public partial class FrmAbm : Form
+    public partial class FrmAbmStock : Form
     {
         //DLLs necesarias para mover el Form.
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
@@ -19,16 +19,15 @@ namespace Summanager
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
         private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int lParam);
 
-        public FrmAbm() : this(String.Empty){}
+        public FrmAbmStock() : this(String.Empty) { }
 
-        public FrmAbm(string titulo)
+        public FrmAbmStock(string title)
         {
             InitializeComponent();
-
-            this.lblTitulo.Text = titulo;
+            this.lblTitulo.Text = title;
         }
 
-        /** EVENTOS **/
+        /* EVENTOS */
         private void panelSuperior_MouseDown(object sender, MouseEventArgs e)
         {
             ReleaseCapture();
@@ -48,10 +47,15 @@ namespace Summanager
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            var result = MessageBox.Show("¿Está seguro que desea Cancelar la operación?", Application.ProductName + " " + Application.ProductVersion, 
+            var result = MessageBox.Show("¿Está seguro que desea Cancelar la operación?", Application.ProductName + " " + Application.ProductVersion,
                             MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
             if (result == DialogResult.Yes) this.Close();
+        }
+
+        private void txtBusqueda_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter) this.txtCantidad.Focus();
         }
     }
 }
