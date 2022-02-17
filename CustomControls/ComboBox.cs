@@ -322,6 +322,7 @@ namespace CustomControls
         }
     }
 
+    [Serializable]
     public class ItemButton : System.Windows.Forms.Button
     {
         private ComboBox combo;

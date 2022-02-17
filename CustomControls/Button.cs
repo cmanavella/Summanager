@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 namespace CustomControls
 {
+    [Serializable]
     public partial class Button : UserControl
     {
         private Color buttonBackColor;
