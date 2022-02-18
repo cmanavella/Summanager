@@ -43,16 +43,22 @@ namespace Summanager
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-        private void btnNuevoSuministro_Click(object sender, EventArgs e)
-        {
-            FrmNuevoSuministro nuevoSuministro = new FrmNuevoSuministro("Nuevo Suministro");
-            nuevoSuministro.ShowDialog();
-        }
-
+        
         private void FrmStock_Shown(object sender, EventArgs e)
         {
             ActualizarStock();
+        }
+
+        private void btnIngreso_Click(object sender, EventArgs e)
+        {
+            FrmIngresoStock frmIngreso = new FrmIngresoStock();
+            frmIngreso.ShowDialog();
+        }
+
+        private void btnNuevoSuministro_Enter(object sender, EventArgs e)
+        {
+            FrmNuevoSuministro nuevoSuministro = new FrmNuevoSuministro("Nuevo Suministro");
+            nuevoSuministro.ShowDialog();
         }
     }
 }

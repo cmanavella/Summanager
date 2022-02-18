@@ -26,6 +26,20 @@ namespace CustomControls
 
         [Browsable(true), EditorBrowsable(EditorBrowsableState.Always), Bindable(true)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public ContentAlignment TextAlign
+        {
+            get
+            {
+                return this.button1.TextAlign;
+            }
+            set
+            {
+                this.button1.TextAlign = value;
+            }
+        }
+
+        [Browsable(true), EditorBrowsable(EditorBrowsableState.Always), Bindable(true)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public new bool Enabled
         {
             get

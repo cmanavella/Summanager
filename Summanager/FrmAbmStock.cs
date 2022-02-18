@@ -55,7 +55,22 @@ namespace Summanager
 
         private void txtBusqueda_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter) this.txtCantidad.Focus();
+            if(e != null)
+            {
+                if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Tab)
+                {
+                    //this.txtCantidad.Focus();
+                    MessageBox.Show("Hola Mundo");
+                }
+            }
+        }
+
+        private void txtBusqueda_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyCode == Keys.Tab)
+            {
+                e.IsInputKey = true;
+            }
         }
     }
 }

@@ -237,6 +237,7 @@ namespace CustomControls
             {
                 this.textBox1.CharacterCasing = CharacterCasing.Normal;
             }
+            this.OnPreviewKeyDown(e);
         }
 
         public void Clear()

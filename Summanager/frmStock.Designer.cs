@@ -39,11 +39,11 @@ namespace Summanager
             this.Fallado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Compatible = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblMsjeStock = new System.Windows.Forms.Label();
-            this.menuNuevo = new CustomControls.MenuButton();
-            this.btnNuevoSuministro = new CustomControls.ItemMenuButton();
             this.btnEnviar = new CustomControls.Button();
             this.btnDevolucion = new CustomControls.Button();
             this.btnIngreso = new CustomControls.Button();
+            this.menuNuevo = new CustomControls.MenuButton();
+            this.btnNuevoSuministro = new CustomControls.ItemMenuButton();
             this.panelTitulo.SuspendLayout();
             this.panelMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
@@ -165,10 +165,48 @@ namespace Summanager
             this.lblMsjeStock.Text = "No hay stock cargado en la Base de Datos.";
             this.lblMsjeStock.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // btnEnviar
+            // 
+            this.btnEnviar.ButtonBackColor = System.Drawing.Color.DarkRed;
+            this.btnEnviar.ButtonForeColor = System.Drawing.Color.White;
+            this.btnEnviar.Image = null;
+            this.btnEnviar.Location = new System.Drawing.Point(980, 296);
+            this.btnEnviar.Name = "btnEnviar";
+            this.btnEnviar.Size = new System.Drawing.Size(58, 28);
+            this.btnEnviar.TabIndex = 14;
+            this.btnEnviar.Text = "Enviar";
+            this.btnEnviar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // btnDevolucion
+            // 
+            this.btnDevolucion.ButtonBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(159)))), ((int)(((byte)(206)))));
+            this.btnDevolucion.ButtonForeColor = System.Drawing.Color.White;
+            this.btnDevolucion.Image = null;
+            this.btnDevolucion.Location = new System.Drawing.Point(472, 296);
+            this.btnDevolucion.Name = "btnDevolucion";
+            this.btnDevolucion.Size = new System.Drawing.Size(89, 28);
+            this.btnDevolucion.TabIndex = 13;
+            this.btnDevolucion.Text = "Devolución";
+            this.btnDevolucion.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // btnIngreso
+            // 
+            this.btnIngreso.ButtonBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
+            this.btnIngreso.ButtonForeColor = System.Drawing.Color.White;
+            this.btnIngreso.Image = null;
+            this.btnIngreso.Location = new System.Drawing.Point(12, 296);
+            this.btnIngreso.Name = "btnIngreso";
+            this.btnIngreso.Size = new System.Drawing.Size(64, 28);
+            this.btnIngreso.TabIndex = 12;
+            this.btnIngreso.Text = "Ingreso";
+            this.btnIngreso.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnIngreso.Click += new System.EventHandler(this.btnIngreso_Click);
+            // 
             // menuNuevo
             // 
             this.menuNuevo.ContainerDesplegado = false;
             this.menuNuevo.Image = global::Summanager.Properties.Resources._new;
+            this.menuNuevo.Items.Add(this.btnNuevoSuministro);
             this.menuNuevo.Location = new System.Drawing.Point(12, 6);
             this.menuNuevo.Name = "menuNuevo";
             this.menuNuevo.Size = new System.Drawing.Size(80, 28);
@@ -192,40 +230,7 @@ namespace Summanager
             this.btnNuevoSuministro.Text = "Suministro";
             this.btnNuevoSuministro.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnNuevoSuministro.UseVisualStyleBackColor = false;
-            this.btnNuevoSuministro.Click += new System.EventHandler(this.btnNuevoSuministro_Click);
-            // 
-            // btnEnviar
-            // 
-            this.btnEnviar.ButtonBackColor = System.Drawing.Color.DarkRed;
-            this.btnEnviar.ButtonForeColor = System.Drawing.Color.White;
-            this.btnEnviar.Image = null;
-            this.btnEnviar.Location = new System.Drawing.Point(980, 296);
-            this.btnEnviar.Name = "btnEnviar";
-            this.btnEnviar.Size = new System.Drawing.Size(58, 28);
-            this.btnEnviar.TabIndex = 14;
-            this.btnEnviar.Text = "Enviar";
-            // 
-            // btnDevolucion
-            // 
-            this.btnDevolucion.ButtonBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(159)))), ((int)(((byte)(206)))));
-            this.btnDevolucion.ButtonForeColor = System.Drawing.Color.White;
-            this.btnDevolucion.Image = null;
-            this.btnDevolucion.Location = new System.Drawing.Point(472, 296);
-            this.btnDevolucion.Name = "btnDevolucion";
-            this.btnDevolucion.Size = new System.Drawing.Size(89, 28);
-            this.btnDevolucion.TabIndex = 13;
-            this.btnDevolucion.Text = "Devolución";
-            // 
-            // btnIngreso
-            // 
-            this.btnIngreso.ButtonBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
-            this.btnIngreso.ButtonForeColor = System.Drawing.Color.White;
-            this.btnIngreso.Image = null;
-            this.btnIngreso.Location = new System.Drawing.Point(12, 296);
-            this.btnIngreso.Name = "btnIngreso";
-            this.btnIngreso.Size = new System.Drawing.Size(64, 28);
-            this.btnIngreso.TabIndex = 12;
-            this.btnIngreso.Text = "Ingreso";
+            this.btnNuevoSuministro.Enter += new System.EventHandler(this.btnNuevoSuministro_Enter);
             // 
             // FrmStock
             // 
@@ -260,7 +265,6 @@ namespace Summanager
 
         private System.Windows.Forms.Label label1;
         private CustomControls.MenuButton menuNuevo;
-        private CustomControls.ItemMenuButton btnNuevoSuministro;
         private System.Windows.Forms.DataGridView dgv;
         private System.Windows.Forms.DataGridViewTextBoxColumn Codigo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
@@ -272,5 +276,6 @@ namespace Summanager
         private CustomControls.Button btnEnviar;
         private CustomControls.Button btnDevolucion;
         private CustomControls.Button btnIngreso;
+        private CustomControls.ItemMenuButton btnNuevoSuministro;
     }
 }

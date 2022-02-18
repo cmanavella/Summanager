@@ -121,6 +121,7 @@ namespace Summanager
             this.txtBusqueda.TabIndex = 17;
             this.txtBusqueda.Text = "Código, Nombre o Modelo de Impresora";
             this.txtBusqueda.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtBusqueda_KeyUp);
+            this.txtBusqueda.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtBusqueda_PreviewKeyDown);
             // 
             // txtCantidad
             // 
@@ -147,6 +148,7 @@ namespace Summanager
             this.btnGuardar.Size = new System.Drawing.Size(80, 28);
             this.btnGuardar.TabIndex = 20;
             this.btnGuardar.Text = "Guardar";
+            this.btnGuardar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // btnCancelar
             // 
@@ -159,6 +161,7 @@ namespace Summanager
             this.btnCancelar.Size = new System.Drawing.Size(80, 28);
             this.btnCancelar.TabIndex = 19;
             this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // lblInfo
@@ -188,6 +191,7 @@ namespace Summanager
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FrmAbmStock";
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmAbmStock";
             this.panelSuperior.ResumeLayout(false);
             this.panelSuperior.PerformLayout();
