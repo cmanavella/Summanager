@@ -84,6 +84,81 @@ namespace Data
         }
 
         /// <summary>
+        /// Obtiene una Lista de Suministros desde la Base de Datos a partir de su Nombre.
+        /// </summary>
+        /// <param name="nombre"></param>
+        /// <returns></returns>
+        public static List<Suministro> GetSuministro(string nombre)
+        {
+            nombre = nombre.ToUpper();
+            var retorno = new List<Suministro>();
+
+            using (var con = DBContext.GetInstance())
+            {
+                var query = "SELECT * FROM Suministros WHERE Nombre LIKE '%" + nombre + "%'";
+
+                using (var command = new SQLiteCommand(query, con))
+                {
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var suministro = new Suministro();
+
+                            suministro.Codigo = Convert.ToInt64(reader["Codigo"].ToString());
+                            suministro.Nombre = reader["Nombre"].ToString();
+                            suministro.Tipo = DBTiposSuministros.GetTipo(Convert.ToInt32(reader["IdTipoSuministro"].ToString()));
+                            suministro.Modelos = DBModelosImpresoras.GetModelo(Convert.ToInt64(reader["Codigo"].ToString()));
+
+                            retorno.Add(suministro);
+                        }
+                    }
+                }
+            }
+
+            if (retorno.Count == 0) retorno = null;
+            return retorno;
+        }
+
+        /// <summary>
+        /// Obtiene una Lista de Suministros desde la Base de Datos a partir del nombre del Modelo de Impresora con el que es compatible.
+        /// </summary>
+        /// <param name="nombre"></param>
+        /// <returns></returns>
+        public static List<Suministro> GetSuministroByModelo(string nombre)
+        {
+            var retorno = new List<Suministro>();
+
+            using (var con = DBContext.GetInstance())
+            {
+                var query = "SELECT Suministros.Codigo, Suministros.Nombre, Suministros.IdTipoSuministro FROM Suministros INNER JOIN " +
+                    "Suministros_X_Modelos ON Suministros.Codigo = Suministros_X_Modelos.CodigoSuministro INNER JOIN Modelos_Impresoras ON " +
+                    "Suministros_X_Modelos.IdModelo = Modelos_Impresoras.Id WHERE Modelos_Impresoras.Nombre LIKE '%" + nombre + "%' GROUP BY Suministros.Codigo";
+
+                using (var command = new SQLiteCommand(query, con))
+                {
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var suministro = new Suministro();
+
+                            suministro.Codigo = Convert.ToInt64(reader["Codigo"].ToString());
+                            suministro.Nombre = reader["Nombre"].ToString();
+                            suministro.Tipo = DBTiposSuministros.GetTipo(Convert.ToInt32(reader["IdTipoSuministro"].ToString()));
+                            suministro.Modelos = DBModelosImpresoras.GetModelo(Convert.ToInt64(reader["Codigo"].ToString()));
+
+                            retorno.Add(suministro);
+                        }
+                    }
+                }
+            }
+
+            if (retorno.Count == 0) retorno = null;
+            return retorno;
+        }
+
+        /// <summary>
         /// Obtiene un Suministro desde la Base de Datos a partir de su Código.
         /// </summary>
         /// <param name="codigo"></param>
@@ -100,13 +175,17 @@ namespace Data
                 {
                     using (var reader = command.ExecuteReader())
                     {
+                        retorno = new Suministro();
                         if (reader.Read())
                         {
-                            retorno = new Suministro();
                             retorno.Codigo = Convert.ToInt64(reader["Codigo"].ToString());
                             retorno.Nombre = reader["Nombre"].ToString();
                             retorno.Tipo = DBTiposSuministros.GetTipo(Convert.ToInt32(reader["IdTipoSuministro"].ToString()));
                             retorno.Modelos = DBModelosImpresoras.GetModelo(Convert.ToInt64(reader["Codigo"].ToString()));
+                        }
+                        else
+                        {
+                            retorno = null;
                         }
                     }
                 }

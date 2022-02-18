@@ -131,6 +131,23 @@ namespace CustomControls
         }
 
         /// <summary>
+        /// Especifica el número máximo de caracteres que se pueden introducir en el control de edición.
+        /// </summary>
+        [Browsable(true), EditorBrowsable(EditorBrowsableState.Always), Bindable(true)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public int MaxLength
+        {
+            get
+            {
+                return this.textBox1.MaxLength;
+            }
+            set
+            {
+                this.textBox1.MaxLength = value;
+            }
+        }
+
+        /// <summary>
         /// Obtiene o establece el punto inicial del texto seleccionado en el cuadro de texto.
         /// </summary>
         /// <returns>La posición inicial del texto seleccionado en el cuadro de texto.</returns>

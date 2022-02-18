@@ -63,7 +63,7 @@ namespace Entities
                 }
             }
 
-            return "CÓDIGO = " + this.Codigo.ToString() + " - NOMBRE = " + this.Nombre + " - TIPO = " + this.Tipo.ToString() + "\n" +
+            return "CÓDIGO = " + this.Codigo.ToString() + " - NOMBRE = " + this.Nombre + " - " + this.Tipo.ToString() + "\n" +
                 modelos;
         }
     }

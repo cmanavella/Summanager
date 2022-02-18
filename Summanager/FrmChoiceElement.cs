@@ -30,8 +30,10 @@ namespace Summanager
             InitializeComponent();
             this.lblTitulo.Text = "Elegir elemento";
 
+            //Paso los suministros a elegir a una variable para mostrarlos en el DataGridView.
             this.suministros = suministros;
 
+            //Creo un Nuevo Suministro Seleccionado.
             this.SuministroSeleccionado = new Suministro();
         }
 
@@ -46,7 +48,17 @@ namespace Summanager
                 {
                     foreach(Suministro suministro in this.suministros)
                     {
-                        this.dgv.Rows.Add(suministro.Codigo, suministro.Nombre);
+                        //Creo el string de los Modelos de Impresoras Compatibles.
+                        string modelos = String.Empty;
+                        bool primera = true;
+                        foreach (Modelo modelo in suministro.Modelos)
+                        {
+                            if (!primera) modelos += ", ";
+                            modelos += modelo.Nombre;
+                            primera = false;
+                        }
+                        //Cargo el DataGridView con todos los sumistros pasados uno a uno.
+                        this.dgv.Rows.Add(suministro.Codigo, suministro.Nombre, suministro.Tipo.Nombre, modelos);
                     }
                 }
             }
@@ -91,21 +103,49 @@ namespace Summanager
         {
             try
             {
+                //Hago esto en un Try por las dudas que ocurra algún error.
+                //Obtengo en Índice de la Fila Seleccionada.
                 int rowIndex = this.dgv.CurrentCell.RowIndex;
+                //Busco con el Índice de la Fila Seleccionada el Código del Suministro.
                 Int64 codigo = Convert.ToInt64(this.dgv.Rows[rowIndex].Cells["Codigo"].Value.ToString());
 
+                //Busco en la Base de Datos el Suministro por su código y lo almaceno en la Propiedad Suministro Seleccionado, que la uso
+                //para devolver el resultado de la selección.
                 this.SuministroSeleccionado = DBSuministros.GetSuministro(codigo);
             }
             catch(Exception ex)
             {
+                //Si hubo algún error, devuelvo Null y muestro mensaje de error.
                 this.SuministroSeleccionado = null;
 
                 MessageBox.Show(ex.Message, Application.ProductName + " " + Application.ProductVersion,
                             MessageBoxButtons.YesNo, MessageBoxIcon.Error);
             }
             
-
+            //Si todo transcurrió con normalidad, cierro el Formulario.
             this.Close();
+        }
+
+        private void dgv_KeyUp(object sender, KeyEventArgs e)
+        {
+            //Si la tecla que presiono en el DataGridView es ENTER, ejecuto el evento clic del Botón Elegir.
+            if (e.KeyCode == Keys.Enter) btnElegir_Click(null, null);
+        }
+
+        private void FrmChoiceElement_Shown(object sender, EventArgs e)
+        {
+            //Cuando muestro el Formulario, pongo el Foco en el DataGridView.
+            this.dgv.Focus();
+        }
+
+        private void dgv_KeyDown(object sender, KeyEventArgs e)
+        {
+            //Con esto hago que se cancele la acción de pasar a la siguiente fila en el DataGridView al presionar la tecla ENTER. De esta manera
+            //puedo usar esa tecla para que me ejecute el evento clic del Botón Elegir.
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.Handled = true;
+            }
         }
     }
 }
