@@ -22,7 +22,7 @@ namespace Summanager
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
         private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int lParam);
 
-        public Stock Stock { get; set; }
+        private Suministro currentSuministro;
 
         public FrmAbmStock() : this(String.Empty) { }
 
@@ -31,7 +31,7 @@ namespace Summanager
             InitializeComponent();
             this.lblTitulo.Text = title;
 
-            this.Stock = new Stock();
+            this.currentSuministro = new Suministro();
 
             _ocultarLabelsInfo();
         }
@@ -45,11 +45,6 @@ namespace Summanager
             this.lblNombre.Text = String.Empty;
             this.lblTipo.Text = String.Empty;
             this.lblCompatible.Text = String.Empty;
-
-            this.label1.Visible = false;
-            this.label2.Visible = false;
-            this.label3.Visible = false;
-            this.label4.Visible = false;
             this.lblCodigo.Visible = false;
             this.lblNombre.Visible = false;
             this.lblTipo.Visible = false;
@@ -75,11 +70,6 @@ namespace Summanager
                 this.lblCompatible.Text += modelo.Nombre;
                 primera = false;
             }
-
-            this.label1.Visible = true;
-            this.label2.Visible = true;
-            this.label3.Visible = true;
-            this.label4.Visible = true;
             this.lblCodigo.Visible = true;
             this.lblNombre.Visible = true;
             this.lblTipo.Visible = true;
@@ -98,11 +88,14 @@ namespace Summanager
                 //Si no hubo error, busco un suministro por el Código.
                 Suministro suministro = DBSuministros.GetSuministro(codigo);
 
-                //Si el suministro no es null, muestro la info del mismo, activo el Text Cantidad y pongo el foco en él.
+                //Si el suministro no es null, muestro la info del mismo y agrego el Suministro al Current Suministro.
+                //Tambien activo el Button Agregar y el Text Cantidad y pongo el foco en él.
                 if (suministro != null)
                 {
                     _mostrarLabelsInfo(suministro);
+                    this.currentSuministro = suministro;
                     this.txtCantidad.Enabled = true;
+                    this.btnAgregar.Enabled = true;
                     this.txtCantidad.Focus();
                 }
                 else
@@ -141,6 +134,9 @@ namespace Summanager
                         //Si el Suministro devuelto no es Null, muestro los Labels de Info y seteo el Text Búsqueda con el Nombre del Suministro.
                         _mostrarLabelsInfo(choice.SuministroSeleccionado);
                         this.txtBusqueda.Text = choice.SuministroSeleccionado.Nombre;
+
+                        //Agrego el Suministro al Current Suministro.
+                        this.currentSuministro = choice.SuministroSeleccionado;
                     }
                     else
                     {
@@ -154,10 +150,14 @@ namespace Summanager
                     //del Suministro.
                     _mostrarLabelsInfo(suministros.First<Suministro>());
                     this.txtBusqueda.Text = suministros.First<Suministro>().Nombre;
+
+                    //Agrego el Suministro al Current Suministro.
+                    this.currentSuministro = suministros.First<Suministro>();
                 }
 
-                //Activo el Text Cantidad y pongo foco en él.
+                //Activo el Button Agregar y el Text Cantidad y pongo foco en él.
                 this.txtCantidad.Enabled = true;
+                this.btnAgregar.Enabled = true;
                 this.txtCantidad.Focus();
             }
             else
@@ -190,6 +190,9 @@ namespace Summanager
                         //Si el Suministro devuelto no es Null, muestro los Labels de Info y seteo el Text Búsqueda con el Nombre del Suministro.
                         _mostrarLabelsInfo(choice.SuministroSeleccionado);
                         this.txtBusqueda.Text = choice.SuministroSeleccionado.Nombre;
+
+                        //Agrego el Suministro al Current Suministro.
+                        this.currentSuministro = choice.SuministroSeleccionado;
                     }
                     else
                     {
@@ -203,10 +206,14 @@ namespace Summanager
                     //del Suministro.
                     _mostrarLabelsInfo(suministros.First<Suministro>());
                     this.txtBusqueda.Text = suministros.First<Suministro>().Nombre;
+
+                    //Agrego el Suministro al Current Suministro.
+                    this.currentSuministro = suministros.First<Suministro>();
                 }
 
-                //Activo el Text Cantidad y pongo foco en él.
+                //Activo el Button Agregar y el Text Cantidad y pongo foco en él.
                 this.txtCantidad.Enabled = true;
+                this.btnAgregar.Enabled = true;
                 this.txtCantidad.Focus();
             }
             else
@@ -214,6 +221,40 @@ namespace Summanager
                 //Si los Suministros devueltos de la Base de Datos son Null, lanzo la Excepción de Suministro no Encontrado.
                 throw new SuministroNoEncontradoException();
             }
+        }
+
+        /// <summary>
+        /// Busca en el DataGridView si el Codigo del Suministro pasado por parámetro ya se encuentra en el mismo.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        private bool _existeElemento(Int64 value)
+        {
+            bool retorno = false;
+
+            if (this.dgv.Rows.Count > 0)
+            {
+                foreach (DataGridViewRow fila in this.dgv.Rows)
+                {
+                    Int64 codigo = Convert.ToInt64(fila.Cells["Codigo"].Value.ToString());
+                    retorno = codigo == value;
+                }
+            }
+
+            return retorno;
+        }
+
+        /// <summary>
+        /// Limpia el Formulario solo en la parte de Busquedas.
+        /// </summary>
+        private void _clear()
+        {
+            this.txtBusqueda.Text = string.Empty;
+            this.txtBusqueda.IsMaskared = true;
+            this.txtCantidad.Text = string.Empty;
+            this.txtCantidad.IsMaskared = true;
+            _ocultarLabelsInfo();
+            this.txtBusqueda.Focus();
         }
 
         /* EVENTOS */
@@ -241,7 +282,6 @@ namespace Summanager
 
             if (result == DialogResult.Yes)
             {
-                this.Stock = null;
                 this.Close();
             }
         }
@@ -327,6 +367,95 @@ namespace Summanager
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
+            }
+        }
+
+        private void txtBusqueda_Enter(object sender, EventArgs e)
+        {
+            //Desactivo el Button Agregar y el Text Cantidad
+            this.txtCantidad.Enabled = false;
+            this.btnAgregar.Enabled = false;
+
+            //Instancio un nuevo Current Suministro.
+            this.currentSuministro = new Suministro();
+        }
+
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            //Valido que el Text Cantidad no se encuentre vacio.
+            if (txtCantidad.Text.Length > 0)
+            {
+                //Paso el valor del Text Cantidad a una variable.
+                int cantidad = Convert.ToInt32(txtCantidad.Text);
+
+                //Valido que la cantidad no sea 0
+                if (cantidad > 0)
+                {
+                    //Valido que el Suministro no se encuentre ya cargado en el DataGridView.
+                    if (!_existeElemento(currentSuministro.Codigo))
+                    {
+                        //Agrego el suministro y la cantidad al DataGridView.
+                        this.dgv.Rows.Add(this.currentSuministro.Codigo, this.currentSuministro.Nombre, cantidad);
+
+                        //Habilito el DataGridView, el Button Quitar y el Button Guardar.
+                        this.dgv.Enabled = true;
+                        this.btnQuitar.Enabled = true;
+                        this.btnGuardar.Enabled = true;
+
+                        //Limpio el Formulario.
+                        _clear();
+                    }
+                    else
+                    {
+                        //Si el Suministro existe, muestro mensaje y limpio el Formulario.
+                        MessageBox.Show("El Suministro ya se encuentra cargado.", Application.ProductName + " " + Application.ProductVersion,
+                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        _clear();
+                    }
+                }
+                else
+                {
+                    //Si la Cantidad es 0, muestro mensaje y pongo foco nuevamente en Cantidad, seleccionando su valor.
+                    MessageBox.Show("La Cantidad debe ser mayor que 0.", Application.ProductName + " " + Application.ProductVersion,
+                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    this.txtCantidad.Focus();
+                    this.txtCantidad.SelectionStart = 0;
+                    this.txtCantidad.SelectionLength = this.txtCantidad.Text.Length;
+                }
+            }
+            else
+            {
+                //Si el Text Cantidad esta vacio, muestro mensaje y pongo foco nuevamente en Cantidad.
+                MessageBox.Show("El campo 'Cantidad' es obligatorio.", Application.ProductName + " " + Application.ProductVersion,
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                this.txtCantidad.Focus();
+            }
+        }
+
+        private void txtCantidad_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.btnAgregar_Click(null, null);
+            }
+        }
+
+        private void btnQuitar_Click(object sender, EventArgs e)
+        {
+            //Este botón quita el elemento seleccionado del DataGridView.
+
+            //Como el DataGridView devuelve una colección de Filas pese a que solo puedo selecciónar una, debo quitar la fila (elemento) seleccionada
+            //recorriendo esa colección con un Foreach.
+            foreach (DataGridViewRow row in this.dgv.SelectedRows)
+            {
+                this.dgv.Rows.RemoveAt(row.Index);
+            }
+
+            //Si el contador de Filas del DataGridView llega a cero, desactivo el Botón Quitar y Boton Guardar.
+            if (this.dgv.Rows.Count == 0)
+            {
+                this.btnQuitar.Enabled = false;
+                this.btnGuardar.Enabled = false;
             }
         }
     }

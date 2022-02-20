@@ -33,15 +33,6 @@ namespace CustomControls
             set
             {
                 this.button1.Enabled = value;
-
-                if (value)
-                {
-                    this.button1.BackColor = this.buttonBackColor;
-                }
-                else
-                {
-                    this.button1.BackColor = Color.Silver;
-                }
             }
         }
 

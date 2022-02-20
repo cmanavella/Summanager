@@ -36,22 +36,18 @@ namespace Summanager
             this.lblTitulo.Size = new System.Drawing.Size(116, 16);
             this.lblTitulo.Text = "Ingreso de Stock";
             // 
-            // txtCantidad
-            // 
-            this.txtCantidad.Location = new System.Drawing.Point(318, 36);
-            // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new System.Drawing.Point(305, 128);
+            this.btnGuardar.Location = new System.Drawing.Point(379, 239);
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(9, 128);
+            this.btnCancelar.Location = new System.Drawing.Point(9, 239);
             // 
             // FrmIngresoStock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.ClientSize = new System.Drawing.Size(397, 168);
+            this.ClientSize = new System.Drawing.Size(471, 279);
             this.Name = "FrmIngresoStock";
             this.ResumeLayout(false);
             this.PerformLayout();
