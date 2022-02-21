@@ -23,6 +23,13 @@ namespace Entities
             this.Fallado = fallado;
         }
 
+        public enum ESTADO
+        {
+            ALTA = 1,
+            BAJA = 2,
+            FALLADO = 3
+        }
+
         public override string ToString()
         {
             return this.Suministro.ToString() + "\n" + "ALTA = " + this.Alta.ToString() + "\n" + "BAJA = " + this.Baja.ToString() + "\n" +

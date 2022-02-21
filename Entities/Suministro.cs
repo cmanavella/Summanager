@@ -47,21 +47,35 @@ namespace Entities
 
         public Suministro() : this(0, null, null, null) { }
 
+        /// <summary>
+        /// Devuelve un String con los Modelos de Impresoras Compatibles, separados por una coma.
+        /// </summary>
+        /// <returns>Un String con los Modelos de Impresoras Compatibles, separados por una coma.</returns>
+        public string GetModelosToString()
+        {
+            //Creo el String de retorno como vacío.
+            string modelos = String.Empty;
+            //Creo una bandera para marcar el primer elemento.
+            bool primera = true;
+
+            //Recorro los Modelos de Impresoras del Suministro.
+            foreach (Modelo modelo in this.Modelos)
+            {
+                //Si no es el primer Modelo, agrego una coma y un espacio al String de devolución.
+                if (!primera) modelos += ", ";
+                //Agrego el Nombre del Modelo al String de Devolución.
+                modelos += modelo.Nombre;
+                //Seteo la bandera que me indica que es el primer elemento en False, para que a partir de ahora me agregue siempre una
+                //coma y un espacio en el String de Devolución.
+                primera = false;
+            }
+            //Devuelvo el String.
+            return modelos;
+        }
+
         public override string ToString()
         {
-            string modelos = String.Empty;
-            if (this.Modelos.Count > 0)
-            {
-                modelos += "COMPATIBLE CON: ";
-
-                bool primera = true;
-                foreach(Modelo modelo in this.Modelos)
-                {
-                    if (!primera) modelos += ", ";
-                    modelos += modelo.Nombre;
-                    primera = false;
-                }
-            }
+            string modelos = "COMPATIBLE CON: " + GetModelosToString();
 
             return "CÓDIGO = " + this.Codigo.ToString() + " - NOMBRE = " + this.Nombre + " - " + this.Tipo.ToString() + "\n" +
                 modelos;

@@ -33,6 +33,7 @@ namespace Summanager
             this.label1 = new System.Windows.Forms.Label();
             this.dgv = new System.Windows.Forms.DataGridView();
             this.Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Alta = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Baja = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -72,6 +73,8 @@ namespace Summanager
             this.dgv.AllowUserToDeleteRows = false;
             this.dgv.AllowUserToResizeColumns = false;
             this.dgv.AllowUserToResizeRows = false;
+            this.dgv.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgv.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dgv.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgv.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
@@ -87,6 +90,7 @@ namespace Summanager
             this.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Codigo,
+            this.Tipo,
             this.Nombre,
             this.Alta,
             this.Baja,
@@ -112,20 +116,26 @@ namespace Summanager
             this.dgv.ShowRowErrors = false;
             this.dgv.Size = new System.Drawing.Size(1026, 184);
             this.dgv.TabIndex = 7;
+            this.dgv.Resize += new System.EventHandler(this.dgv_Resize);
             // 
             // Codigo
             // 
             this.Codigo.HeaderText = "Codigo";
             this.Codigo.Name = "Codigo";
             this.Codigo.ReadOnly = true;
-            this.Codigo.Width = 150;
+            // 
+            // Tipo
+            // 
+            this.Tipo.HeaderText = "Tipo";
+            this.Tipo.Name = "Tipo";
+            this.Tipo.ReadOnly = true;
             // 
             // Nombre
             // 
             this.Nombre.HeaderText = "Descripción";
             this.Nombre.Name = "Nombre";
             this.Nombre.ReadOnly = true;
-            this.Nombre.Width = 200;
+            this.Nombre.Width = 150;
             // 
             // Alta
             // 
@@ -167,6 +177,7 @@ namespace Summanager
             // 
             // btnEnviar
             // 
+            this.btnEnviar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnEnviar.ButtonBackColor = System.Drawing.Color.DarkRed;
             this.btnEnviar.ButtonForeColor = System.Drawing.Color.White;
             this.btnEnviar.Image = null;
@@ -179,6 +190,7 @@ namespace Summanager
             // 
             // btnDevolucion
             // 
+            this.btnDevolucion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDevolucion.ButtonBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(159)))), ((int)(((byte)(206)))));
             this.btnDevolucion.ButtonForeColor = System.Drawing.Color.White;
             this.btnDevolucion.Image = null;
@@ -266,16 +278,17 @@ namespace Summanager
         private System.Windows.Forms.Label label1;
         private CustomControls.MenuButton menuNuevo;
         private System.Windows.Forms.DataGridView dgv;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Codigo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Alta;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Baja;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Fallado;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Compatible;
         private System.Windows.Forms.Label lblMsjeStock;
         private CustomControls.Button btnEnviar;
         private CustomControls.Button btnDevolucion;
         private CustomControls.Button btnIngreso;
         private CustomControls.ItemMenuButton btnNuevoSuministro;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Codigo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Tipo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Alta;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Baja;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Fallado;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Compatible;
     }
 }

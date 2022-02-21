@@ -48,17 +48,8 @@ namespace Summanager
                 {
                     foreach(Suministro suministro in this.suministros)
                     {
-                        //Creo el string de los Modelos de Impresoras Compatibles.
-                        string modelos = String.Empty;
-                        bool primera = true;
-                        foreach (Modelo modelo in suministro.Modelos)
-                        {
-                            if (!primera) modelos += ", ";
-                            modelos += modelo.Nombre;
-                            primera = false;
-                        }
                         //Cargo el DataGridView con todos los sumistros pasados uno a uno.
-                        this.dgv.Rows.Add(suministro.Codigo, suministro.Nombre, suministro.Tipo.Nombre, modelos);
+                        this.dgv.Rows.Add(suministro.Codigo, suministro.Nombre, suministro.Tipo.Nombre, suministro.GetModelosToString());
                     }
                 }
             }

@@ -455,7 +455,6 @@ namespace Summanager
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label lblCompatible;
         private CustomControls.TextBox txtBusqueda;
-        private System.Windows.Forms.DataGridView dgv;
         private CustomControls.PanelButton btnQuitar;
         private CustomControls.PanelButton btnAgregar;
         private System.Windows.Forms.CheckBox chkFallado;
@@ -463,5 +462,6 @@ namespace Summanager
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn Fallado;
+        protected System.Windows.Forms.DataGridView dgv;
     }
 }
