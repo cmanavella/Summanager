@@ -14,9 +14,11 @@ namespace Summanager
     {
         private string msjeValidacion;
         private bool avisoValidacion;
-        public FrmNuevoSuministro(string titulo) : base(titulo)
+        public FrmNuevoSuministro()
         {
             InitializeComponent();
+
+            this.lblTitulo.Text = "Nuevo Suministro";
 
             this.avisoValidacion = true; //Seteo esta variable para que no me muestre dos veces el mensaje de que el Suministro ya existe.
 

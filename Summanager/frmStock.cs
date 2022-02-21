@@ -57,7 +57,7 @@ namespace Summanager
 
         private void btnNuevoSuministro_Enter(object sender, EventArgs e)
         {
-            FrmNuevoSuministro nuevoSuministro = new FrmNuevoSuministro("Nuevo Suministro");
+            FrmNuevoSuministro nuevoSuministro = new FrmNuevoSuministro();
             nuevoSuministro.ShowDialog();
         }
     }

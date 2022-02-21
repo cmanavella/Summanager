@@ -320,10 +320,25 @@ namespace Summanager
                                     //Si no encuentra Suministro por Nombre, intento por Modelo de Impresora Compatible
                                     _buscarPorModelo();
                                 }
-                                catch (SuministroNoEncontradoException ex)
+                                catch (SuministroNoEncontradoException)
                                 {
                                     //En este punto no hay un Suministro con el criterio de búsqueda especificado.
-                                    MessageBox.Show(ex.Message);
+                                    
+                                    //Pregunto si desea agregar un nuevo Suministro.
+                                    var result = MessageBox.Show("No se ha encontrado el Suministro con el criterio de búsqueda establecido. ¿Desea agregar un "
+                                        + "nuevo Suministro?", Application.ProductName + " " + Application.ProductVersion,
+                                        MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
+                                    //Si desea agregar, llamo al Form Nuevo Suministro.
+                                    if(result == DialogResult.Yes)
+                                    {
+                                        FrmNuevoSuministro nuevo = new FrmNuevoSuministro();
+                                        nuevo.ShowDialog();
+                                    }
+
+                                    //Limpio el Formulario. Antes pongo el foco en otra cosa, como el Botón Cancelar.
+                                    this.btnCancelar.Focus();
+                                    _clear();
                                 }
                             }
                         }
