@@ -89,13 +89,14 @@ namespace Summanager
                 Suministro suministro = DBSuministros.GetSuministro(codigo);
 
                 //Si el suministro no es null, muestro la info del mismo y agrego el Suministro al Current Suministro.
-                //Tambien activo el Button Agregar y el Text Cantidad y pongo el foco en él.
+                //Tambien activo el Button Agregar, el Check Fallado y el Text Cantidad y pongo el foco en él.
                 if (suministro != null)
                 {
                     _mostrarLabelsInfo(suministro);
                     this.currentSuministro = suministro;
                     this.txtCantidad.Enabled = true;
                     this.btnAgregar.Enabled = true;
+                    this.chkFallado.Enabled = false;
                     this.txtCantidad.Focus();
                 }
                 else
@@ -155,9 +156,10 @@ namespace Summanager
                     this.currentSuministro = suministros.First<Suministro>();
                 }
 
-                //Activo el Button Agregar y el Text Cantidad y pongo foco en él.
+                //Activo el Button Agregar, el Check Fallado y el Text Cantidad y pongo foco en él.
                 this.txtCantidad.Enabled = true;
                 this.btnAgregar.Enabled = true;
+                this.chkFallado.Enabled = true;
                 this.txtCantidad.Focus();
             }
             else
@@ -211,9 +213,10 @@ namespace Summanager
                     this.currentSuministro = suministros.First<Suministro>();
                 }
 
-                //Activo el Button Agregar y el Text Cantidad y pongo foco en él.
+                //Activo el Button Agregar, el Check Fallado y el Text Cantidad y pongo foco en él.
                 this.txtCantidad.Enabled = true;
                 this.btnAgregar.Enabled = true;
+                this.chkFallado.Enabled = true;
                 this.txtCantidad.Focus();
             }
             else
@@ -224,11 +227,11 @@ namespace Summanager
         }
 
         /// <summary>
-        /// Busca en el DataGridView si el Codigo del Suministro pasado por parámetro ya se encuentra en el mismo.
+        /// Busca en el DataGridView si el Codigo del Suministro pasado por parámetro ya se encuentra en el mismo y con el mismo estado.
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        private bool _existeElemento(Int64 value)
+        private bool _existeElemento(Int64 value, bool fallado)
         {
             bool retorno = false;
 
@@ -237,7 +240,13 @@ namespace Summanager
                 foreach (DataGridViewRow fila in this.dgv.Rows)
                 {
                     Int64 codigo = Convert.ToInt64(fila.Cells["Codigo"].Value.ToString());
-                    retorno = codigo == value;
+                    string strFallado = fila.Cells["Fallado"].Value.ToString();
+
+                    bool boolFallado = strFallado == "Sí";
+
+                    retorno = (codigo == value && fallado == boolFallado);
+
+                    if (retorno) break;
                 }
             }
 
@@ -253,6 +262,8 @@ namespace Summanager
             this.txtBusqueda.IsMaskared = true;
             this.txtCantidad.Text = string.Empty;
             this.txtCantidad.IsMaskared = true;
+            this.chkFallado.Checked = false;
+            this.chkFallado.Enabled = false;
             _ocultarLabelsInfo();
             this.txtBusqueda.Focus();
         }
@@ -407,10 +418,14 @@ namespace Summanager
                 if (cantidad > 0)
                 {
                     //Valido que el Suministro no se encuentre ya cargado en el DataGridView.
-                    if (!_existeElemento(currentSuministro.Codigo))
+                    if (!_existeElemento(currentSuministro.Codigo, this.chkFallado.Checked))
                     {
+                        //Me fijo en el Check Fallado.
+                        string fallado = "No";
+                        if (this.chkFallado.Checked) fallado = "Sí";
+
                         //Agrego el suministro y la cantidad al DataGridView.
-                        this.dgv.Rows.Add(this.currentSuministro.Codigo, this.currentSuministro.Nombre, cantidad);
+                        this.dgv.Rows.Add(this.currentSuministro.Codigo, this.currentSuministro.Nombre, cantidad, fallado);
 
                         //Habilito el DataGridView, el Button Quitar y el Button Guardar.
                         this.dgv.Enabled = true;
