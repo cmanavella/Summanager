@@ -36,8 +36,6 @@ namespace Summanager
             this.panelInferior = new System.Windows.Forms.Panel();
             this.panelIzquierdo = new System.Windows.Forms.Panel();
             this.panelDerecho = new System.Windows.Forms.Panel();
-            this.btnGuardar = new CustomControls.Button();
-            this.btnCancelar = new CustomControls.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.lblCodigo = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -46,16 +44,18 @@ namespace Summanager
             this.lblTipo = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.lblCompatible = new System.Windows.Forms.Label();
-            this.dgv = new System.Windows.Forms.DataGridView();
-            this.btnQuitar = new CustomControls.PanelButton();
-            this.btnAgregar = new CustomControls.PanelButton();
-            this.txtCantidad = new CustomControls.TextBox();
-            this.txtBusqueda = new CustomControls.TextBox();
-            this.chkFallado = new System.Windows.Forms.CheckBox();
+            this.dgv = new CustomControls.DataGridView();
             this.Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Fallado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chkFallado = new System.Windows.Forms.CheckBox();
+            this.btnQuitar = new CustomControls.PanelButton();
+            this.btnAgregar = new CustomControls.PanelButton();
+            this.btnGuardar = new CustomControls.Button();
+            this.btnCancelar = new CustomControls.Button();
+            this.txtCantidad = new CustomControls.TextBox();
+            this.txtBusqueda = new CustomControls.TextBox();
             this.panelSuperior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.SuspendLayout();
@@ -124,34 +124,6 @@ namespace Summanager
             this.panelDerecho.Name = "panelDerecho";
             this.panelDerecho.Size = new System.Drawing.Size(1, 248);
             this.panelDerecho.TabIndex = 16;
-            // 
-            // btnGuardar
-            // 
-            this.btnGuardar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGuardar.ButtonBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
-            this.btnGuardar.ButtonForeColor = System.Drawing.Color.White;
-            this.btnGuardar.Enabled = false;
-            this.btnGuardar.Image = null;
-            this.btnGuardar.Location = new System.Drawing.Point(379, 239);
-            this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(80, 28);
-            this.btnGuardar.TabIndex = 20;
-            this.btnGuardar.Text = "Guardar";
-            this.btnGuardar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // btnCancelar
-            // 
-            this.btnCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnCancelar.ButtonBackColor = System.Drawing.Color.Gray;
-            this.btnCancelar.ButtonForeColor = System.Drawing.Color.White;
-            this.btnCancelar.Image = null;
-            this.btnCancelar.Location = new System.Drawing.Point(12, 239);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(80, 28);
-            this.btnCancelar.TabIndex = 19;
-            this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // label1
             // 
@@ -251,6 +223,8 @@ namespace Summanager
             this.dgv.AllowUserToDeleteRows = false;
             this.dgv.AllowUserToResizeColumns = false;
             this.dgv.AllowUserToResizeRows = false;
+            this.dgv.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgv.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dgv.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgv.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
@@ -291,8 +265,52 @@ namespace Summanager
             this.dgv.Size = new System.Drawing.Size(447, 76);
             this.dgv.TabIndex = 29;
             // 
+            // Codigo
+            // 
+            this.Codigo.HeaderText = "Codigo";
+            this.Codigo.Name = "Codigo";
+            this.Codigo.ReadOnly = true;
+            this.Codigo.Width = 150;
+            // 
+            // Nombre
+            // 
+            this.Nombre.HeaderText = "Descripción";
+            this.Nombre.Name = "Nombre";
+            this.Nombre.ReadOnly = true;
+            this.Nombre.Width = 225;
+            // 
+            // Cantidad
+            // 
+            this.Cantidad.HeaderText = "Cantidad";
+            this.Cantidad.Name = "Cantidad";
+            this.Cantidad.ReadOnly = true;
+            this.Cantidad.Width = 80;
+            // 
+            // Fallado
+            // 
+            this.Fallado.HeaderText = "Fallado";
+            this.Fallado.Name = "Fallado";
+            this.Fallado.ReadOnly = true;
+            this.Fallado.Visible = false;
+            this.Fallado.Width = 50;
+            // 
+            // chkFallado
+            // 
+            this.chkFallado.AutoSize = true;
+            this.chkFallado.Enabled = false;
+            this.chkFallado.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkFallado.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
+            this.chkFallado.Location = new System.Drawing.Point(400, 39);
+            this.chkFallado.Name = "chkFallado";
+            this.chkFallado.Size = new System.Drawing.Size(75, 21);
+            this.chkFallado.TabIndex = 34;
+            this.chkFallado.Text = "Fallado";
+            this.chkFallado.UseVisualStyleBackColor = true;
+            this.chkFallado.Visible = false;
+            // 
             // btnQuitar
             // 
+            this.btnQuitar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnQuitar.ButtonBackColor = System.Drawing.Color.DarkRed;
             this.btnQuitar.ButtonForeColor = System.Drawing.Color.White;
             this.btnQuitar.Enabled = false;
@@ -306,6 +324,7 @@ namespace Summanager
             // 
             // btnAgregar
             // 
+            this.btnAgregar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAgregar.ButtonBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
             this.btnAgregar.ButtonForeColor = System.Drawing.Color.White;
             this.btnAgregar.Enabled = false;
@@ -316,6 +335,34 @@ namespace Summanager
             this.btnAgregar.TabIndex = 32;
             this.btnAgregar.Text = "+";
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
+            // 
+            // btnGuardar
+            // 
+            this.btnGuardar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnGuardar.ButtonBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
+            this.btnGuardar.ButtonForeColor = System.Drawing.Color.White;
+            this.btnGuardar.Enabled = false;
+            this.btnGuardar.Image = null;
+            this.btnGuardar.Location = new System.Drawing.Point(379, 239);
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(80, 28);
+            this.btnGuardar.TabIndex = 20;
+            this.btnGuardar.Text = "Guardar";
+            this.btnGuardar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // btnCancelar
+            // 
+            this.btnCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnCancelar.ButtonBackColor = System.Drawing.Color.Gray;
+            this.btnCancelar.ButtonForeColor = System.Drawing.Color.White;
+            this.btnCancelar.Image = null;
+            this.btnCancelar.Location = new System.Drawing.Point(12, 239);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(80, 28);
+            this.btnCancelar.TabIndex = 19;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // txtCantidad
             // 
@@ -352,49 +399,6 @@ namespace Summanager
             this.txtBusqueda.Enter += new System.EventHandler(this.txtBusqueda_Enter);
             this.txtBusqueda.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtBusqueda_KeyUp);
             this.txtBusqueda.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtBusqueda_PreviewKeyDown);
-            // 
-            // chkFallado
-            // 
-            this.chkFallado.AutoSize = true;
-            this.chkFallado.Enabled = false;
-            this.chkFallado.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkFallado.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
-            this.chkFallado.Location = new System.Drawing.Point(400, 39);
-            this.chkFallado.Name = "chkFallado";
-            this.chkFallado.Size = new System.Drawing.Size(75, 21);
-            this.chkFallado.TabIndex = 34;
-            this.chkFallado.Text = "Fallado";
-            this.chkFallado.UseVisualStyleBackColor = true;
-            this.chkFallado.Visible = false;
-            // 
-            // Codigo
-            // 
-            this.Codigo.HeaderText = "Codigo";
-            this.Codigo.Name = "Codigo";
-            this.Codigo.ReadOnly = true;
-            this.Codigo.Width = 150;
-            // 
-            // Nombre
-            // 
-            this.Nombre.HeaderText = "Descripción";
-            this.Nombre.Name = "Nombre";
-            this.Nombre.ReadOnly = true;
-            this.Nombre.Width = 225;
-            // 
-            // Cantidad
-            // 
-            this.Cantidad.HeaderText = "Cantidad";
-            this.Cantidad.Name = "Cantidad";
-            this.Cantidad.ReadOnly = true;
-            this.Cantidad.Width = 80;
-            // 
-            // Fallado
-            // 
-            this.Fallado.HeaderText = "Fallado";
-            this.Fallado.Name = "Fallado";
-            this.Fallado.ReadOnly = true;
-            this.Fallado.Visible = false;
-            this.Fallado.Width = 50;
             // 
             // FrmAbmStock
             // 
@@ -455,13 +459,13 @@ namespace Summanager
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label lblCompatible;
         private CustomControls.TextBox txtBusqueda;
-        private CustomControls.PanelButton btnQuitar;
-        private CustomControls.PanelButton btnAgregar;
-        private System.Windows.Forms.CheckBox chkFallado;
         private System.Windows.Forms.DataGridViewTextBoxColumn Codigo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn Fallado;
-        protected System.Windows.Forms.DataGridView dgv;
+        protected CustomControls.PanelButton btnQuitar;
+        protected CustomControls.PanelButton btnAgregar;
+        protected CustomControls.DataGridView dgv;
+        protected System.Windows.Forms.CheckBox chkFallado;
     }
 }

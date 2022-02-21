@@ -91,6 +91,42 @@ namespace Data
                                                 " WHERE Codigo_Suministro = " + stock.Suministro.Codigo;
                                         }
                                         break; //Salgo del Case.
+                                    case Stock.ESTADO.BAJA:
+                                        //Si es la cantidad Baja la que quiero modificar, consulto si el Stock existe en la Base de Datos.
+                                        if (!_existeStock(stock.Suministro.Codigo))
+                                        {
+                                            //Si no existe, creo la Query con un SQL de Adición, donde solo paso como valor numérico la Cantidad de Baja.
+                                            //Las demás cantidades las paso en 0.
+                                            query = "INSERT INTO Stock (Codigo_Suministro, Alta, Baja, Fallado) VALUES(" + stock.Suministro.Codigo +
+                                                ", 0" + stock.Baja + ", 0)";
+                                        }
+                                        else
+                                        {
+                                            //Si existe, creo la Query con un SQL de Actualización, donde solo paso como valor numérico la Cantidad de Alta.
+                                            //Las demás cantidades las paso en 0. Además sumo la Cantidad de Baja almacenada en la Base de Datos a la pasada
+                                            //por parámetro.
+                                            query = "UPDATE Stock SET Baja = " + (_getCantidadBaja(stock.Suministro.Codigo) + stock.Baja) +
+                                                " WHERE Codigo_Suministro = " + stock.Suministro.Codigo;
+                                        }
+                                        break; //Salgo del Case.
+                                    case Stock.ESTADO.FALLADO:
+                                        //Si es la cantidad Fallado la que quiero modificar, consulto si el Stock existe en la Base de Datos.
+                                        if (!_existeStock(stock.Suministro.Codigo))
+                                        {
+                                            //Si no existe, creo la Query con un SQL de Adición, donde solo paso como valor numérico la Cantidad de Fallado.
+                                            //Las demás cantidades las paso en 0.
+                                            query = "INSERT INTO Stock (Codigo_Suministro, Alta, Baja, Fallado) VALUES(" + stock.Suministro.Codigo +
+                                                ", 0, 0," + stock.Fallado + ")";
+                                        }
+                                        else
+                                        {
+                                            //Si existe, creo la Query con un SQL de Actualización, donde solo paso como valor numérico la Cantidad de Fallado.
+                                            //Las demás cantidades las paso en 0. Además sumo la Cantidad de Fallado almacenada en la Base de Datos a la pasada
+                                            //por parámetro.
+                                            query = "UPDATE Stock SET Baja = " + (_getCantidadFallado(stock.Suministro.Codigo) + stock.Fallado) +
+                                                " WHERE Codigo_Suministro = " + stock.Suministro.Codigo;
+                                        }
+                                        break; //Salgo del Case.
                                 }
 
                                 //Paso la Query al Command y luego la ejecuto.
@@ -130,6 +166,56 @@ namespace Data
                     using (var reader = command.ExecuteReader())
                     {
                         if (reader.Read()) retorno = Convert.ToInt32(reader["Alta"].ToString());
+                    }
+                }
+            }
+
+            return retorno;
+        }
+
+        /// <summary>
+        /// Devuelve la Cantidad de Baja de un Stock específico en base a su Código
+        /// </summary>
+        /// <param name="codigo">Código del Stock donde se requiere buscar la Cantidad de Baja.</param>
+        /// <returns></returns>
+        private static int _getCantidadBaja(Int64 codigo)
+        {
+            int retorno = 0;
+
+            using (var con = DBContext.GetInstance())
+            {
+                var query = "SELECT Baja FROM Stock WHERE Codigo_Suministro = " + codigo;
+
+                using (var command = new SQLiteCommand(query, con))
+                {
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader.Read()) retorno = Convert.ToInt32(reader["Baja"].ToString());
+                    }
+                }
+            }
+
+            return retorno;
+        }
+
+        /// <summary>
+        /// Devuelve la Cantidad de Fallado de un Stock específico en base a su Código
+        /// </summary>
+        /// <param name="codigo">Código del Stock donde se requiere buscar la Cantidad de Fallado.</param>
+        /// <returns></returns>
+        private static int _getCantidadFallado(Int64 codigo)
+        {
+            int retorno = 0;
+
+            using (var con = DBContext.GetInstance())
+            {
+                var query = "SELECT Fallado FROM Stock WHERE Codigo_Suministro = " + codigo;
+
+                using (var command = new SQLiteCommand(query, con))
+                {
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader.Read()) retorno = Convert.ToInt32(reader["Fallado"].ToString());
                     }
                 }
             }

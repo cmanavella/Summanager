@@ -67,6 +67,9 @@
     <Compile Include="CustomGroupBox.Designer.cs">
       <DependentUpon>CustomGroupBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataGridView.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="DetalleEstadistica.cs">
       <SubType>UserControl</SubType>
     </Compile>

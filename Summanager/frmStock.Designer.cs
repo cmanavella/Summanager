@@ -200,6 +200,7 @@ namespace Summanager
             this.btnDevolucion.TabIndex = 13;
             this.btnDevolucion.Text = "Devolución";
             this.btnDevolucion.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnDevolucion.Click += new System.EventHandler(this.btnDevolucion_Click);
             // 
             // btnIngreso
             // 
@@ -277,7 +278,7 @@ namespace Summanager
 
         private System.Windows.Forms.Label label1;
         private CustomControls.MenuButton menuNuevo;
-        private System.Windows.Forms.DataGridView dgv;
+        protected System.Windows.Forms.DataGridView dgv;
         private System.Windows.Forms.Label lblMsjeStock;
         private CustomControls.Button btnEnviar;
         private CustomControls.Button btnDevolucion;

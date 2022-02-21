@@ -87,5 +87,12 @@ namespace Summanager
             //Agrando la Columna Nombre del DataGridView cuando este cambia su tamaño.
             this.dgv.Columns["Nombre"].Width = this.dgv.Width - 836;
         }
+
+        private void btnDevolucion_Click(object sender, EventArgs e)
+        {
+            frmDevolucionStock devolucionStock = new frmDevolucionStock();
+            devolucionStock.ShowDialog();
+            ActualizarStock();
+        }
     }
 }
