@@ -47,7 +47,7 @@ namespace Data
         }
 
         /// <summary>
-        /// Actualiza uno o varios Stock en la Base de Datos, de acuerdo al Estado que se quiere actualizar.
+        /// Agerega cantidades de uno o varios Stock en la Base de Datos, de acuerdo al Estado que se quiere actualizar.
         /// </summary>
         /// <param name="stocks">Una Lista de Stocks a actualizar.</param>
         /// <param name="estado">La cantidad que se quiere actualizar, es decir cantidad de alta, de baja o de fallado.</param>
@@ -87,7 +87,7 @@ namespace Data
                                             //Si existe, creo la Query con un SQL de Actualización, donde solo paso como valor numérico la Cantidad de Alta.
                                             //Las demás cantidades las paso en 0. Además sumo la Cantidad de Alta almacenada en la Base de Datos a la pasada
                                             //por parámetro.
-                                            query = "UPDATE Stock SET Alta = " + (_getCantidadAlta(stock.Suministro.Codigo) + stock.Alta) + 
+                                            query = "UPDATE Stock SET Alta = " + (GetCantidadAlta(stock.Suministro.Codigo) + stock.Alta) + 
                                                 " WHERE Codigo_Suministro = " + stock.Suministro.Codigo;
                                         }
                                         break; //Salgo del Case.
@@ -105,7 +105,7 @@ namespace Data
                                             //Si existe, creo la Query con un SQL de Actualización, donde solo paso como valor numérico la Cantidad de Alta.
                                             //Las demás cantidades las paso en 0. Además sumo la Cantidad de Baja almacenada en la Base de Datos a la pasada
                                             //por parámetro.
-                                            query = "UPDATE Stock SET Baja = " + (_getCantidadBaja(stock.Suministro.Codigo) + stock.Baja) +
+                                            query = "UPDATE Stock SET Baja = " + (GetCantidadBaja(stock.Suministro.Codigo) + stock.Baja) +
                                                 " WHERE Codigo_Suministro = " + stock.Suministro.Codigo;
                                         }
                                         break; //Salgo del Case.
@@ -123,7 +123,7 @@ namespace Data
                                             //Si existe, creo la Query con un SQL de Actualización, donde solo paso como valor numérico la Cantidad de Fallado.
                                             //Las demás cantidades las paso en 0. Además sumo la Cantidad de Fallado almacenada en la Base de Datos a la pasada
                                             //por parámetro.
-                                            query = "UPDATE Stock SET Fallado = " + (_getCantidadFallado(stock.Suministro.Codigo) + stock.Fallado) +
+                                            query = "UPDATE Stock SET Fallado = " + (GetCantidadFallado(stock.Suministro.Codigo) + stock.Fallado) +
                                                 " WHERE Codigo_Suministro = " + stock.Suministro.Codigo;
                                         }
                                         break; //Salgo del Case.
@@ -149,11 +149,80 @@ namespace Data
         }
 
         /// <summary>
+        /// Agerega cantidades de uno o varios Stock en la Base de Datos, de acuerdo al Estado que se quiere actualizar.
+        /// </summary>
+        /// <param name="stocks">Una Lista de Stocks a actualizar.</param>
+        /// <param name="estado">La cantidad que se quiere actualizar, es decir cantidad de alta, de baja o de fallado.</param>
+        public static void SubstractStock(List<Stock> stocks, Stock.ESTADO estado)
+        {
+            using (var con = DBContext.GetInstance())
+            {
+                //Como es una Lista de Stock los que voy a actualizar, hago una Transaction en caso que suceda algo no impacte en la BD.
+                using (var transaction = con.BeginTransaction())
+                {
+                    //Hago un Try, ya que a partir de ahora pueden ocurrir errores.
+                    try
+                    {
+                        using (var command = new SQLiteCommand(con))
+                        {
+                            //Creo una Query con un String vacío
+                            var query = string.Empty;
+
+                            //Recorro la Lista de Stock para actualizar la Cantidad del mismo, de acuerdo a lo establecido por parametro.
+                            foreach (Stock stock in stocks)
+                            {
+                                //Para crear el Query primero me tengo que fijar que cantidad de Stock quiero modificar (Alta, Baja o Fallado).
+                                switch (estado)
+                                {
+                                    case Stock.ESTADO.ALTA:
+                                        //Solo paso como valor numérico la Cantidad de Alta.
+                                        //Las demás cantidades las paso en 0. Además resto la Cantidad de Alta almacenada en la Base de Datos a la pasada
+                                        //por parámetro.
+                                        query = "UPDATE Stock SET Alta = " + (GetCantidadAlta(stock.Suministro.Codigo) - stock.Alta) +
+                                            " WHERE Codigo_Suministro = " + stock.Suministro.Codigo;
+                                        break; //Salgo del Case.
+                                    case Stock.ESTADO.BAJA:
+                                        //Solo paso como valor numérico la Cantidad de Baja.
+                                        //Las demás cantidades las paso en 0. Además resto la Cantidad de Baja almacenada en la Base de Datos a la pasada
+                                        //por parámetro.
+                                        query = "UPDATE Stock SET Baja = " + (GetCantidadBaja(stock.Suministro.Codigo) - stock.Baja) +
+                                            " WHERE Codigo_Suministro = " + stock.Suministro.Codigo;
+                                        break; //Salgo del Case.
+                                    case Stock.ESTADO.FALLADO:
+                                        //Solo paso como valor numérico la Cantidad de Fallado.
+                                        //Las demás cantidades las paso en 0. Además resto la Cantidad de Fallado almacenada en la Base de Datos a la pasada
+                                        //por parámetro.
+                                        query = "UPDATE Stock SET Fallado = " + (GetCantidadFallado(stock.Suministro.Codigo) + stock.Fallado) +
+                                            " WHERE Codigo_Suministro = " + stock.Suministro.Codigo;
+                                        break; //Salgo del Case.
+                                }
+
+                                //Paso la Query al Command y luego la ejecuto.
+                                command.CommandText = query;
+                                command.ExecuteNonQuery();
+                            }
+
+                            //Una vez que he ejecutado todas las Query y llegué a este punto, confirmo la Transacción así se impacta en la Base de Datos.
+                            transaction.Commit();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        //Si hubo un error cancelo la Transaction para que no se impacte nada en la Base de Datos.
+                        transaction.Rollback();
+                        //Envío la Excepción para que en el FrontEnd pueda ser capturada.
+                        throw ex;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
         /// Devuelve la Cantidad de Alta de un Stock específico en base a su Código
         /// </summary>
         /// <param name="codigo">Código del Stock donde se requiere buscar la Cantidad de Alta.</param>
         /// <returns></returns>
-        private static int _getCantidadAlta(Int64 codigo)
+        public static int GetCantidadAlta(Int64 codigo)
         {
             int retorno = 0;
 
@@ -178,7 +247,7 @@ namespace Data
         /// </summary>
         /// <param name="codigo">Código del Stock donde se requiere buscar la Cantidad de Baja.</param>
         /// <returns></returns>
-        private static int _getCantidadBaja(Int64 codigo)
+        public static int GetCantidadBaja(Int64 codigo)
         {
             int retorno = 0;
 
@@ -203,7 +272,7 @@ namespace Data
         /// </summary>
         /// <param name="codigo">Código del Stock donde se requiere buscar la Cantidad de Fallado.</param>
         /// <returns></returns>
-        private static int _getCantidadFallado(Int64 codigo)
+        public static int GetCantidadFallado(Int64 codigo)
         {
             int retorno = 0;
 

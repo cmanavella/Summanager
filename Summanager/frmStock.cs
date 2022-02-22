@@ -110,7 +110,9 @@ namespace Summanager
 
         private void btnEntrega_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(this.btnEntrega.Location.ToString());
+            FrmEntregarStock entregarStock = new FrmEntregarStock();
+            entregarStock.ShowDialog();
+            ActualizarStock();
         }
     }
 }

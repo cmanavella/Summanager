@@ -17,6 +17,10 @@ namespace Summanager
             InitializeComponent();
 
             this.lblTitulo.Text = "Devolución de Stock";
+
+            base.ValidoCantidadAlta = false;
+            base.ValidoCantidadBaja = false;
+            base.ValidoCantidadFallado = false;
         }
 
         private void frmDevolucionStock_Shown(object sender, EventArgs e)

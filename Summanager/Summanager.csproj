@@ -154,6 +154,12 @@
     <Compile Include="FrmEmergente.Designer.cs">
       <DependentUpon>FrmEmergente.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmEntregarStock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmEntregarStock.Designer.cs">
+      <DependentUpon>FrmEntregarStock.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmEstados.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -224,6 +230,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmEmergente.resx">
       <DependentUpon>FrmEmergente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmEntregarStock.resx">
+      <DependentUpon>FrmEntregarStock.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmEstados.resx">
       <DependentUpon>FrmEstados.cs</DependentUpon>

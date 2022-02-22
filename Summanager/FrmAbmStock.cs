@@ -24,6 +24,10 @@ namespace Summanager
 
         private Suministro currentSuministro;
 
+        protected bool ValidoCantidadAlta;
+        protected bool ValidoCantidadBaja;
+        protected bool ValidoCantidadFallado;
+
         public FrmAbmStock() : this(String.Empty) { }
 
         public FrmAbmStock(string title)
@@ -32,6 +36,9 @@ namespace Summanager
             this.lblTitulo.Text = title;
 
             this.currentSuministro = new Suministro();
+
+            //this.ValidoCantidadAlta = false;
+            //this.ValidoCantidadBajaFalla = false;
 
             _ocultarLabelsInfo();
         }
@@ -268,6 +275,65 @@ namespace Summanager
             this.txtBusqueda.Focus();
         }
 
+        /// <summary>
+        /// Agrega un Suministro al DataGridView.
+        /// </summary>
+        protected void Agregar()
+        {
+            //Valido que el Text Cantidad no se encuentre vacio.
+            if (txtCantidad.Text.Length > 0)
+            {
+                //Paso el valor del Text Cantidad a una variable.
+                int cantidad = Convert.ToInt32(txtCantidad.Text);
+
+                //Valido que la cantidad no sea 0
+                if (cantidad > 0)
+                {
+                    //Valido que el Suministro no se encuentre ya cargado en el DataGridView.
+                    if (!_existeElemento(currentSuministro.Codigo, this.chkFallado.Checked))
+                    {
+                        //Me fijo en el Check Fallado.
+                        string fallado = "No";
+                        if (this.chkFallado.Checked) fallado = "Sí";
+
+                        //Agrego el suministro y la cantidad al DataGridView.
+                        this.dgv.Rows.Add(this.currentSuministro.Codigo, this.currentSuministro.Nombre, cantidad, fallado);
+
+                        //Habilito el DataGridView, el Button Quitar y el Button Guardar.
+                        this.dgv.Enabled = true;
+                        this.btnQuitar.Enabled = true;
+                        this.btnGuardar.Enabled = true;
+
+                        //Limpio el Formulario.
+                        _clear();
+                    }
+                    else
+                    {
+                        //Si el Suministro existe, muestro mensaje y limpio el Formulario.
+                        MessageBox.Show("El Suministro ya se encuentra cargado.", Application.ProductName + " " + Application.ProductVersion,
+                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        _clear();
+                    }
+                }
+                else
+                {
+                    //Si la Cantidad es 0, muestro mensaje y pongo foco nuevamente en Cantidad, seleccionando su valor.
+                    MessageBox.Show("La Cantidad debe ser mayor que 0.", Application.ProductName + " " + Application.ProductVersion,
+                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    this.txtCantidad.Focus();
+                    this.txtCantidad.SelectionStart = 0;
+                    this.txtCantidad.SelectionLength = this.txtCantidad.Text.Length;
+                }
+            }
+            else
+            {
+                //Si el Text Cantidad esta vacio, muestro mensaje y pongo foco nuevamente en Cantidad.
+                MessageBox.Show("El campo 'Cantidad' es obligatorio.", Application.ProductName + " " + Application.ProductVersion,
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                this.txtCantidad.Focus();
+            }
+        }
+
         /* EVENTOS */
         private void panelSuperior_MouseDown(object sender, MouseEventArgs e)
         {
@@ -408,57 +474,71 @@ namespace Summanager
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            //Valido que el Text Cantidad no se encuentre vacio.
-            if (txtCantidad.Text.Length > 0)
+            bool agrego = true;
+
+            //Pregunto si debo validar la cantidad de Alta del Suministro en Stock.
+            if (this.ValidoCantidadAlta)
             {
-                //Paso el valor del Text Cantidad a una variable.
-                int cantidad = Convert.ToInt32(txtCantidad.Text);
+                //Seteo la bandera de Agregar en False.
+                agrego = false;
 
-                //Valido que la cantidad no sea 0
-                if (cantidad > 0)
+                //Hago un Try por si algún error sucede.
+                try
                 {
-                    //Valido que el Suministro no se encuentre ya cargado en el DataGridView.
-                    if (!_existeElemento(currentSuministro.Codigo, this.chkFallado.Checked))
+                    //Traigo de la Base de Datos la Cantidad en Stock del Suministro.
+                    int cantidadEnStock = DBStock.GetCantidadAlta(Convert.ToInt64(this.lblCodigo.Text));
+
+                    //Me aseguro que Text Cantidad no esté vacío.
+                    if (txtCantidad.Text.Length > 0)
                     {
-                        //Me fijo en el Check Fallado.
-                        string fallado = "No";
-                        if (this.chkFallado.Checked) fallado = "Sí";
+                        int cantidad = Convert.ToInt32(this.txtCantidad.Text);
 
-                        //Agrego el suministro y la cantidad al DataGridView.
-                        this.dgv.Rows.Add(this.currentSuministro.Codigo, this.currentSuministro.Nombre, cantidad, fallado);
-
-                        //Habilito el DataGridView, el Button Quitar y el Button Guardar.
-                        this.dgv.Enabled = true;
-                        this.btnQuitar.Enabled = true;
-                        this.btnGuardar.Enabled = true;
-
-                        //Limpio el Formulario.
-                        _clear();
+                        //Valido que la cantidad no sea 0
+                        if (cantidad > 0)
+                        {
+                            //Si la Cantidad que deseo entregar es menor o igual a la Cantidad que hay en Stock, agrego el Suministro en DataGridView
+                            //seteando la bandera Agrego en True.
+                            if (cantidad <= cantidadEnStock)
+                            {
+                                agrego = true;
+                            }
+                            else
+                            {
+                                //Si no lo es, muestro Mensaje y Limpio el Form.
+                                MessageBox.Show("No hay cantidad suficiente del Suministro en Stock para entregar.", Application.ProductName + " " + Application.ProductVersion,
+                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                _clear();
+                            }
+                        }
+                        else
+                        {
+                            //Si la Cantidad es 0, muestro mensaje y pongo foco nuevamente en Cantidad, seleccionando su valor.
+                            MessageBox.Show("La Cantidad debe ser mayor que 0.", Application.ProductName + " " + Application.ProductVersion,
+                                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            this.txtCantidad.Focus();
+                            this.txtCantidad.SelectionStart = 0;
+                            this.txtCantidad.SelectionLength = this.txtCantidad.Text.Length;
+                        }
                     }
                     else
                     {
-                        //Si el Suministro existe, muestro mensaje y limpio el Formulario.
-                        MessageBox.Show("El Suministro ya se encuentra cargado.", Application.ProductName + " " + Application.ProductVersion,
-                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        _clear();
+                        //Si el Text Cantidad esta vacio, muestro mensaje y pongo foco nuevamente en Cantidad.
+                        MessageBox.Show("El campo 'Cantidad' es obligatorio.", Application.ProductName + " " + Application.ProductVersion,
+                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        this.txtCantidad.Focus();
                     }
                 }
-                else
+                catch(Exception ex)
                 {
-                    //Si la Cantidad es 0, muestro mensaje y pongo foco nuevamente en Cantidad, seleccionando su valor.
-                    MessageBox.Show("La Cantidad debe ser mayor que 0.", Application.ProductName + " " + Application.ProductVersion,
-                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    this.txtCantidad.Focus();
-                    this.txtCantidad.SelectionStart = 0;
-                    this.txtCantidad.SelectionLength = this.txtCantidad.Text.Length;
+                    MessageBox.Show(ex.Message, Application.ProductName + " " + Application.ProductVersion,
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            else
+
+            //Pregunto por la bandera Agrego. Si es True Agrego el Suministro.
+            if (agrego)
             {
-                //Si el Text Cantidad esta vacio, muestro mensaje y pongo foco nuevamente en Cantidad.
-                MessageBox.Show("El campo 'Cantidad' es obligatorio.", Application.ProductName + " " + Application.ProductVersion,
-                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                this.txtCantidad.Focus();
+                Agregar();
             }
         }
 
