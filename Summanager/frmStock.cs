@@ -86,6 +86,19 @@ namespace Summanager
         {
             //Agrando la Columna Nombre del DataGridView cuando este cambia su tamaño.
             this.dgv.Columns["Nombre"].Width = this.dgv.Width - 836;
+
+            //Debo colocar los Botones Entrega y Devolución en la mitad de la pantalla.
+            //Almaceno la cantidad de Píxeles que separan a los botones. Para ello, substraigo a la Posición en X del Botón Devolución la suma de la 
+            //Posición en X del Botón Entrega sumado a su Ancho.
+            int separador = this.btnDevolucion.Location.X - (this.btnEntrega.Location.X + this.btnEntrega.Width);
+            //Calculo el Ancho Total de los dos Botones y el espacio que lo separa.
+            int widthTotal = this.btnEntrega.Width + separador + this.btnDevolucion.Width;
+            //Calculo el Punto Medio del Formulario.
+            int middleForm = this.Width / 2;
+            //Seteo la Posición en X del Botón Entrega substrayendo al valor de la Mitad de Formulario el valor de la Mitad de los Botones.
+            this.btnEntrega.Location = new Point((middleForm - widthTotal / 2), this.btnEntrega.Location.Y);
+            //Seteo la Posición en X del Botón Devolución sumando la Posición en X del Botón Entrega, su Ancho y el Ancho del Espacio que los separa.
+            this.btnDevolucion.Location = new Point((this.btnEntrega.Location.X + this.btnEntrega.Width + separador), this.btnDevolucion.Location.Y);
         }
 
         private void btnDevolucion_Click(object sender, EventArgs e)
@@ -93,6 +106,11 @@ namespace Summanager
             frmDevolucionStock devolucionStock = new frmDevolucionStock();
             devolucionStock.ShowDialog();
             ActualizarStock();
+        }
+
+        private void btnEntrega_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(this.btnEntrega.Location.ToString());
         }
     }
 }
