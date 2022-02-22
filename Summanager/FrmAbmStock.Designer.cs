@@ -29,7 +29,7 @@ namespace Summanager
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelSuperior = new System.Windows.Forms.Panel();
             this.lblTitulo = new System.Windows.Forms.Label();
             this.btnCerrar = new CustomControls.PanelButton();
@@ -93,7 +93,7 @@ namespace Summanager
             this.btnCerrar.Location = new System.Drawing.Point(441, 0);
             this.btnCerrar.Name = "btnCerrar";
             this.btnCerrar.Size = new System.Drawing.Size(30, 30);
-            this.btnCerrar.TabIndex = 11;
+            this.btnCerrar.TabIndex = 1;
             this.btnCerrar.TabStop = false;
             this.btnCerrar.Text = "X";
             this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
@@ -229,14 +229,14 @@ namespace Summanager
             this.dgv.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgv.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgv.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(159)))), ((int)(((byte)(206)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(159)))), ((int)(((byte)(206)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(159)))), ((int)(((byte)(206)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(159)))), ((int)(((byte)(206)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Codigo,
@@ -263,7 +263,7 @@ namespace Summanager
             this.dgv.ShowEditingIcon = false;
             this.dgv.ShowRowErrors = false;
             this.dgv.Size = new System.Drawing.Size(447, 76);
-            this.dgv.TabIndex = 29;
+            this.dgv.TabIndex = 6;
             // 
             // Codigo
             // 
@@ -303,10 +303,11 @@ namespace Summanager
             this.chkFallado.Location = new System.Drawing.Point(400, 39);
             this.chkFallado.Name = "chkFallado";
             this.chkFallado.Size = new System.Drawing.Size(75, 21);
-            this.chkFallado.TabIndex = 34;
+            this.chkFallado.TabIndex = 4;
             this.chkFallado.Text = "Fallado";
             this.chkFallado.UseVisualStyleBackColor = true;
             this.chkFallado.Visible = false;
+            this.chkFallado.KeyUp += new System.Windows.Forms.KeyEventHandler(this.chkFallado_KeyUp);
             // 
             // btnQuitar
             // 
@@ -318,7 +319,7 @@ namespace Summanager
             this.btnQuitar.Location = new System.Drawing.Point(429, 203);
             this.btnQuitar.Name = "btnQuitar";
             this.btnQuitar.Size = new System.Drawing.Size(30, 30);
-            this.btnQuitar.TabIndex = 33;
+            this.btnQuitar.TabIndex = 7;
             this.btnQuitar.Text = "-";
             this.btnQuitar.Click += new System.EventHandler(this.btnQuitar_Click);
             // 
@@ -332,7 +333,7 @@ namespace Summanager
             this.btnAgregar.Location = new System.Drawing.Point(429, 39);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(30, 30);
-            this.btnAgregar.TabIndex = 32;
+            this.btnAgregar.TabIndex = 5;
             this.btnAgregar.Text = "+";
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
@@ -346,7 +347,7 @@ namespace Summanager
             this.btnGuardar.Location = new System.Drawing.Point(379, 239);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(80, 28);
-            this.btnGuardar.TabIndex = 20;
+            this.btnGuardar.TabIndex = 9;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -359,7 +360,7 @@ namespace Summanager
             this.btnCancelar.Location = new System.Drawing.Point(12, 239);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(80, 28);
-            this.btnCancelar.TabIndex = 19;
+            this.btnCancelar.TabIndex = 8;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
@@ -377,7 +378,7 @@ namespace Summanager
             this.txtCantidad.SelectionLength = 0;
             this.txtCantidad.SelectionStart = 0;
             this.txtCantidad.Size = new System.Drawing.Size(67, 20);
-            this.txtCantidad.TabIndex = 18;
+            this.txtCantidad.TabIndex = 3;
             this.txtCantidad.Text = "Cantidad";
             this.txtCantidad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCantidad_KeyPress);
             this.txtCantidad.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtCantidad_KeyUp);
@@ -394,7 +395,7 @@ namespace Summanager
             this.txtBusqueda.SelectionLength = 0;
             this.txtBusqueda.SelectionStart = 0;
             this.txtBusqueda.Size = new System.Drawing.Size(289, 20);
-            this.txtBusqueda.TabIndex = 17;
+            this.txtBusqueda.TabIndex = 2;
             this.txtBusqueda.Text = "Código, Nombre o Modelo de Impresora";
             this.txtBusqueda.Enter += new System.EventHandler(this.txtBusqueda_Enter);
             this.txtBusqueda.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtBusqueda_KeyUp);

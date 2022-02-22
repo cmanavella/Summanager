@@ -488,5 +488,13 @@ namespace Summanager
                 this.btnGuardar.Enabled = false;
             }
         }
+
+        private void chkFallado_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.btnAgregar_Click(null, null);
+            }
+        }
     }
 }
