@@ -96,7 +96,7 @@ namespace Summanager
                     this.currentSuministro = suministro;
                     this.txtCantidad.Enabled = true;
                     this.btnAgregar.Enabled = true;
-                    this.chkFallado.Enabled = false;
+                    this.chkFallado.Enabled = true;
                     this.txtCantidad.Focus();
                 }
                 else
@@ -302,9 +302,6 @@ namespace Summanager
             //Pregunto si el KeyEventArgs no es Null.
             if(e != null)
             {
-                //Oculto los Labels Info.
-                _ocultarLabelsInfo();
-
                 //Me aseguro que no se haya presionado la conbinación SHIFT + TAB. De esa manera impido que se ejecute el buscador al querer volver al 
                 //control con esa combinación de teclas.
                 if(!(e.Shift && e.KeyCode == Keys.Tab))
@@ -312,6 +309,9 @@ namespace Summanager
                     //Me aseguro que la tecla presionada sea ENTER o TAB y que el Text Búsqueda no esté vacío para ejecutar la búsqueda.
                     if ((e.KeyCode == Keys.Enter || e.KeyCode == Keys.Tab) && this.txtBusqueda.Text.Length > 0)
                     {
+                        //Oculto los Labels Info.
+                        _ocultarLabelsInfo();
+
                         try
                         {
                             //Intento buscar por Código.

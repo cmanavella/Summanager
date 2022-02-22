@@ -35,6 +35,7 @@ namespace Summanager
             // btnGuardar
             // 
             this.btnGuardar.Location = new System.Drawing.Point(433, 239);
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // btnQuitar
             // 

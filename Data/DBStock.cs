@@ -98,7 +98,7 @@ namespace Data
                                             //Si no existe, creo la Query con un SQL de Adición, donde solo paso como valor numérico la Cantidad de Baja.
                                             //Las demás cantidades las paso en 0.
                                             query = "INSERT INTO Stock (Codigo_Suministro, Alta, Baja, Fallado) VALUES(" + stock.Suministro.Codigo +
-                                                ", 0" + stock.Baja + ", 0)";
+                                                ", 0," + stock.Baja + ", 0)";
                                         }
                                         else
                                         {
@@ -123,7 +123,7 @@ namespace Data
                                             //Si existe, creo la Query con un SQL de Actualización, donde solo paso como valor numérico la Cantidad de Fallado.
                                             //Las demás cantidades las paso en 0. Además sumo la Cantidad de Fallado almacenada en la Base de Datos a la pasada
                                             //por parámetro.
-                                            query = "UPDATE Stock SET Baja = " + (_getCantidadFallado(stock.Suministro.Codigo) + stock.Fallado) +
+                                            query = "UPDATE Stock SET Fallado = " + (_getCantidadFallado(stock.Suministro.Codigo) + stock.Fallado) +
                                                 " WHERE Codigo_Suministro = " + stock.Suministro.Codigo;
                                         }
                                         break; //Salgo del Case.
