@@ -43,9 +43,9 @@ namespace Summanager
             this.btnEnviar = new CustomControls.Button();
             this.btnDevolucion = new CustomControls.Button();
             this.btnIngreso = new CustomControls.Button();
-            this.menuNuevo = new CustomControls.MenuButton();
             this.btnNuevoSuministro = new CustomControls.ItemMenuButton();
             this.btnEntrega = new CustomControls.Button();
+            this.menuNuevo = new CustomControls.MenuButton();
             this.panelTitulo.SuspendLayout();
             this.panelMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
@@ -188,6 +188,7 @@ namespace Summanager
             this.btnEnviar.TabIndex = 6;
             this.btnEnviar.Text = "Enviar";
             this.btnEnviar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnEnviar.Click += new System.EventHandler(this.btnEnviar_Click);
             // 
             // btnDevolucion
             // 
@@ -214,17 +215,6 @@ namespace Summanager
             this.btnIngreso.Text = "Ingreso";
             this.btnIngreso.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnIngreso.Click += new System.EventHandler(this.btnIngreso_Click);
-            // 
-            // menuNuevo
-            // 
-            this.menuNuevo.ContainerDesplegado = false;
-            this.menuNuevo.Image = global::Summanager.Properties.Resources._new;
-            this.menuNuevo.Items.Add(this.btnNuevoSuministro);
-            this.menuNuevo.Location = new System.Drawing.Point(12, 6);
-            this.menuNuevo.Name = "menuNuevo";
-            this.menuNuevo.Size = new System.Drawing.Size(80, 28);
-            this.menuNuevo.TabIndex = 1;
-            this.menuNuevo.Text = "Nuevo";
             // 
             // btnNuevoSuministro
             // 
@@ -257,6 +247,17 @@ namespace Summanager
             this.btnEntrega.Text = "Entrega";
             this.btnEntrega.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnEntrega.Click += new System.EventHandler(this.btnEntrega_Click);
+            // 
+            // menuNuevo
+            // 
+            this.menuNuevo.ContainerDesplegado = false;
+            this.menuNuevo.Image = global::Summanager.Properties.Resources._new;
+            this.menuNuevo.Items.Add(this.btnNuevoSuministro);
+            this.menuNuevo.Location = new System.Drawing.Point(12, 6);
+            this.menuNuevo.Name = "menuNuevo";
+            this.menuNuevo.Size = new System.Drawing.Size(80, 28);
+            this.menuNuevo.TabIndex = 1;
+            this.menuNuevo.Text = "Nuevo";
             // 
             // FrmStock
             // 

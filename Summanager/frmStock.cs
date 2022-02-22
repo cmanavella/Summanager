@@ -114,5 +114,12 @@ namespace Summanager
             entregarStock.ShowDialog();
             ActualizarStock();
         }
+
+        private void btnEnviar_Click(object sender, EventArgs e)
+        {
+            FrmEnviarStock enviarStock = new FrmEnviarStock();
+            enviarStock.ShowDialog();
+            ActualizarStock();
+        }
     }
 }

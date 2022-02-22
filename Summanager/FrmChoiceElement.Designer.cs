@@ -184,6 +184,7 @@ namespace Summanager
             this.dgv.ShowRowErrors = false;
             this.dgv.Size = new System.Drawing.Size(1010, 168);
             this.dgv.TabIndex = 24;
+            this.dgv.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_CellMouseDoubleClick);
             this.dgv.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgv_KeyDown);
             this.dgv.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dgv_KeyUp);
             // 

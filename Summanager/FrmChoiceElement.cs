@@ -138,5 +138,10 @@ namespace Summanager
                 e.Handled = true;
             }
         }
+
+        private void dgv_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            this.btnElegir_Click(null, null);
+        }
     }
 }

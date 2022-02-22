@@ -535,6 +535,124 @@ namespace Summanager
                 }
             }
 
+            //Pregunto si debo validar la cantidad de Baja del Suministro en Stock. Esta validación solo se hace si el Check Fallado es False.
+            if (this.ValidoCantidadBaja && !this.chkFallado.Checked)
+            {
+                //Seteo la bandera de Agregar en False.
+                agrego = false;
+
+                //Hago un Try por si algún error sucede.
+                try
+                {
+                    //Traigo de la Base de Datos la Cantidad de Baja en Stock del Suministro.
+                    int cantidadEnStock = DBStock.GetCantidadBaja(Convert.ToInt64(this.lblCodigo.Text));
+
+                    //Me aseguro que Text Cantidad no esté vacío.
+                    if (txtCantidad.Text.Length > 0)
+                    {
+                        int cantidad = Convert.ToInt32(this.txtCantidad.Text);
+
+                        //Valido que la cantidad no sea 0
+                        if (cantidad > 0)
+                        {
+                            //Si la Cantidad que deseo enviar es menor o igual a la Cantidad que hay en Stock, agrego el Suministro en DataGridView
+                            //seteando la bandera Agrego en True.
+                            if (cantidad <= cantidadEnStock)
+                            {
+                                agrego = true;
+                            }
+                            else
+                            {
+                                //Si no lo es, muestro Mensaje y Limpio el Form.
+                                MessageBox.Show("No hay cantidad suficiente del Suministro en Stock para enviar.", Application.ProductName + " " + Application.ProductVersion,
+                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                _clear();
+                            }
+                        }
+                        else
+                        {
+                            //Si la Cantidad es 0, muestro mensaje y pongo foco nuevamente en Cantidad, seleccionando su valor.
+                            MessageBox.Show("La Cantidad debe ser mayor que 0.", Application.ProductName + " " + Application.ProductVersion,
+                                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            this.txtCantidad.Focus();
+                            this.txtCantidad.SelectionStart = 0;
+                            this.txtCantidad.SelectionLength = this.txtCantidad.Text.Length;
+                        }
+                    }
+                    else
+                    {
+                        //Si el Text Cantidad esta vacio, muestro mensaje y pongo foco nuevamente en Cantidad.
+                        MessageBox.Show("El campo 'Cantidad' es obligatorio.", Application.ProductName + " " + Application.ProductVersion,
+                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        this.txtCantidad.Focus();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, Application.ProductName + " " + Application.ProductVersion,
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+
+            //Pregunto si debo validar la cantidad de Fallado del Suministro en Stock. Esta validación solo se hace si el Check Fallado es True.
+            if (this.ValidoCantidadBaja && this.chkFallado.Checked)
+            {
+                //Seteo la bandera de Agregar en False.
+                agrego = false;
+
+                //Hago un Try por si algún error sucede.
+                try
+                {
+                    //Traigo de la Base de Datos la Cantidad de Fallado en Stock del Suministro.
+                    int cantidadEnStock = DBStock.GetCantidadFallado(Convert.ToInt64(this.lblCodigo.Text));
+
+                    //Me aseguro que Text Cantidad no esté vacío.
+                    if (txtCantidad.Text.Length > 0)
+                    {
+                        int cantidad = Convert.ToInt32(this.txtCantidad.Text);
+
+                        //Valido que la cantidad no sea 0
+                        if (cantidad > 0)
+                        {
+                            //Si la Cantidad que deseo enviar es menor o igual a la Cantidad que hay en Stock, agrego el Suministro en DataGridView
+                            //seteando la bandera Agrego en True.
+                            if (cantidad <= cantidadEnStock)
+                            {
+                                agrego = true;
+                            }
+                            else
+                            {
+                                //Si no lo es, muestro Mensaje y Limpio el Form.
+                                MessageBox.Show("No hay cantidad suficiente del Suministro en Stock para enviar.", Application.ProductName + " " + Application.ProductVersion,
+                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                _clear();
+                            }
+                        }
+                        else
+                        {
+                            //Si la Cantidad es 0, muestro mensaje y pongo foco nuevamente en Cantidad, seleccionando su valor.
+                            MessageBox.Show("La Cantidad debe ser mayor que 0.", Application.ProductName + " " + Application.ProductVersion,
+                                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            this.txtCantidad.Focus();
+                            this.txtCantidad.SelectionStart = 0;
+                            this.txtCantidad.SelectionLength = this.txtCantidad.Text.Length;
+                        }
+                    }
+                    else
+                    {
+                        //Si el Text Cantidad esta vacio, muestro mensaje y pongo foco nuevamente en Cantidad.
+                        MessageBox.Show("El campo 'Cantidad' es obligatorio.", Application.ProductName + " " + Application.ProductVersion,
+                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        this.txtCantidad.Focus();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, Application.ProductName + " " + Application.ProductVersion,
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+
             //Pregunto por la bandera Agrego. Si es True Agrego el Suministro.
             if (agrego)
             {

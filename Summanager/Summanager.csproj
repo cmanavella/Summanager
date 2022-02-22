@@ -160,6 +160,12 @@
     <Compile Include="FrmEntregarStock.Designer.cs">
       <DependentUpon>FrmEntregarStock.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmEnviarStock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmEnviarStock.Designer.cs">
+      <DependentUpon>FrmEnviarStock.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmEstados.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -233,6 +239,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmEntregarStock.resx">
       <DependentUpon>FrmEntregarStock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmEnviarStock.resx">
+      <DependentUpon>FrmEnviarStock.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmEstados.resx">
       <DependentUpon>FrmEstados.cs</DependentUpon>

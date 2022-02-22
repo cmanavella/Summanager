@@ -192,7 +192,7 @@ namespace Data
                                         //Solo paso como valor numérico la Cantidad de Fallado.
                                         //Las demás cantidades las paso en 0. Además resto la Cantidad de Fallado almacenada en la Base de Datos a la pasada
                                         //por parámetro.
-                                        query = "UPDATE Stock SET Fallado = " + (GetCantidadFallado(stock.Suministro.Codigo) + stock.Fallado) +
+                                        query = "UPDATE Stock SET Fallado = " + (GetCantidadFallado(stock.Suministro.Codigo) - stock.Fallado) +
                                             " WHERE Codigo_Suministro = " + stock.Suministro.Codigo;
                                         break; //Salgo del Case.
                                 }
