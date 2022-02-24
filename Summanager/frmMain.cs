@@ -10,6 +10,7 @@ using IO;
 using CustomControls;
 using Summanager.Properties;
 using System.Reflection;
+using Data;
 
 namespace Summanager
 {
@@ -48,6 +49,9 @@ namespace Summanager
             {
                 MessageBox.Show(ex.Message);
             }
+
+            //Busco Usuario Logueado.
+            GetUserLogged();
         }
 
         [Browsable(true), EditorBrowsable(EditorBrowsableState.Always), Bindable(true)]
@@ -65,6 +69,39 @@ namespace Summanager
             {
                 lblTitulo.Text = value; 
                 base.Text = value;
+            }
+        }
+
+        /// <summary>
+        /// Busca en la Base de Datos un Usuario Logueado. En base a eso Modifica los Elementos del Usuario.
+        /// </summary>
+        public static void GetUserLogged()
+        {
+            try
+            {
+                //Busco en la Base de Datos.
+                DBUsers.FindLogin();
+
+                //Pregunto si el Usuario está Logueado.
+                if (User.IsLogged)
+                {
+                    //Si lo está muestro su nombre y activo el Button Stock.
+                    lblUsuario.Text = "Sesión iniciada como: " + User.Nombre;
+                    lblUsuario.Visible = true;
+
+                    btnStock.Visible = true;
+                }
+                else
+                {
+                    //Caso contrario escondo el nombre del usuario y el Button Stock.
+                    lblUsuario.Visible = false;
+                    btnStock.Visible = false;
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName + " " + Application.ProductVersion,
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -207,6 +244,12 @@ namespace Summanager
         }
 
         private void appIcon_MouseDown(object sender, MouseEventArgs e)
+        {
+            ReleaseCapture();
+            SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
+
+        private void lblUsuario_MouseDown(object sender, MouseEventArgs e)
         {
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);

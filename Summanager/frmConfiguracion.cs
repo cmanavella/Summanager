@@ -7,6 +7,8 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using IO;
+using Entities;
+using Data;
 
 namespace Summanager
 {
@@ -14,6 +16,7 @@ namespace Summanager
     {
         private bool automatizo;
         private int periodo;
+        private bool deboIniciar;
 
         public FrmConfiguracion()
         {
@@ -31,6 +34,27 @@ namespace Summanager
             if (this.chkAutomatico.Checked)
             {
                 this.cmbPeriodo.SelectItem(this.periodo, true);
+            }
+
+            _setElementsByUser();
+        }
+
+        /// <summary>
+        /// Setea los elementos relacionados con el Usuario de acuerdo a si este se encuentra Logueado o no.
+        /// </summary>
+        private void _setElementsByUser()
+        {
+            if (User.IsLogged)
+            {
+                this.btnIniciarCerrar.ButtonBackColor = Color.DarkRed;
+                this.btnIniciarCerrar.Text = "Cerrar";
+                this.deboIniciar = false;
+            }
+            else
+            {
+                this.btnIniciarCerrar.ButtonBackColor = Color.FromArgb(0, 137, 132);
+                this.btnIniciarCerrar.Text = "Iniciar";
+                this.deboIniciar = true;
             }
         }
 
@@ -76,10 +100,13 @@ namespace Summanager
                 File.setActualizacionEstados(this.chkAutomatico.Checked);
                 File.setPeriodo(this.cmbPeriodo.SelectedItem().Value);
 
-                MessageBox.Show("Configuración guardada con éxito.");
-            }catch(Exception ex)
+                MessageBox.Show("Configuración guardada con éxito.", Application.ProductName + " " + Application.ProductVersion,
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch(Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, Application.ProductName + " " + Application.ProductVersion,
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -101,7 +128,8 @@ namespace Summanager
             //Si llego hasta acá, significa que el CheckBox no está activado y que no se ha seleccionado ningún Item del Combo Período.
             else
             {
-                MessageBox.Show("Debe definir un período.");
+                MessageBox.Show("Debe definir un período.", Application.ProductName + " " + Application.ProductVersion,
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -131,6 +159,30 @@ namespace Summanager
                 this.cmbPeriodo.SelectItem(this.periodo, true);
             }
             _guardar();  //Guardo los cambios.
+        }
+
+        private void btnIniciarCerrar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (deboIniciar)
+                {
+                    DBUsers.LogIn("cmanavella", "Mana5692");
+                }
+                else
+                {
+                    DBUsers.LogOut();
+                }
+
+                _setElementsByUser();
+
+                FrmMain.GetUserLogged();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName + " " + Application.ProductVersion,
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
