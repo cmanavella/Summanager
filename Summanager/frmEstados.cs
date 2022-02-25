@@ -39,6 +39,49 @@ namespace Summanager
         }
 
         /// <summary>
+        /// Devuelve una condición en TRUE o FALSE si la Lista de Impresoras no ha sido analizada.
+        /// </summary>
+        /// <returns>TRUE o FALSE</returns>
+        private bool _noAnalizadas()
+        {
+            bool retorno = true;
+
+            //Recorro la Lista de Impresoras. Si al menos una no es No Analizada devuelvo FALSE.
+            foreach(Printer printer in FrmMain.Printers)
+            {
+                if(printer.Estado != Printer.NO_ANALIZADA)
+                {
+                    retorno = false;
+                    break;
+                }
+            }
+
+            return retorno;
+        }
+
+        /// <summary>
+        /// Carga el DataGridView sin analizar la Lista de Impresoras.
+        /// </summary>
+        private void _cargoSinAnalizar()
+        {
+            //Limpio el DGV.
+            this.dgv.DataSource = null;
+            this.dgv.Refresh();
+
+            _llenarDgv(); //Cargo el DGV con lo analizado.
+
+            //Hago las Estadísticas Generales.
+            _getEstadisticaGral();
+            //Filtro el DGV.
+            _filtrar();
+
+            //Cargo el Label Última Actualización con la Fecha y Hora almacenada en el FrmMain.
+            this.lblActualizacion.Text = "Última actualización: " + Fecha.ParceFecha(FrmMain.UltimaActualización);
+            //Muestro la etiqueta de la última actualización.
+            this.lblActualizacion.Visible = true;
+        }
+
+        /// <summary>
         /// Devuelve la última ruta guardada que usó un OpenFileDialog.
         /// </summary>
         /// <returns></returns>
@@ -1131,26 +1174,73 @@ namespace Summanager
             //Al cargar el Form Estados trato de traer una Lista de Impresoras desde el Archivo actual en el que estoy trabajando.
             try
             {
-                FrmMain.Printers = IO.File.readCurrentFile();
+                //Traigo la Lista de Impresoras del Current File solo si esta Lista no tiene elementos.
+                if(FrmMain.Printers.Count == 0) FrmMain.Printers = IO.File.readCurrentFile();
+
+                _tituloForm();
+                _acomodarBotones();
+
+                if (!_esNuevo())
+                {
+                    //Resto al ancho y alto del FrmMain los valores de la diferencia que existe en la relación entre éste y el FrmEstados.
+                    //En este caso son 205 y 35. Los resultados se los paso al ancho y alto del FrmEstados.
+                    //Esto lo debo hacer para que se acomoden los elementos antes de actualizar.
+                    this.Width = this.frmMain.Width - 205;
+                    this.Height = this.frmMain.Height - 35;
+
+                    //Me aseguro que la Lista de Impresoras tenga al menos una.
+                    if (FrmMain.Printers.Count > 0)
+                    {
+                        //Me fijo que la Lista de Impresoras no estén analizadas
+                        if (_noAnalizadas())
+                        {
+                            //Si no lo están ejecuto el Botón Actualizar.
+                            btnActualizar_Click(sender, null); //Actualizo el DGV con el análisis de la Lista de Impresoras.
+                        }
+                        else
+                        {
+                            //Debo preguntar si automatizo.
+                            if (this.automatizo)
+                            {
+                                //Si automatizo debo obtener la diferencia de segundos transcurridos entre la última actualización y ahora.
+                                double segundos = (DateTime.Now - FrmMain.UltimaActualización).TotalSeconds;
+
+                                if(segundos >= this.periodo)
+                                {
+                                    //Si los segundos transcurridos son mayores o iguales al período elegido por el usuario, actualizo.
+                                    btnActualizar_Click(sender, null);
+                                }
+                                else
+                                {
+                                    //Si los segundos son menores al período, cargo sin actualizar.
+                                    _cargoSinAnalizar();
+
+                                    //Paso a la variable Contador, que es la encargada de llevar el tiempo en este Form, los segundos transcurridos.
+                                    this.contador = (int) segundos;
+
+                                    //Activo el Timer
+                                    this.timerContador.Enabled = true;
+                                }
+                            }
+                            else
+                            {
+                                //Si ya están analizadas y no automatizo, las cargo directamente en el DataGridView.
+                                _cargoSinAnalizar();
+                            }
+                        }
+                    }
+                    else
+                    {
+                        //Sino ejecuto Exception.
+                        throw new Exception("La Lista de Impresoras se encuentra vacía.");
+                    }
+                }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show("No se puede acceder al archivo.", Application.ProductName + ": Archivo dañado",
+                MessageBox.Show(ex.Message, Application.ProductName + ": Archivo dañado",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 btnNuevo_Click(null, null);
-            }
-
-            _tituloForm();
-            _acomodarBotones();
-
-            if (!_esNuevo())
-            {
-                //Resto al ancho y alto del FrmMain los valores de la diferencia que existe en la relación entre éste y el FrmEstados.
-                //En este caso son 205 y 35. Los resultados se los paso al ancho y alto del FrmEstados.
-                //Esto lo debo hacer para que se acomoden los elementos antes de actualizar.
-                this.Width = this.frmMain.Width - 205;
-                this.Height = this.frmMain.Height - 35;
-                btnActualizar_Click(sender, null); //Actualizo el DGV con el análisis de la Lista de Impresoras.
             }
         }
 
@@ -1370,7 +1460,7 @@ namespace Summanager
         private void btnActualizar_Click(object sender, EventArgs e)
         {
             //Si automatizo, apago el Timer Contador antes de actualizar. De esa manera trato de que no haya problemas
-            if (automatizo) this.timerContador.Enabled = false;
+            if (this.automatizo) this.timerContador.Enabled = false;
             //Oculto la etiqueta la última actualización.
             this.lblActualizacion.Visible = false;
 
@@ -1419,19 +1509,12 @@ namespace Summanager
 
             FrmMain.Printers = cargando.PrintersPassed;
 
-            //List<Printer> printersReturned = cargando.PrintersPassed; //Cargo una nueva Lista de Impresoras con lo devuelto.
-
-            ////Actualizo la Lista de Impresoras actual con la devuelta por el Form Cargando.
-            //foreach (Printer printer in printersReturned)
-            //{
-            //    int i = this.printers.FindIndex(o => o.Ip == printer.Ip);
-            //    this.printers[i] = printer;
-            //}
-
             _llenarDgv(); //Cargo el DGV con lo analizado.
 
+            //Paso la fecha y hora de la última actualización al FrmMain
+            FrmMain.UltimaActualización = DateTime.Now;
             //Cargo la fecha y hora de la última actualización.
-            this.lblActualizacion.Text = "Última actualización: " + Fecha.ParceFecha(DateTime.Now);
+            this.lblActualizacion.Text = "Última actualización: " + Fecha.ParceFecha(FrmMain.UltimaActualización);
             //Muestro la etiqueta de la última actualización.
             this.lblActualizacion.Visible = true;
             //Hago las Estadísticas Generales.

@@ -17,6 +17,7 @@ namespace Summanager
     public partial class FrmMain : Form
     {
         public static List<Printer> Printers { get; set; }
+        public static DateTime UltimaActualización { get; set; }
 
         private FrmEstados formEstados;
         private int formWidth;
@@ -32,6 +33,7 @@ namespace Summanager
             InitializeComponent();
 
             Printers = new List<Printer>();
+            UltimaActualización = new DateTime();
 
             this.Text = Application.ProductName;
 
