@@ -163,6 +163,7 @@ namespace Summanager
 
         private void btnIniciarCerrar_Click(object sender, EventArgs e)
         {
+            //PROVISORIO.
             try
             {
                 if (deboIniciar)
