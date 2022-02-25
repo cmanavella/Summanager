@@ -301,6 +301,7 @@ namespace IO
                 if (div.GetAttribute("class") == "progress-inner BlackGauge")
                 {
                     this.printer.Toner = Int32.Parse(div.GetAttribute("title").Substring(0, div.GetAttribute("title").Length - 1));
+                    break;
                 }
             }
 
@@ -311,6 +312,7 @@ namespace IO
                 if (div.GetAttribute("class") == "progress-inner BlackGauge")
                 {
                     this.printer.UImagen = Int32.Parse(div.GetAttribute("title").Substring(0, div.GetAttribute("title").Length - 1));
+                    break;
                 }
             }
 
@@ -321,6 +323,7 @@ namespace IO
                 if (div.GetAttribute("class") == "progress-inner BlackGauge")
                 {
                     this.printer.KitMant = Int32.Parse(div.GetAttribute("title").Substring(0, div.GetAttribute("title").Length - 1));
+                    break;
                 }
             }
         }
