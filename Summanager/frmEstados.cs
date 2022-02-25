@@ -13,7 +13,6 @@ namespace Summanager
 {
     public partial class FrmEstados : Summanager.FrmContenido
     {
-        private List<Printer> printers;
         private FrmMain frmMain;
         private Estadistica estadisticaGral;
         private Estadistica estadisticaPart;
@@ -28,7 +27,6 @@ namespace Summanager
             InitializeComponent();
 
             this.frmMain = frmMain;
-            this.printers = new List<Printer>();
             this.automatizo = File.getActualizacionEstados();
             this.periodo = Periodo.GetPeriodo(File.getPeriodo());
             this.contador = 0;
@@ -92,7 +90,7 @@ namespace Summanager
 
             //Me fijo que la Lista de Impresoras no esté vacía. Si no lo está significa que ya hay un 
             //archivo abierto y que por ende tiene un nombre.
-            if (printers.Count > 0)
+            if (FrmMain.Printers.Count > 0)
             {
                 string fileName = IO.File.GetCurrentFileTitle(); //Obtengo la ruta del archivo abierto.
                 string[] splitFileName = fileName.Split('\\'); //Lo divido para extraer solo el nombre del archivo.
@@ -238,7 +236,7 @@ namespace Summanager
             {
                 this.btnAbrir.Enabled = true;
 
-                if (this.printers.Count > 0)
+                if (FrmMain.Printers.Count > 0)
                 {
                     this.btnNuevo.Enabled = true;
                     this.btnGuardar.Enabled = true;
@@ -323,10 +321,10 @@ namespace Summanager
         private void _llenarDgv()
         {
             //Ordeno la Lista de Impresoras por la Oficina.
-            this.printers.Sort((x, y) => x.Oficina.CompareTo(y.Oficina));
+            FrmMain.Printers.Sort((x, y) => x.Oficina.CompareTo(y.Oficina));
 
             //Compruebo que la Lista de Impresoras no esté vacía.
-            if (printers.Count > 0)
+            if (FrmMain.Printers.Count > 0)
             {
                 DataTable dataTable = new DataTable();
 
@@ -346,7 +344,7 @@ namespace Summanager
                 dataTable.Columns.Add("FiltroKM", typeof(int));
 
                 //Recorro la Lista de Impresoras para cargarlas.
-                foreach (var printer in printers)
+                foreach (var printer in FrmMain.Printers)
                 {
                     //Creo las variables toner, uimagen y kitmant como strings vacíos para, en caso de que estos 
                     //suministros sean nulos, no mostrar nada.
@@ -462,7 +460,7 @@ namespace Summanager
             
 
             //Muestro los elementos del Filtro.
-            this.lblTotal.Text = "Total: " + this.printers.Count;
+            this.lblTotal.Text = "Total: " + FrmMain.Printers.Count;
             this.lblTotal.Visible = true;
             this.txtFiltro.Visible = true;
             this.lblEstado.Visible = true;
@@ -1015,14 +1013,14 @@ namespace Summanager
                         //momento.
                         foreach (Printer nueva in nuevas)
                         {
-                            this.printers.Add(nueva);
+                            FrmMain.Printers.Add(nueva);
                         }
                     }
                     else
                     {
                         //Si no se desea combinar, limpio la Lista de Impresoras y la cargo con los datos importados.
-                        this.printers.Clear();
-                        this.printers = frmImportando.Printers;
+                        FrmMain.Printers.Clear();
+                        FrmMain.Printers = frmImportando.Printers;
                     }
                     MessageBox.Show("Datos importados con éxito."); //Muestro mensaje de éxito.
                 }else
@@ -1036,7 +1034,7 @@ namespace Summanager
             openFileDialog.FileName = ""; //Limpio el OFD.
 
             //Pregunto si la Lista de Impresoras no está vacia.
-            if (printers.Count > 0)
+            if (FrmMain.Printers.Count > 0)
             {
                 _tituloForm(); //Actualizo el Título del Form Main.
                 //A ese título le concateno al final el caracter '*' que es mi bandera para saber si un archivo ha sido modificado.
@@ -1067,10 +1065,10 @@ namespace Summanager
                 string filePath = saveFileDialog.FileName;
                 
                 //Llamo al método que lo crea si no existe y lo guarda.
-                IO.File.saveFileAs(filePath, printers);
+                IO.File.saveFileAs(filePath, FrmMain.Printers);
 
-                printers.Clear(); //Limpio la Lista de Impresoras.
-                printers = IO.File.readCurrentFile(); //Leo el archivo guardado y cargo con él la Lista de Impresoras.
+                FrmMain.Printers.Clear(); //Limpio la Lista de Impresoras.
+                FrmMain.Printers = IO.File.readCurrentFile(); //Leo el archivo guardado y cargo con él la Lista de Impresoras.
                 _tituloForm(); //Actualizo el Título del Form Main.
                 retorno = DialogResult.OK; //Cargo en la variable de retorno que todo ha salido OK.
             }
@@ -1103,9 +1101,9 @@ namespace Summanager
             else
             {
                 //Sino, significa que debo guardar la Lista de Impresoras en el archivo ya abierto.
-                IO.File.saveFile(this.printers);
-                printers.Clear(); //Limpio la Lista de Impresoras.
-                printers = IO.File.readCurrentFile(); //Leo el archivo guardado.
+                IO.File.saveFile(FrmMain.Printers);
+                FrmMain.Printers.Clear(); //Limpio la Lista de Impresoras.
+                FrmMain.Printers = IO.File.readCurrentFile(); //Leo el archivo guardado.
                 _tituloForm(); //Actualizo el Título del Form Main
                 retorno = DialogResult.OK; //Cargo el resultado de la acción en la variable de retorno.
             }
@@ -1130,9 +1128,10 @@ namespace Summanager
 
         private void frmEstados_Load(object sender, EventArgs e)
         {
+            //Al cargar el Form Estados trato de traer una Lista de Impresoras desde el Archivo actual en el que estoy trabajando.
             try
             {
-                printers = IO.File.readCurrentFile();
+                FrmMain.Printers = IO.File.readCurrentFile();
             }
             catch (Exception)
             {
@@ -1161,7 +1160,7 @@ namespace Summanager
             if (this.frmMain.CheckUnsavedFile() == DialogResult.OK)
             {
 
-                this.printers.Clear(); //Limpio la Lista de Impresoras.
+                FrmMain.Printers.Clear(); //Limpio la Lista de Impresoras.
                                        //Limpio el DGV.
                 this.dgv.Columns.Clear();
                 this.dgv.Refresh();
@@ -1193,8 +1192,8 @@ namespace Summanager
                 {
                     IO.File.openFile(filePath); //Cambio la ruta de la variable en el Application Config.
 
-                    printers.Clear(); //Limpio la Lista de Impresoras.
-                    printers = IO.File.readCurrentFile(); //Leo el archivo y cargo la Lista de Impresoras con él.
+                    FrmMain.Printers.Clear(); //Limpio la Lista de Impresoras.
+                    FrmMain.Printers = IO.File.readCurrentFile(); //Leo el archivo y cargo la Lista de Impresoras con él.
                     _tituloForm(); //Actualizo el Título del Form Main.
                     btnActualizar_Click(sender, null); //Analizo la Lista de Impresoras.
                 }
@@ -1393,7 +1392,7 @@ namespace Summanager
             bool repitoActualizar = false;
             //Llamo al Form Cargando para que analice la Lista de Impresoras pasadas por parámetros.
             //Este Form ya viene catcheado.
-            FrmCargando cargando = new FrmCargando(printers);
+            FrmCargando cargando = new FrmCargando(FrmMain.Printers);
 
             //Repito el proceso si el chromedriver está desactualizado y se desea actualizarlo.
             do
@@ -1401,7 +1400,7 @@ namespace Summanager
                 if (repitoActualizar)
                 {
                     cargando = null;
-                    cargando = new FrmCargando(this.printers);
+                    cargando = new FrmCargando(FrmMain.Printers);
                 }
                 cargando.ShowDialog(); //Lo muestro como un dialog para que mientras analiza no se pueda hacer nada.
 
@@ -1417,16 +1416,17 @@ namespace Summanager
                     repitoActualizar = false;
                 }
             } while (repitoActualizar);
-            
 
-            List<Printer> printersReturned = cargando.PrintersPassed; //Cargo una nueva Lista de Impresoras con lo devuelto.
+            FrmMain.Printers = cargando.PrintersPassed;
 
-            //Actualizo la Lista de Impresoras actual con la devuelta por el Form Cargando.
-            foreach (Printer printer in printersReturned)
-            {
-                int i = this.printers.FindIndex(o => o.Ip == printer.Ip);
-                this.printers[i] = printer;
-            }
+            //List<Printer> printersReturned = cargando.PrintersPassed; //Cargo una nueva Lista de Impresoras con lo devuelto.
+
+            ////Actualizo la Lista de Impresoras actual con la devuelta por el Form Cargando.
+            //foreach (Printer printer in printersReturned)
+            //{
+            //    int i = this.printers.FindIndex(o => o.Ip == printer.Ip);
+            //    this.printers[i] = printer;
+            //}
 
             _llenarDgv(); //Cargo el DGV con lo analizado.
 
@@ -1449,7 +1449,7 @@ namespace Summanager
 
         private void FrmEstados_Shown(object sender, EventArgs e)
         {
-            if (this.printers.Count <= 0)
+            if (FrmMain.Printers.Count <= 0)
             {
                 this.panelEstadisticas.Visible = false;
             }

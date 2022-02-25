@@ -16,6 +16,8 @@ namespace Summanager
 {
     public partial class FrmMain : Form
     {
+        public static List<Printer> Printers { get; set; }
+
         private FrmEstados formEstados;
         private int formWidth;
 
@@ -28,6 +30,8 @@ namespace Summanager
         public FrmMain()
         {
             InitializeComponent();
+
+            Printers = new List<Printer>();
 
             this.Text = Application.ProductName;
 
