@@ -115,7 +115,7 @@ namespace Summanager
             this.dgv.ShowCellToolTips = false;
             this.dgv.ShowEditingIcon = false;
             this.dgv.ShowRowErrors = false;
-            this.dgv.Size = new System.Drawing.Size(1026, 184);
+            this.dgv.Size = new System.Drawing.Size(1026, 302);
             this.dgv.TabIndex = 2;
             this.dgv.Resize += new System.EventHandler(this.dgv_Resize);
             // 
@@ -182,7 +182,7 @@ namespace Summanager
             this.btnEnviar.ButtonBackColor = System.Drawing.Color.DarkRed;
             this.btnEnviar.ButtonForeColor = System.Drawing.Color.White;
             this.btnEnviar.Image = null;
-            this.btnEnviar.Location = new System.Drawing.Point(980, 296);
+            this.btnEnviar.Location = new System.Drawing.Point(980, 414);
             this.btnEnviar.Name = "btnEnviar";
             this.btnEnviar.Size = new System.Drawing.Size(58, 28);
             this.btnEnviar.TabIndex = 6;
@@ -195,7 +195,7 @@ namespace Summanager
             this.btnDevolucion.ButtonBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(159)))), ((int)(((byte)(206)))));
             this.btnDevolucion.ButtonForeColor = System.Drawing.Color.White;
             this.btnDevolucion.Image = null;
-            this.btnDevolucion.Location = new System.Drawing.Point(510, 296);
+            this.btnDevolucion.Location = new System.Drawing.Point(510, 414);
             this.btnDevolucion.Name = "btnDevolucion";
             this.btnDevolucion.Size = new System.Drawing.Size(89, 28);
             this.btnDevolucion.TabIndex = 5;
@@ -208,7 +208,7 @@ namespace Summanager
             this.btnIngreso.ButtonBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
             this.btnIngreso.ButtonForeColor = System.Drawing.Color.White;
             this.btnIngreso.Image = null;
-            this.btnIngreso.Location = new System.Drawing.Point(12, 296);
+            this.btnIngreso.Location = new System.Drawing.Point(12, 414);
             this.btnIngreso.Name = "btnIngreso";
             this.btnIngreso.Size = new System.Drawing.Size(64, 28);
             this.btnIngreso.TabIndex = 3;
@@ -240,7 +240,7 @@ namespace Summanager
             this.btnEntrega.ButtonBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(159)))), ((int)(((byte)(206)))));
             this.btnEntrega.ButtonForeColor = System.Drawing.Color.White;
             this.btnEntrega.Image = null;
-            this.btnEntrega.Location = new System.Drawing.Point(415, 296);
+            this.btnEntrega.Location = new System.Drawing.Point(415, 414);
             this.btnEntrega.Name = "btnEntrega";
             this.btnEntrega.Size = new System.Drawing.Size(89, 28);
             this.btnEntrega.TabIndex = 4;
