@@ -163,27 +163,33 @@ namespace Summanager
 
         private void btnIniciarCerrar_Click(object sender, EventArgs e)
         {
-            //PROVISORIO.
-            try
+            if (deboIniciar)
             {
-                if (deboIniciar)
-                {
-                    DBUsers.LogIn("cmanavella", "Mana5692");
-                }
-                else
-                {
-                    DBUsers.LogOut();
-                }
-
-                _setElementsByUser();
-
-                FrmMain.GetUserLogged();
+                FrmInicioSesion frmIniciar = new FrmInicioSesion();
+                frmIniciar.ShowDialog();
             }
-            catch(Exception ex)
+            else
             {
-                MessageBox.Show(ex.Message, Application.ProductName + " " + Application.ProductVersion,
+                var result = MessageBox.Show("¿Está seguro que desea cerrar sesión?", Application.ProductName + " " + Application.ProductVersion,
+                            MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if(result == DialogResult.Yes)
+                {
+                    try
+                    {
+                        DBUsers.LogOut();
+                    }
+                    catch(Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, Application.ProductName + " " + Application.ProductVersion,
                             MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
             }
+
+            _setElementsByUser();
+
+            FrmMain.GetUserLogged();
         }
     }
 }

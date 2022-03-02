@@ -75,6 +75,7 @@ namespace Summanager
             this.btnCerrar.Name = "btnCerrar";
             this.btnCerrar.Size = new System.Drawing.Size(30, 30);
             this.btnCerrar.TabIndex = 11;
+            this.btnCerrar.TabStop = false;
             this.btnCerrar.Text = "X";
             this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
             // 
@@ -112,6 +113,7 @@ namespace Summanager
             this.txtNombre.IsMaskared = true;
             this.txtNombre.Location = new System.Drawing.Point(8, 36);
             this.txtNombre.MaskText = "Nombre";
+            this.txtNombre.MaxLength = 32767;
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.SelectionLength = 0;
             this.txtNombre.SelectionStart = 0;
@@ -130,6 +132,7 @@ namespace Summanager
             this.btnCancelar.Size = new System.Drawing.Size(80, 28);
             this.btnCancelar.TabIndex = 15;
             this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // btnGuardar
@@ -143,6 +146,7 @@ namespace Summanager
             this.btnGuardar.Size = new System.Drawing.Size(80, 28);
             this.btnGuardar.TabIndex = 16;
             this.btnGuardar.Text = "Guardar";
+            this.btnGuardar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // FrmAbm
             // 
@@ -161,6 +165,7 @@ namespace Summanager
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmAbm";
+            this.Shown += new System.EventHandler(this.FrmAbm_Shown);
             this.panelSuperior.ResumeLayout(false);
             this.panelSuperior.PerformLayout();
             this.ResumeLayout(false);

@@ -20,6 +20,7 @@ namespace CustomControls
         private string maskText;
         private string normalText;
         private CharacterCasing character;
+        private bool useSystemPasswordChar;
 
         public TextBox()
         {
@@ -45,6 +46,7 @@ namespace CustomControls
             this.textBox1.Leave += this.TextBox_Leave;
 
             this.character = CharacterCasing.Normal;
+            this.useSystemPasswordChar = false;
         }
 
         /// <summary>
@@ -127,6 +129,23 @@ namespace CustomControls
             set
             {
                 this.character = value;
+            }
+        }
+
+        /// <summary>
+        /// Indica si el texto del control de edición debería aparecer como caracter de contraseña predeterminado.
+        /// </summary>
+        [Browsable(true), EditorBrowsable(EditorBrowsableState.Always), Bindable(true)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public bool UseSystemPasswordChar
+        {
+            get
+            {
+                return this.useSystemPasswordChar;
+            }
+            set
+            {
+                this.useSystemPasswordChar = value;
             }
         }
 
@@ -228,7 +247,7 @@ namespace CustomControls
             }
 
             //Pregunto si la tecla presionada ha sido la de borrar o suprimir y si el texto está vacío. Si esto es así, seteo los 
-            //los caracteres a normal.
+            //los caracteres a normal y el Texto como Contraseña en False.
             //Antes pregunto si el KeyEventArg no es nulo, ya que cuando aprieto el botón Borrar del UserControl llamo a este evento pasándole
             //KeyEventArg como nulo.
             if (e != null)
@@ -236,12 +255,14 @@ namespace CustomControls
                 if ((e.KeyCode == Keys.Back || e.KeyCode == Keys.Delete) && this.textBox1.Text.Length == 0)
                 {
                     this.textBox1.CharacterCasing = CharacterCasing.Normal;
+                    this.textBox1.UseSystemPasswordChar = false;
                 }
-                //Si no se dan esas condiciones, pregunto si el texto tiene valor. Si lo tiene, seteo los cartacteres como los he configurado en la 
-                //propiedad del UserControl.
+                //Si no se dan esas condiciones, pregunto si el texto tiene valor. Si lo tiene, seteo los cartacteres y el uso de contraseña
+                //como los he configurado en la propiedad del UserControl.
                 else if (this.textBox1.Text.Length > 0)
                 {
                     this.textBox1.CharacterCasing = this.character;
+                    this.textBox1.UseSystemPasswordChar = this.useSystemPasswordChar;
                 }
             }
         }
@@ -249,10 +270,11 @@ namespace CustomControls
         private void textBox1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             //En este paso capturo el presionar de la tecla Tab antes de que el UserControl pierda el foco.
-            //En este caso pregunto si la tecla es Tab y a la vex el texto está vacío. En tal caso seteo los caracteres a Normal.
+            //En este caso pregunto si la tecla es Tab y a la vez el texto está vacío. En tal caso seteo los caracteres a Normal y el Modo Contraseña en False.
             if (e.KeyCode == Keys.Tab && this.textBox1.Text.Length == 0)
             {
                 this.textBox1.CharacterCasing = CharacterCasing.Normal;
+                this.textBox1.UseSystemPasswordChar = false;
             }
             this.OnPreviewKeyDown(e);
         }
@@ -262,6 +284,7 @@ namespace CustomControls
             this.textBox1.Text = String.Empty;
             this.textBox1_KeyUp(null, null);
             this.textBox1.CharacterCasing = CharacterCasing.Normal; //Pongo los caracteres en Normal
+            this.textBox1.UseSystemPasswordChar = false; //Pongo el Modo Contraseña en False.
             if (!this.textBox1.Focused) this.TextBox_Leave(null, null);
         }
 

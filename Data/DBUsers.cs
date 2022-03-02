@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Entities;
 using System.Security.Cryptography;
 using System.Data.SQLite;
+using CustomExceptions;
 
 namespace Data
 {
@@ -54,6 +55,8 @@ namespace Data
 
                         User.IsLogged = true;
                     }
+
+                    if (!User.IsLogged) throw new LogInException();
                 }
             }
         }

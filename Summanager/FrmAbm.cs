@@ -53,5 +53,10 @@ namespace Summanager
 
             if (result == DialogResult.Yes) this.Close();
         }
+
+        private void FrmAbm_Shown(object sender, EventArgs e)
+        {
+            this.btnCerrar.Focus();
+        }
     }
 }
