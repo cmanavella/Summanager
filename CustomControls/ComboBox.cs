@@ -14,10 +14,10 @@ namespace CustomControls
     {
         private Color colorFocused;
         private Color colorUnfocused;
-        private bool desplegado;
+        private ContainerCombo container;
         private Item itemSelected;
-        private int firstHeight;
         private int itemButtonHeght;
+        private Point containerLocation;
 
         /// <summary>
         /// Devuelve los Items cargados en el Objeto ComboBox
@@ -34,31 +34,28 @@ namespace CustomControls
             this.colorFocused = Color.FromArgb(0, 137, 132);
             //Color usado para colorear los elementos cuando el combo no tiene foco.
             this.colorUnfocused = Color.Gray;
-            //Variable bandera que uso para saber si el Height del combo se agranda porque
-            //se despliega o no.
-            this.desplegado = false;
 
             //Creo el Objeto Items.
             this.Items = new List<Item>();
 
-            //Uso esta variable para almacenar el Heigth original del combo a la hora de crearlo.
-            this.firstHeight = this.Height;
             //Uso esta variable para setear el Heigth que van a tener los Items del combo.
             this.itemButtonHeght = 25;
+
+            //Este es contenedor de los botones. Sería lo que se despliega.
+            this.container = new ContainerCombo(this);
 
             //Traslado los eventos de los elementos del combo a su respectivo evento en el combo.
             this.contenedorCombo.Enter += ComboBox_Enter;
             this.contenedorCombo.Leave += ComboBox_Leave;
-            this.contenedorCombo.MouseClick += ComboBox_MouseClick;
             this.division.Enter += ComboBox_Enter;
             this.division.Leave += ComboBox_Leave;
-            this.division.MouseClick += ComboBox_MouseClick;
+            //this.division.MouseClick += ComboBox_MouseClick;
             this.icon.Enter += ComboBox_Enter;
             this.icon.Leave += ComboBox_Leave;
-            this.icon.MouseClick += ComboBox_MouseClick;
+            //this.icon.MouseClick += ComboBox_MouseClick;
             this.lblItemText.Enter += ComboBox_Enter;
             this.lblItemText.Leave += ComboBox_Leave;
-            this.lblItemText.MouseClick += ComboBox_MouseClick;
+            //this.lblItemText.MouseClick += ComboBox_MouseClick;
         }
 
         /// <summary>
@@ -83,64 +80,36 @@ namespace CustomControls
         /// Permite desplegar o replegar el ComboBox, determinando si fue llamado por un evento Click o
         /// no.
         /// </summary>
-        /// <param name="esClic"></param>
-        private void _desplegar(bool esClic)
+        private void _desplegar()
         {
-            //Pregunto si fue llamado por un Click. Hago esto porque también uso este método en el 
-            //evento Leave del ComboBox.
-            if (esClic)
+            //Primero me aseguro que haya Ítems (Botones) cargados en el Combo para desplegar su contenedor.
+            if (this.Items.Count > 0)
             {
-                //Pregunto si el ComboBox se encuentra desplegado o no.
-                if (!desplegado)
+                //Limpio todos los controles que ya tenga el contenedor.
+                this.container.Controls.Clear();
+                //Agrego el panel superior del contenedor, que tiene la funcionalidad de replegarlo. Lo agrego sí o sí ya que al quitar todos 
+                //controles, también quito el panel superior y es menester para el correcto funcionamiento del contenedor.
+                this.container.AgregarPanelSuperior();
+
+                //Recorro todos los Ítems cargados en el Menú y los agrego al contenedor. Como por defecto tienen la propiedad Dock seteada en Top, debo
+                //ponerlos al frente de todo a medida que los agrego.
+                foreach (Item item in this.Items)
                 {
-                    //Si no. Lo debo desplegar.
-
-                    //Quito el Anchor con respecto al Bottom del contenedor para que no se modifique 
-                    //cuando cambie el Heigth del combo.
-                    this.contenedorCombo.Anchor = (AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right);
-                    //Por las dudas lo vuelvo a pocisionar en las coordenadas 0,0.
-                    this.contenedorCombo.Left = 0;
-                    this.contenedorCombo.Top = 0;
-
-                    //Debo calcular el alto que va a tener el contenedor de los Items.
-                    int altoLista;
-                    if (this.contain.Controls.Count > 0)
-                    {
-                        //Si hay items multiplico la altura de ellos por la cantidad que hay.
-                        altoLista = this.itemButtonHeght * this.contain.Controls.Count;
-                    }
-                    else
-                    {
-                        //Si no hay items seteo el Heigth con el del combo a la hora de crearlo.
-                        altoLista = this.firstHeight;
-                    }
-
-                    this.lista.Height = altoLista; //Asigno el alto al contenedor.
-                    //Como la lista se encuentra abajo del combo debo moverla hacia arriba tanto como la 
-                    //haya hecho crecer en alto.
-                    this.lista.Top = this.lista.Top - this.lista.Height;
-                    //Sumo a la altura del combo la altura de la lista.
-                    this.Height = this.firstHeight + altoLista;
-
-                    //Seteo la variable bandera para saber que está desplegado.
-                    this.desplegado = true;
+                    ItemButton button = new ItemButton(this);
+                    button.Value = item.Value;
+                    button.Text = item.Text;
+                    this.container.Controls.Add(button);
+                    button.BringToFront();
                 }
-                else
-                {
-                    //Si está desplegado lo debo replegar.
-                    this.Height = this.firstHeight;
-                    this.lista.Height = 0;
-                    this.lista.Top = this.Height;
-                    this.desplegado = false;
-                }
-            }else if (desplegado)
-            {
-                //Si no fue llamado por un evento click pregunto solamente si está desplegado.
-                //En este caso solo repliego.
-                this.Height = this.firstHeight;
-                this.lista.Height = 0;
-                this.lista.Top = this.Height;
-                this.desplegado = false;
+
+                //Seteo la altura del contenedor que la calcula el método de él mismo.
+                this.container.SetHeight();
+                //Lo pongo al frente para que no se oculte detrás de otro elemento.
+                this.container.BringToFront();
+                //Como el contenedor básicamente es un Form modificado, lo muestro.
+                this.container.Show();
+                //Seteo la posición del contenedor en la pantalla para que quede exactamente debajo del Menú.
+                this.container.Location = this.containerLocation;
             }
         }
 
@@ -180,8 +149,9 @@ namespace CustomControls
         {
             this.lblItemText.Text = this.Items[index].Text; //Paso el texto al Label que lo muestra.
             this.itemSelected = this.Items[index]; //Guaro el item seleccionado.
-            if(!esCodigo) ComboBox_MouseClick(null, null); //Ejecuto el evento Clic del combo, si este método no es llamado desde código y si por el clic del mouse.
             if (this.ItemSelectedChange != null) this.ItemSelectedChange(null, null); //Disparo el Handler si este no es null.
+
+            this.container.Hide();
         }
 
         /// <summary>
@@ -234,10 +204,24 @@ namespace CustomControls
             }
         }
 
+        private void _clickEnCombo()
+        {
+            //Cuando hago clic con el mouse, hago que el combo tome foco.
+            this.Focus();
+
+            //Al hacer clic en el Menú necesito que se despliegue el contenedor. Pero antes debo calcular la pocisión exacta para ubicarlo.
+            //Para ello, transformo el Objeto Sender en un Control.
+            Control control = this.lblItemText;
+            //Luego calculo la posición del Contenedor en base a la posición relativa que ocupa el Menú en la pantalla.
+            this.containerLocation = control.PointToScreen(control.Location);
+
+            //Llamo al método desplegar. Le indico por parámetro que se llama desde un evento clic.
+            _desplegar();
+        }
+
         /*
          * EVENTOS.
          */
-
         private void ComboBox_Enter(object sender, EventArgs e)
         {
             //Cuando el combo toma foco pinto sus elementos con el color definido en el constructor.
@@ -254,19 +238,6 @@ namespace CustomControls
             this.division.BackColor = this.colorUnfocused;
             this.icon.ForeColor = this.colorUnfocused;
             this.lblItemText.ForeColor = this.colorUnfocused;
-
-            //Llamo al método desplegar. Le paso como parámetro 'false' para indicarle que no lo llamo
-            //desde un evento clic. De esa manera me aseguro que solo si se encuentra desplegado, se va
-            //a replegar.
-            _desplegar(false);
-        }
-
-        private void ComboBox_MouseClick(object sender, MouseEventArgs e)
-        {
-            //Cuando hago clic con el mouse, hago que el combo tome foco.
-            this.Focus();
-            //Llamo al método desplegar. Le indico por parámetro que se llama desde un evento clic.
-            _desplegar(true);
         }
 
         private void ComboBox_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -290,6 +261,128 @@ namespace CustomControls
             {
                 _beforeItem();
             }
+        }
+
+        private void lblItemText_Click(object sender, EventArgs e)
+        {
+            _clickEnCombo();
+        }
+
+        private void division_Click(object sender, EventArgs e)
+        {
+            _clickEnCombo();
+        }
+
+        private void icon_Click(object sender, EventArgs e)
+        {
+            _clickEnCombo();
+        }
+    }
+
+    /// <summary>
+    /// Control que contiene los botones de un control Menú. Por defecto está oculto pero se despliega y pliega al hacer clic en el Menú.
+    /// </summary>
+    public class ContainerCombo : Form
+    {
+        private ComboBox combo;
+        private Panel panelSuperior;
+        private Panel panelHand;
+
+        /// <summary>
+        /// Constructor de la clase Container.
+        /// </summary>
+        /// <param name="menu">Control Menú que lo contiene.</param>
+        public ContainerCombo(ComboBox combo)
+        {
+            //Paso el Menú del parámetro a la variable del contenedor.
+            this.combo = combo;
+
+            //Creo un panel superior.
+            this.panelSuperior = new Panel();
+            //Creo el panel Hand que se va a encontrar dentro del Panel Superior a su izquierda.
+            //Tiene la función de simplemente modificar el cursor del mouse a hand.
+            this.panelHand = new Panel();
+
+            //Al ser un Form necesito setearlo.
+            this.Width = 300;
+            //Le quito los bordes.
+            this.FormBorderStyle = FormBorderStyle.None;
+            //El TransparencyKey y el BackColor seteados con el mismo color me permiten que el Form sea transparente.
+            this.TransparencyKey = Color.Red;
+            this.BackColor = Color.Red;
+            //Hago que no se muestre en la Barra de Tareas.
+            this.ShowInTaskbar = false;
+
+            //Asigno los Eventos con los que voy a trabajar.
+            //Evento que tiene lugar cuando el Form se desactiva.
+            this.Deactivate += Container_Deactivate;
+            this.panelHand.Click += Panel_Hand_Click;
+            this.panelSuperior.Click += Panel_Superior_Click;
+            this.Shown += new System.EventHandler(this.ContainerCombo_Shown);
+        }
+
+        /// <summary>
+        /// Devuelve la altura del contenedor en base a la cantidad de elementos que contenga.
+        /// </summary>
+        public void SetHeight()
+        {
+            //Ingreso la altura del Panel Superior.
+            int height = this.panelSuperior.Height;
+
+            //Recorro todos los controles cargados en el contenedor, que no sean del tipo Panel, y voy sumando su altura.
+            foreach (Control control in this.Controls)
+            {
+                if (control.GetType().Name != "Panel")
+                {
+                    height += control.Height;
+                }
+            }
+
+            //Seteo la altura del contenedor en base a lo calculado sumándole 2px del Borde Inferior.
+            this.Height = height + 2;
+        }
+
+        /// <summary>
+        /// Agrega el panel superior dentro del contenedor.
+        /// </summary>
+        public void AgregarPanelSuperior()
+        {
+            //Seteo el panel superior
+            this.panelSuperior.Height = this.combo.Height;
+            this.panelSuperior.Dock = DockStyle.Top;
+            this.Controls.Add(this.panelSuperior);
+            this.panelSuperior.BringToFront();
+
+            //Seteo el panel hand. Es importante que el ancho de este panel sea del ancho del Menú que lo contiene para simular, al pasar el mouse por
+            //encima o al hacer clic, que uno está actuando sobre el Menú.
+            this.panelHand.Width = this.combo.Width;
+            this.panelHand.Dock = DockStyle.Left;
+            this.panelHand.Cursor = Cursors.Hand;
+            this.panelHand.BringToFront();
+
+            //Agrego el Panel Hand al Panel Superior.
+            this.panelSuperior.Controls.Add(this.panelHand);
+        }
+
+        //En los eventos clic de los dos paneles y en el evento deactive del contenedor, simplemente oculto el mismo (lo pliego).
+        private void Panel_Superior_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
+
+        private void Panel_Hand_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
+
+        private void Container_Deactivate(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
+
+        private void ContainerCombo_Shown(object sender, EventArgs e)
+        {
+            this.Width = this.combo.Width;
         }
     }
 
@@ -341,10 +434,12 @@ namespace CustomControls
             this.Cursor = Cursors.Hand;
 
             this.TabStop = false;
+            this.Dock = DockStyle.Top;
 
             //Acomodo la fuente.
             this.Font = new Font("Century Gothic", 8.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
-            this.ForeColor = Color.FromArgb(0, 137, 132);
+            this.ForeColor = Color.White;
+            this.BackColor = Color.FromArgb(0, 137, 132);
             this.TextAlign = ContentAlignment.MiddleLeft;
 
             //Le asigno el evento Mouse Click.

@@ -60,6 +60,7 @@ namespace CustomControls
             this.division.Name = "division";
             this.division.Size = new System.Drawing.Size(2, 25);
             this.division.TabIndex = 1;
+            this.division.Click += new System.EventHandler(this.division_Click);
             // 
             // icon
             // 
@@ -78,6 +79,7 @@ namespace CustomControls
             this.icon.TabStop = false;
             this.icon.Text = "V";
             this.icon.UseVisualStyleBackColor = true;
+            this.icon.Click += new System.EventHandler(this.icon_Click);
             // 
             // contenedorCombo
             // 
@@ -105,6 +107,7 @@ namespace CustomControls
             this.lblItemText.Size = new System.Drawing.Size(108, 25);
             this.lblItemText.TabIndex = 3;
             this.lblItemText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblItemText.Click += new System.EventHandler(this.lblItemText_Click);
             // 
             // lista
             // 
@@ -168,7 +171,6 @@ namespace CustomControls
             this.Enter += new System.EventHandler(this.ComboBox_Enter);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ComboBox_KeyUp);
             this.Leave += new System.EventHandler(this.ComboBox_Leave);
-            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ComboBox_MouseClick);
             this.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.ComboBox_PreviewKeyDown);
             this.contenedorCombo.ResumeLayout(false);
             this.lista.ResumeLayout(false);
