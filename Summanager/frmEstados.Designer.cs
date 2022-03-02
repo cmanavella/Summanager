@@ -34,17 +34,18 @@ namespace Summanager
             this.dgv = new System.Windows.Forms.DataGridView();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.lblSuministro = new System.Windows.Forms.Label();
-            this.lblEstado = new System.Windows.Forms.Label();
             this.lblTotal = new System.Windows.Forms.Label();
             this.lblActualizacion = new System.Windows.Forms.Label();
             this.timerContador = new System.Windows.Forms.Timer(this.components);
             this.panelEstadisticas = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.lblEstTitle = new System.Windows.Forms.Label();
+            this.detalleEstadistica = new CustomControls.DetalleEstadistica();
             this.estNoAna = new CustomControls.Estadistica();
             this.estOffline = new CustomControls.Estadistica();
             this.estOnline = new CustomControls.Estadistica();
-            this.panel3 = new System.Windows.Forms.Panel();
             this.customGroupBox3 = new CustomControls.CustomGroupBox();
             this.estKitMantCritico = new CustomControls.Estadistica();
             this.estUnImgCritico = new CustomControls.Estadistica();
@@ -53,15 +54,7 @@ namespace Summanager
             this.estKitMantRiesgo = new CustomControls.Estadistica();
             this.estUnImgRiesgo = new CustomControls.Estadistica();
             this.estTonerRiesgo = new CustomControls.Estadistica();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.lblEstTitle = new System.Windows.Forms.Label();
             this.btnCambiarEst = new CustomControls.Button();
-            this.detalleEstadistica = new CustomControls.DetalleEstadistica();
-            this.btnAgregar = new CustomControls.Button();
-            this.btnLimpiar = new CustomControls.Button();
-            this.cmbSuministro = new CustomControls.ComboBox();
-            this.cmbEstados = new CustomControls.ComboBox();
-            this.txtFiltro = new CustomControls.TextBox();
             this.btnActualizar = new CustomControls.Button();
             this.btnExportar = new CustomControls.Button();
             this.btnImportar = new CustomControls.Button();
@@ -69,15 +62,24 @@ namespace Summanager
             this.btnGuardar = new CustomControls.Button();
             this.btnAbrir = new CustomControls.Button();
             this.btnNuevo = new CustomControls.Button();
+            this.groupFiltro = new CustomControls.CustomGroupBox();
+            this.btnAgregar = new CustomControls.Button();
+            this.btnLimpiar = new CustomControls.Button();
+            this.cmbSuministro = new CustomControls.ComboBox();
+            this.lblSuministro = new System.Windows.Forms.Label();
+            this.cmbEstados = new CustomControls.ComboBox();
+            this.txtFiltro = new CustomControls.TextBox();
+            this.lblEstado = new System.Windows.Forms.Label();
             this.panelTitulo.SuspendLayout();
             this.panelMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.panelEstadisticas.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.customGroupBox3.SuspendLayout();
             this.customGroupBox1.SuspendLayout();
-            this.panel2.SuspendLayout();
+            this.groupFiltro.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelTitulo
@@ -127,7 +129,7 @@ namespace Summanager
             this.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgv.EnableHeadersVisualStyles = false;
             this.dgv.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
-            this.dgv.Location = new System.Drawing.Point(12, 130);
+            this.dgv.Location = new System.Drawing.Point(12, 153);
             this.dgv.MultiSelect = false;
             this.dgv.Name = "dgv";
             this.dgv.ReadOnly = true;
@@ -143,35 +145,11 @@ namespace Summanager
             this.dgv.ShowCellToolTips = false;
             this.dgv.ShowEditingIcon = false;
             this.dgv.ShowRowErrors = false;
-            this.dgv.Size = new System.Drawing.Size(1038, 182);
+            this.dgv.Size = new System.Drawing.Size(1038, 159);
             this.dgv.TabIndex = 5;
             this.dgv.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgv_DataBindingComplete);
             this.dgv.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dgv_MouseDoubleClick);
             this.dgv.Resize += new System.EventHandler(this.dgv_Resize);
-            // 
-            // lblSuministro
-            // 
-            this.lblSuministro.AutoSize = true;
-            this.lblSuministro.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSuministro.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
-            this.lblSuministro.Location = new System.Drawing.Point(531, 104);
-            this.lblSuministro.Name = "lblSuministro";
-            this.lblSuministro.Size = new System.Drawing.Size(76, 17);
-            this.lblSuministro.TabIndex = 27;
-            this.lblSuministro.Text = "Suministro:";
-            this.lblSuministro.Visible = false;
-            // 
-            // lblEstado
-            // 
-            this.lblEstado.AutoSize = true;
-            this.lblEstado.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEstado.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
-            this.lblEstado.Location = new System.Drawing.Point(294, 104);
-            this.lblEstado.Name = "lblEstado";
-            this.lblEstado.Size = new System.Drawing.Size(56, 17);
-            this.lblEstado.TabIndex = 24;
-            this.lblEstado.Text = "Estado:";
-            this.lblEstado.Visible = false;
             // 
             // lblTotal
             // 
@@ -227,6 +205,50 @@ namespace Summanager
             this.panel4.Size = new System.Drawing.Size(1055, 112);
             this.panel4.TabIndex = 18;
             // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.customGroupBox3);
+            this.panel3.Controls.Add(this.customGroupBox1);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel3.Location = new System.Drawing.Point(0, 44);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(1055, 136);
+            this.panel3.TabIndex = 17;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.lblEstTitle);
+            this.panel2.Controls.Add(this.btnCambiarEst);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1055, 44);
+            this.panel2.TabIndex = 15;
+            // 
+            // lblEstTitle
+            // 
+            this.lblEstTitle.AutoSize = true;
+            this.lblEstTitle.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEstTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
+            this.lblEstTitle.Location = new System.Drawing.Point(9, 10);
+            this.lblEstTitle.Name = "lblEstTitle";
+            this.lblEstTitle.Size = new System.Drawing.Size(154, 16);
+            this.lblEstTitle.TabIndex = 25;
+            this.lblEstTitle.Text = "Estadísticas Generales";
+            // 
+            // detalleEstadistica
+            // 
+            this.detalleEstadistica.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.detalleEstadistica.Lex410 = 5;
+            this.detalleEstadistica.Lex610 = 3;
+            this.detalleEstadistica.Lex622 = 8;
+            this.detalleEstadistica.Lex812 = 20;
+            this.detalleEstadistica.Location = new System.Drawing.Point(94, 450);
+            this.detalleEstadistica.Name = "detalleEstadistica";
+            this.detalleEstadistica.Size = new System.Drawing.Size(160, 100);
+            this.detalleEstadistica.TabIndex = 13;
+            this.detalleEstadistica.Visible = false;
+            // 
             // estNoAna
             // 
             this.estNoAna.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -260,16 +282,6 @@ namespace Summanager
             this.estOnline.TabIndex = 10;
             this.estOnline.Text = "Online";
             this.estOnline.Total = 0;
-            // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.customGroupBox3);
-            this.panel3.Controls.Add(this.customGroupBox1);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(0, 44);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1055, 136);
-            this.panel3.TabIndex = 17;
             // 
             // customGroupBox3
             // 
@@ -373,27 +385,6 @@ namespace Summanager
             this.estTonerRiesgo.MouseLeave += new System.EventHandler(this.estTonerRiesgo_MouseLeave);
             this.estTonerRiesgo.MouseHover += new System.EventHandler(this.estTonerRiesgo_MouseHover);
             // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.lblEstTitle);
-            this.panel2.Controls.Add(this.btnCambiarEst);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1055, 44);
-            this.panel2.TabIndex = 15;
-            // 
-            // lblEstTitle
-            // 
-            this.lblEstTitle.AutoSize = true;
-            this.lblEstTitle.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEstTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
-            this.lblEstTitle.Location = new System.Drawing.Point(9, 10);
-            this.lblEstTitle.Name = "lblEstTitle";
-            this.lblEstTitle.Size = new System.Drawing.Size(154, 16);
-            this.lblEstTitle.TabIndex = 25;
-            this.lblEstTitle.Text = "Estadísticas Generales";
-            // 
             // btnCambiarEst
             // 
             this.btnCambiarEst.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -405,87 +396,9 @@ namespace Summanager
             this.btnCambiarEst.Size = new System.Drawing.Size(84, 28);
             this.btnCambiarEst.TabIndex = 12;
             this.btnCambiarEst.Text = "Cambiar";
+            this.btnCambiarEst.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnCambiarEst.Visible = false;
             this.btnCambiarEst.Click += new System.EventHandler(this.btnCambiarEst_Click);
-            // 
-            // detalleEstadistica
-            // 
-            this.detalleEstadistica.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.detalleEstadistica.Lex410 = 5;
-            this.detalleEstadistica.Lex610 = 3;
-            this.detalleEstadistica.Lex622 = 8;
-            this.detalleEstadistica.Lex812 = 20;
-            this.detalleEstadistica.Location = new System.Drawing.Point(94, 450);
-            this.detalleEstadistica.Name = "detalleEstadistica";
-            this.detalleEstadistica.Size = new System.Drawing.Size(160, 100);
-            this.detalleEstadistica.TabIndex = 13;
-            this.detalleEstadistica.Visible = false;
-            // 
-            // btnAgregar
-            // 
-            this.btnAgregar.ButtonBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
-            this.btnAgregar.ButtonForeColor = System.Drawing.Color.White;
-            this.btnAgregar.Image = global::Summanager.Properties.Resources.add;
-            this.btnAgregar.Location = new System.Drawing.Point(854, 96);
-            this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(88, 28);
-            this.btnAgregar.TabIndex = 32;
-            this.btnAgregar.Text = "Agregar";
-            this.btnAgregar.Visible = false;
-            // 
-            // btnLimpiar
-            // 
-            this.btnLimpiar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLimpiar.ButtonBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
-            this.btnLimpiar.ButtonForeColor = System.Drawing.Color.White;
-            this.btnLimpiar.Image = global::Summanager.Properties.Resources.clear;
-            this.btnLimpiar.Location = new System.Drawing.Point(948, 96);
-            this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(90, 28);
-            this.btnLimpiar.TabIndex = 31;
-            this.btnLimpiar.Text = "Limpiar";
-            this.btnLimpiar.Visible = false;
-            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
-            // 
-            // cmbSuministro
-            // 
-            this.cmbSuministro.BackColor = System.Drawing.Color.White;
-            this.cmbSuministro.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cmbSuministro.Location = new System.Drawing.Point(613, 97);
-            this.cmbSuministro.MinimumSize = new System.Drawing.Size(136, 27);
-            this.cmbSuministro.Name = "cmbSuministro";
-            this.cmbSuministro.Size = new System.Drawing.Size(169, 27);
-            this.cmbSuministro.TabIndex = 4;
-            this.cmbSuministro.Visible = false;
-            this.cmbSuministro.ItemSelectedChange += new System.EventHandler(this.cmbSuministro_ItemSelectedChange);
-            // 
-            // cmbEstados
-            // 
-            this.cmbEstados.BackColor = System.Drawing.Color.White;
-            this.cmbEstados.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cmbEstados.Location = new System.Drawing.Point(356, 97);
-            this.cmbEstados.MinimumSize = new System.Drawing.Size(136, 27);
-            this.cmbEstados.Name = "cmbEstados";
-            this.cmbEstados.Size = new System.Drawing.Size(169, 27);
-            this.cmbEstados.TabIndex = 3;
-            this.cmbEstados.Visible = false;
-            this.cmbEstados.ItemSelectedChange += new System.EventHandler(this.cmbEstados_ItemSelectedChange);
-            // 
-            // txtFiltro
-            // 
-            this.txtFiltro.BackColor = System.Drawing.Color.White;
-            this.txtFiltro.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
-            this.txtFiltro.IsMaskared = true;
-            this.txtFiltro.Location = new System.Drawing.Point(12, 104);
-            this.txtFiltro.MaskText = "Filtrar por Ip, Modelo u Oficina";
-            this.txtFiltro.Name = "txtFiltro";
-            this.txtFiltro.SelectionLength = 0;
-            this.txtFiltro.SelectionStart = 0;
-            this.txtFiltro.Size = new System.Drawing.Size(270, 20);
-            this.txtFiltro.TabIndex = 2;
-            this.txtFiltro.Text = "Filtrar por Ip, Modelo u Oficina";
-            this.txtFiltro.Visible = false;
-            this.txtFiltro.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtFiltro_KeyUp);
             // 
             // btnActualizar
             // 
@@ -498,6 +411,7 @@ namespace Summanager
             this.btnActualizar.Size = new System.Drawing.Size(105, 28);
             this.btnActualizar.TabIndex = 13;
             this.btnActualizar.Text = "Actualizar";
+            this.btnActualizar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
             // 
             // btnExportar
@@ -510,6 +424,7 @@ namespace Summanager
             this.btnExportar.Size = new System.Drawing.Size(92, 28);
             this.btnExportar.TabIndex = 12;
             this.btnExportar.Text = "Exportar";
+            this.btnExportar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnExportar.Click += new System.EventHandler(this.btnExportar_Click);
             // 
             // btnImportar
@@ -522,6 +437,7 @@ namespace Summanager
             this.btnImportar.Size = new System.Drawing.Size(96, 28);
             this.btnImportar.TabIndex = 11;
             this.btnImportar.Text = "Importar";
+            this.btnImportar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnImportar.Click += new System.EventHandler(this.btnImportar_Click);
             // 
             // btnGuardarComo
@@ -534,6 +450,7 @@ namespace Summanager
             this.btnGuardarComo.Size = new System.Drawing.Size(150, 28);
             this.btnGuardarComo.TabIndex = 10;
             this.btnGuardarComo.Text = "Guardar como...";
+            this.btnGuardarComo.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnGuardarComo.Click += new System.EventHandler(this.btnGuardarComo_Click);
             // 
             // btnGuardar
@@ -546,6 +463,7 @@ namespace Summanager
             this.btnGuardar.Size = new System.Drawing.Size(98, 28);
             this.btnGuardar.TabIndex = 9;
             this.btnGuardar.Text = "Guardar";
+            this.btnGuardar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // btnAbrir
@@ -558,6 +476,7 @@ namespace Summanager
             this.btnAbrir.Size = new System.Drawing.Size(69, 28);
             this.btnAbrir.TabIndex = 8;
             this.btnAbrir.Text = "Abrir";
+            this.btnAbrir.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnAbrir.Click += new System.EventHandler(this.btnAbrir_Click);
             // 
             // btnNuevo
@@ -570,40 +489,129 @@ namespace Summanager
             this.btnNuevo.Size = new System.Drawing.Size(76, 28);
             this.btnNuevo.TabIndex = 7;
             this.btnNuevo.Text = "Nuevo";
+            this.btnNuevo.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
+            // 
+            // groupFiltro
+            // 
+            this.groupFiltro.Controls.Add(this.btnAgregar);
+            this.groupFiltro.Controls.Add(this.btnLimpiar);
+            this.groupFiltro.Controls.Add(this.cmbSuministro);
+            this.groupFiltro.Controls.Add(this.lblSuministro);
+            this.groupFiltro.Controls.Add(this.cmbEstados);
+            this.groupFiltro.Controls.Add(this.txtFiltro);
+            this.groupFiltro.Controls.Add(this.lblEstado);
+            this.groupFiltro.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupFiltro.Location = new System.Drawing.Point(0, 89);
+            this.groupFiltro.Name = "groupFiltro";
+            this.groupFiltro.Size = new System.Drawing.Size(1055, 58);
+            this.groupFiltro.TabIndex = 34;
+            this.groupFiltro.Text = "Filtro";
+            this.groupFiltro.Visible = false;
+            // 
+            // btnAgregar
+            // 
+            this.btnAgregar.ButtonBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
+            this.btnAgregar.ButtonForeColor = System.Drawing.Color.White;
+            this.btnAgregar.Image = global::Summanager.Properties.Resources.add;
+            this.btnAgregar.Location = new System.Drawing.Point(854, 16);
+            this.btnAgregar.Name = "btnAgregar";
+            this.btnAgregar.Size = new System.Drawing.Size(88, 28);
+            this.btnAgregar.TabIndex = 39;
+            this.btnAgregar.Text = "Agregar";
+            this.btnAgregar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnAgregar.Visible = false;
+            // 
+            // btnLimpiar
+            // 
+            this.btnLimpiar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLimpiar.ButtonBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
+            this.btnLimpiar.ButtonForeColor = System.Drawing.Color.White;
+            this.btnLimpiar.Image = global::Summanager.Properties.Resources.clear;
+            this.btnLimpiar.Location = new System.Drawing.Point(948, 16);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(90, 28);
+            this.btnLimpiar.TabIndex = 38;
+            this.btnLimpiar.Text = "Limpiar";
+            this.btnLimpiar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // cmbSuministro
+            // 
+            this.cmbSuministro.BackColor = System.Drawing.Color.White;
+            this.cmbSuministro.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cmbSuministro.Location = new System.Drawing.Point(613, 17);
+            this.cmbSuministro.MinimumSize = new System.Drawing.Size(136, 27);
+            this.cmbSuministro.Name = "cmbSuministro";
+            this.cmbSuministro.Size = new System.Drawing.Size(169, 27);
+            this.cmbSuministro.TabIndex = 35;
+            // 
+            // lblSuministro
+            // 
+            this.lblSuministro.AutoSize = true;
+            this.lblSuministro.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSuministro.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
+            this.lblSuministro.Location = new System.Drawing.Point(531, 24);
+            this.lblSuministro.Name = "lblSuministro";
+            this.lblSuministro.Size = new System.Drawing.Size(76, 17);
+            this.lblSuministro.TabIndex = 37;
+            this.lblSuministro.Text = "Suministro:";
+            // 
+            // cmbEstados
+            // 
+            this.cmbEstados.BackColor = System.Drawing.Color.White;
+            this.cmbEstados.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cmbEstados.Location = new System.Drawing.Point(356, 17);
+            this.cmbEstados.MinimumSize = new System.Drawing.Size(136, 27);
+            this.cmbEstados.Name = "cmbEstados";
+            this.cmbEstados.Size = new System.Drawing.Size(169, 27);
+            this.cmbEstados.TabIndex = 34;
+            // 
+            // txtFiltro
+            // 
+            this.txtFiltro.BackColor = System.Drawing.Color.White;
+            this.txtFiltro.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtFiltro.IsMaskared = true;
+            this.txtFiltro.Location = new System.Drawing.Point(12, 24);
+            this.txtFiltro.MaskText = "Filtrar por Ip, Modelo u Oficina";
+            this.txtFiltro.MaxLength = 32767;
+            this.txtFiltro.Name = "txtFiltro";
+            this.txtFiltro.SelectionLength = 0;
+            this.txtFiltro.SelectionStart = 0;
+            this.txtFiltro.Size = new System.Drawing.Size(270, 20);
+            this.txtFiltro.TabIndex = 33;
+            this.txtFiltro.Text = "Filtrar por Ip, Modelo u Oficina";
+            // 
+            // lblEstado
+            // 
+            this.lblEstado.AutoSize = true;
+            this.lblEstado.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEstado.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
+            this.lblEstado.Location = new System.Drawing.Point(294, 24);
+            this.lblEstado.Name = "lblEstado";
+            this.lblEstado.Size = new System.Drawing.Size(56, 17);
+            this.lblEstado.TabIndex = 36;
+            this.lblEstado.Text = "Estado:";
             // 
             // FrmEstados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(1055, 665);
+            this.Controls.Add(this.groupFiltro);
             this.Controls.Add(this.detalleEstadistica);
             this.Controls.Add(this.panelEstadisticas);
             this.Controls.Add(this.lblTotal);
-            this.Controls.Add(this.btnAgregar);
-            this.Controls.Add(this.btnLimpiar);
-            this.Controls.Add(this.cmbSuministro);
-            this.Controls.Add(this.lblSuministro);
-            this.Controls.Add(this.cmbEstados);
-            this.Controls.Add(this.txtFiltro);
-            this.Controls.Add(this.lblEstado);
             this.Controls.Add(this.dgv);
             this.Name = "FrmEstados";
             this.Text = "";
             this.Load += new System.EventHandler(this.frmEstados_Load);
             this.Shown += new System.EventHandler(this.FrmEstados_Shown);
             this.Controls.SetChildIndex(this.dgv, 0);
-            this.Controls.SetChildIndex(this.panelTitulo, 0);
-            this.Controls.SetChildIndex(this.panelMenu, 0);
-            this.Controls.SetChildIndex(this.lblEstado, 0);
-            this.Controls.SetChildIndex(this.txtFiltro, 0);
-            this.Controls.SetChildIndex(this.cmbEstados, 0);
-            this.Controls.SetChildIndex(this.lblSuministro, 0);
-            this.Controls.SetChildIndex(this.cmbSuministro, 0);
-            this.Controls.SetChildIndex(this.btnLimpiar, 0);
-            this.Controls.SetChildIndex(this.btnAgregar, 0);
             this.Controls.SetChildIndex(this.lblTotal, 0);
             this.Controls.SetChildIndex(this.panelEstadisticas, 0);
             this.Controls.SetChildIndex(this.detalleEstadistica, 0);
+            this.Controls.SetChildIndex(this.panelTitulo, 0);
+            this.Controls.SetChildIndex(this.panelMenu, 0);
+            this.Controls.SetChildIndex(this.groupFiltro, 0);
             this.panelTitulo.ResumeLayout(false);
             this.panelTitulo.PerformLayout();
             this.panelMenu.ResumeLayout(false);
@@ -611,14 +619,15 @@ namespace Summanager
             this.panelEstadisticas.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.customGroupBox3.ResumeLayout(false);
             this.customGroupBox3.PerformLayout();
             this.customGroupBox1.ResumeLayout(false);
             this.customGroupBox1.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
+            this.groupFiltro.ResumeLayout(false);
+            this.groupFiltro.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -626,16 +635,9 @@ namespace Summanager
         private System.Windows.Forms.DataGridView dgv;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
-        private CustomControls.ComboBox cmbSuministro;
-        private System.Windows.Forms.Label lblSuministro;
-        private CustomControls.ComboBox cmbEstados;
-        private CustomControls.TextBox txtFiltro;
-        private System.Windows.Forms.Label lblEstado;
         private System.Windows.Forms.Label lblTotal;
         private System.Windows.Forms.Label lblActualizacion;
         private System.Windows.Forms.Timer timerContador;
-        private CustomControls.Button btnLimpiar;
-        private CustomControls.Button btnAgregar;
         private CustomControls.Button btnNuevo;
         private CustomControls.Button btnGuardarComo;
         private CustomControls.Button btnGuardar;
@@ -661,5 +663,13 @@ namespace Summanager
         private CustomControls.Estadistica estOffline;
         private CustomControls.Estadistica estOnline;
         private CustomControls.DetalleEstadistica detalleEstadistica;
+        private CustomControls.CustomGroupBox groupFiltro;
+        private CustomControls.Button btnAgregar;
+        private CustomControls.Button btnLimpiar;
+        private CustomControls.ComboBox cmbSuministro;
+        private System.Windows.Forms.Label lblSuministro;
+        private CustomControls.ComboBox cmbEstados;
+        private CustomControls.TextBox txtFiltro;
+        private System.Windows.Forms.Label lblEstado;
     }
 }

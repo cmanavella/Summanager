@@ -505,14 +505,7 @@ namespace Summanager
             //Muestro los elementos del Filtro.
             this.lblTotal.Text = "Total: " + FrmMain.Printers.Count;
             this.lblTotal.Visible = true;
-            this.txtFiltro.Visible = true;
-            this.lblEstado.Visible = true;
-            this.cmbEstados.Visible = true;
-            this.lblSuministro.Visible = true;
-            this.cmbSuministro.Visible = true;
-            //this.btnAgregar.Visible = true;
-            //this.btnQuitar.Visible = true;
-            this.btnLimpiar.Visible = true;
+            this.groupFiltro.Visible = true;
         }
 
         /// <summary>
@@ -1470,13 +1463,7 @@ namespace Summanager
 
             //Oculto elementos
             this.lblTotal.Visible = false;
-            this.txtFiltro.Visible = false;
-            this.lblEstado.Visible = false;
-            this.cmbEstados.Visible = false;
-            this.lblSuministro.Visible = false;
-            this.cmbSuministro.Visible = false;
-            this.btnLimpiar.Visible = false;
-            this.btnAgregar.Visible = false;
+            this.groupFiltro.Visible = false;
             this.panelEstadisticas.Visible = false;
 
             bool repitoActualizar = false;
