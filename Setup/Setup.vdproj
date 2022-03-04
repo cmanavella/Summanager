@@ -64,7 +64,7 @@
         "Entry"
         {
         "MsmKey" = "8:_0BFF6986CC6144C95C250F749CDA9D24"
-        "OwnerKey" = "8:_DD82A47E8821716F8B194332B528C832"
+        "OwnerKey" = "8:_2F4F01D9232DA10347DC39BACC3DF573"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -219,6 +219,18 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_2F4F01D9232DA10347DC39BACC3DF573"
+        "OwnerKey" = "8:_68E877129F4648A7BD6D69AFE8E50679"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_2F4F01D9232DA10347DC39BACC3DF573"
+        "OwnerKey" = "8:_B7BB0B481C4A326F65B94020C653889B"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_2F7AA198F42FF2639D7497D65CC56882"
         "OwnerKey" = "8:_68E877129F4648A7BD6D69AFE8E50679"
         "MsmSig" = "8:_UNDEFINED"
@@ -293,6 +305,12 @@
         {
         "MsmKey" = "8:_3D2B2ACB3ED7042C113AA956BD6457BA"
         "OwnerKey" = "8:_B86B1BFAD4A56A63025648A361C1B43D"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_3D2B2ACB3ED7042C113AA956BD6457BA"
+        "OwnerKey" = "8:_77921B76128596A82564E9025C4996ED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -454,7 +472,7 @@
         "Entry"
         {
         "MsmKey" = "8:_5F46CF7B67A2E70C49FC5FC966FDEB68"
-        "OwnerKey" = "8:_DD82A47E8821716F8B194332B528C832"
+        "OwnerKey" = "8:_2F4F01D9232DA10347DC39BACC3DF573"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -935,18 +953,6 @@
         {
         "MsmKey" = "8:_DCD5D40202AB132716ED8AA308025D43"
         "OwnerKey" = "8:_68E877129F4648A7BD6D69AFE8E50679"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_DD82A47E8821716F8B194332B528C832"
-        "OwnerKey" = "8:_68E877129F4648A7BD6D69AFE8E50679"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_DD82A47E8821716F8B194332B528C832"
-        "OwnerKey" = "8:_B7BB0B481C4A326F65B94020C653889B"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -2047,7 +2053,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:HtmlAgilityPack, Version=1.11.38.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:HtmlAgilityPack, Version=1.11.42.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_076A1D80D298E42C30AB58F9F3325539"
@@ -2604,6 +2610,37 @@
                     }
                 }
             "SourcePath" = "8:System.IO.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_76B3208CD8924424A259567993D59686"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_2F4F01D9232DA10347DC39BACC3DF573"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:FSharp.Core, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_2F4F01D9232DA10347DC39BACC3DF573"
+                    {
+                    "Name" = "8:FSharp.Core.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:FSharp.Core.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_76B3208CD8924424A259567993D59686"
@@ -5522,37 +5559,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_DD82A47E8821716F8B194332B528C832"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:FSharp.Core, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_DD82A47E8821716F8B194332B528C832"
-                    {
-                    "Name" = "8:FSharp.Core.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:FSharp.Core.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_76B3208CD8924424A259567993D59686"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_DF1845CF0ADB6E59030E10CFB60717B9"
             {
             "AssemblyRegister" = "3:1"
@@ -6074,15 +6080,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:SumManager"
-        "ProductCode" = "8:{D0F8CC2D-B9B9-46F9-9AF9-35296CF39F1F}"
-        "PackageCode" = "8:{849F3E37-6A24-4F02-A27B-24E309F416A1}"
+        "ProductCode" = "8:{560124F2-A02F-4AEE-9464-704D771C25DB}"
+        "PackageCode" = "8:{AFA6D6C3-C441-45F9-931D-2E89673907C2}"
         "UpgradeCode" = "8:{498DCFC0-9962-4A38-A402-DE61F7672373}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:4.2.0"
+        "ProductVersion" = "8:4.2.1"
         "Manufacturer" = "8:Poder Judicial Córdoba"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
