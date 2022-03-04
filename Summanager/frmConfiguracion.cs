@@ -77,18 +77,6 @@ namespace Summanager
             this.cmbPeriodo.Add(10, "1 día");
         }
 
-        private void chkAutomatico_CheckedChanged(object sender, EventArgs e)
-        {
-            //Activo o desactivo el Combo Período según esté o no activado el CheckBox Automatizo.
-            if (chkAutomatico.Checked)
-            {
-                this.cmbPeriodo.Enabled = true;
-            }
-            else
-            {
-                this.cmbPeriodo.Enabled = false;
-            }
-        }
 
         /// <summary>
         /// Almacena en el Configuration Manager los cambios realizados.
@@ -107,6 +95,50 @@ namespace Summanager
             {
                 MessageBox.Show(ex.Message, Application.ProductName + " " + Application.ProductVersion,
                             MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnIniciarCerrar_Click(object sender, EventArgs e)
+        {
+            if (deboIniciar)
+            {
+                FrmInicioSesion frmIniciar = new FrmInicioSesion();
+                frmIniciar.ShowDialog();
+            }
+            else
+            {
+                var result = MessageBox.Show("¿Está seguro que desea cerrar sesión?", Application.ProductName + " " + Application.ProductVersion,
+                            MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if(result == DialogResult.Yes)
+                {
+                    try
+                    {
+                        DBUsers.LogOut();
+                    }
+                    catch(Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, Application.ProductName + " " + Application.ProductVersion,
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+
+            _setElementsByUser();
+
+            FrmMain.GetUserLogged();
+        }
+
+        private void chkAutomatico_CheckedChanged(object sender, EventArgs e)
+        {
+            //Activo o desactivo el Combo Período según esté o no activado el CheckBox Automatizo.
+            if (chkAutomatico.Checked)
+            {
+                this.cmbPeriodo.Enabled = true;
+            }
+            else
+            {
+                this.cmbPeriodo.Enabled = false;
             }
         }
 
@@ -159,37 +191,6 @@ namespace Summanager
                 this.cmbPeriodo.SelectItem(this.periodo, true);
             }
             _guardar();  //Guardo los cambios.
-        }
-
-        private void btnIniciarCerrar_Click(object sender, EventArgs e)
-        {
-            if (deboIniciar)
-            {
-                FrmInicioSesion frmIniciar = new FrmInicioSesion();
-                frmIniciar.ShowDialog();
-            }
-            else
-            {
-                var result = MessageBox.Show("¿Está seguro que desea cerrar sesión?", Application.ProductName + " " + Application.ProductVersion,
-                            MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-                if(result == DialogResult.Yes)
-                {
-                    try
-                    {
-                        DBUsers.LogOut();
-                    }
-                    catch(Exception ex)
-                    {
-                        MessageBox.Show(ex.Message, Application.ProductName + " " + Application.ProductVersion,
-                            MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-            }
-
-            _setElementsByUser();
-
-            FrmMain.GetUserLogged();
         }
     }
 }

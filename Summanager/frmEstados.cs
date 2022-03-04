@@ -1525,21 +1525,6 @@ namespace Summanager
             }
         }
 
-        private void txtFiltro_KeyUp(object sender, KeyEventArgs e)
-        {
-            _filtrar();
-        }
-
-        private void cmbEstados_ItemSelectedChange(object sender, EventArgs e)
-        {
-            _filtrar();
-        }
-
-        private void cmbSuministro_ItemSelectedChange(object sender, EventArgs e)
-        {
-            _filtrar();
-        }
-
         private void dgv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             _colorearDgv();
@@ -1552,15 +1537,6 @@ namespace Summanager
             {
                 btnActualizar_Click(null, null);
             }
-        }
-
-        private void btnLimpiar_Click(object sender, EventArgs e)
-        {
-            this.txtFiltro.Clear();
-            this.txtFiltro.Focus();
-            this.cmbEstados.SelectItem(0, true);
-            this.cmbSuministro.SelectItem(0, true);
-            this.btnLimpiar.Focus();
         }
 
         private void dgv_Resize(object sender, EventArgs e)
@@ -1661,6 +1637,30 @@ namespace Summanager
         private void estKitMantRiesgo_MouseLeave(object sender, EventArgs e)
         {
             this.detalleEstadistica.Visible = false;
+        }
+
+        private void txtFiltro_KeyUp(object sender, KeyEventArgs e)
+        {
+            _filtrar();
+        }
+
+        private void cmbEstados_ItemSelectedChange(object sender, EventArgs e)
+        {
+            _filtrar();
+        }
+
+        private void cmbSuministro_ItemSelectedChange(object sender, EventArgs e)
+        {
+            _filtrar();
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            this.txtFiltro.Clear();
+            this.txtFiltro.Focus();
+            this.cmbEstados.SelectItem(0, true);
+            this.cmbSuministro.SelectItem(0, true);
+            this.btnLimpiar.Focus();
         }
     }
 }

@@ -95,6 +95,7 @@ namespace Summanager
             this.btnCancelar.TabIndex = 20;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // btnAceptar
             // 
@@ -107,6 +108,7 @@ namespace Summanager
             this.btnAceptar.TabIndex = 19;
             this.btnAceptar.Text = "Aceptar";
             this.btnAceptar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
             // 
             // cmbPeriodo
             // 
@@ -139,6 +141,7 @@ namespace Summanager
             this.chkAutomatico.TabIndex = 16;
             this.chkAutomatico.Text = "Actualizar automáticamente los estados de las impresoras";
             this.chkAutomatico.UseVisualStyleBackColor = true;
+            this.chkAutomatico.CheckedChanged += new System.EventHandler(this.chkAutomatico_CheckedChanged);
             // 
             // FrmConfiguracion
             // 
