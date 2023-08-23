@@ -4,6 +4,7 @@ using HtmlAgilityPack;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing;
 using System.IO;
@@ -42,19 +43,28 @@ namespace IO
             //La variable url ya contiene la cadena 'http://' por lo que le concateno el ip.
             this.url += ip;
 
-            //Pongo un TimeOut de 4 segundos para que no se demore tanto cuando la impresora es inaccesible.
-            this.web.PreRequest = delegate (HttpWebRequest webRequest)
-            {
-                webRequest.Timeout = 4000;
-                return true;
-            };
+            ////Pongo un TimeOut de 4 segundos para que no se demore tanto cuando la impresora es inaccesible.
+            //this.web.PreRequest = delegate (HttpWebRequest webRequest)
+            //{
+            //    webRequest.Timeout = 4000;
+            //    return true;
+            //};
 
-            //Cargo la página HTML de la Impresora.
-            this.doc = this.web.Load(this.url);
+            ////Cargo la página HTML de la Impresora.
+            //this.doc = this.web.Load(this.url);
+
+            ////Almaceno el Title de la página HTML y lo uso como modelo de la Impresora.
+            //var title = this.doc.DocumentNode.SelectNodes("//title").FirstOrDefault();
+            //this.printer.Modelo = title.InnerHtml;
+
+            //Le indico a Selenium que vaya a la página de la impresora mediante su IP.
+            this.driver.Navigate().GoToUrl(this.url);
+            //Seteo el driver para que por cada búsqueda dentro de la pagina de la impresora, espere 5 segundos. 
+            //De esa manera le doy tiempo a que analice correctamente.
+            this.driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(7);
 
             //Almaceno el Title de la página HTML y lo uso como modelo de la Impresora.
-            var title = this.doc.DocumentNode.SelectNodes("//title").FirstOrDefault();
-            this.printer.Modelo = title.InnerHtml;
+            this.printer.Modelo = this.driver.Title;
 
             //Según el modelo de la Impresora, llamo al método encargado de leer el resto de la información.
             switch (this.printer.Modelo)
@@ -82,78 +92,25 @@ namespace IO
         /// </summary>
         private void _Lex410()
         {
-            this.url += Printer.L410_AFTER_URL;
-            this.doc = this.web.Load(this.url);
-
-            int contTablas = 0;
             try
             {
-                foreach (var tabla in doc.DocumentNode.SelectNodes(Printer.L410_TABLE))
-                {
-                    contTablas++;
+                //Accedo a la página que contiene la info de los suministros.
+                this.url += Printer.L410_AFTER_URL;
+                this.driver.Navigate().GoToUrl(this.url);
 
-                    if (contTablas == (int)Printer.L410_NUM_TABLA.TONER)
-                    {
-                        int contTr = 0;
-                        foreach (var nodo in tabla.ChildNodes)
-                        {
-                            if (nodo.Name == "tr") contTr++;
-                            if (contTr == (int)Printer.L410_NUM_TR.TONER)
-                            {
-                                string[] valor = nodo.InnerText.Split('~');
-                                if (valor.Length > 1)
-                                {
-                                    valor[1] = valor[1].Remove(valor[1].Length - 1);
-                                    this.printer.Toner = Int32.Parse(valor[1]);
-                                }
-                                else
-                                {
-                                    valor = nodo.InnerText.Split(' ');
-                                    if (valor.Length > 1)
-                                    {
-                                        valor[4] = valor[4].Remove(valor[4].Length - 1);
-                                        this.printer.Toner = Int32.Parse(valor[4]);
-                                    }
-                                    else
-                                    {
-                                        this.printer.Toner = 0;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    if (contTablas == (int)Printer.L410_NUM_TABLA.UNIDAD_IMAGEN)
-                    {
-                        int contTr = 0;
-                        foreach (var nodo in tabla.ChildNodes)
-                        {
-                            if (nodo.Name == "tr") contTr++;
-                            if (contTr == (int)Printer.L410_NUM_TR.UNIDAD_IMAGEN && nodo.Name == "tr")
-                            {
-                                string[] valor = nodo.InnerText.Split(':');
-                                valor[1] = valor[1].Remove(valor[1].Length - 3);
+                //Traigo el contenedor que contiene el toner. En este caso, es un elemento b dentro de un td
+                IWebElement container = this.driver.FindElement(By.XPath("/html/body/table[1]/tbody/tr[3]/td/b"));
+                //Corto el texto del contenedor y lo paso a la variable toner de la impresora.
+                this.printer.Toner = Int32.Parse(container.Text.Substring(16, (container.Text.Length - 17)));
 
-                                this.printer.UImagen = Int32.Parse(valor[1]);
-                            }
-                            this.printer.KitMant = null;
-                        }
-                    }
-                }
+                //Traigo el contenedor que contiene la unidad de imagen.
+                container = this.driver.FindElement(By.XPath("/html/body/table[4]/tbody/tr[5]/td[2]"));
+                //Corto el texto del contenedor y lo paso a la variable unidad de imagen de la impresora.
+                this.printer.UImagen = Int32.Parse(container.Text.Substring(0, (container.Text.Length - 1)));
             }
             catch (Exception ex)
             {
-                //Pregunto si el mensaje que devuelve es de Índice fuera de matriz. Si lo es, significa que uno de los suministros no se pudo leer 
-                //porque no se muestra en la página de la impresora.
-                if(ex.Message== "Índice fuera de los límites de la matriz.")
-                {
-                    throw new SuministroException();
-                }
-                else
-                {
-                    //Si hubo otro error, lo paso para que me lo muestre.
-                    throw ex;
-                }
-                
+
             }
         }
 
@@ -162,57 +119,24 @@ namespace IO
         /// </summary>
         private void _Lex610()
         {
+            //Accedo a la página que contiene la info de los suministros.
             this.url += Printer.L610_AFTER_URL;
-            this.doc = this.web.Load(this.url);
+            this.driver.Navigate().GoToUrl(this.url);
 
-            int contTablas = 0;
-            foreach (var tabla in doc.DocumentNode.SelectNodes(Printer.L610_TABLE))
-            {
-                contTablas++;
-                if (contTablas == (int)Printer.L610_NUM_TABLA.TONER)
-                {
-                    int contTr = 0;
-                    foreach (var nodo in tabla.ChildNodes)
-                    {
-                        if (nodo.Name == "tr") contTr++;
-                        if (contTr == (int)Printer.L610_NUM_TR.TONER)
-                        {
-                            string[] valor = nodo.InnerText.Split('~');
-                            if (valor.Length > 1)
-                            {
-                                valor[1] = valor[1].Remove(valor[1].Length - 1);
-                                this.printer.Toner = Int32.Parse(valor[1]);
-                            }
-                            else
-                            {
-                                this.printer.Toner = 0;
-                            }
-                        }
-                    }
-                }
-                if (contTablas == (int)Printer.L610_NUM_TABLA.UNIDAD_IMAGEN)
-                {
-                    int contTr = 0;
-                    foreach (var nodo in tabla.ChildNodes)
-                    {
-                        if (nodo.Name == "tr") contTr++;
-                        if (contTr == (int)Printer.L610_NUM_TR.KIT_MANTENIMIENTO && nodo.Name == "tr")
-                        {
-                            string[] valor = nodo.InnerText.Split(':');
-                            valor[1] = valor[1].Remove(valor[1].Length - 3);
+            //Traigo el contenedor que contiene el toner. En este caso, es un elemento b dentro de un td
+            IWebElement container = this.driver.FindElement(By.XPath("/html/body/table[1]/tbody/tr[3]/td/b"));
+            //Corto el texto del contenedor y lo paso a la variable toner de la impresora.
+            this.printer.Toner = Int32.Parse(container.Text.Substring(16, (container.Text.Length - 17)));
 
-                            this.printer.KitMant = Int32.Parse(valor[1]);
-                        }
-                        if (contTr == (int)Printer.L610_NUM_TR.UNIDAD_IMAGEN && nodo.Name == "tr")
-                        {
-                            string[] valor = nodo.InnerText.Split(':');
-                            valor[1] = valor[1].Remove(valor[1].Length - 3);
+            //Traigo el contenedor que contiene la unidad de imagen.
+            container = this.driver.FindElement(By.XPath("/html/body/table[4]/tbody/tr[6]/td[2]"));
+            //Corto el texto del contenedor y lo paso a la variable unidad de imagen de la impresora.
+            this.printer.UImagen = Int32.Parse(container.Text.Substring(0, (container.Text.Length - 1)));
 
-                            this.printer.UImagen = Int32.Parse(valor[1]);
-                        }
-                    }
-                }
-            }
+            //Traigo el contenedor que contiene el kit de mantenimiento.
+            container = this.driver.FindElement(By.XPath("/html/body/table[4]/tbody/tr[5]/td[2]"));
+            //Corto el texto del contenedor y lo paso a la variable kit de mantenimiento de la impresora.
+            this.printer.KitMant = Int32.Parse(container.Text.Substring(0, (container.Text.Length - 1)));
         }
 
         /// <summary>
@@ -220,57 +144,24 @@ namespace IO
         /// </summary>
         private void _Lex812()
         {
+            //Accedo a la página que contiene la info de los suministros.
             this.url += Printer.L812_AFTER_URL;
-            this.doc = this.web.Load(this.url);
+            this.driver.Navigate().GoToUrl(this.url);
 
-            int contTablas = 0;
-            foreach (var tabla in doc.DocumentNode.SelectNodes(Printer.L812_TABLE))
-            {
-                contTablas++;
-                if (contTablas == (int)Printer.L812_NUM_TABLA.TONER)
-                {
-                    int contTr = 0;
-                    foreach (var nodo in tabla.ChildNodes)
-                    {
-                        if (nodo.Name == "tr") contTr++;
-                        if (contTr == (int)Printer.L812_NUM_TR.TONER)
-                        {
-                            string[] valor = nodo.InnerText.Split('~');
-                            if (valor.Length > 1)
-                            {
-                                valor[1] = valor[1].Remove(valor[1].Length - 1);
-                                this.printer.Toner = Int32.Parse(valor[1]);
-                            }
-                            else
-                            {
-                                this.printer.Toner = 0;
-                            }
-                        }
-                    }
-                }
-                if (contTablas == (int)Printer.L812_NUM_TABLA.UNIDAD_IMAGEN)
-                {
-                    int contTr = 0;
-                    foreach (var nodo in tabla.ChildNodes)
-                    {
-                        if (nodo.Name == "tr") contTr++;
-                        if (contTr == (int)Printer.L812_NUM_TR.KIT_MANTENIMIENTO && nodo.Name == "tr")
-                        {
-                            string[] valor = nodo.InnerText.Split(':');
-                            valor[1] = valor[1].Remove(valor[1].Length - 3);
+            //Traigo el contenedor que contiene el toner. En este caso, es un elemento b dentro de un td
+            IWebElement container = this.driver.FindElement(By.XPath("/html/body/table[2]/tbody/tr[3]/td/b"));
+            //Corto el texto del contenedor y lo paso a la variable toner de la impresora.
+            this.printer.Toner = Int32.Parse(container.Text.Substring(16, (container.Text.Length - 17)));
 
-                            this.printer.KitMant = Int32.Parse(valor[1]);
-                        }
-                        if (contTr == (int)Printer.L812_NUM_TR.UNIDAD_IMAGEN && nodo.Name == "tr")
-                        {
-                            string[] valor = nodo.InnerText.Split(':');
-                            valor[1] = valor[1].Remove(valor[1].Length - 3);
+            //Traigo el contenedor que contiene la unidad de imagen.
+            container = this.driver.FindElement(By.XPath("/html/body/table[5]/tbody/tr[5]/td[2]"));
+            //Corto el texto del contenedor y lo paso a la variable unidad de imagen de la impresora.
+            this.printer.UImagen = Int32.Parse(container.Text.Substring(0, (container.Text.Length - 1)));
 
-                            this.printer.UImagen = Int32.Parse(valor[1]);
-                        }
-                    }
-                }
-            }
+            //Traigo el contenedor que contiene el kit de mantenimiento.
+            container = this.driver.FindElement(By.XPath("/html/body/table[5]/tbody/tr[7]/td[2]"));
+            //Corto el texto del contenedor y lo paso a la variable kit de mantenimiento de la impresora.
+            this.printer.KitMant = Int32.Parse(container.Text.Substring(0, (container.Text.Length - 1)));
         }
 
         /// <summary>
@@ -285,9 +176,6 @@ namespace IO
 
             //Le indico a Selenium que vaya a la página de la impresora mediante su IP.
             this.driver.Navigate().GoToUrl(this.url);
-            //Seteo el driver para que por cada búsqueda dentro de la pagina de la impresora, espere 5 segundos. 
-            //De esa manera le doy tiempo a que analice correctamente.
-            this.driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
 
             /*Busco dentro de la pagina cada uno de los suministros. Primero busco el contenedor de cada uno de ellos (siempre es un li).
             Luego obtengo todos los elementos div del contenedor. Cuando tengo esos div los recorro uno a uno preguntándo por el que tiene

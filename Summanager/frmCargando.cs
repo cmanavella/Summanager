@@ -151,6 +151,19 @@ namespace Summanager
                     printerScrapped.KitMant = null;
                     this.PrintersScrapped.Add(printerScrapped);
                 }
+                catch (WebDriverTimeoutException)
+                {
+                    //Si se ejecuta la excepción por TimeOut, pongo la impresora como Offline.
+                    Printer printerScrapped = new Printer();
+                    printerScrapped.Ip = printer.Ip;
+                    printerScrapped.Estado = "Offline";
+                    printerScrapped.Modelo = null;
+                    printerScrapped.Oficina = printer.Oficina;
+                    printerScrapped.Toner = null;
+                    printerScrapped.UImagen = null;
+                    printerScrapped.KitMant = null;
+                    this.PrintersScrapped.Add(printerScrapped);
+                }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
