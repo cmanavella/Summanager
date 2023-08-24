@@ -57,7 +57,7 @@ namespace Summanager
             }
 
             //Busco Usuario Logueado.
-            GetUserLogged();
+            //GetUserLogged();
         }
 
         [Browsable(true), EditorBrowsable(EditorBrowsableState.Always), Bindable(true)]
@@ -81,35 +81,35 @@ namespace Summanager
         /// <summary>
         /// Busca en la Base de Datos un Usuario Logueado. En base a eso Modifica los Elementos del Usuario.
         /// </summary>
-        public static void GetUserLogged()
-        {
-            try
-            {
-                //Busco en la Base de Datos.
-                DBUsers.FindLogin();
+        //public static void GetUserLogged()
+        //{
+        //    try
+        //    {
+        //        //Busco en la Base de Datos.
+        //        DBUsers.FindLogin();
 
-                //Pregunto si el Usuario está Logueado.
-                if (User.IsLogged)
-                {
-                    //Si lo está muestro su nombre y activo el Button Stock.
-                    lblUsuario.Text = "Sesión iniciada como: " + User.Nombre;
-                    lblUsuario.Visible = true;
+        //        //Pregunto si el Usuario está Logueado.
+        //        if (User.IsLogged)
+        //        {
+        //            //Si lo está muestro su nombre y activo el Button Stock.
+        //            lblUsuario.Text = "Sesión iniciada como: " + User.Nombre;
+        //            lblUsuario.Visible = true;
 
-                    btnStock.Visible = true;
-                }
-                else
-                {
-                    //Caso contrario escondo el nombre del usuario y el Button Stock.
-                    lblUsuario.Visible = false;
-                    btnStock.Visible = false;
-                }
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message, Application.ProductName + " " + Application.ProductVersion,
-                            MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+        //            btnStock.Visible = true;
+        //        }
+        //        else
+        //        {
+        //            //Caso contrario escondo el nombre del usuario y el Button Stock.
+        //            lblUsuario.Visible = false;
+        //            btnStock.Visible = false;
+        //        }
+        //    }
+        //    catch(Exception ex)
+        //    {
+        //        MessageBox.Show(ex.Message, Application.ProductName + " " + Application.ProductVersion,
+        //                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    }
+        //}
 
         /// <summary>
         /// Obtiene el título de la Applicación, quitando la concatenación con el nombre del archivo reciente.

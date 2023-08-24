@@ -126,7 +126,7 @@ namespace Summanager
 
             _setElementsByUser();
 
-            FrmMain.GetUserLogged();
+            //FrmMain.GetUserLogged();
         }
 
         private void chkAutomatico_CheckedChanged(object sender, EventArgs e)

@@ -31,7 +31,7 @@ namespace Summanager
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.panelSuperior = new System.Windows.Forms.Panel();
-            lblUsuario = new System.Windows.Forms.Label();
+            this.lblUsuario = new System.Windows.Forms.Label();
             this.appIcon = new System.Windows.Forms.PictureBox();
             this.lblTitulo = new System.Windows.Forms.Label();
             this.btnMinimizar = new CustomControls.PanelButton();
@@ -41,7 +41,7 @@ namespace Summanager
             this.panelMenu = new System.Windows.Forms.Panel();
             this.bordeInferiorIzquierdo = new System.Windows.Forms.Panel();
             this.btnConfiguracion = new CustomControls.LateralMenuButton();
-            btnStock = new CustomControls.LateralMenuButton();
+            this.btnStock = new CustomControls.LateralMenuButton();
             this.btnEstados = new CustomControls.LateralMenuButton();
             this.panelLogo = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -72,7 +72,7 @@ namespace Summanager
             // panelSuperior
             // 
             this.panelSuperior.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
-            this.panelSuperior.Controls.Add(lblUsuario);
+            this.panelSuperior.Controls.Add(this.lblUsuario);
             this.panelSuperior.Controls.Add(this.appIcon);
             this.panelSuperior.Controls.Add(this.lblTitulo);
             this.panelSuperior.Controls.Add(this.btnMinimizar);
@@ -87,16 +87,17 @@ namespace Summanager
             // 
             // lblUsuario
             // 
-            lblUsuario.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            lblUsuario.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            lblUsuario.ForeColor = System.Drawing.Color.White;
-            lblUsuario.Location = new System.Drawing.Point(806, 7);
-            lblUsuario.Name = "lblUsuario";
-            lblUsuario.Size = new System.Drawing.Size(358, 16);
-            lblUsuario.TabIndex = 16;
-            lblUsuario.Text = "Usuario";
-            lblUsuario.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            lblUsuario.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lblUsuario_MouseDown);
+            this.lblUsuario.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblUsuario.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUsuario.ForeColor = System.Drawing.Color.White;
+            this.lblUsuario.Location = new System.Drawing.Point(806, 7);
+            this.lblUsuario.Name = "lblUsuario";
+            this.lblUsuario.Size = new System.Drawing.Size(358, 16);
+            this.lblUsuario.TabIndex = 16;
+            this.lblUsuario.Text = "Usuario";
+            this.lblUsuario.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblUsuario.Visible = false;
+            this.lblUsuario.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lblUsuario_MouseDown);
             // 
             // appIcon
             // 
@@ -115,7 +116,7 @@ namespace Summanager
             this.lblTitulo.ForeColor = System.Drawing.Color.White;
             this.lblTitulo.Location = new System.Drawing.Point(29, 7);
             this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(49, 16);
+            this.lblTitulo.Size = new System.Drawing.Size(48, 16);
             this.lblTitulo.TabIndex = 13;
             this.lblTitulo.Text = "label2";
             this.lblTitulo.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lblTitulo_MouseDown);
@@ -176,7 +177,7 @@ namespace Summanager
             this.panelMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
             this.panelMenu.Controls.Add(this.bordeInferiorIzquierdo);
             this.panelMenu.Controls.Add(this.btnConfiguracion);
-            this.panelMenu.Controls.Add(btnStock);
+            this.panelMenu.Controls.Add(this.btnStock);
             this.panelMenu.Controls.Add(this.btnEstados);
             this.panelMenu.Location = new System.Drawing.Point(0, 150);
             this.panelMenu.Name = "panelMenu";
@@ -208,15 +209,16 @@ namespace Summanager
             // 
             // btnStock
             // 
-            btnStock.Dock = System.Windows.Forms.DockStyle.Top;
-            btnStock.Image = global::Summanager.Properties.Resources.box;
-            btnStock.Location = new System.Drawing.Point(0, 45);
-            btnStock.Name = "btnStock";
-            btnStock.Selected = false;
-            btnStock.Size = new System.Drawing.Size(205, 45);
-            btnStock.TabIndex = 1;
-            btnStock.Text = "Stock";
-            btnStock.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnStock_MouseClick);
+            this.btnStock.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnStock.Image = global::Summanager.Properties.Resources.box;
+            this.btnStock.Location = new System.Drawing.Point(0, 45);
+            this.btnStock.Name = "btnStock";
+            this.btnStock.Selected = false;
+            this.btnStock.Size = new System.Drawing.Size(205, 45);
+            this.btnStock.TabIndex = 1;
+            this.btnStock.Text = "Stock";
+            this.btnStock.Visible = false;
+            this.btnStock.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnStock_MouseClick);
             // 
             // btnEstados
             // 
@@ -257,7 +259,7 @@ namespace Summanager
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(162)))), ((int)(((byte)(160)))));
             this.label1.Location = new System.Drawing.Point(8, 101);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(190, 32);
+            this.label1.Size = new System.Drawing.Size(189, 32);
             this.label1.TabIndex = 1;
             this.label1.Text = "SumManager";
             // 
@@ -438,7 +440,6 @@ namespace Summanager
         private System.Windows.Forms.Panel bordeDerecho;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panelContenido;
-        private static CustomControls.LateralMenuButton btnStock;
         private CustomControls.LateralMenuButton btnEstados;
         private CustomControls.LateralMenuButton btnConfiguracion;
         private System.Windows.Forms.Panel bordeEsquinaDerecha;
@@ -452,6 +453,7 @@ namespace Summanager
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel bordeInferiorDerecho;
         private System.Windows.Forms.PictureBox appIcon;
-        private static System.Windows.Forms.Label lblUsuario;
+        private CustomControls.LateralMenuButton btnStock;
+        private System.Windows.Forms.Label lblUsuario;
     }
 }

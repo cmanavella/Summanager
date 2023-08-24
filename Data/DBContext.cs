@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.SQLite;
+﻿using System.Data.SQLite;
 using System.IO;
 using System.Reflection;
 
@@ -12,7 +7,7 @@ namespace Data
     public class DBContext
     {
         //String de conexión.
-        private static string connectionString = "Data Source=" + Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\data.sqlite;Version=3;";
+        private static string connectionString = "Data Source=" + Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\data.sqlite;";
 
         /// <summary>
         /// Devuelve una instancia de la conexión a la Base de Datos ya abierta.
