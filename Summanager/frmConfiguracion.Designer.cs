@@ -29,8 +29,6 @@ namespace Summanager
         /// </summary>
         private void InitializeComponent()
         {
-            this.customGroupBox1 = new CustomControls.CustomGroupBox();
-            this.btnIniciarCerrar = new CustomControls.Button();
             this.customGroupBox2 = new CustomControls.CustomGroupBox();
             this.btnCancelar = new CustomControls.Button();
             this.btnAceptar = new CustomControls.Button();
@@ -38,37 +36,13 @@ namespace Summanager
             this.label1 = new System.Windows.Forms.Label();
             this.chkAutomatico = new System.Windows.Forms.CheckBox();
             this.panelTitulo.SuspendLayout();
-            this.customGroupBox1.SuspendLayout();
             this.customGroupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblTitulo
             // 
-            this.lblTitulo.Size = new System.Drawing.Size(200, 32);
+            this.lblTitulo.Size = new System.Drawing.Size(199, 32);
             this.lblTitulo.Text = "Configuración";
-            // 
-            // customGroupBox1
-            // 
-            this.customGroupBox1.Controls.Add(this.btnIniciarCerrar);
-            this.customGroupBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.customGroupBox1.Location = new System.Drawing.Point(0, 89);
-            this.customGroupBox1.Name = "customGroupBox1";
-            this.customGroupBox1.Size = new System.Drawing.Size(1050, 73);
-            this.customGroupBox1.TabIndex = 16;
-            this.customGroupBox1.Text = "Panel Usuario";
-            // 
-            // btnIniciarCerrar
-            // 
-            this.btnIniciarCerrar.ButtonBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(137)))), ((int)(((byte)(132)))));
-            this.btnIniciarCerrar.ButtonForeColor = System.Drawing.Color.White;
-            this.btnIniciarCerrar.Image = null;
-            this.btnIniciarCerrar.Location = new System.Drawing.Point(17, 27);
-            this.btnIniciarCerrar.Name = "btnIniciarCerrar";
-            this.btnIniciarCerrar.Size = new System.Drawing.Size(80, 28);
-            this.btnIniciarCerrar.TabIndex = 6;
-            this.btnIniciarCerrar.Text = "Iniciar";
-            this.btnIniciarCerrar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.btnIniciarCerrar.Click += new System.EventHandler(this.btnIniciarCerrar_Click);
             // 
             // customGroupBox2
             // 
@@ -78,7 +52,7 @@ namespace Summanager
             this.customGroupBox2.Controls.Add(this.label1);
             this.customGroupBox2.Controls.Add(this.chkAutomatico);
             this.customGroupBox2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.customGroupBox2.Location = new System.Drawing.Point(0, 162);
+            this.customGroupBox2.Location = new System.Drawing.Point(0, 89);
             this.customGroupBox2.Name = "customGroupBox2";
             this.customGroupBox2.Size = new System.Drawing.Size(1050, 100);
             this.customGroupBox2.TabIndex = 17;
@@ -148,16 +122,12 @@ namespace Summanager
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(1050, 665);
             this.Controls.Add(this.customGroupBox2);
-            this.Controls.Add(this.customGroupBox1);
             this.Name = "FrmConfiguracion";
             this.Controls.SetChildIndex(this.panelTitulo, 0);
             this.Controls.SetChildIndex(this.panelMenu, 0);
-            this.Controls.SetChildIndex(this.customGroupBox1, 0);
             this.Controls.SetChildIndex(this.customGroupBox2, 0);
             this.panelTitulo.ResumeLayout(false);
             this.panelTitulo.PerformLayout();
-            this.customGroupBox1.ResumeLayout(false);
-            this.customGroupBox1.PerformLayout();
             this.customGroupBox2.ResumeLayout(false);
             this.customGroupBox2.PerformLayout();
             this.ResumeLayout(false);
@@ -165,8 +135,6 @@ namespace Summanager
         }
 
         #endregion
-        private CustomControls.CustomGroupBox customGroupBox1;
-        private CustomControls.Button btnIniciarCerrar;
         private CustomControls.CustomGroupBox customGroupBox2;
         private CustomControls.Button btnCancelar;
         private CustomControls.Button btnAceptar;

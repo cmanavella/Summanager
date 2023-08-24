@@ -8,7 +8,6 @@ using System.Text;
 using System.Windows.Forms;
 using IO;
 using Entities;
-using Data;
 
 namespace Summanager
 {
@@ -34,27 +33,6 @@ namespace Summanager
             if (this.chkAutomatico.Checked)
             {
                 this.cmbPeriodo.SelectItem(this.periodo, true);
-            }
-
-            _setElementsByUser();
-        }
-
-        /// <summary>
-        /// Setea los elementos relacionados con el Usuario de acuerdo a si este se encuentra Logueado o no.
-        /// </summary>
-        private void _setElementsByUser()
-        {
-            if (User.IsLogged)
-            {
-                this.btnIniciarCerrar.ButtonBackColor = Color.DarkRed;
-                this.btnIniciarCerrar.Text = "Cerrar";
-                this.deboIniciar = false;
-            }
-            else
-            {
-                this.btnIniciarCerrar.ButtonBackColor = Color.FromArgb(0, 137, 132);
-                this.btnIniciarCerrar.Text = "Iniciar";
-                this.deboIniciar = true;
             }
         }
 
@@ -96,37 +74,6 @@ namespace Summanager
                 MessageBox.Show(ex.Message, Application.ProductName + " " + Application.ProductVersion,
                             MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void btnIniciarCerrar_Click(object sender, EventArgs e)
-        {
-            if (deboIniciar)
-            {
-                FrmInicioSesion frmIniciar = new FrmInicioSesion();
-                frmIniciar.ShowDialog();
-            }
-            else
-            {
-                var result = MessageBox.Show("¿Está seguro que desea cerrar sesión?", Application.ProductName + " " + Application.ProductVersion,
-                            MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-                if(result == DialogResult.Yes)
-                {
-                    try
-                    {
-                        DBUsers.LogOut();
-                    }
-                    catch(Exception ex)
-                    {
-                        MessageBox.Show(ex.Message, Application.ProductName + " " + Application.ProductVersion,
-                            MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-            }
-
-            _setElementsByUser();
-
-            //FrmMain.GetUserLogged();
         }
 
         private void chkAutomatico_CheckedChanged(object sender, EventArgs e)
