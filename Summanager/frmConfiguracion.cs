@@ -15,7 +15,6 @@ namespace Summanager
     {
         private bool automatizo;
         private int periodo;
-        private bool deboIniciar;
 
         public FrmConfiguracion()
         {

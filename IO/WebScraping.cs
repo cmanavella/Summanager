@@ -1,33 +1,18 @@
-﻿using CustomExceptions;
-using Entities;
-using HtmlAgilityPack;
+﻿using Entities;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IO
 {
     public class WebScraping
     {
-        private HtmlWeb web;
-        private HtmlDocument doc;
         private string url;
         private Printer printer;
         private IWebDriver driver;
 
         public WebScraping(IWebDriver driver)
         {
-            this.web = new HtmlWeb();
-            this.doc = new HtmlDocument();
             this.url = "http://";
             this.printer = new Printer();
             this.driver = driver;
@@ -42,20 +27,6 @@ namespace IO
         {
             //La variable url ya contiene la cadena 'http://' por lo que le concateno el ip.
             this.url += ip;
-
-            ////Pongo un TimeOut de 4 segundos para que no se demore tanto cuando la impresora es inaccesible.
-            //this.web.PreRequest = delegate (HttpWebRequest webRequest)
-            //{
-            //    webRequest.Timeout = 4000;
-            //    return true;
-            //};
-
-            ////Cargo la página HTML de la Impresora.
-            //this.doc = this.web.Load(this.url);
-
-            ////Almaceno el Title de la página HTML y lo uso como modelo de la Impresora.
-            //var title = this.doc.DocumentNode.SelectNodes("//title").FirstOrDefault();
-            //this.printer.Modelo = title.InnerHtml;
 
             //Le indico a Selenium que vaya a la página de la impresora mediante su IP.
             this.driver.Navigate().GoToUrl(this.url);
