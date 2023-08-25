@@ -8,8 +8,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 
@@ -26,6 +28,8 @@ namespace Summanager
         private int tiempo;
         private List<Printer> PrintersScrapped;
         private IWebDriver webDriver;
+
+        private string prueba = "";
 
         public List<Printer> PrintersPassed { get; set; }
         public bool Error { get; set; }
@@ -58,7 +62,8 @@ namespace Summanager
                 ChromeOptions options = new ChromeOptions();
                 options.AddArgument("--headless");
                 //Luego configuro el CMD del Selenium para que tampoco se vea.
-                var chromeDriverService = ChromeDriverService.CreateDefaultService();
+                var chromeDriverService = ChromeDriverService.CreateDefaultService(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
+
                 chromeDriverService.HideCommandPromptWindow = true;
                 //Abro el driver y el browser y los dejo listos para ser usados.
                 this.webDriver = new ChromeDriver(chromeDriverService, options);
