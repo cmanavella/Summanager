@@ -67,7 +67,7 @@ namespace IO
             try
             {
                 //Accedo a la página que contiene la info de los suministros.
-                this.url += "hola"; //Printer.L410_AFTER_URL;
+                this.url += Printer.L410_AFTER_URL;
                 this.driver.Navigate().GoToUrl(this.url);
 
                 //Traigo el contenedor que contiene el toner. En este caso, es un elemento b dentro de un td
