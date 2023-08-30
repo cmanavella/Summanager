@@ -134,12 +134,12 @@ namespace IO
             this.printer.Toner = Int32.Parse(container.Text.Substring(16, (container.Text.Length - 17)));
 
             //Traigo el contenedor que contiene la unidad de imagen.
-            container = this.driver.FindElement(By.XPath("/html/body/table[5]/tbody/tr[5]/td[2]"));
+            container = this.driver.FindElement(By.XPath("/html/body/table[5]/tbody/tr[7]/td[2]"));
             //Corto el texto del contenedor y lo paso a la variable unidad de imagen de la impresora.
             this.printer.UImagen = Int32.Parse(container.Text.Substring(0, (container.Text.Length - 1)));
 
             //Traigo el contenedor que contiene el kit de mantenimiento.
-            container = this.driver.FindElement(By.XPath("/html/body/table[5]/tbody/tr[7]/td[2]"));
+            container = this.driver.FindElement(By.XPath("/html/body/table[5]/tbody/tr[5]/td[2]"));
             //Corto el texto del contenedor y lo paso a la variable kit de mantenimiento de la impresora.
             this.printer.KitMant = Int32.Parse(container.Text.Substring(0, (container.Text.Length - 1)));
         }
