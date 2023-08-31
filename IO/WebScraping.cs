@@ -103,20 +103,35 @@ namespace IO
             this.url += Printer.L610_AFTER_URL;
             this.driver.Navigate().GoToUrl(this.url);
 
-            //Traigo el contenedor que contiene el toner. En este caso, es un elemento b dentro de un td
-            IWebElement container = this.driver.FindElement(By.XPath("/html/body/table[1]/tbody/tr[3]/td/b"));
-            //Corto el texto del contenedor y lo paso a la variable toner de la impresora.
-            this.printer.Toner = Int32.Parse(container.Text.Substring(16, (container.Text.Length - 17)));
+            try
+            {
+                //Traigo el contenedor que contiene el toner. En este caso, es un elemento b dentro de un td
+                IWebElement container = this.driver.FindElement(By.XPath("/html/body/table[1]/tbody/tr[3]/td/b"));
+                //Corto el texto del contenedor y lo paso a la variable toner de la impresora.
+                this.printer.Toner = Int32.Parse(container.Text.Substring(16, (container.Text.Length - 17)));
 
-            //Traigo el contenedor que contiene la unidad de imagen.
-            container = this.driver.FindElement(By.XPath("/html/body/table[4]/tbody/tr[6]/td[2]"));
-            //Corto el texto del contenedor y lo paso a la variable unidad de imagen de la impresora.
-            this.printer.UImagen = Int32.Parse(container.Text.Substring(0, (container.Text.Length - 1)));
+                //Traigo el contenedor que contiene la unidad de imagen.
+                container = this.driver.FindElement(By.XPath("/html/body/table[4]/tbody/tr[6]/td[2]"));
+                //Corto el texto del contenedor y lo paso a la variable unidad de imagen de la impresora.
+                this.printer.UImagen = Int32.Parse(container.Text.Substring(0, (container.Text.Length - 1)));
 
-            //Traigo el contenedor que contiene el kit de mantenimiento.
-            container = this.driver.FindElement(By.XPath("/html/body/table[4]/tbody/tr[5]/td[2]"));
-            //Corto el texto del contenedor y lo paso a la variable kit de mantenimiento de la impresora.
-            this.printer.KitMant = Int32.Parse(container.Text.Substring(0, (container.Text.Length - 1)));
+                //Traigo el contenedor que contiene el kit de mantenimiento.
+                container = this.driver.FindElement(By.XPath("/html/body/table[4]/tbody/tr[5]/td[2]"));
+                //Corto el texto del contenedor y lo paso a la variable kit de mantenimiento de la impresora.
+                this.printer.KitMant = Int32.Parse(container.Text.Substring(0, (container.Text.Length - 1)));
+            }
+            catch (Exception ex)
+            {
+                //Si se ejecuta una excepción por StartIndex en uno de los suministros quiere decir que la impresora no lo está mostrando.
+                if (ex.Source == "mscorlib")
+                {
+                    throw new SuministroException();
+                }
+                else
+                {
+                    throw ex;
+                }
+            }
         }
 
         /// <summary>
@@ -128,20 +143,35 @@ namespace IO
             this.url += Printer.L812_AFTER_URL;
             this.driver.Navigate().GoToUrl(this.url);
 
-            //Traigo el contenedor que contiene el toner. En este caso, es un elemento b dentro de un td
-            IWebElement container = this.driver.FindElement(By.XPath("/html/body/table[2]/tbody/tr[3]/td/b"));
-            //Corto el texto del contenedor y lo paso a la variable toner de la impresora.
-            this.printer.Toner = Int32.Parse(container.Text.Substring(16, (container.Text.Length - 17)));
+            try
+            {
+                //Traigo el contenedor que contiene el toner. En este caso, es un elemento b dentro de un td
+                IWebElement container = this.driver.FindElement(By.XPath("/html/body/table[2]/tbody/tr[3]/td/b"));
+                //Corto el texto del contenedor y lo paso a la variable toner de la impresora.
+                this.printer.Toner = Int32.Parse(container.Text.Substring(16, (container.Text.Length - 17)));
 
-            //Traigo el contenedor que contiene la unidad de imagen.
-            container = this.driver.FindElement(By.XPath("/html/body/table[5]/tbody/tr[7]/td[2]"));
-            //Corto el texto del contenedor y lo paso a la variable unidad de imagen de la impresora.
-            this.printer.UImagen = Int32.Parse(container.Text.Substring(0, (container.Text.Length - 1)));
+                //Traigo el contenedor que contiene la unidad de imagen.
+                container = this.driver.FindElement(By.XPath("/html/body/table[5]/tbody/tr[7]/td[2]"));
+                //Corto el texto del contenedor y lo paso a la variable unidad de imagen de la impresora.
+                this.printer.UImagen = Int32.Parse(container.Text.Substring(0, (container.Text.Length - 1)));
 
-            //Traigo el contenedor que contiene el kit de mantenimiento.
-            container = this.driver.FindElement(By.XPath("/html/body/table[5]/tbody/tr[5]/td[2]"));
-            //Corto el texto del contenedor y lo paso a la variable kit de mantenimiento de la impresora.
-            this.printer.KitMant = Int32.Parse(container.Text.Substring(0, (container.Text.Length - 1)));
+                //Traigo el contenedor que contiene el kit de mantenimiento.
+                container = this.driver.FindElement(By.XPath("/html/body/table[5]/tbody/tr[5]/td[2]"));
+                //Corto el texto del contenedor y lo paso a la variable kit de mantenimiento de la impresora.
+                this.printer.KitMant = Int32.Parse(container.Text.Substring(0, (container.Text.Length - 1)));
+            }
+            catch (Exception ex)
+            {
+                //Si se ejecuta una excepción por StartIndex en uno de los suministros quiere decir que la impresora no lo está mostrando.
+                if (ex.Source == "mscorlib")
+                {
+                    throw new SuministroException();
+                }
+                else
+                {
+                    throw ex;
+                }
+            }
         }
 
         /// <summary>
