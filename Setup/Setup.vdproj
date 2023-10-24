@@ -1436,7 +1436,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:SumManager"
         "ProductCode" = "8:{63F8DEEE-8328-4B27-9EA8-7FF2111B706A}"
-        "PackageCode" = "8:{02E81B0D-C466-44AB-AA50-1B4C54B67B11}"
+        "PackageCode" = "8:{29DAF1AD-F63C-4D1A-B811-43BC2074D3AC}"
         "UpgradeCode" = "8:{498DCFC0-9962-4A38-A402-DE61F7672373}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -1567,7 +1567,7 @@
             "Target" = "8:_18797C9C095A4883B6746BCDA8257C7A"
             "Folder" = "8:_3A4035E71C09461B93EEFE42480A31E0"
             "WorkingFolder" = "8:_76B3208CD8924424A259567993D59686"
-            "Icon" = "8:"
+            "Icon" = "8:_3D4F7DEEC7EA441BBB54FB3BBD3C85CC"
             "Feature" = "8:"
             }
         }
