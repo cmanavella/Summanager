@@ -29,11 +29,12 @@ namespace IO
             //La variable url ya contiene la cadena 'http://' por lo que le concateno el ip.
             this.url += ip;
 
+            //Seteo el driver para que por cada búsqueda dentro de la pagina de la impresora, espere 10 segundos. 
+            //De esa manera le doy tiempo a que analice correctamente.
+            this.driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(10);
+
             //Le indico a Selenium que vaya a la página de la impresora mediante su IP.
             this.driver.Navigate().GoToUrl(this.url);
-            //Seteo el driver para que por cada búsqueda dentro de la pagina de la impresora, espere 5 segundos. 
-            //De esa manera le doy tiempo a que analice correctamente.
-            this.driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(7);
 
             //Almaceno el Title de la página HTML y lo uso como modelo de la Impresora.
             this.printer.Modelo = this.driver.Title;
